@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --900: rgb(23 23 23); /*scroll top btn hover*/
+    --800: rgb(38 38 38); /*app primary text*/
+    --600: rgb(82 82 82); /*rating neutral*/
+    --500: rgb(115 115 115); /*app secondary text*/
+    --400: rgb(163 163 163); /**/
+    --300: rgb(212 212 212); /*btn hover*/
+    --200: rgb(229 229 229); /*popup border*/
+    --100: rgb(245 245 245); /*skeleton bg*/
+    --50: rgb(250 250 250); /*app background*/
+    --white: rgb(255 255 255); /*box background*/
+    --sky-200-opacity: rgb(186 230 253 / 0.9); /*navbar background*/
+    --green-500: rgb(34 197 94);
+    --green-200: rgb(187 247 208);
+    --red-500: rgb(239 68 68);
+    --red-300: rgb(220 38 38);
+    --red-200: rgb(255, 75, 75);
+
+    --image-grayscale: 0;
+    --image-opacity: 100%;
+    --navbar-height: 3.5rem;
+}
+
+.dark {
+    --900: rgb(250 250 250); /*scroll top btn hover*/
+    --800: rgb(245 245 245); /*app primary text*/
+    --600: rgb(82 82 82); /*rating neutral*/
+    --500: rgb(212 212 212); /*app secondary text*/
+    --400: rgb(163 163 163); /*btn hover shadow*/
+    --300: rgb(115 115 115); /*btn shadow*/
+    --200: rgb(10 10 10); /*popup border*/
+    --100: rgb(38 38 38); /*skeleton bg*/
+    --50: rgb(10 10 10); /*app background*/
+    --white: rgb(23 23 23); /*box background*/
+    --sky-200-opacity: rgb(31 41 55 / 0.9); /*navbar background*/
+    --green-500: rgb(22 163 74);
+    --green-200: rgb(20 83 45);
+    --red-500: rgb(220 38 38);
+    --red-300: rgb(153 27 27);
+    --red-200: rgb(127 29 29);
+    --image-grayscale: 10%;
+    --image-opacity: 90%;
+}
+
+/*darker images in dark theme*/
+img {
+    filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
+}
+
+.scrolling-touch {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--400);
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--500);
+}
+
+HTML,
+BODY {
+    margin: 0;
+    padding: 0;
+    background-color: var(--50);
+    height: 100%;
+}
+
+.onPageNavigation {
+    scroll-margin-top: var(--navbar-height);
+}
+
+/* local font */
+@layer base {
+    @font-face {
+        font-family: "FavoritBookC";
+        src: url("FavoritBookC.eot");
+        src: local("FavoritBookC"),
+            url("/src/shared/assets/fonts/FavoritBookC.eot") format("embedded-opentype"),
+            url("/src/shared/assets/fonts/FavoritBookC.woff2") format("woff2"),
+            url("/src/shared/assets/fonts/FavoritBookC.woff") format("woff"),
+            url("/src/shared/assets/fonts/FavoritBookC.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: "FavoritBookC";
+        src: url("/src/shared/assets/fonts/FavoritHeavyC");
+        src: local("FavoritHeavyC"),
+            url("/src/shared/assets/fonts/FavoritHeavyC.eot") format("embedded-opentype"),
+            url("/src/shared/assets/fonts/FavoritHeavyC.woff2") format("woff2"),
+            url("/src/shared/assets/fonts/FavoritHeavyC.woff") format("woff"),
+            url("/src/shared/assets/fonts/FavoritHeavyC.ttf") format("truetype");
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: "FavoritBookC";
+        src: url("FavoritC-Bold.eot");
+        src: local("FavoritC Bold"), local("FavoritC-Bold"),
+            url("/src/shared/assets/fonts/FavoritC-Bold.eot") format("embedded-opentype"),
+            url("/src/shared/assets/fonts/FavoritC-Bold.woff2") format("woff2"),
+            url("/src/shared/assets/fonts/FavoritC-Bold.woff") format("woff"),
+            url("/src/shared/assets/fonts/FavoritC-Bold.ttf") format("truetype");
+        font-weight: 800;
+        font-style: normal;
+        font-display: swap;
+    }
+}
