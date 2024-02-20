@@ -23,3 +23,8 @@ export const searchPagePersistConfig = {
     storage,
     whitelist: ["userQueries"],
 };
+
+export const statisticsPagePersistConfig = {
+    key: "statisticsPage",
+    storage,
+};

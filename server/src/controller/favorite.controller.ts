@@ -61,15 +61,6 @@ class FavoriteController {
         }
     }
 
-    async syncApis(_req: Request<GetFavoriteOneInput>, res: Response, next: NextFunction) {
-        try {
-            const data = await favoriteService.getFavoriteSyncData(res.locals.user.id);
-            return res.status(200).json({ data });
-        } catch (e) {
-            next(e);
-        }
-    }
-
     async removeFavorite(
         req: Request<{}, {}, RemoveFavoriteOneInput>,
         res: Response,
@@ -88,6 +79,23 @@ class FavoriteController {
             );
 
             return res.status(200).json({ data: updated });
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async syncApis(_req: Request<GetFavoriteOneInput>, res: Response, next: NextFunction) {
+        try {
+            const data = await favoriteService.getFavoriteSyncData(res.locals.user.id);
+            return res.status(200).json({ data });
+        } catch (e) {
+            next(e);
+        }
+    }
+    async getStatistics(req: Request, res: Response, next: NextFunction) {
+        try {
+            const data = await favoriteService.getFavoriteStatistics(res.locals.user.id);
+            return res.status(200).json({ data });
         } catch (e) {
             next(e);
         }

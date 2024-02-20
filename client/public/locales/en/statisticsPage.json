@@ -1,0 +1,27 @@
+{
+    "Marks": "Marks",
+    "Last ratings": "Last ratings",
+    "rating": "Movie rating",
+    "userScore": "Your rating",
+    "Name": "Name",
+    "Count": "Count",
+    "AvgUserScore": "Your rating",
+    "AvgRating": "Movie rating",
+    "Countries": "Countries",
+    "Genres": "Genres",
+    "24 hours": "24 hours",
+    "Week": "Week",
+    "Month": "Month",
+    "Year": "Year",
+    "All time": "All time",
+    "Countries and genres": "Countries and genres",
+    "Data": "Data",
+    "Sort by": "Sort by",
+    "Change order": "Change order",
+    "Show all": "Show all",
+
+    "films_one": "film",
+    "films_other": "films",
+    "stars_one": "star",
+    "stars_other": "stars"
+}

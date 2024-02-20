@@ -205,6 +205,50 @@ class FavoriteService {
               });
     }
 
+    async getFavoriteStatistics(userId: number) {
+        const result = await favoriteModel.aggregate([
+            { $match: { user: new mongoose.Types.ObjectId(userId) } },
+            { $unwind: "$favorites" },
+            {
+                $lookup: {
+                    from: "films",
+                    localField: "favorites.film",
+                    foreignField: "_id",
+                    as: "favorites.film",
+
+                    pipeline: [
+                        {
+                            $project: {
+                                _id: 0,
+                                filmId: 1,
+                                genres: "$genres.genre",
+                                countries: "$countries.country",
+                                nameRu: 1,
+                                rating: 1,
+                                year: 1,
+                            },
+                        },
+                    ],
+                },
+            },
+            { $sort: { [sortBy]: 1 } },
+            {
+                $project: {
+                    _id: 0,
+                    user: 0,
+                    "favorites._id": 0,
+                    "favorites.createdAt": 0,
+                },
+            },
+        ]);
+
+        return result.map((item) => {
+            const { favorites } = item;
+            const { film, ...otherFields } = favorites;
+            return { ...film[0], ...otherFields };
+        });
+    }
+
     private async createFavorite(
         userId: number,
         filmDocumentId: Types.ObjectId,

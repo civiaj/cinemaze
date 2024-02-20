@@ -1,6 +1,7 @@
 export const getNoun = (number: number = 1, one: string, two: string, five: string) => {
     let n = Math.abs(number);
     n %= 100;
+
     if (n >= 5 && n <= 20) {
         return five;
     }

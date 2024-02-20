@@ -11,7 +11,7 @@ export const SettingsBox = ({ children, className, condition }: Props) => {
     return condition ? (
         <div
             className={classNames(
-                "flex flex-col gap-2 bg-my-neutral-50 rounded-xl items-start px-2 py-2 sm:px-4",
+                "bg-my-neutral-100 rounded-xl px-2 py-4 sm:px-4 grid grid-cols-2 gap-x-2 gap-y-2 items-center justify-items-start",
                 {},
                 [className]
             )}

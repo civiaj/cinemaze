@@ -19,6 +19,8 @@ export {
     TbStarFilled as FilledStar,
     TbCopy as Copy,
     TbEyeOff as Hide,
+    TbEye as EyeOpen,
+    TbEyeClosed as EyeClose,
     TbStatusChange as Change,
     TbTrash as Trashcan,
     TbEye as Show,
@@ -36,6 +38,8 @@ export {
     TbLanguage as Language,
     TbLogin as Login,
     TbChartPie as Statistics,
+    TbSortAscending as Ascending,
+    TbSortDescending as Descending,
 } from "react-icons/tb";
 
 export { IoClose as Close } from "react-icons/io5";

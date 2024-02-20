@@ -11,6 +11,7 @@ import {
     RemoveFavoriteRequest,
     SyncDataResponse,
     TFavorite,
+    TStatistics,
 } from "../model/types";
 
 const userFilmsApi = serverApi.injectEndpoints({
@@ -107,6 +108,14 @@ const userFilmsApi = serverApi.injectEndpoints({
             transformResponse: (response: { data: SyncDataResponse }) => response.data,
             providesTags: ["Films"],
         }),
+        getStatistics: builder.query<TStatistics[], void>({
+            query: () => ({
+                url: "/favorite/statistics",
+                credentials: "include",
+            }),
+            transformResponse: (response: { data: TStatistics[] }) => response.data,
+            providesTags: ["Films"],
+        }),
     }),
     overrideExisting: false,
 });
@@ -118,4 +127,5 @@ export const {
     useLazyGetOneFavoriteQuery,
     useGetSyncDataQuery,
     useRemoveOneFavoriteMutation,
+    useGetStatisticsQuery,
 } = userFilmsApi;

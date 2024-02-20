@@ -1,16 +1,16 @@
 import { ThemeContext } from "app/theme/model/context";
-import { THEMES, TTheme } from "app/theme/model/types";
+import { THEMES, TThemes } from "app/theme/model/types";
 import { ReactNode, useEffect, useMemo } from "react";
 import { LOCAL_STORAGE_THEME } from "shared/const/const";
 import { useLocalStorage } from "shared/hooks/useLocalStorage";
-import getPreferableTheme from "../helper/getPreferableTheme";
+import { getPreferableTheme } from "../helper/getPreferableTheme";
 
 type Props = {
     children: ReactNode;
 };
 
 export const ThemeProvider = ({ children }: Props) => {
-    const { value: theme, setValue: setTheme } = useLocalStorage<TTheme>(
+    const { value: theme, setValue: setTheme } = useLocalStorage<TThemes>(
         getPreferableTheme(),
         LOCAL_STORAGE_THEME
     );

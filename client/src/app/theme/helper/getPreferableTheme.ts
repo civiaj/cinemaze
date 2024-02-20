@@ -1,9 +1,7 @@
-import { TTheme } from "app/theme/model/types";
+import { TThemes } from "../model/types";
 
-const getPreferableTheme = (): TTheme => {
+export const getPreferableTheme = (): TThemes => {
     return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
 };
-
-export default getPreferableTheme;

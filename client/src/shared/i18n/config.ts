@@ -14,6 +14,7 @@ i18n.use(HttpApi)
         },
         debug: import.meta.env.VITE_ENV === "development",
         keySeparator: ".",
+
         backend: {
             loadPath: "/locales/{{lng}}/{{ns}}.json",
         },

@@ -1,4 +1,5 @@
 import { ReactNode, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ListChildComponentProps } from "react-window";
 import { Down } from "shared/assets/icons";
 import { classNames } from "shared/lib/classNames";
@@ -33,6 +34,7 @@ type Props = {
     disabled?: boolean;
     theme?: Themes;
     render?: (props: ListChildComponentProps, onClose: () => void) => ReactNode;
+    translationKey?: string;
 };
 
 export const AppSelect = (props: Props) => {
@@ -45,11 +47,13 @@ export const AppSelect = (props: Props) => {
         wrapperClassName,
         disabled,
         render,
+        translationKey = "",
         theme = "regular",
         ...otherProps
     } = props;
 
     const [isOpen, setIsOpen] = useState(false);
+    const { t } = useTranslation(translationKey);
 
     const handleClose = () => setIsOpen(false);
     const handleToggle = () => setIsOpen((p) => !p);
@@ -67,7 +71,9 @@ export const AppSelect = (props: Props) => {
             theme="popup"
             style={style}
         >
-            <span className="line-clamp-1 break-words text-start">{options[index].label}</span>
+            <span className="line-clamp-1 break-words text-start">
+                {t(String(options[index].label))}
+            </span>
         </Button>
     );
 
@@ -91,7 +97,7 @@ export const AppSelect = (props: Props) => {
                     )}
                     {...otherProps}
                 >
-                    <span className="line-clamp-1 text-start">{selectedValue}</span>
+                    <span className="line-clamp-1 text-start">{t(String(selectedValue))}</span>
                     <Down className="shrink-0" />
                 </Button>
             </div>

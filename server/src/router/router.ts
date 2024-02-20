@@ -56,4 +56,6 @@ router.post(
     favoriteController.removeFavorite
 );
 
+router.get("/favorite/statistics", deserializeUser, favoriteController.getStatistics);
+
 export default router;

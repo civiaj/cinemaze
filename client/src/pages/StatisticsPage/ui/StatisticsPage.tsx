@@ -1,5 +1,12 @@
+import { Page } from "entities/Ui";
+import { StatisticsPageBody } from "pages/StatisticsPage/ui/StatisticsPageBody";
+
 const StatisticsPage = () => {
-    return <div>StatisticsPage</div>;
+    return (
+        <Page>
+            <StatisticsPageBody />
+        </Page>
+    );
 };
 
 export default StatisticsPage;

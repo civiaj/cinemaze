@@ -27,4 +27,17 @@ export type SyncDataResponse = {
     all: number;
 };
 
+export type TStatistics = {
+    filmId: number;
+    genres: string[];
+    countries: string[];
+    userScore: number | null;
+    bookmarked: boolean;
+    hidden: boolean;
+    updatedAt: string;
+    rating?: string;
+    nameRu?: string;
+    year?: string;
+};
+
 export type FavoriteItemT = { films: FilmT[]; totalPages: number };

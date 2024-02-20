@@ -124,7 +124,7 @@ class AuthController {
     private addAuthCookies(res: Response, tokens: { accessToken: string; refreshToken: string }) {
         res.cookie("access_token", tokens.accessToken, accessTokenCookieOptions);
         res.cookie("refresh_token", tokens.refreshToken, refreshTokenCookieOptions);
-        res.cookie("logged", true, { ...accessTokenCookieOptions, httpOnly: false });
+        res.cookie("logged", true, { ...refreshTokenCookieOptions, httpOnly: false });
     }
 
     private removeAuthCookies(res: Response) {
