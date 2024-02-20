@@ -1,6 +1,5 @@
 export {
-    TbLayoutGrid as Tile,
-    TbLayoutList as List,
+    TbLayoutGrid as Grid,
     TbSearch as Search,
     TbMenu2 as Menu,
     TbHome as Home,

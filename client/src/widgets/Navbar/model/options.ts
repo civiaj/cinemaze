@@ -1,4 +1,4 @@
-import { Language, Sun } from "shared/assets/icons";
+import { Grid, Language, Sun } from "shared/assets/icons";
 import { NavbarOptions, NavbarOptionsType } from "../model/types";
 import { lngs } from "shared/i18n/types";
 import { themes } from "app/theme";
@@ -24,6 +24,6 @@ export const options: Record<
         label: "Appearance",
         value: "appearance",
         variants: appearances,
-        Icon: Sun,
+        Icon: Grid,
     },
 };
