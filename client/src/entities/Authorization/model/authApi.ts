@@ -22,7 +22,7 @@ const authApi = serverApi.injectEndpoints({
                 try {
                     dispatch(authAndUserSliceActions.startLoading());
                     await queryFulfilled;
-                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate());
+                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate("withoutError"));
                     refetch();
                 } catch (e) {
                     // errorMiddleware
@@ -42,7 +42,7 @@ const authApi = serverApi.injectEndpoints({
                 try {
                     dispatch(authAndUserSliceActions.startLoading());
                     await queryFulfilled;
-                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate());
+                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate("withoutError"));
                     refetch();
                 } catch (e) {
                     // errorMiddleware
