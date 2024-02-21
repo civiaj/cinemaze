@@ -12,6 +12,7 @@ import { Heading } from "shared/ui/Text/Heading";
 import { Text } from "shared/ui/Text/Text";
 import { listVariants } from "../model/data";
 import { FavoriteListVariantT } from "../model/types";
+import { useHideScroll } from "shared/hooks/useHideScroll";
 
 type Props = {
     onClose: () => void;
@@ -30,6 +31,7 @@ export const FavoriteRemoveModal = (props: Props) => {
 
     const [removeOneFavorite, { isLoading }] = useRemoveOneFavoriteMutation();
 
+    useHideScroll();
     const onDelete = async () => {
         if (!filmId) return;
         await removeOneFavorite({
