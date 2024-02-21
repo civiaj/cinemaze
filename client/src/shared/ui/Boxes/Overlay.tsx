@@ -1,5 +1,4 @@
 import { HTMLAttributes, ReactNode, useRef } from "react";
-
 import { useUpdateHeight } from "shared/hooks/useUpdateHeight";
 import { classNames } from "shared/lib/classNames";
 

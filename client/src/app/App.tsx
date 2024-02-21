@@ -14,7 +14,7 @@ function App() {
     const isLogged = useAppSelector(getIsLogged);
     const { isLoading } = useGetMeQuery("withoutError", { skip: !isLogged });
 
-    if (isLoading) return <FullscreenSpinner />;
+    if (isLoading) return <FullscreenSpinner className="bg-my-neutral-50 dark:bg-my-neutral-50" />;
 
     return (
         <div

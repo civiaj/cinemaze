@@ -6,13 +6,14 @@ import { selectUser } from "entities/User";
 import { useNavigate } from "react-router-dom";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Button } from "shared/ui/Button/Button";
-import { options } from "widgets/Navbar/model/options";
-import { NavbarOptions, NavbarViews } from "../../model/types";
 import { useTranslation } from "react-i18next";
 import { TLngs, lngs } from "shared/i18n/types";
 import { TThemes } from "app/theme";
 import { TAppearances, appearances, getUiAppearance } from "entities/Ui";
 import { Elipsis } from "shared/ui/Text/Elipsis";
+
+import { options } from "../../model/options";
+import { NavbarOptions, NavbarViews } from "../../model/types";
 
 type Props = {
     onSetOpenView: (newContext: NavbarViews) => void;

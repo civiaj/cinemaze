@@ -26,7 +26,6 @@ export const Page = forwardRef<HTMLDivElement, PageProps>((props, ref) => {
     const { pathname } = useLocation();
 
     const dispatch = useAppDispatch();
-
     const scrollRestoration = useAppSelector((state) => getScrollByPath(state, pathname));
 
     const handleScrollRestoration = useThrottle(() => {

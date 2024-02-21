@@ -20,6 +20,7 @@ import { uiActions } from "entities/Ui";
 import { useUpdateHeight } from "shared/hooks/useUpdateHeight";
 import { Overlay } from "shared/ui/Boxes/Overlay";
 import { DEBOUNCE_SEARCH } from "shared/const/const";
+import { useHideScroll } from "shared/hooks/useHideScroll";
 
 const extraHeight = 56 + (window.innerHeight / 100) * 10; //3.5rem + 10%
 
@@ -33,17 +34,10 @@ export const SearchInput = (props: Props) => {
     const { pathname } = useLocation();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const query = useAppSelector(geInitialSearchQuery);
+
     const inputRef = useRef<HTMLInputElement>(null);
-    const maxHeight = useUpdateHeight(extraHeight);
 
     const [inputValue, setInputValue] = useState("");
-    const debouncedInputValue = useDebouncedValue(inputValue, DEBOUNCE_SEARCH);
-
-    const { data, isLoading, isFetching, isError } = useSearchQuery(
-        { ...query, keyword: debouncedInputValue, page: 1 },
-        { skip: !debouncedInputValue || !inputValue }
-    );
 
     const onSetActive = () => {
         setActive(true);
@@ -124,36 +118,11 @@ export const SearchInput = (props: Props) => {
                         />
                     </div>
                     {isActive && (
-                        <div
-                            style={{ maxHeight }}
-                            className="w-full bg-my-white border border-my-neutral-200 rounded-xl absolute top-12 left-0 overflow-y-auto mb-5"
-                        >
-                            <div className="flex flex-col px-2 py-2 gap-2">
-                                <SearchUserQueries
-                                    inputValue={inputValue}
-                                    startSearch={handleStartSearch}
-                                />
-                                <SearchQueryResults
-                                    results={data?.films}
-                                    isLoading={isLoading || isFetching}
-                                    isError={isError}
-                                    inputValue={inputValue}
-                                    onClose={onSetInactive}
-                                />
-
-                                <AppLink
-                                    theme="clean"
-                                    className="flex items-center gap-2 px-2 text-my-green-500"
-                                    to={routePath.search}
-                                    onClick={onSetInactive}
-                                >
-                                    <div className="flex-1 flex items-center justify-center gap-2">
-                                        <GoToSearch className="shrink-0" />
-                                        <span>Расширенный поиск</span>
-                                    </div>
-                                </AppLink>
-                            </div>
-                        </div>
+                        <SearchBody
+                            inputValue={inputValue}
+                            onSetInactive={onSetInactive}
+                            handleStartSearch={handleStartSearch}
+                        />
                     )}
 
                     <Button
@@ -167,5 +136,51 @@ export const SearchInput = (props: Props) => {
             </div>
             {isActive && <Overlay />}
         </>
+    );
+};
+
+type SearchBodyProps = {
+    inputValue: string;
+    onSetInactive: () => void;
+    handleStartSearch: () => void;
+};
+
+const SearchBody = ({ inputValue, onSetInactive, handleStartSearch }: SearchBodyProps) => {
+    useHideScroll();
+    const query = useAppSelector(geInitialSearchQuery);
+    const debouncedInputValue = useDebouncedValue(inputValue, DEBOUNCE_SEARCH);
+    const maxHeight = useUpdateHeight(extraHeight);
+    const { data, isLoading, isFetching, isError } = useSearchQuery(
+        { ...query, keyword: debouncedInputValue, page: 1 },
+        { skip: !debouncedInputValue || !inputValue }
+    );
+    return (
+        <div
+            style={{ maxHeight }}
+            className="w-full bg-my-white border border-my-neutral-200 rounded-xl absolute top-12 left-0 overflow-y-auto mb-5"
+        >
+            <div className="flex flex-col px-2 py-2 gap-2">
+                <SearchUserQueries inputValue={inputValue} startSearch={handleStartSearch} />
+                <SearchQueryResults
+                    results={data?.films}
+                    isLoading={isLoading || isFetching}
+                    isError={isError}
+                    inputValue={inputValue}
+                    onClose={onSetInactive}
+                />
+
+                <AppLink
+                    theme="clean"
+                    className="flex items-center gap-2 px-2 text-my-green-500"
+                    to={routePath.search}
+                    onClick={onSetInactive}
+                >
+                    <div className="flex-1 flex items-center justify-center gap-2">
+                        <GoToSearch className="shrink-0" />
+                        <span>Расширенный поиск</span>
+                    </div>
+                </AppLink>
+            </div>
+        </div>
     );
 };

@@ -1,11 +1,12 @@
 import { useAppSelector } from "app/store";
-import { getBreadcrumbs } from "entities/Ui/model/selectors";
 import { memo, useCallback, useState } from "react";
 import { Dots } from "shared/assets/icons";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Button } from "shared/ui/Button/Button";
 import { OutsideClickWrapper } from "shared/ui/OutsideClickWrapper/OutsideClickWrapper";
 import { PopupList } from "shared/ui/PopupList/PopupList";
+
+import { getBreadcrumbs } from "../../model/selectors";
 
 type Props = {
     displayedIndex: number;

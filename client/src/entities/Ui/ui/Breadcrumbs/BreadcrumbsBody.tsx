@@ -1,11 +1,12 @@
 import { useAppSelector } from "app/store";
-import { getBreadcrumbs } from "entities/Ui/model/selectors";
-import { Branches } from "entities/Ui/ui/Breadcrumbs/Branches";
-import { ExtraBreadcrumbs } from "entities/Ui/ui/Breadcrumbs/ExtraBreadcrumbs";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ID_BREADCRUMBS } from "shared/const/const";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Box } from "shared/ui/Boxes/Box";
+
+import { getBreadcrumbs } from "../../model/selectors";
+import { Branches } from "../../ui/Breadcrumbs/Branches";
+import { ExtraBreadcrumbs } from "../../ui/Breadcrumbs/ExtraBreadcrumbs";
 
 export const BreadcrumbsBody = () => {
     const { details: branches, main } = useAppSelector(getBreadcrumbs);

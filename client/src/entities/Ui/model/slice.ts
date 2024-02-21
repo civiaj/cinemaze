@@ -3,7 +3,8 @@ import { routeConfig } from "app/router/router";
 import { BreadcrumbsT, UiSchema, TAppearances } from "./types";
 
 const initialState: UiSchema = {
-    collapsed: true,
+    sb: true,
+    na: true,
     scroll: {},
     appearance: "tile",
     breadcrumbs: {
@@ -17,10 +18,13 @@ const uiSlice = createSlice({
     initialState,
     reducers: {
         toggleSidebar: (state) => {
-            state.collapsed = !state.collapsed;
+            state.sb = !state.sb;
         },
         closeSidebar: (state) => {
-            state.collapsed = true;
+            state.sb = true;
+        },
+        toggleNavbarAuth: (state, action: PayloadAction<boolean>) => {
+            state.na = action.payload;
         },
         saveScrollPosition: (
             state,

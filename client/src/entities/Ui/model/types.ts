@@ -12,7 +12,8 @@ export const appearances: TAppearancesRecord = {
 export type BreadcrumbsT = { pathname: string; label: string };
 
 export interface UiSchema {
-    collapsed: boolean;
+    sb: boolean;
+    na: boolean;
     scroll: Record<string, number>;
     appearance: TAppearances;
     breadcrumbs: {

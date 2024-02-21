@@ -1,5 +1,6 @@
 import { routePath } from "app/router/router";
-import { useAppSelector } from "app/store";
+import { useAppDispatch, useAppSelector } from "app/store";
+import { getNavbarAuthCollapsed, uiActions } from "entities/Ui";
 import { selectUser } from "entities/User";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,11 +13,12 @@ import { Button } from "shared/ui/Button/Button";
 import { Image } from "shared/ui/Image/Image";
 import { OutsideClickWrapper } from "shared/ui/OutsideClickWrapper/OutsideClickWrapper";
 import { Elipsis } from "shared/ui/Text/Elipsis";
-import { NavbarOptions, NavbarViews } from "widgets/Navbar/model/types";
-import { NavbarAppearance } from "widgets/Navbar/ui/NavigationAuth/NavbarAppearance";
-import { NavbarLang } from "widgets/Navbar/ui/NavigationAuth/NavbarLang";
-import { NavbarMain } from "widgets/Navbar/ui/NavigationAuth/NavbarMain";
-import { NavbarTheme } from "widgets/Navbar/ui/NavigationAuth/NavbarTheme";
+
+import { NavbarOptions, NavbarViews } from "../../model/types";
+import { NavbarAppearance } from "./NavbarAppearance";
+import { NavbarLang } from "./NavbarLang";
+import { NavbarMain } from "./NavbarMain";
+import { NavbarTheme } from "./NavbarTheme";
 
 const titles: Record<NavbarOptions, string> = {
     language: "Language",
@@ -25,14 +27,22 @@ const titles: Record<NavbarOptions, string> = {
 };
 
 export const NavigationAuth = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const navbarAuthCollapsed = useAppSelector(getNavbarAuthCollapsed);
+    const dispatch = useAppDispatch();
     const user = useAppSelector(selectUser);
-    const onClose = useCallback(() => setIsOpen(false), []);
+
+    const onClose = useCallback(() => {
+        dispatch(uiActions.toggleNavbarAuth(true));
+    }, [dispatch]);
+
+    const onOpen = useCallback(() => {
+        dispatch(uiActions.toggleNavbarAuth(false));
+    }, [dispatch]);
 
     return (
         <OutsideClickWrapper onClose={onClose}>
             {user ? (
-                <Button theme="regularNavIcon" onClick={() => setIsOpen(true)}>
+                <Button theme="regularNavIcon" onClick={onOpen}>
                     <Image
                         src={user.photo}
                         onErrorSrc={defaultUser}
@@ -40,11 +50,11 @@ export const NavigationAuth = () => {
                     />
                 </Button>
             ) : (
-                <Button theme="login" onClick={() => setIsOpen(true)}>
+                <Button theme="login" onClick={onOpen}>
                     <Login />
                 </Button>
             )}
-            <NavigationAuthBodyPopup transitionValue={isOpen} onClose={onClose} />
+            <NavigationAuthBodyPopup transitionValue={!navbarAuthCollapsed} onClose={onClose} />
         </OutsideClickWrapper>
     );
 };

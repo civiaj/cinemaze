@@ -66,7 +66,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
     if (isFilterLoading) {
         return (
             <div className="flex items-center justify-center">
-                <Spinner />
+                <Spinner className="h-6 w-6" />
             </div>
         );
     }

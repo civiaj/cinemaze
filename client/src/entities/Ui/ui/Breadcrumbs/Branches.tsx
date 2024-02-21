@@ -1,8 +1,9 @@
-import { BreadcrumbsT } from "entities/Ui/model/types";
 import { useEffect, useState } from "react";
 import { Right } from "shared/assets/icons";
 import { classNames } from "shared/lib/classNames";
 import { AppLink } from "shared/ui/AppLink/AppLink";
+
+import { BreadcrumbsT } from "../../model/types";
 
 type Props = {
     getMap: () => Map<string, number>;

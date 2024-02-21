@@ -1,13 +1,13 @@
 import { routePath } from "app/router/router";
 import { useAppDispatch, useAppSelector } from "app/store";
-import { getSidebarCollapsed, uiActions } from "entities/Ui";
-import { NavigationAuth } from "./NavigationAuth/NavigationAuth";
+import { allowNavbarScroll, uiActions } from "entities/Ui";
 import { SearchInput } from "pages/SearchPage";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Menu } from "shared/assets/icons";
 import { classNames } from "shared/lib/classNames";
 import { Button } from "shared/ui/Button/Button";
+import { NavigationAuth } from "./NavigationAuth/NavigationAuth";
 
 const min = 0;
 
@@ -17,7 +17,8 @@ export const Navbar = () => {
     const navRef = useRef<HTMLElement>(null);
     const { pathname } = useLocation();
 
-    const collapsed = useAppSelector(getSidebarCollapsed);
+    const allowScroll = useAppSelector(allowNavbarScroll);
+
     const [wasClicked, setWasClicked] = useState(false);
 
     const [isActive, setActive] = useState(false);
@@ -26,7 +27,7 @@ export const Navbar = () => {
     }, []);
 
     useEffect(() => {
-        if (!navRef.current || !collapsed || isActive) return;
+        if (!navRef.current || !allowScroll || isActive) return;
 
         const max = navRef.current.scrollHeight;
 
@@ -54,7 +55,7 @@ export const Navbar = () => {
 
         document.addEventListener("scroll", handleScroll);
         return () => document.removeEventListener("scroll", handleScroll);
-    }, [collapsed, wasClicked, isActive]);
+    }, [allowScroll, wasClicked, isActive]);
 
     useEffect(() => {
         if (wasClicked) {
