@@ -23,6 +23,7 @@
     --image-grayscale: 0;
     --image-opacity: 100%;
     --navbar-height: 3.5rem;
+    --border: var(--200);
 }
 
 .dark {
@@ -44,6 +45,7 @@
     --red-200: rgb(127 29 29);
     --image-grayscale: 10%;
     --image-opacity: 90%;
+    --border: var(--100);
 }
 
 /*darker images in dark theme*/

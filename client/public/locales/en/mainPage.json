@@ -1,8 +1,8 @@
 {
-    "popular": "Popular",
-    "main-query": {
-        "popular": "Popular",
-        "best": "Best",
-        "antisipated": "Antisipated"
-    }
+    "mq-popular": "Popular",
+    "mq-best": "Best",
+    "mq-antisipated": "Antisipated",
+    "mq-popular-h": "Watching now",
+    "mq-best-h": "Best of all time",
+    "mq-antisipated-h": "Coming soon"
 }

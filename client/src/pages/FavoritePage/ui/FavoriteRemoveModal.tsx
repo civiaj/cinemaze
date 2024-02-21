@@ -13,6 +13,7 @@ import { Text } from "shared/ui/Text/Text";
 import { listVariants } from "../model/data";
 import { FavoriteListVariantT } from "../model/types";
 import { useHideScroll } from "shared/hooks/useHideScroll";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     onClose: () => void;
@@ -21,6 +22,7 @@ type Props = {
 };
 
 export const FavoriteRemoveModal = (props: Props) => {
+    const { t } = useTranslation("favoritePage");
     const { onClose, listVariant, film } = props;
     const { nameEn, nameRu, nameOriginal, filmId } = film ?? {};
     const title = nameRu ?? nameEn ?? nameOriginal;
@@ -32,6 +34,7 @@ export const FavoriteRemoveModal = (props: Props) => {
     const [removeOneFavorite, { isLoading }] = useRemoveOneFavoriteMutation();
 
     useHideScroll();
+
     const onDelete = async () => {
         if (!filmId) return;
         await removeOneFavorite({
@@ -44,14 +47,14 @@ export const FavoriteRemoveModal = (props: Props) => {
     const link = `${routePath.details}/${film?.filmId}`;
 
     return createPortal(
-        <Overlay>
+        <Overlay className="mt-0">
             <OutsideClickWrapper className="max-w-3xl flex-1 p-4" onClose={onClose}>
                 <Box className="p-4">
                     <div className="flex flex-col gap-2">
-                        <Heading headinglevel={1}>Удаление</Heading>
+                        <Heading headinglevel={1}>{t("Deletion")}</Heading>
                         <div>
                             <Text as="span" className="text-start">
-                                Вы действительно хотите удалить{" "}
+                                {t("delete-msg")}{" "}
                             </Text>
                             {title ? (
                                 <AppLink
@@ -61,11 +64,11 @@ export const FavoriteRemoveModal = (props: Props) => {
                                     {title}
                                 </AppLink>
                             ) : (
-                                <Text as="span">Фильм</Text>
+                                <Text as="span">{t("Film")}</Text>
                             )}
-                            <Text as="span"> из списка </Text>
+                            <Text as="span"> {t("delete-msg-from")} </Text>
                             <Text as="span" className="font-medium">
-                                {category}
+                                {t(category)}
                             </Text>
                             ?
                         </div>
@@ -91,10 +94,10 @@ export const FavoriteRemoveModal = (props: Props) => {
                             onClick={onDelete}
                             isLoading={isLoading}
                         >
-                            Удалить
+                            {t("Delete")}
                         </Button>
                         <Button onClick={onClose} theme="regular" className="font-medium">
-                            Отмена
+                            {t("Cancel")}
                         </Button>
                     </div>
                 </Box>

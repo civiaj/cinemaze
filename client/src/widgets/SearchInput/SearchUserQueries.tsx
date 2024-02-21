@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "app/store";
 import { getSearchUserQueriesByInput } from "pages/SearchPage/model/selectors";
 import { searchPageActions } from "pages/SearchPage/model/slice";
+import { useTranslation } from "react-i18next";
 import { Search } from "shared/assets/icons";
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
 
 export const SearchUserQueries = ({ inputValue = "", startSearch }: Props) => {
     const userQueries = useAppSelector((state) => getSearchUserQueriesByInput(state, inputValue));
+    const { t } = useTranslation();
     const dispatch = useAppDispatch();
 
     const handleDeleteUserQuery = (str: string) => {
@@ -24,7 +26,7 @@ export const SearchUserQueries = ({ inputValue = "", startSearch }: Props) => {
     return (
         !!userQueries.length && (
             <>
-                <p className="px-2 text-sm font-medium">Недавние запросы</p>
+                <p className="px-2 text-sm font-medium">{t("Search-recent")}</p>
                 <ul className="flex flex-col">
                     {userQueries.map((query) => (
                         <li
@@ -44,7 +46,7 @@ export const SearchUserQueries = ({ inputValue = "", startSearch }: Props) => {
                                 onClick={() => handleDeleteUserQuery(query)}
                                 className="text-xs hover:underline shrink-0 pr-2 text-blue-500 z-50"
                             >
-                                Удалить
+                                {t("Delete")}
                             </button>
                         </li>
                     ))}

@@ -7,6 +7,7 @@ import { LoginPage } from "pages/LoginPage";
 
 import { IRoute } from "./types";
 import { StatisticsPage } from "pages/StatisticsPage";
+import { UserPage } from "pages/UserPage";
 
 export enum AppRoutes {
     MAIN = "main",
@@ -16,6 +17,7 @@ export enum AppRoutes {
     FAVORITE = "favorite",
     LOGIN = "login",
     STATISTICS = "statistics",
+    USER = "user",
 }
 
 export const routePath: Record<AppRoutes, string> = {
@@ -26,6 +28,7 @@ export const routePath: Record<AppRoutes, string> = {
     [AppRoutes.FAVORITE]: "/favorite",
     [AppRoutes.LOGIN]: "/login",
     [AppRoutes.STATISTICS]: "/statistics",
+    [AppRoutes.USER]: "/me",
 };
 
 export const routeConfig: Record<AppRoutes, IRoute> = {
@@ -34,13 +37,15 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.default,
         label: "",
         auth: false,
+        allowedRoles: [],
     },
 
     [AppRoutes.MAIN]: {
         element: <MainPage />,
         path: routePath.main,
-        label: "Главная",
+        label: "r-main",
         auth: false,
+        allowedRoles: [],
     },
 
     [AppRoutes.DETAILS]: {
@@ -48,33 +53,43 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.details + "/:id",
         label: "",
         auth: false,
+        allowedRoles: [],
     },
 
     [AppRoutes.SEARCH]: {
         element: <SearchPage />,
         path: routePath.search,
-        label: "Поиск",
+        label: "r-search",
         auth: false,
+        allowedRoles: [],
     },
 
     [AppRoutes.LOGIN]: {
         element: <LoginPage />,
         path: routePath.login,
-        label: "Страница входа",
+        label: "r-login",
         auth: false,
+        allowedRoles: [],
     },
 
     [AppRoutes.FAVORITE]: {
         element: <FavoritePage />,
         path: routePath.favorite,
-        label: "Мои фильмы",
+        label: "r-favorite",
         auth: true,
         allowedRoles: ["user", "admin"],
     },
     [AppRoutes.STATISTICS]: {
         element: <StatisticsPage />,
         path: routePath.statistics,
-        label: "Статистика",
+        label: "r-statistics",
+        auth: true,
+        allowedRoles: ["user", "admin"],
+    },
+    [AppRoutes.USER]: {
+        element: <UserPage />,
+        path: routePath.user,
+        label: "r-user",
         auth: true,
         allowedRoles: ["user", "admin"],
     },

@@ -1,6 +1,7 @@
 import { routePath } from "app/router/router";
 import { useAppDispatch } from "app/store";
 import { searchPageActions } from "pages/SearchPage/model/slice";
+import { useTranslation } from "react-i18next";
 import { EMPTY_LINE } from "shared/const/const";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { ColoredNumber } from "shared/ui/ColoredNumber/ColoredNumber";
@@ -18,6 +19,7 @@ type Props = {
 export const SearchQueryResults = (props: Props) => {
     const { results, isError, isLoading, inputValue, onClose } = props;
     const dispatch = useAppDispatch();
+    const { t } = useTranslation();
 
     const handleQueryClick = (queryName?: string) => {
         onClose();
@@ -49,7 +51,7 @@ export const SearchQueryResults = (props: Props) => {
     return (
         !!results?.length && (
             <>
-                <p className="px-2 text-sm font-medium">Результаты</p>
+                <p className="px-2 text-sm font-medium">{t("Results")}</p>
                 <ul className="flex flex-col">
                     {results.map((item) => (
                         <li key={item.filmId} className="rounded-xl overflow-hidden">

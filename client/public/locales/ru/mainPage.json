@@ -1,8 +1,8 @@
 {
-    "popular": "Popular",
-    "main-query": {
-        "popular": "Популярные",
-        "best": "Лучшие",
-        "antisipated": "Ожидаемые"
-    }
+    "mq-popular": "Популярные",
+    "mq-best": "Лушчие",
+    "mq-antisipated": "Одидаемые",
+    "mq-popular-h": "Смотрят сейчас",
+    "mq-best-h": "Топ всех времен",
+    "mq-antisipated-h": "Скоро в кино"
 }

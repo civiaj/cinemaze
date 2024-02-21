@@ -112,7 +112,7 @@ export const SearchPageBody = () => {
                     {showEnd && <EndBox />}
                 </div>
 
-                <Box className="sticky !gap-4 top-4 hidden lg:flex">
+                <Box className="sticky !gap-4 top-[72px] hidden lg:flex">
                     <Heading headinglevel={3}>Расширенный поиск</Heading>
                     <SearchExtended
                         disabled={disabled}

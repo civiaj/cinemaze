@@ -21,6 +21,7 @@ import { useUpdateHeight } from "shared/hooks/useUpdateHeight";
 import { Overlay } from "shared/ui/Boxes/Overlay";
 import { DEBOUNCE_SEARCH } from "shared/const/const";
 import { useHideScroll } from "shared/hooks/useHideScroll";
+import { useTranslation } from "react-i18next";
 
 const extraHeight = 56 + (window.innerHeight / 100) * 10; //3.5rem + 10%
 
@@ -34,6 +35,7 @@ export const SearchInput = (props: Props) => {
     const { pathname } = useLocation();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const { t } = useTranslation();
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -108,7 +110,7 @@ export const SearchInput = (props: Props) => {
 
                         <Input
                             className="w-full md:w-96 pr-10"
-                            placeholder="Поиск"
+                            placeholder={t("Search")}
                             theme="regularNav"
                             value={inputValue}
                             onMouseDown={onSetActive}
@@ -130,7 +132,7 @@ export const SearchInput = (props: Props) => {
                         theme="regularNav"
                         onClick={() => handleStartSearch()}
                     >
-                        Найти
+                        {t("Find")}
                     </Button>
                 </OutsideClickWrapper>
             </div>
@@ -147,6 +149,7 @@ type SearchBodyProps = {
 
 const SearchBody = ({ inputValue, onSetInactive, handleStartSearch }: SearchBodyProps) => {
     useHideScroll();
+    const { t } = useTranslation();
     const query = useAppSelector(geInitialSearchQuery);
     const debouncedInputValue = useDebouncedValue(inputValue, DEBOUNCE_SEARCH);
     const maxHeight = useUpdateHeight(extraHeight);
@@ -177,7 +180,7 @@ const SearchBody = ({ inputValue, onSetInactive, handleStartSearch }: SearchBody
                 >
                     <div className="flex-1 flex items-center justify-center gap-2">
                         <GoToSearch className="shrink-0" />
-                        <span>Расширенный поиск</span>
+                        <span>{t("Search-extd")}</span>
                     </div>
                 </AppLink>
             </div>

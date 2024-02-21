@@ -25,10 +25,7 @@ import { getSelectByDate, getTL } from "../model/selectors";
 import { statisticsActions } from "../model/slice";
 import { TLIntervals, TLStat } from "../model/types";
 
-const CustomTooltip = ({
-    payload,
-    active,
-}: TooltipProps<TLStat["userScore"], TLStat["date"]> & { markLabel: string }) => {
+const CustomTooltip = ({ payload, active }: TooltipProps<TLStat["userScore"], TLStat["date"]>) => {
     const { t } = useTranslation("statisticsPage");
     if (active && payload && payload.length) {
         const item = payload[0].payload as TLStat;
@@ -67,7 +64,6 @@ export const FavoriteTimelineChart = () => {
     });
 
     const color = COLORS[theme];
-    const markLabel = t("Mark");
 
     const onIntervalChange = (newValue: string) => {
         dispatch(statisticsActions.tlSetInterval(newValue as TLIntervals));
@@ -113,7 +109,7 @@ export const FavoriteTimelineChart = () => {
                         />
                         <Tooltip
                             trigger={tooltip}
-                            content={<CustomTooltip markLabel={markLabel} />}
+                            content={<CustomTooltip />}
                             animationDuration={ANIMATION_DURATION}
                         />
 

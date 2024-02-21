@@ -22,14 +22,14 @@ export const MainPageHeader = () => {
 
     return (
         <HeaderWithControlls>
-            <p>{t("popular")}</p>
-            <Heading headinglevel={1}>{headerTitles[mainQuery]}</Heading>
+            <Heading headinglevel={1}>{t(headerTitles[mainQuery])}</Heading>
             <ControllsBox>
                 <AppSelect
                     className="w-40"
                     options={mainQueryOptions}
                     value={mainQuery}
                     actionChange={onMainQueryChange}
+                    translationKey="mainPage"
                 />
             </ControllsBox>
         </HeaderWithControlls>

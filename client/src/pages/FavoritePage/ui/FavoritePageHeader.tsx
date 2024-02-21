@@ -48,9 +48,10 @@ export const FavoritePageHeader = memo(({ listVariant }: Props) => {
 
     return (
         <HeaderWithControlls>
-            <Heading headinglevel={1}>{t("userList")}</Heading>
+            <Heading headinglevel={1}>{t("favoriteList")}</Heading>
             <ControllsBox>
                 <AppSelect
+                    translationKey="favoritePage"
                     className="w-44"
                     options={options}
                     value={listVariant}
@@ -64,7 +65,7 @@ export const FavoritePageHeader = memo(({ listVariant }: Props) => {
                             style={style}
                         >
                             <p className="line-clamp-1 break-words text-start flex justify-between w-full">
-                                {options[index].label}
+                                {t(options[index].label)}
                                 {
                                     <span className="text-blue-500 font-medium text-xs">
                                         {options[index].stat}

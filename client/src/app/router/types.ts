@@ -3,5 +3,5 @@ export interface IRoute {
     element: JSX.Element;
     auth: boolean;
     label: string;
-    allowedRoles?: ("admin" | "user")[];
+    allowedRoles: ("admin" | "user")[];
 }

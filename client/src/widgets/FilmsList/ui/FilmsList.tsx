@@ -97,7 +97,7 @@ export const FilmsList = memo((props: FilmsListPropsT) => {
 
     return (
         <>
-            {isSyncFetching && page > 1 && <FullscreenSpinner />}
+            {isSyncFetching && page > 1 && <FullscreenSpinner className="mt-0" />}
             <ul className={`${containerStyle[appearance]}`}>
                 {films.map((film) => (
                     <FilmCard

@@ -26,6 +26,7 @@ router.get("/activate/:verificationCode", validate(verifyEmailSchema), authContr
 // Получить пользователя
 router.get("/users/me", deserializeUser, userController.getMe);
 router.get("/users/all", deserializeUser, roles(["admin"]), userController.getAll);
+router.get("/user/sessions", deserializeUser, userController.getUserSessions);
 
 // Получить фильмы
 router.get(

@@ -1,4 +1,4 @@
-import { Types } from "mongoose";
+import mongoose, { Types } from "mongoose";
 import {
     JWT_ACCESS_PRIVATE_KEY,
     JWT_REFRESH_PRIVATE_KEY,
@@ -64,6 +64,15 @@ class TokenService {
 
     async deleteToken(refreshToken: string, userAgent: string) {
         return tokenModel.deleteOne({ refreshToken, userAgent });
+    }
+
+    async getUserSessions(userId: number, userAgent: string) {
+        const result = await tokenModel.find({ user: userId }, { userAgent: 1, _id: 0 }).lean();
+        const index = result.findIndex((e) => e.userAgent === userAgent);
+        const current = result[index];
+        result.splice(index, 1);
+
+        return { current, other: result };
     }
 }
 

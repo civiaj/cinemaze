@@ -44,7 +44,7 @@ export const Sidebar = memo(() => {
                 <>
                     <animated.aside
                         style={{ ...style }}
-                        className="bg-my-white shadow-sm shadow-my-neutral-200 z-30 py-2 flex flex-col justify-between fixed top-0 left-0 h-[100dvh] pt-14"
+                        className="bg-my-white shadow-sm shadow-my-neutral-200 z-30 py-2 flex flex-col justify-between fixed top-0 left-0 h-[100dvh] mt-14"
                     >
                         <ul className="p-2 hidden flex-col gap-1 w-64 3xl:flex">
                             {sidebarItems.map((sidebarItem) => (

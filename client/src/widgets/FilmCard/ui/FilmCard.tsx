@@ -9,13 +9,14 @@ import { Image } from "shared/ui/Image/Image";
 import { Heading } from "shared/ui/Text/Heading";
 
 import { FilmCardPropsT } from "../model/types";
+import { useTranslation } from "react-i18next";
 
 export const FilmCard = memo((props: FilmCardPropsT) => {
     const {
         film,
         userScore,
         isHidden,
-        label = "Смотреть",
+        label = "Watch",
         cardStyles,
         onDelete,
         onClick,
@@ -36,6 +37,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
         filmLength,
     } = film;
 
+    const { t } = useTranslation();
     const filmTitle = nameRu ?? nameEn ?? nameOriginal ?? EMPTY_LINE;
     const handleClick = useCallback(() => onClick?.(), [onClick]);
     const stats = hideStats
@@ -89,7 +91,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                         [cardStyles?.label]
                     )}
                 >
-                    {label}
+                    {t(label)}
                 </span>
 
                 <div className="absolute top-2 left-2 flex items-center gap-2">
@@ -163,10 +165,14 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                                 )}
                             </div>
                             <div className="flex-1 flex flex-col gap-1 font-normal text-sm">
-                                {filmLength && <p>Продолжительность: {filmLength}</p>}
+                                {filmLength && (
+                                    <p>
+                                        {t("Film length")}: {filmLength}
+                                    </p>
+                                )}
                                 {!!countries?.length && (
                                     <p>
-                                        Страны:{" "}
+                                        {t("Countries")}:{" "}
                                         {countries.map((country) => country.country).join(", ")}
                                     </p>
                                 )}
@@ -195,7 +201,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                                     to={`${routePath.details}/${String(filmId)}`}
                                     onClick={handleClick}
                                 >
-                                    Смотреть
+                                    {t("Watch")}
                                 </AppLink>
                             </div>
                         </div>
@@ -206,7 +212,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                         to={`${routePath.details}/${String(filmId)}`}
                         onClick={handleClick}
                     >
-                        Смотреть
+                        {t("Watch")}
                     </AppLink>
                 </Box>
             </li>

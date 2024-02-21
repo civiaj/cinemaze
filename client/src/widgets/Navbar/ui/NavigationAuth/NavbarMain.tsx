@@ -43,9 +43,9 @@ export const NavbarMain = ({ onSetOpenView, onClose }: Props) => {
 
     return (
         <div>
-            <div className="py-2 px-4 border-b border-my-neutral-100">
+            <div className="py-2 px-4 border-b border-border">
                 {user ? (
-                    <AppLink to={""} theme="button" onClick={onClose}>
+                    <AppLink to={routePath.user} theme="button" onClick={onClose}>
                         {t("myprofile")}
                     </AppLink>
                 ) : (

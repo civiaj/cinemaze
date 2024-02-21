@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { NavLink, NavLinkProps } from "react-router-dom";
 import { SideBarItem } from "widgets/Sidebar/model/types";
 
@@ -8,6 +9,7 @@ export const SidebarItem = (props: Props) => {
     const cls = "flex items-center justify-start gap-3 px-4 h-10 text-lg rounded-xl";
     const clsInactive = cls + " " + "hover:bg-my-neutral-200";
     const clsActive = cls + " " + "bg-my-neutral-200  [&>svg]:text-blue-500";
+    const { t } = useTranslation();
 
     return (
         <li>
@@ -16,7 +18,7 @@ export const SidebarItem = (props: Props) => {
                 {...otherProps}
             >
                 <Icon className="text-xl" />
-                <span>{label}</span>
+                <span>{t(label)}</span>
             </NavLink>
         </li>
     );

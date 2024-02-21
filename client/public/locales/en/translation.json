@@ -1,6 +1,6 @@
 {
     "myprofile": "My profile",
-    "mymoovies": "My moovies",
+    "mymovies": "My movies",
     "signin": "Sign in",
     "signout": "Sign-out",
     "Language": "Language",
@@ -12,5 +12,20 @@
     "Russian": "Russian",
     "System": "Device",
     "Light": "Light",
-    "Dark": "Dark"
+    "Dark": "Dark",
+    "r-main": "Main",
+    "r-favorite": "My movies",
+    "r-statistics": "Statistics",
+    "r-search": "Search",
+    "r-login": "Login page",
+    "r-user": "User",
+    "Search": "Search",
+    "Search-extd": "Extended search",
+    "Search-recent": "Recent queries",
+    "Find": "Find",
+    "Delete": "Delete",
+    "Results": "Results",
+    "Watch": "Watch",
+    "Film length": "Film length",
+    "Countries": "Countries"
 }

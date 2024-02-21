@@ -92,7 +92,7 @@ class FavoriteController {
             next(e);
         }
     }
-    async getStatistics(req: Request, res: Response, next: NextFunction) {
+    async getStatistics(_req: Request, res: Response, next: NextFunction) {
         try {
             const data = await favoriteService.getFavoriteStatistics(res.locals.user.id);
             return res.status(200).json({ data });
