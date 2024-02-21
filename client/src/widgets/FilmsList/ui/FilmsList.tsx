@@ -6,6 +6,7 @@ import { selectUser } from "entities/User";
 import { memo, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { Box } from "shared/ui/Boxes/Box";
+import { FullscreenSpinner } from "shared/ui/Spinner/FullscreenSpinner";
 import { Spinner } from "shared/ui/Spinner/Spinner";
 
 import { Message } from "shared/ui/Text/Message";
@@ -54,7 +55,11 @@ export const FilmsList = memo((props: FilmsListPropsT) => {
 
     const { pathname } = useLocation();
     const user = useAppSelector(selectUser);
-    const { isLoading: isSyncLoading, data: syncData } = useGetSyncDataQuery(undefined, {
+    const {
+        isLoading: isSyncLoading,
+        isFetching: isSyncFetching,
+        data: syncData,
+    } = useGetSyncDataQuery(undefined, {
         skip: !user,
     });
 
@@ -74,7 +79,7 @@ export const FilmsList = memo((props: FilmsListPropsT) => {
         [syncData, user]
     );
 
-    if ((isLoading || isFetching || isSyncLoading) && page === 1)
+    if ((isLoading || isFetching || isSyncLoading || isSyncFetching) && page === 1)
         return (
             <FilmListSkeleton
                 containerStyle={containerStyle[appearance]}
@@ -92,6 +97,7 @@ export const FilmsList = memo((props: FilmsListPropsT) => {
 
     return (
         <>
+            {isSyncFetching && page > 1 && <FullscreenSpinner />}
             <ul className={`${containerStyle[appearance]}`}>
                 {films.map((film) => (
                     <FilmCard

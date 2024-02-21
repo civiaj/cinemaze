@@ -8,6 +8,7 @@ import { ImagePreviewSlider } from "widgets/ImagePreview/ui/ImagePreviewSlider";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { FilmImages } from "widgets/FilmImages/model/types";
 import { ImagePreviewBody } from "widgets/ImagePreview/ui/ImagePreviewBody";
+import { useHideScroll } from "shared/hooks/useHideScroll";
 
 interface ImagePreviewProps {
     onClose: () => void;
@@ -38,6 +39,7 @@ export const ImagePreview = (props: ImagePreviewProps) => {
 
     const handleClose = useCallback(() => onClose(), [onClose]);
 
+    useHideScroll();
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === "Escape") handleClose();

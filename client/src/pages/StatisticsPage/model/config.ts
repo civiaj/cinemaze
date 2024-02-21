@@ -27,4 +27,4 @@ export const COLORS: Record<TThemes, string> = {
     light: LIGHT,
     system: getPreferableTheme() === "dark" ? DARK : LIGHT,
 };
-export const MARGIN = { top: 10, left: 30, right: 50, bottom: 10 };
+export const MARGIN = { top: 30, left: 30, right: 50, bottom: 30 };

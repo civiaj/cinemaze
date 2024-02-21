@@ -19,7 +19,7 @@ export const Overlay = (props: Props) => {
             style={{ height }}
             ref={overlay}
             className={classNames(
-                "dark:bg-neutral-700/50 bg-neutral-900/50 fixed h-full w-full inset-0 overflow-auto z-20 text-my-neutral-800 flex items-center justify-center",
+                "dark:bg-neutral-950/80 bg-neutral-900/80 fixed h-full w-full inset-0 overflow-auto z-20 text-my-neutral-800 flex items-center justify-center",
                 {},
                 [className]
             )}
