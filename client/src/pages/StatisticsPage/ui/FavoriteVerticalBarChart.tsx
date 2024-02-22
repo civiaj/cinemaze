@@ -247,16 +247,12 @@ export const FavoriteVerticalBarChart = () => {
                         <Bar
                             animationDuration={ANIMATION_DURATION}
                             animationBegin={ANIMATION_BEGIN}
-                            dataKey={"avgUserScore"}
+                            dataKey={sort}
                             className="fill-blue-500"
                             activeBar={{ stroke: color, strokeWidth: 2 }}
                         >
                             <LabelList
-                                dataKey="avgRating"
-                                content={<CustomLabelList labelFor="avgRating" />}
-                            />
-                            <LabelList
-                                dataKey="avgUserScore"
+                                dataKey={sort}
                                 content={<CustomLabelList labelFor="avgUserScore" />}
                             />
                         </Bar>

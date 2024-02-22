@@ -7,10 +7,6 @@ export const scoreTitles: Record<ScoreFilters, { title: string }> = {
 
 export const vbSortOptions: OptionType<VBSortBy, string>[] = [
     {
-        label: "Name",
-        value: "name",
-    },
-    {
         label: "Count",
         value: "count",
     },

@@ -2,7 +2,7 @@ export type ScoreFilters = "userScore" | "rating";
 export type TScore = { score: number; count: number };
 
 export type VBFilters = "genres" | "countries";
-export type VBSortBy = "name" | "count" | "avgUserScore" | "avgRating";
+export type VBSortBy = "count" | "avgUserScore" | "avgRating";
 
 export type VBStat = {
     avgUserScore: number;

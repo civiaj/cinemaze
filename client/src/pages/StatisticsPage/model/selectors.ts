@@ -88,26 +88,15 @@ export const getSelectByFilter = createSelector(
             });
 
         return result.sort((a, b) => {
-            switch (sortBy) {
-                case "avgRating":
-                case "count":
-                case "avgUserScore": {
-                    const diff = order === "asc" ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
+            const diff = order === "asc" ? a[sortBy] - b[sortBy] : b[sortBy] - a[sortBy];
 
-                    if (!diff) {
-                        return order === "asc"
-                            ? a.name.localeCompare(b.name)
-                            : b.name.localeCompare(a.name);
-                    }
-
-                    return diff;
-                }
-                case "name": {
-                    return order === "asc"
-                        ? a.name.localeCompare(b.name)
-                        : b.name.localeCompare(a.name);
-                }
+            if (!diff) {
+                return order === "asc"
+                    ? a.name.localeCompare(b.name)
+                    : b.name.localeCompare(a.name);
             }
+
+            return diff;
         });
     }
 );
