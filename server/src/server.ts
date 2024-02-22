@@ -6,6 +6,7 @@ import logger from "./utils/logger";
 import connect from "./utils/connect";
 import router from "./router/router";
 import errorBoundary from "./middleware/errorBoundary";
+import useragent from "express-useragent";
 import userAgent from "./middleware/userAgent";
 
 const app = express();
@@ -16,15 +17,17 @@ app.use(cookieParser());
 
 app.use(cors({ credentials: true, origin: [CLIENT_URL, "http://192.168.1.59:5173"] }));
 
+app.use(useragent.express());
 app.use(userAgent);
 
 app.use("/api", router);
 
-app.all("*", (req: Request, res: Response, next: NextFunction) => {
+app.all("*", (req: Request, _res: Response, next: NextFunction) => {
     const err = new Error(`Route ${req.originalUrl} not found`) as any;
     err.statusCode = 404;
     next(err);
 });
+
 app.use(errorBoundary);
 
 app.listen(PORT, async () => {
