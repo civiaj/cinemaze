@@ -1,6 +1,11 @@
 import { Router } from "express";
 import validate from "../middleware/validate";
-import { createUserSchema, loginUserSchema, verifyEmailSchema } from "../schema/user.schema";
+import {
+    createUserSchema,
+    displayNameSchema,
+    loginUserSchema,
+    verifyEmailSchema,
+} from "../schema/user.schema";
 import authController from "../controller/auth.controller";
 import deserializeUser from "../middleware/deserializeUser";
 import userController from "../controller/user.controller";
@@ -21,12 +26,18 @@ router.post("/login", validate(loginUserSchema), authController.login.bind(authC
 router.get("/refresh", authController.refresh.bind(authController));
 router.get("/logout", deserializeUser, authController.logout.bind(authController));
 router.get("/activate/:verificationCode", validate(verifyEmailSchema), authController.verifyEmail);
-//?? Добавить 2 эндпоинта: a) для сброса пороля б) для верификации сброса пороля через email.
+//?? Добавить 2 эндпоинта: a) для сброса пороля б) для верификации сброса.
 
-// Получить пользователя
+// Пользователь
 router.get("/users/me", deserializeUser, userController.getMe);
 router.get("/users/all", deserializeUser, roles(["admin"]), userController.getAll);
 router.get("/user/sessions", deserializeUser, userController.getUserSessions);
+router.patch(
+    "/user/update/displayName",
+    deserializeUser,
+    validate(displayNameSchema),
+    userController.updateUserDisplayName
+);
 
 // Получить фильмы
 router.get(

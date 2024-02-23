@@ -1,6 +1,7 @@
 import { authAndUserSliceActions } from "entities/AuthAndUser";
 import { userActions } from "entities/User";
 import { TUser } from "entities/User/model/types";
+import toast from "react-hot-toast";
 import { serverApi } from "shared/api/serverApi";
 
 export const userApi = serverApi.injectEndpoints({
@@ -31,8 +32,26 @@ export const userApi = serverApi.injectEndpoints({
                 return response;
             },
         }),
+        updateDisplayName: builder.mutation<{ message: string }, { displayName: string }>({
+            query: (body) => ({
+                url: "user/update/displayName",
+                credentials: "include",
+                body,
+                method: "PATCH",
+            }),
+            async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
+                try {
+                    await queryFulfilled;
+                    toast.success(`Имя обновлено`);
+                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate("withoutError"));
+                    refetch();
+                } catch (e) {
+                    //error middleware
+                }
+            },
+        }),
     }),
     overrideExisting: false,
 });
 
-export const { useGetMeQuery, useLazyGetMeQuery } = userApi;
+export const { useGetMeQuery, useLazyGetMeQuery, useUpdateDisplayNameMutation } = userApi;

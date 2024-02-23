@@ -1,43 +1,40 @@
 import { useAppSelector } from "app/store";
 import { Page } from "entities/Ui";
 import { selectUser } from "entities/User";
-import { useTranslation } from "react-i18next";
-import { Box } from "shared/ui/Boxes/Box";
-import { Image } from "shared/ui/Image/Image";
-import { Heading } from "shared/ui/Text/Heading";
-import defaultUser from "shared/assets/images/default-user_128x128.png";
+import { TUserSection } from "pages/UserPage/model/types";
+import { UserSectionHome } from "pages/UserPage/ui/UserSectionHome";
+import { UserSectionName } from "pages/UserPage/ui/UserSectionName";
+import { UserSectionPhoto } from "pages/UserPage/ui/UserSectionPhoto";
+import { useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const UserPage = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const section: null | string | TUserSection = searchParams.get("section");
     const user = useAppSelector(selectUser);
-    const { t } = useTranslation("userPage");
+
+    const onChangeSection = useCallback(
+        (newSection: null | TUserSection) => {
+            if (!newSection) return setSearchParams();
+            searchParams.set("section", newSection);
+            setSearchParams(searchParams);
+        },
+        [setSearchParams, searchParams]
+    );
 
     if (!user) return "нет пользователя";
 
     return (
         <Page>
-            <Box>
-                <Heading headinglevel={1}>{t("Profile")}</Heading>
-                <div>
-                    <div className=" gap-x-10 gap-y-2 place-items-start">
-                        <div className="grid grid-cols-[2fr,3fr] items-center border-b py-4 border-border">
-                            <div className="font-medium">Фото профиля</div>
-                            <Image
-                                containerClassName="rounded-full w-20 h-20"
-                                src={user.photo}
-                                onErrorSrc={defaultUser}
-                            />
-                        </div>
-                        <div className="grid grid-cols-[2fr,3fr] items-center border-b py-4 border-border">
-                            <div className="font-medium">Адрес электронной почты</div>
-                            <div>{user.email}</div>
-                        </div>
-                        <div className="grid grid-cols-[2fr,3fr] items-center border-b py-4 border-border">
-                            <div className="font-medium">Имя пользователя</div>
-                            <div>{user.displayName}</div>
-                        </div>
-                    </div>
-                </div>
-            </Box>
+            {!section && <UserSectionHome user={user} onChangeSection={onChangeSection} />}
+
+            {section === "photo" && (
+                <UserSectionPhoto photo={user.photo} onChangeSection={onChangeSection} />
+            )}
+
+            {section === "name" && (
+                <UserSectionName name={user.displayName} onChangeSection={onChangeSection} />
+            )}
         </Page>
     );
 };

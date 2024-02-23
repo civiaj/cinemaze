@@ -39,6 +39,7 @@ export {
     TbChartPie as Statistics,
     TbSortAscending as Ascending,
     TbSortDescending as Descending,
+    TbPencil as Pencil,
 } from "react-icons/tb";
 
 export { IoClose as Close } from "react-icons/io5";

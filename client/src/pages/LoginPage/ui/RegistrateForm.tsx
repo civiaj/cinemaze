@@ -1,6 +1,6 @@
 import { useRegisterMutation } from "entities/Authorization";
 import formatServerError from "shared/api/helpers/formatServerError";
-import { FormErrorMsg } from "pages/LoginPage/ui/FormErrorMsg";
+import { FormErrorMsg } from "shared/ui/FormErrorMsg/FormErrorMsg";
 import { useState } from "react";
 import { Box } from "shared/ui/Boxes/Box";
 import { Button } from "shared/ui/Button/Button";
@@ -23,7 +23,12 @@ export const RegistrateForm = (props: Props) => {
 
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        registerUser({ confirmPassword, displayName, email, password });
+        registerUser({
+            confirmPassword,
+            displayName,
+            email,
+            password,
+        });
     };
 
     let message: string | null = null;

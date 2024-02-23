@@ -1,5 +1,5 @@
 import { useLoginMutation } from "entities/Authorization";
-import { FormErrorMsg } from "pages/LoginPage/ui/FormErrorMsg";
+import { FormErrorMsg } from "shared/ui/FormErrorMsg/FormErrorMsg";
 import { useState } from "react";
 import formatServerError from "shared/api/helpers/formatServerError";
 import { Box } from "shared/ui/Boxes/Box";

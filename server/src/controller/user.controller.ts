@@ -1,6 +1,8 @@
 import { NextFunction, Response, Request } from "express";
 import userService from "../service/user.service";
 import tokenService from "../service/token.service";
+import ApiError from "../exceptions/api.error";
+import { DisplayNameInput } from "../schema/user.schema";
 
 class UserController {
     async getMe(_req: Request, res: Response, next: NextFunction) {
@@ -20,6 +22,24 @@ class UserController {
             next(e);
         }
     }
+    async updateUserDisplayName(
+        req: Request<{}, {}, DisplayNameInput>,
+        res: Response,
+        next: NextFunction
+    ) {
+        try {
+            const user = await userService.findUser({ id: res.locals.user.id });
+
+            if (!user) throw ApiError.BadRequest("Нет пользователя с таким id");
+            user.displayName = req.body.displayName;
+            await user.save({ validateBeforeSave: false });
+
+            return res.status(200).json({ data: "success" });
+        } catch (e) {
+            next(e);
+        }
+    }
+
     async getUserSessions(_req: Request, res: Response, next: NextFunction) {
         try {
             const data = await tokenService.getUserSessions(res.locals.user.id, res.locals.ua);

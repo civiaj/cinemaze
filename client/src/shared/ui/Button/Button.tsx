@@ -16,6 +16,7 @@ const themes = {
     clean: "clean",
     danger: "danger",
     login: "login",
+    userprofile: "userprofile",
 } as const;
 
 type Themes = ObjectValues<typeof themes>;
@@ -50,6 +51,7 @@ const cls: Record<Themes, string> = {
     clean: "text-inherit rounded-xl px-4 [&>*]:stroke-2 active:translate-y-[1px] bg-transparent hover:bg-my-neutral-200 focus:bg-my-neutral-200 text-blue-500",
     danger: "text-inherit rounded-xl px-4 [&>*]:stroke-2 active:translate-y-[1px] bg-my-red-200 hover:bg-my-red-300 focus:bg-my-red-300 text-neutral-50",
     login: "text-neutral-50 rounded-xl [&>*]:stroke-2 active:translate-y-[1px] h-10 w-10 justify-center text-xl bg-gradient-to-br from-blue-400 from-40% to-purple-400 to-90%",
+    userprofile: "w-full block h-auto py-4 focus:ring-0 hover:bg-my-neutral-100",
 };
 
 const spinner: Record<Themes, string> = {
@@ -66,6 +68,7 @@ const spinner: Record<Themes, string> = {
     regularNav: "text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
     regularNavIcon: "text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
     login: "text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
+    userprofile: "text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
 };
 
 export const Button = memo((props: ButtonProps) => {

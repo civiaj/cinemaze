@@ -22,7 +22,7 @@ export const FormErrorMsg = (props: Props) => {
             condition &&
             msg && (
                 <animated.div style={style} className={classNames("grid", {}, [className])}>
-                    <div className="bg-my-red-200 rounded-xl overflow-hidden">
+                    <div className="bg-my-red-200 rounded-xl text-my-neutral-50 overflow-hidden">
                         <p className="text-sm px-4 py-2">{msg}</p>
                     </div>
                 </animated.div>
