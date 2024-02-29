@@ -1,6 +1,6 @@
 import { classNames } from "shared/lib/classNames";
 import { Button } from "shared/ui/Button/Button";
-import { Image } from "shared/ui/Image/Image";
+import { AppImage } from "shared/ui/AppImage/AppImage";
 
 interface PosterProps {
     posterUrl?: string;
@@ -13,9 +13,9 @@ export const AboutPoster = (props: PosterProps) => {
 
     return (
         <div className={classNames("flex flex-col gap-4", {}, [className])}>
-            <div className="relative rounded-xl overflow-hidden">
-                <Image
-                    containerClassName="h-72 w-full"
+            <div className="relative overflow-hidden aspect-[9/16]">
+                <AppImage
+                    containerClassName=""
                     src={posterUrl}
                     alt="poster"
                     className="select-none"

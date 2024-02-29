@@ -5,12 +5,11 @@ import { selectUser } from "entities/User";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Left, Login } from "shared/assets/icons";
-import defaultUser from "shared/assets/images/default-user.png";
 import withPopup from "shared/hoc/withPopup";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Box } from "shared/ui/Boxes/Box";
 import { Button } from "shared/ui/Button/Button";
-import { Image } from "shared/ui/Image/Image";
+import { AppImage } from "shared/ui/AppImage/AppImage";
 import { OutsideClickWrapper } from "shared/ui/OutsideClickWrapper/OutsideClickWrapper";
 import { Elipsis } from "shared/ui/Text/Elipsis";
 
@@ -35,22 +34,23 @@ export const NavigationAuth = () => {
         dispatch(uiActions.toggleNavbarAuth(true));
     }, [dispatch]);
 
-    const onOpen = useCallback(() => {
-        dispatch(uiActions.toggleNavbarAuth(false));
-    }, [dispatch]);
+    const onToggle = useCallback(() => {
+        dispatch(uiActions.toggleNavbarAuth(!navbarAuthCollapsed));
+    }, [dispatch, navbarAuthCollapsed]);
 
     return (
         <OutsideClickWrapper onClose={onClose}>
             {user ? (
-                <Button theme="regularNavIcon" onClick={onOpen}>
-                    <Image
+                <Button theme="regularNavIcon" onClick={onToggle} className="overflow-hidden">
+                    <AppImage
                         src={user.photo}
-                        onErrorSrc={defaultUser}
+                        onErrorSrc="user"
                         containerClassName="bg-transparent"
+                        className="transition-none"
                     />
                 </Button>
             ) : (
-                <Button theme="login" onClick={onOpen}>
+                <Button theme="login" onClick={onToggle}>
                     <Login />
                 </Button>
             )}
@@ -69,10 +69,11 @@ const NavigationAuthBody = ({ onClose }: { onClose: () => void }) => {
         <Box className="absolute right-0 top-full mt-6 p-0 sm:p-0 gap-0 sm:gap-0 overflow-hidden w-72">
             {user && (
                 <div className="flex gap-4 py-6 px-4 border-b border-border">
-                    <Image
+                    <AppImage
                         src={user.photo}
                         containerClassName="w-12 h-12 rounded-xl shrink-0"
-                        onErrorSrc={defaultUser}
+                        onErrorSrc="user"
+                        className="transition-none"
                     />
                     <div className="flex flex-col">
                         <p

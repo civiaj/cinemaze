@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { EMPTY_LINE } from "shared/const/const";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { ColoredNumber } from "shared/ui/ColoredNumber/ColoredNumber";
-import { Image } from "shared/ui/Image/Image";
+import { AppImage } from "shared/ui/AppImage/AppImage";
 import { Spinner } from "shared/ui/Spinner/Spinner";
 
 type Props = {
@@ -67,7 +67,7 @@ export const SearchQueryResults = (props: Props) => {
                             >
                                 <div className="px-2 flex gap-2">
                                     <div className="h-24 w-16 rounded-xl overflow-hidden">
-                                        <Image src={item.posterUrlPreview} />
+                                        <AppImage src={item.posterUrlPreview} />
                                     </div>
                                     <div className="flex-1 flex flex-col justify-between">
                                         <p className="font-medium line-clamp-1 text-ellipsis flex-1">

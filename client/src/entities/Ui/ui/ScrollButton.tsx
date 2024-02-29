@@ -33,11 +33,11 @@ export const ScrollButton = (props: ScrollButtonProps) => {
     return (
         <Button
             onClick={handleClick}
-            theme="regularIcon"
+            theme="blue"
             className={classNames(
-                "fixed z-20 right-2 bottom-7 opacity-0 pointer-events-none bg-my-neutral-800 text-my-neutral-50 shadow-none hover:bg-my-neutral-900 hover:text-my-neutral-50 focus:bg-my-neutral-900",
+                "fixed z-20 right-2 bottom-7 opacity-0 pointer-events-none hidden h-10 w-10 p-0 text-2xl",
                 {
-                    ["pointer-events-auto opacity-100"]: isDisplayed,
+                    ["pointer-events-auto opacity-100 flex"]: isDisplayed,
                 }
             )}
         >

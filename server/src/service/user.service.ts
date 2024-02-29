@@ -15,7 +15,7 @@ class UserService {
     }
 
     async findUser(filter: FilterQuery<User>, options: QueryOptions = {}) {
-        return userModel.findOne(filter, {}, options);
+        return userModel.findOne(filter, {}, options).select("+photo");
     }
 
     async findUserWithPassword(filter: FilterQuery<User>, options: QueryOptions = {}) {

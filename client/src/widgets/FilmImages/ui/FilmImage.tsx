@@ -1,7 +1,7 @@
 import { ReactEventHandler, memo, useState } from "react";
 import { classNames } from "shared/lib/classNames";
 import { AppLink } from "shared/ui/AppLink/AppLink";
-import { Image } from "shared/ui/Image/Image";
+import { AppImage } from "shared/ui/AppImage/AppImage";
 
 interface FilmImageProps {
     index: number;
@@ -69,7 +69,7 @@ export const FilmImage = memo((props: FilmImageProps) => {
                     className="group h-full w-full relative rounded-xl overflow-hidden focus:ring-2 focus:ring-blue-500 outline-none"
                     onClick={() => handlePreviewOpen(index)}
                 >
-                    <Image src={previewUrl} alt={`preview #${index}`} onLoad={handleLoad} />
+                    <AppImage src={previewUrl} alt={`preview #${index}`} onLoad={handleLoad} />
                     <span className="absolute top-2 left-2 z-[1] ">
                         <AppLink
                             to={imageUrl}

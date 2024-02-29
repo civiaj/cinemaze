@@ -17,8 +17,11 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 
         if (!decoded) throw ApiError.Unauthorized("Неверный токен");
 
-        const user = await userService.findUser({ id: decoded.id });
+        const user = await userService.findUser({ id: decoded.id }, { lean: true });
         if (!user) throw ApiError.Unauthorized("Пользователь с указанным токеном не существует");
+
+        const token = await tokenService.findToken({ user: user.id, userAgent: res.locals.ua });
+        if (!token) throw ApiError.Unauthorized("Токен недействителен");
 
         res.locals.user = user;
         next();

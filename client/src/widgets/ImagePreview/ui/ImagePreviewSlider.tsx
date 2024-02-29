@@ -1,5 +1,5 @@
 import { classNames } from "shared/lib/classNames";
-import { Image } from "shared/ui/Image/Image";
+import { AppImage } from "shared/ui/AppImage/AppImage";
 import { SwiperOptions } from "swiper/types";
 import { FilmImages } from "widgets/FilmImages/model/types";
 import { Slider } from "widgets/Slider";
@@ -53,7 +53,7 @@ export const ImagePreviewSlider = (props: ImagePreviewSliderProps) => {
                     )}
                     onClick={() => onSetSlide(index!)}
                 >
-                    <Image src={image.previewUrl} containerClassName="bg-black" />
+                    <AppImage src={image.previewUrl} containerClassName="bg-black" />
                 </button>
             )}
             slides={images}

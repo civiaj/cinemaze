@@ -23,7 +23,7 @@ const userFilmsApi = serverApi.injectEndpoints({
                 body,
                 credentials: "include",
             }),
-            invalidatesTags: ["Films"],
+            invalidatesTags: ["Favorites"],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 const {
                     film: { filmId },
@@ -62,7 +62,7 @@ const userFilmsApi = serverApi.injectEndpoints({
             }),
             transformResponse: (response: { data: FavoriteItemT }) => response.data,
 
-            providesTags: ["Films"],
+            providesTags: ["Favorites"],
         }),
         getOneFavorite: builder.query<TFavorite | null, number>({
             query: (filmId) => ({
@@ -70,7 +70,7 @@ const userFilmsApi = serverApi.injectEndpoints({
                 credentials: "include",
             }),
             transformResponse: (reponse: { data: TFavorite }) => reponse.data,
-            providesTags: (_result, _error, arg) => [{ type: "Films", id: arg }],
+            providesTags: (_result, _error, arg) => [{ type: "Favorites", id: arg }],
         }),
 
         removeOneFavorite: builder.mutation<{ message: string }, RemoveFavoriteRequest>({
@@ -80,7 +80,7 @@ const userFilmsApi = serverApi.injectEndpoints({
                 body: payload.body,
                 credentials: "include",
             }),
-            invalidatesTags: ["Films"],
+            invalidatesTags: ["Favorites"],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     await queryFulfilled;
@@ -106,7 +106,7 @@ const userFilmsApi = serverApi.injectEndpoints({
                 credentials: "include",
             }),
             transformResponse: (response: { data: SyncDataResponse }) => response.data,
-            providesTags: ["Films"],
+            providesTags: ["Favorites"],
         }),
         getStatistics: builder.query<TStatistics[], void>({
             query: () => ({
@@ -114,7 +114,7 @@ const userFilmsApi = serverApi.injectEndpoints({
                 credentials: "include",
             }),
             transformResponse: (response: { data: TStatistics[] }) => response.data,
-            providesTags: ["Films"],
+            providesTags: ["Favorites"],
         }),
     }),
     overrideExisting: false,

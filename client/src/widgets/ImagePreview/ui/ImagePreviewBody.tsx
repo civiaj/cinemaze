@@ -1,6 +1,6 @@
 import { useUpdateHeight } from "shared/hooks/useUpdateHeight";
 import { classNames } from "shared/lib/classNames";
-import { Image } from "shared/ui/Image/Image";
+import { AppImage } from "shared/ui/AppImage/AppImage";
 
 type Props = {
     src?: string;
@@ -16,7 +16,7 @@ export const ImagePreviewBody = ({ src, onSetIsShown, isShown }: Props) => {
     return (
         <div className="h-full w-full col-span-5">
             <div className="flex items-center justify-center h-full">
-                <Image
+                <AppImage
                     onLoad={() => onSetIsShown()}
                     src={src}
                     containerStyle={{ maxHeight }}

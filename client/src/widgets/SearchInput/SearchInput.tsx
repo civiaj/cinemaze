@@ -60,6 +60,7 @@ export const SearchInput = (props: Props) => {
 
     const handleStartSearch = (query?: string) => {
         if (!inputValue && !query) {
+            onSetActive();
             inputRef.current?.focus();
             return;
         }
@@ -88,7 +89,7 @@ export const SearchInput = (props: Props) => {
                     onClose={onSetInactive}
                     className="flex gap-2 justify-center relative flex-1 md:flex-initial"
                 >
-                    <div className="relative flex-1 md:flex-initial">
+                    <form className="relative flex-1 md:flex-initial" autoComplete="off">
                         <span
                             className={classNames(
                                 "opacity-100 pointer-events-none absolute top-0 right-0 w-10 h-full flex items-center justify-center",
@@ -108,6 +109,13 @@ export const SearchInput = (props: Props) => {
                             <Close />
                         </button>
 
+                        <input
+                            autoComplete="false"
+                            name="hidden"
+                            type="text"
+                            style={{ display: "none" }}
+                        />
+
                         <Input
                             className="w-full md:w-96 pr-10"
                             placeholder={t("Search")}
@@ -117,8 +125,9 @@ export const SearchInput = (props: Props) => {
                             onChange={handleInputChange}
                             onKeyDown={handleKeyDown}
                             ref={inputRef}
+                            type="text"
                         />
-                    </div>
+                    </form>
                     {isActive && (
                         <SearchBody
                             inputValue={inputValue}
@@ -148,8 +157,6 @@ type SearchBodyProps = {
 };
 
 const SearchBody = ({ inputValue, onSetInactive, handleStartSearch }: SearchBodyProps) => {
-    useHideScroll();
-    const { t } = useTranslation();
     const query = useAppSelector(geInitialSearchQuery);
     const debouncedInputValue = useDebouncedValue(inputValue, DEBOUNCE_SEARCH);
     const maxHeight = useUpdateHeight(extraHeight);
@@ -157,10 +164,12 @@ const SearchBody = ({ inputValue, onSetInactive, handleStartSearch }: SearchBody
         { ...query, keyword: debouncedInputValue, page: 1 },
         { skip: !debouncedInputValue || !inputValue }
     );
+    const { t } = useTranslation();
+    useHideScroll();
     return (
         <div
             style={{ maxHeight }}
-            className="w-full bg-my-white border border-my-neutral-200 rounded-xl absolute top-12 left-0 overflow-y-auto mb-5"
+            className="w-full bg-my-white border border-my-neutral-200 rounded-xl absolute top-full left-0 overflow-y-auto mb-5 mt-4"
         >
             <div className="flex flex-col px-2 py-2 gap-2">
                 <SearchUserQueries inputValue={inputValue} startSearch={handleStartSearch} />

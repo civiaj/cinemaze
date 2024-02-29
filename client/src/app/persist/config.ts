@@ -3,7 +3,14 @@ import storage from "redux-persist/lib/storage";
 export const persistConfig = {
     key: "appstorage",
     storage,
-    whitelist: ["ui"],
+    whitelist: [],
+};
+
+export const uiConfig = {
+    key: "uiConfig",
+    storage,
+    whitelist: ["sb", "appearance"],
+    blaclist: ["na"],
 };
 
 export const mainPagePersistConfig = {

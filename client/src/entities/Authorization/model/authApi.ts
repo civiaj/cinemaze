@@ -1,16 +1,11 @@
 import { authAndUserSliceActions } from "entities/AuthAndUser";
-import {
-    GenericResponse,
-    LoginRequest,
-    RegisterRequest,
-    TokenResponse,
-} from "entities/Authorization/model/types";
+import { LoginRequest, RegisterRequest, GenericResponse } from "entities/Authorization/model/types";
 import { userActions, userApi } from "entities/User";
 import { serverApi } from "shared/api/serverApi";
 
 const authApi = serverApi.injectEndpoints({
     endpoints: (builder) => ({
-        register: builder.mutation<TokenResponse, RegisterRequest>({
+        register: builder.mutation<GenericResponse, RegisterRequest>({
             query: (data) => ({
                 url: "/register",
                 method: "POST",
@@ -30,7 +25,7 @@ const authApi = serverApi.injectEndpoints({
                 }
             },
         }),
-        login: builder.mutation<TokenResponse, LoginRequest>({
+        login: builder.mutation<GenericResponse, LoginRequest>({
             query: (data) => ({
                 url: "/login",
                 method: "POST",
@@ -65,12 +60,24 @@ const authApi = serverApi.injectEndpoints({
                 }
             },
         }),
-        verifyEmail: builder.mutation<GenericResponse, string>({
-            query: (verificationCode) => ({ url: `/activate/${verificationCode}` }),
+        checkPassword: builder.mutation<GenericResponse, LoginRequest>({
+            query: (body) => ({
+                url: "/checkPassword",
+                method: "POST",
+                body,
+                credentials: "include",
+            }),
         }),
+        // verifyEmail: builder.mutation<GenericResponse, string>({
+        //     query: (verificationCode) => ({ url: `/activate/${verificationCode}` }),
+        // }),
     }),
     overrideExisting: false,
 });
 
-export const { useRegisterMutation, useLoginMutation, useLogoutMutation, useVerifyEmailMutation } =
-    authApi;
+export const {
+    useRegisterMutation,
+    useLoginMutation,
+    useLogoutMutation,
+    useCheckPasswordMutation,
+} = authApi;

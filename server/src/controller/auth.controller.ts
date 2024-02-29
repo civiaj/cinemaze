@@ -60,6 +60,21 @@ class AuthController {
         }
     }
 
+    async checkPassword(req: Request<{}, {}, LoginUserInput>, res: Response, next: NextFunction) {
+        try {
+            const { email, password } = req.body;
+            const user = await userService.findUserWithPassword({ email });
+
+            if (!user || !user.comparePassword(password)) {
+                throw ApiError.BadRequest("Неверный пароль");
+            }
+
+            return res.status(201).json({ message: "success" });
+        } catch (e) {
+            next(e);
+        }
+    }
+
     async refresh(req: Request, res: Response, next: NextFunction) {
         try {
             const message = "Невозможно обновить access token";
@@ -68,7 +83,8 @@ class AuthController {
             const decoded = tokenService.verifyJwt<{ id: string }>(refreshToken, "refresh");
             if (!decoded) throw new ApiError(message, 403);
 
-            const token = await tokenService.findToken(refreshToken, res.locals.ua);
+            const token = await tokenService.findToken({ refreshToken, userAgent: res.locals.ua });
+            console.log(res.locals.ua);
             if (!token) throw new ApiError(message, 403);
 
             const user = await userService.findUser({ id: decoded.id });

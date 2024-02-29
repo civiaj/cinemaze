@@ -13,12 +13,8 @@ export const FilmCardSkeleton = (props: Props) => {
 
     if (appearance === "tile")
         return (
-            <li
-                className={classNames("relative rounded-xl overflow-hidden h-72", {}, [
-                    cardStyles?.card,
-                ])}
-            >
-                <Skeleton className="w-full h-full bg-my-neutral-100" />
+            <li className={classNames("relative overflow-hidden h-72", {}, [cardStyles?.card])}>
+                <Skeleton className="w-full h-full bg-my-neutral-100 rounded-none" />
                 <Skeleton
                     className={classNames(
                         "absolute bottom-2 left-2 h-7 w-[70%] bg-my-neutral-200",

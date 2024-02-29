@@ -70,7 +70,6 @@ img {
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: var(--400);
-    border-radius: 5px;
 }
 
 /* Handle on hover */

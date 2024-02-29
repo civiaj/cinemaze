@@ -5,7 +5,7 @@ import { EMPTY_LINE } from "shared/const/const";
 import { classNames } from "shared/lib/classNames";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Box } from "shared/ui/Boxes/Box";
-import { Image } from "shared/ui/Image/Image";
+import { AppImage } from "shared/ui/AppImage/AppImage";
 import { Heading } from "shared/ui/Text/Heading";
 
 import { FilmCardPropsT } from "../model/types";
@@ -56,30 +56,28 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
     if (appearance === "tile")
         return (
             <li
-                className={classNames("relative group rounded-xl overflow-hidden w-full h-72", {}, [
+                className={classNames("relative group w-full h-72 overflow-hidden", {}, [
                     cardStyles?.card,
                 ])}
             >
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-70% to-neutral-900 to-90% z-[1]" />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-80% to-neutral-950/90 to-90% z-[1]" />
                 <AppLink
                     to={`${routePath.details}/${String(filmId)}`}
                     theme="card"
                     className="absolute inset-0 z-[5]"
                     onClick={handleClick}
                 />
-                <Image
-                    src={posterUrlPreview}
-                    alt={`${filmTitle} poster`}
-                    containerClassName="h-[95%]"
-                />
+                <AppImage src={posterUrlPreview} alt={`${filmTitle} poster`} />
 
                 <div className="absolute inset-0 group-hover:bg-neutral-900/50 group-focus:bg-neutral-900/50 z-[2]" />
                 <div className="absolute left-2 bottom-2 z-[1]">
                     <Heading
                         headinglevel={4}
-                        className={classNames("text-neutral-50 w-full line-clamp-1 pr-2", {}, [
-                            cardStyles?.title,
-                        ])}
+                        className={classNames(
+                            "text-neutral-50 w-full line-clamp-1 pr-2 break-words text-start",
+                            {},
+                            [cardStyles?.title]
+                        )}
                     >
                         {filmTitle}
                     </Heading>
@@ -128,7 +126,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                 <Box className="gap-4 relative">
                     <div className="flex gap-4">
                         <div className="relative w-36 h-52 rounded-xl overflow-hidden shrink-0 border border-my-neutral-200">
-                            <Image src={posterUrlPreview} alt={`${filmTitle} poster`} />
+                            <AppImage src={posterUrlPreview} alt={`${filmTitle} poster`} />
                             <div className="absolute top-2 left-2 flex items-center gap-2">
                                 {stats.map(
                                     (item) =>

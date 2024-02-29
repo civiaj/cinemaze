@@ -1,0 +1,67 @@
+import { routePath } from "app/router/router";
+import { useDeletePhotoMutation } from "entities/User";
+import { UserModalAnimationHoc } from "pages/UserPage/ui/UserSectionPhoto/UserModalAnimationHoc";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import formatServerError from "shared/api/helpers/formatServerError";
+import { classNames } from "shared/lib/classNames";
+import { Box } from "shared/ui/Boxes/Box";
+import { UserBox, UserBoxSeparator } from "shared/ui/Boxes/UserBox";
+import { Button } from "shared/ui/Button/Button";
+import { FormErrorMsg } from "shared/ui/FormErrorMsg/FormErrorMsg";
+import { Heading } from "shared/ui/Text/Heading";
+import { Text } from "shared/ui/Text/Text";
+
+type Props = {
+    onClose: () => void;
+    isModal: boolean;
+};
+
+const Modal = ({ onClose }: Props) => {
+    const { t } = useTranslation();
+    const [deletePhoto, { isLoading, isError, error }] = useDeletePhotoMutation();
+    const navigate = useNavigate();
+
+    const onDelete = () => {
+        deletePhoto()
+            .unwrap()
+            .then(() => navigate(routePath.user));
+    };
+
+    return (
+        <Box className={classNames("gap-0 sm:gap-0 p-0 sm:p-0 shadow-0")}>
+            <UserBox>
+                <Heading headinglevel={1}>Удаление</Heading>
+            </UserBox>
+            <UserBox className="gap-2 sm:gap-4">
+                <Text>Вы действительно хотите удалить фото профиля?</Text>
+
+                <FormErrorMsg isError={isError} msg={formatServerError(error)} />
+                <UserBoxSeparator />
+                <div className="border-0 flex self-center gap-2">
+                    <Button
+                        className="font-medium"
+                        theme="danger"
+                        onClick={onDelete}
+                        isLoading={isLoading}
+                    >
+                        <Text>{t("Delete")}</Text>
+                    </Button>
+                    <Button onClick={onClose} theme="regular" className="font-medium">
+                        <Text>{t("Cancel")}</Text>
+                    </Button>
+                </div>
+            </UserBox>
+            <div className="w-full h-2 shrink-0 bg-red-500" />
+        </Box>
+    );
+};
+
+export const UserPhotoDeleteModal = (props: Props) => {
+    const Component = UserModalAnimationHoc(Modal, {
+        transitionValue: props.isModal,
+        onCloseModal: props.onClose,
+    });
+
+    return <Component {...props} />;
+};

@@ -67,7 +67,7 @@ export const FilmImagesBody = (props: FilmImagesBodyProps) => {
             />
 
             {activeIndex !== null && (
-                <ImagePreview
+                <AppImagePreview
                     activeIndex={activeIndex}
                     images={data.items}
                     onClose={handlePreviewClose}

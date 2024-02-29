@@ -2,7 +2,7 @@ import { routePath } from "app/router/router";
 import { useAppDispatch, useAppSelector } from "app/store";
 import { allowNavbarScroll, uiActions } from "entities/Ui";
 import { SearchInput } from "pages/SearchPage";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Menu } from "shared/assets/icons";
 import { classNames } from "shared/lib/classNames";
@@ -77,11 +77,12 @@ export const Navbar = () => {
             <Button theme="regularNavIcon" onClick={handleToggle}>
                 <Menu />
             </Button>
-
-            <SearchInput isActive={isActive} setActive={onOpenSearch} />
-            <div className="flex gap-4 items-center">
-                <NavigationAuth />
-            </div>
+            <Suspense>
+                <SearchInput isActive={isActive} setActive={onOpenSearch} />
+                <div className="flex gap-4 items-center">
+                    <NavigationAuth />
+                </div>
+            </Suspense>
         </nav>
     );
 };

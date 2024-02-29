@@ -4,6 +4,8 @@ import {
     createUserSchema,
     displayNameSchema,
     loginUserSchema,
+    passwordSchema,
+    removeSessionSchema,
     verifyEmailSchema,
 } from "../schema/user.schema";
 import authController from "../controller/auth.controller";
@@ -17,26 +19,49 @@ import {
 } from "../schema/favorite.schema";
 import favoriteController from "../controller/favorite.controller";
 import { createFilmSchema } from "../schema/film.schema";
+import { resizeSingleImage, uploadSingleImage } from "../upload/single.image";
 
 const router = Router();
 
 // Авторизация
 router.post("/register", validate(createUserSchema), authController.register.bind(authController));
 router.post("/login", validate(loginUserSchema), authController.login.bind(authController));
+router.post("/checkPassword", validate(loginUserSchema), authController.checkPassword);
 router.get("/refresh", authController.refresh.bind(authController));
 router.get("/logout", deserializeUser, authController.logout.bind(authController));
 router.get("/activate/:verificationCode", validate(verifyEmailSchema), authController.verifyEmail);
 //?? Добавить 2 эндпоинта: a) для сброса пороля б) для верификации сброса.
 
 // Пользователь
-router.get("/users/me", deserializeUser, userController.getMe);
-router.get("/users/all", deserializeUser, roles(["admin"]), userController.getAll);
+router.get("/user/me", deserializeUser, userController.getMe);
+router.get("/user/all", deserializeUser, roles(["admin"]), userController.getAll);
 router.get("/user/sessions", deserializeUser, userController.getUserSessions);
 router.patch(
     "/user/update/displayName",
     deserializeUser,
     validate(displayNameSchema),
     userController.updateUserDisplayName
+);
+router.patch(
+    "/user/update/password",
+    deserializeUser,
+    validate(passwordSchema),
+    userController.updatePassword
+);
+router.patch(
+    "/user/update/photo",
+    deserializeUser,
+    uploadSingleImage,
+    resizeSingleImage,
+    userController.updateUserPhoto
+);
+router.patch("/user/remove/photo", deserializeUser, userController.deleteUserPhoto);
+
+router.delete(
+    "/user/sessions",
+    deserializeUser,
+    validate(removeSessionSchema),
+    userController.removeSession
 );
 
 // Получить фильмы

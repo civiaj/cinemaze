@@ -8,10 +8,13 @@ import router from "./router/router";
 import errorBoundary from "./middleware/errorBoundary";
 import useragent from "express-useragent";
 import userAgent from "./middleware/userAgent";
+import path from "path";
 
 const app = express();
 
 app.use(express.json());
+
+app.use("/api/static/profiles", express.static(path.join(__dirname, "../static/profiles")));
 
 app.use(cookieParser());
 

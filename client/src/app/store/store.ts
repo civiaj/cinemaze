@@ -9,6 +9,7 @@ import {
     searchPagePersistConfig,
     favoritePagePersistConfig,
     statisticsPagePersistConfig,
+    uiConfig,
 } from "app/persist/config";
 import { uiReducer } from "entities/Ui";
 import { mainPageReducer } from "pages/MainPage";
@@ -24,12 +25,12 @@ import { authAndUserSliceReducer } from "entities/AuthAndUser";
 import { statisticsReducer } from "pages/StatisticsPage/model/slice";
 
 const rootReducer = combineReducers({
-    ui: uiReducer,
     user: userReducer,
+    authAndUserIsLoading: authAndUserSliceReducer,
+    ui: persistReducer(uiConfig, uiReducer),
     mainPage: persistReducer(mainPagePersistConfig, mainPageReducer),
     favoritePage: persistReducer(favoritePagePersistConfig, favoritePageReducer),
     searchPage: persistReducer(searchPagePersistConfig, searchPageReducer),
-    authAndUserIsLoading: authAndUserSliceReducer,
     statisticsPage: persistReducer(statisticsPagePersistConfig, statisticsReducer),
     [filmApi.reducerPath]: filmApi.reducer,
     [serverApi.reducerPath]: serverApi.reducer,

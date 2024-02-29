@@ -1,6 +1,6 @@
 import { authAndUserSliceActions } from "entities/AuthAndUser";
 import { userActions } from "entities/User";
-import { TUser } from "entities/User/model/types";
+import { SessionsResponse, TUser } from "entities/User/model/types";
 import toast from "react-hot-toast";
 import { serverApi } from "shared/api/serverApi";
 
@@ -8,7 +8,7 @@ export const userApi = serverApi.injectEndpoints({
     endpoints: (builder) => ({
         getMe: builder.query<TUser, void | "withoutError">({
             query: () => ({
-                url: "users/me",
+                url: "user/me",
                 credentials: "include",
             }),
 
@@ -32,6 +32,14 @@ export const userApi = serverApi.injectEndpoints({
                 return response;
             },
         }),
+        getSessions: builder.query<SessionsResponse, void>({
+            query: () => ({
+                url: "/user/sessions",
+                credentials: "include",
+            }),
+            transformResponse: (response: { data: SessionsResponse }) => response.data,
+            providesTags: ["Session"],
+        }),
         updateDisplayName: builder.mutation<{ message: string }, { displayName: string }>({
             query: (body) => ({
                 url: "user/update/displayName",
@@ -50,8 +58,98 @@ export const userApi = serverApi.injectEndpoints({
                 }
             },
         }),
+        updatePassword: builder.mutation<
+            { message: string },
+            { password: string; confirmPassword: string }
+        >({
+            query: (body) => ({
+                url: "/user/update/password",
+                credentials: "include",
+                body,
+                method: "PATCH",
+            }),
+            async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
+                try {
+                    await queryFulfilled;
+                    toast.success(`Пароль обновлен`);
+                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate("withoutError"));
+                    refetch();
+                } catch (e) {
+                    //error middleware
+                }
+            },
+        }),
+        updatePhoto: builder.mutation<{ message: string }, FormData>({
+            query: (formData) => ({
+                url: "user/update/photo",
+                credentials: "include",
+                body: formData,
+                method: "PATCH",
+            }),
+            async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
+                try {
+                    await queryFulfilled;
+                    toast.success(`Фото профиля обновлено`);
+                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate("withoutError"));
+                    refetch();
+                } catch (e) {
+                    //error middleware
+                }
+            },
+        }),
+
+        deletePhoto: builder.mutation<{ message: string }, void>({
+            query: () => ({
+                url: "user/remove/photo",
+                credentials: "include",
+                method: "PATCH",
+            }),
+            async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
+                try {
+                    await queryFulfilled;
+                    toast.success(`Фото профиля удалено`);
+                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate("withoutError"));
+                    refetch();
+                } catch (e) {
+                    //error middleware
+                }
+            },
+        }),
+
+        removeSession: builder.mutation<{ message: string }, { session: string }>({
+            query: (body) => ({
+                url: "user/sessions",
+                method: "DELETE",
+                credentials: "include",
+                body,
+            }),
+            async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
+                try {
+                    await queryFulfilled;
+                    toast.success(`Сессия удалена`);
+                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate("withoutError"));
+                    refetch();
+                } catch (e) {
+                    //error middleware
+                }
+            },
+            transformErrorResponse: (response) => {
+                response.data = "withoutError";
+                return response;
+            },
+            invalidatesTags: ["Session"],
+        }),
     }),
     overrideExisting: false,
 });
 
-export const { useGetMeQuery, useLazyGetMeQuery, useUpdateDisplayNameMutation } = userApi;
+export const {
+    useGetMeQuery,
+    useLazyGetMeQuery,
+    useUpdateDisplayNameMutation,
+    useGetSessionsQuery,
+    useRemoveSessionMutation,
+    useUpdatePasswordMutation,
+    useUpdatePhotoMutation,
+    useDeletePhotoMutation,
+} = userApi;

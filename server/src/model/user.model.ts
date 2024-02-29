@@ -9,7 +9,7 @@ export type User = {
     email: string;
     password: string;
     role: string;
-    photo: string;
+    photo: string | null;
     verified: boolean;
     verificationCode: string | null;
     passwordResetToken: string | null;
@@ -33,8 +33,8 @@ const userSchema = new mongoose.Schema<User, TUserModel, TUserMethods>(
         email: { type: String, required: true, unique: true },
         displayName: { type: String, required: true },
         password: { type: String, required: true, min: 8, max: 32, select: false },
-        role: { type: String, default: "user" },
-        photo: { type: String, default: "default.png" },
+        role: { type: String, required: true, default: "user" },
+        photo: { type: String, required: true, default: "default-user.jpeg" },
         verified: { type: Boolean, default: false },
         verificationCode: { type: String, select: false },
         passwordResetToken: { type: String, select: false },

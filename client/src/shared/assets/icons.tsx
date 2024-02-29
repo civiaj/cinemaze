@@ -40,6 +40,8 @@ export {
     TbSortAscending as Ascending,
     TbSortDescending as Descending,
     TbPencil as Pencil,
+    TbHandStop as Stop,
+    TbFile as File,
 } from "react-icons/tb";
 
 export { IoClose as Close } from "react-icons/io5";

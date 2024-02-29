@@ -10,3 +10,10 @@ export type TUser = {
     updatedAt: string;
     id: string;
 };
+
+export type SessionIdentifier = { os: string; browser: string; version: string };
+
+export type SessionsResponse = {
+    current: SessionIdentifier;
+    other: SessionIdentifier[];
+};

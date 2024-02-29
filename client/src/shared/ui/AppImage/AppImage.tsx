@@ -3,44 +3,45 @@ import {
     ImgHTMLAttributes,
     MutableRefObject,
     ReactEventHandler,
-    useCallback,
     useRef,
-    useState,
 } from "react";
+import defaultUser from "shared/assets/images/default-user.jpeg";
 import fallbackImage from "shared/assets/images/placeholder.jpg";
-import { useIntersectionObserver } from "shared/hooks/useIntersectionObserver";
 import { classNames } from "shared/lib/classNames";
 
 interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
     className?: string;
     containerClassName?: string;
-    onErrorSrc?: string;
+    onErrorSrc?: "user";
     containerStyle?: CSSProperties;
 }
 
-export const Image = (props: ImageProps) => {
+export const AppImage = (props: ImageProps) => {
     const { className, containerClassName, src, onErrorSrc, containerStyle, ...otherProps } = props;
 
     const handleImageError: ReactEventHandler<HTMLImageElement> = (e) => {
         e.currentTarget.onerror = null;
-        e.currentTarget.src = onErrorSrc ?? fallbackImage;
+
+        let errorImage;
+
+        switch (onErrorSrc) {
+            case "user": {
+                errorImage = defaultUser;
+                break;
+            }
+            default: {
+                errorImage = fallbackImage;
+                break;
+            }
+        }
+
+        e.currentTarget.src = errorImage;
     };
 
     const imageRef = useRef() as MutableRefObject<HTMLImageElement>;
-    const [isVisible, setIsVisible] = useState(false);
 
-    const onScrollEnd = useCallback(
-        (observer: IntersectionObserver, entry: IntersectionObserverEntry) => {
-            setIsVisible(true);
-            observer?.unobserve(entry.target);
-        },
-        []
-    );
-
-    useIntersectionObserver({
-        targetRef: imageRef,
-        onScrollEnd,
-    });
+    const source =
+        onErrorSrc === "user" ? import.meta.env.VITE_SERVER_STATIC_USER_PHOTO + src : src;
 
     return (
         <div
@@ -53,10 +54,10 @@ export const Image = (props: ImageProps) => {
                 ref={imageRef}
                 onError={handleImageError}
                 loading="lazy"
-                src={src}
+                src={source}
                 className={classNames(
-                    "h-full w-full object-cover object-center opacity-0 transition-[opacity] duration-300",
-                    { ["opacity-100"]: isVisible },
+                    "h-full w-full object-cover object-center opacity-100 transition-[opacity] duration-300",
+                    {},
                     [className]
                 )}
                 {...otherProps}

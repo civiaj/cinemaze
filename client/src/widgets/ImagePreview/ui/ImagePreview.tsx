@@ -74,7 +74,7 @@ export const ImagePreview = (props: ImagePreviewProps) => {
                         >
                             <Left />
                         </Button>
-                        <ImagePreviewBody
+                        <AppImagePreviewBody
                             src={activeImageUrl}
                             isShown={isShown}
                             onSetIsShown={onSetIsShown}
@@ -91,7 +91,7 @@ export const ImagePreview = (props: ImagePreviewProps) => {
                     </div>
                 </div>
 
-                <ImagePreviewSlider
+                <AppImagePreviewSlider
                     className=""
                     images={images}
                     activeSlide={activeSlide}

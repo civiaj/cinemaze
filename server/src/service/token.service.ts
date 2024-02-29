@@ -1,4 +1,4 @@
-import mongoose, { Types } from "mongoose";
+import mongoose, { FilterQuery, Types } from "mongoose";
 import {
     JWT_ACCESS_PRIVATE_KEY,
     JWT_REFRESH_PRIVATE_KEY,
@@ -7,9 +7,10 @@ import {
     JWT_ACCESS_TTL,
     JWT_REFRESH_TTL,
 } from "../../config";
-import tokenModel from "../model/token.model";
+import tokenModel, { Token } from "../model/token.model";
 import { User } from "../model/user.model";
 import jwt from "jsonwebtoken";
+import ApiError from "../exceptions/api.error";
 
 type Keys = "access" | "refresh";
 
@@ -58,8 +59,8 @@ class TokenService {
         return { accessToken, refreshToken };
     }
 
-    async findToken(refreshToken: string, userAgent: string) {
-        return tokenModel.findOne({ refreshToken, userAgent }, {}, { lean: true });
+    async findToken(filter: FilterQuery<Token>) {
+        return tokenModel.findOne(filter, {}, { lean: true });
     }
 
     async deleteToken(refreshToken: string, userAgent: string) {
@@ -68,11 +69,30 @@ class TokenService {
 
     async getUserSessions(userId: number, userAgent: string) {
         const result = await tokenModel.find({ user: userId }, { userAgent: 1, _id: 0 }).lean();
+
         const index = result.findIndex((e) => e.userAgent === userAgent);
         const current = result[index];
         result.splice(index, 1);
 
-        return { current, other: result };
+        return {
+            current: JSON.parse(current.userAgent),
+            other: result.map((s) => JSON.parse(s.userAgent)),
+        };
+    }
+
+    async removeUserSessions(userId: number, userAgent: string, session: string) {
+        let result;
+        if (session === "all") {
+            result = await tokenModel.deleteMany({ user: userId, userAgent: { $ne: userAgent } });
+        } else {
+            result = await tokenModel.deleteOne({ user: userId, userAgent: session });
+        }
+
+        console.log({ session, userAgent, result });
+
+        if (result.deletedCount === 0) throw ApiError.BadRequest("Сессия не была найдена");
+
+        return result;
     }
 }
 

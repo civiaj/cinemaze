@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { useOutsideClick } from "shared/hooks/useOutsideClick";
 
 interface OutsideClickWrapperProps {
@@ -15,6 +15,19 @@ export const OutsideClickWrapper = ({
     className,
 }: OutsideClickWrapperProps) => {
     const ref = useOutsideClick(onClose, capture);
+
+    useEffect(() => {
+        const onKeyDown = (e: globalThis.KeyboardEvent) => {
+            if (e.key === "Escape") {
+                onClose();
+            }
+        };
+        document.addEventListener("keydown", onKeyDown);
+        return () => {
+            document.removeEventListener("keydown", onKeyDown);
+        };
+    }, [onClose]);
+
     return (
         <div className={className} ref={ref}>
             {children}

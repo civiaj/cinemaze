@@ -1,4 +1,4 @@
-import { Image } from "shared/ui/Image/Image";
+import { AppImage } from "shared/ui/AppImage/AppImage";
 import { Spinner } from "shared/ui/Spinner/Spinner";
 
 import { useGetFilmAwardsQuery } from "../model/filmAwardsApi";
@@ -46,7 +46,7 @@ export const FilmAwards = ({ filmId }: FilmAwardsProps) => {
             </div>
             {award.imageUrl && (
                 <div className="h-14 w-14 md:h-20 md:w-20 rounded-full overflow-hidden">
-                    <Image src={award.imageUrl} className="object-contain" />
+                    <AppImage src={award.imageUrl} className="object-contain" />
                 </div>
             )}
         </ul>
