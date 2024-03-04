@@ -139,7 +139,12 @@ export const FavoriteVerticalBarChart = () => {
     );
 
     const displayed = showAll ? data : data.slice(0, MAX_DISPLAYED);
-    const height = `${displayed.length * CATEGORY_HEIGHT + TICK_HEIGHT}px`;
+
+    const height = `${
+        displayed.length * CATEGORY_HEIGHT + TICK_HEIGHT + MARGIN.top + MARGIN.bottom
+    }px`;
+
+    console.log(height);
     const width = longestWord * LETTER_WIDTH;
     const { theme } = useTheme();
     const color = COLORS[theme];
