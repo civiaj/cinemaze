@@ -3,8 +3,8 @@ import { Spinner } from "shared/ui/Spinner/Spinner";
 
 import { useGetFilmAwardsQuery } from "../model/filmAwardsApi";
 import { FilmAwardsList } from "./FilmAwardsList";
-import { Message } from "shared/ui/Text/Message";
 import { Heading } from "shared/ui/Text/Heading";
+import { Text } from "shared/ui/Text/Text";
 
 interface FilmAwardsProps {
     filmId: number;
@@ -13,7 +13,7 @@ interface FilmAwardsProps {
 export const FilmAwards = ({ filmId }: FilmAwardsProps) => {
     const { data, isError, isLoading, isFetching } = useGetFilmAwardsQuery(filmId);
 
-    if (isError) return <Message message="Что-то пошло не так." />;
+    if (isError) return <Text>Что-то пошло не так.</Text>;
 
     if (isLoading || isFetching)
         return (
@@ -22,7 +22,7 @@ export const FilmAwards = ({ filmId }: FilmAwardsProps) => {
             </div>
         );
 
-    if (!data?.total) return <Message message="Нет наград." />;
+    if (!data?.total) return <Text>Нет наград.</Text>;
 
     return data.items.map((award) => (
         <ul key={award.name} className="flex gap-2 px-2 py-2 sm:px-4 rounded-xl">

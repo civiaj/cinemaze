@@ -4,14 +4,14 @@ import { getIsLogged, selectUser, useGetMeQuery } from "entities/User";
 import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 import { ProgressBarFallback } from "widgets/ProgressBar";
-import { UnauthorizedMessage } from "widgets/RequireAuth/UnauthorizedMessage";
+import { UnauthorizedMessage } from "widgets/Messages/UnauthorizedMessage";
 
 interface RequireAuthProps {
     children: ReactNode;
     allowedRoles: string[];
 }
 
-const RequireAuth = ({ children, allowedRoles = [] }: RequireAuthProps) => {
+export const RequireAuth = ({ children, allowedRoles = [] }: RequireAuthProps) => {
     const user = useAppSelector(selectUser);
     const isLogged = useAppSelector(getIsLogged);
 
@@ -26,5 +26,3 @@ const RequireAuth = ({ children, allowedRoles = [] }: RequireAuthProps) => {
     if (user && !roleCondition) return <UnauthorizedMessage />;
     if (user && roleCondition) return children;
 };
-
-export default RequireAuth;

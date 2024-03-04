@@ -3,9 +3,11 @@ import validate from "../middleware/validate";
 import {
     createUserSchema,
     displayNameSchema,
+    emailSchema,
     loginUserSchema,
     passwordSchema,
     removeSessionSchema,
+    resetPasswordSchema,
     verifyEmailSchema,
 } from "../schema/user.schema";
 import authController from "../controller/auth.controller";
@@ -30,6 +32,8 @@ router.post("/checkPassword", validate(loginUserSchema), authController.checkPas
 router.get("/refresh", authController.refresh.bind(authController));
 router.get("/logout", deserializeUser, authController.logout.bind(authController));
 router.get("/activate/:verificationCode", validate(verifyEmailSchema), authController.verifyEmail);
+router.post("/forgot", validate(emailSchema), authController.forgotPassword);
+router.post("/reset/:resetToken", validate(resetPasswordSchema), authController.resetPassword);
 //?? Добавить 2 эндпоинта: a) для сброса пороля б) для верификации сброса.
 
 // Пользователь

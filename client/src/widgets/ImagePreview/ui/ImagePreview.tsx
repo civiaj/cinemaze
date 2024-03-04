@@ -1,14 +1,13 @@
 import { Close, Left, Right } from "shared/assets/icons";
 import { Button } from "shared/ui/Button/Button";
-
 import { useCallback, useEffect, useState } from "react";
 import { classNames } from "shared/lib/classNames";
-import { ImagePreviewSlider } from "widgets/ImagePreview/ui/ImagePreviewSlider";
-
+import { useHideScroll } from "shared/hooks/useHideScroll";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { FilmImages } from "widgets/FilmImages/model/types";
-import { ImagePreviewBody } from "widgets/ImagePreview/ui/ImagePreviewBody";
-import { useHideScroll } from "shared/hooks/useHideScroll";
+
+import { ImagePreviewBody } from "./ImagePreviewBody";
+import { ImagePreviewSlider } from "./ImagePreviewSlider";
 
 interface ImagePreviewProps {
     onClose: () => void;
@@ -74,7 +73,7 @@ export const ImagePreview = (props: ImagePreviewProps) => {
                         >
                             <Left />
                         </Button>
-                        <AppImagePreviewBody
+                        <ImagePreviewBody
                             src={activeImageUrl}
                             isShown={isShown}
                             onSetIsShown={onSetIsShown}
@@ -91,8 +90,7 @@ export const ImagePreview = (props: ImagePreviewProps) => {
                     </div>
                 </div>
 
-                <AppImagePreviewSlider
-                    className=""
+                <ImagePreviewSlider
                     images={images}
                     activeSlide={activeSlide}
                     initialSlide={activeIndex}

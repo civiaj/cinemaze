@@ -34,6 +34,25 @@ export const loginUserSchema = object({
     }),
 });
 
+export const emailSchema = object({
+    body: object({
+        email,
+    }),
+});
+
+export const resetPasswordSchema = object({
+    body: object({
+        password,
+        confirmPassword: string().trim().min(1, "Необходимо заполнить подтверждение пароля"),
+    }).refine((data) => data.password === data.confirmPassword, {
+        message: "Пароли не совпадают",
+        path: ["passwordConfirm"],
+    }),
+    params: object({
+        resetToken: string(),
+    }),
+});
+
 export const verifyEmailSchema = object({
     params: object({
         verificationCode: string(),
@@ -68,3 +87,5 @@ export type VerifyEmailInput = TypeOf<typeof verifyEmailSchema>["params"];
 export type DisplayNameInput = TypeOf<typeof displayNameSchema>["body"];
 export type RemoveSessionInput = TypeOf<typeof removeSessionSchema>["body"];
 export type UpdatePasswordInput = TypeOf<typeof passwordSchema>["body"];
+export type EmailInput = TypeOf<typeof emailSchema>["body"];
+export type ResetPasswordInput = TypeOf<typeof resetPasswordSchema>;

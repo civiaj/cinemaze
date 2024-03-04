@@ -1,9 +1,10 @@
 import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ProgressBarFallback } from "widgets/ProgressBar";
-import RequireAuth from "widgets/RequireAuth/RequireAuth";
+
 import { routeConfig } from "./router";
 import { IRoute } from "./types";
+import { RequireAuth } from "entities/Authorization";
 
 export const AppRouter = () => {
     const renderRoutes = (route: IRoute) => {

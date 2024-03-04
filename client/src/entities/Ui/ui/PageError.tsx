@@ -1,8 +1,9 @@
 import { Box } from "shared/ui/Boxes/Box";
 import { Button } from "shared/ui/Button/Button";
-import { Message } from "shared/ui/Text/Message";
+
 import { Page } from "./Page";
 import { classNames } from "shared/lib/classNames";
+import { Text } from "shared/ui/Text/Text";
 
 interface PageErrorProps {
     onReset?: () => void;
@@ -18,12 +19,10 @@ export const PageError = (props: PageErrorProps) => {
     return (
         <Page className={classNames("", {}, [className])}>
             <Box className="flex items-center gap-4">
-                <Message
-                    message={
-                        message ||
-                        "Не получается отобразить содержимое. Пожалуйста, попробуйте перезагрузить страницу."
-                    }
-                />
+                <Text>
+                    {message ??
+                        "Не получается отобразить содержимое. Пожалуйста, попробуйте перезагрузить страницу."}
+                </Text>
                 <Button theme="regular" onClick={handleReset}>
                     {btnText || "Перезагрузить"}
                 </Button>

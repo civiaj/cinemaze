@@ -1,19 +1,21 @@
 import { useLoginMutation } from "entities/Authorization";
-import { FormErrorMsg } from "shared/ui/FormErrorMsg/FormErrorMsg";
+import { LoginSections } from "pages/LoginPage/model/types";
 import { useState } from "react";
 import formatServerError from "shared/api/helpers/formatServerError";
 import { Box } from "shared/ui/Boxes/Box";
 import { Button } from "shared/ui/Button/Button";
+import { FormErrorMsg } from "shared/ui/FormErrorMsg/FormErrorMsg";
 import { Input } from "shared/ui/Input/Input";
 import { Heading } from "shared/ui/Text/Heading";
+import { Text } from "shared/ui/Text/Text";
 
 type Props = {
-    onFormTypeChange: () => void;
+    onSectionChange: (newValue?: LoginSections) => void;
     isLoading: boolean;
 };
 
 export const LoginForm = (props: Props) => {
-    const { onFormTypeChange, isLoading } = props;
+    const { onSectionChange, isLoading } = props;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -24,12 +26,9 @@ export const LoginForm = (props: Props) => {
         loginUser({ email, password });
     };
 
-    let message: string | null = null;
-    if (error) message = formatServerError(error);
-
     return (
         <form onSubmit={onSubmitHandler}>
-            <Box className="w-80">
+            <Box className="w-80 px-6">
                 <Heading headinglevel={1}>Логин</Heading>
 
                 <div className="w-full flex flex-col gap-2">
@@ -52,19 +51,21 @@ export const LoginForm = (props: Props) => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <FormErrorMsg msg={message} isError={isError} />
+                <FormErrorMsg msg={formatServerError(error)} isError={isError} />
+
+                <Button onClick={() => onSectionChange("forgot")}>Забыли пароль?</Button>
 
                 <div className="flex justify-center flex-col gap-2">
                     <Button theme="blue" type="submit" isLoading={isLoading}>
-                        Войти
+                        <Text>Войти</Text>
                     </Button>
                     <Button
                         theme="clean"
                         className="justify-center"
                         type="button"
-                        onClick={onFormTypeChange}
+                        onClick={() => onSectionChange("registrate")}
                     >
-                        Зарегистрироваться
+                        <Text>Зарегистрироваться</Text>
                     </Button>
                 </div>
             </Box>

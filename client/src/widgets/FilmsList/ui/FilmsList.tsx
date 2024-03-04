@@ -8,11 +8,10 @@ import { useLocation } from "react-router-dom";
 import { Box } from "shared/ui/Boxes/Box";
 import { FullscreenSpinner } from "shared/ui/Spinner/FullscreenSpinner";
 import { Spinner } from "shared/ui/Spinner/Spinner";
-
-import { Message } from "shared/ui/Text/Message";
 import { Text } from "shared/ui/Text/Text";
 import { FilmCard, FilmCardPropsT } from "widgets/FilmCard";
-import { FilmListSkeleton } from "widgets/FilmsList/ui/FilmListSkeleton";
+
+import { FilmListSkeleton } from "./FilmListSkeleton";
 
 type FilmsListPropsT = {
     films: FilmT[];
@@ -117,9 +116,7 @@ export const FilmsList = memo((props: FilmsListPropsT) => {
                     {page > 1 && isFetching && <Spinner />}
                 </div>
             )}
-            {films.length && isError && (
-                <Message type="danger" message="При загрузке возникла ошибка." />
-            )}
+            {films.length && isError && <Text>При загрузке возникла ошибка.</Text>}
         </>
     );
 });

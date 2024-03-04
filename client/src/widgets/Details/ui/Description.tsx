@@ -1,4 +1,3 @@
-import { Message } from "shared/ui/Text/Message";
 import { useDetailsQuery } from "../../../pages/DetailsPage/model/detailsApi";
 import { Text } from "shared/ui/Text/Text";
 
@@ -12,7 +11,7 @@ export const Description = ({ filmId }: DescriptionProps) => {
     if (!currentData?.description)
         return (
             <div className="h-20 flex items-center justify-center">
-                <Message message="Обзор недоступен." />
+                <Text>Обзор недоступен.</Text>
             </div>
         );
 

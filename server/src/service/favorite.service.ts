@@ -14,7 +14,7 @@ const order = -1;
 
 class FavoriteService {
     async createFavoriteUser(userDocumentId: Types.ObjectId) {
-        return favoriteModel.create({ user: userDocumentId, favorites: [] });
+        return favoriteModel.create({ user: userDocumentId });
     }
 
     async modifyFavorite(
@@ -24,13 +24,14 @@ class FavoriteService {
     ) {
         const favorite = await this.getFavorite(userId, filmDocumentId);
 
+        console.log(favorite);
+
         return favorite.length
             ? this.updateFavorite(userId, filmDocumentId, payload)
             : this.createFavorite(userId, filmDocumentId, payload);
     }
 
     async getFavoriteData(userId: number, filmDocumentId: Types.ObjectId) {
-        console.log("works");
         const result = await favoriteModel.aggregate([
             { $match: { user: new mongoose.Types.ObjectId(userId) } },
             { $unwind: "$favorites" },
@@ -255,6 +256,7 @@ class FavoriteService {
         payload: CreateFavoriteInput["favorite"]
     ) {
         const addToSet = { favorites: { film: filmDocumentId, ...payload } };
+        console.log(addToSet);
         return favoriteModel.updateOne({ user: userId }, { $addToSet: addToSet }, { upsert: true });
     }
 

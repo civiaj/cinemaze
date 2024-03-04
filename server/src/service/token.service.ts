@@ -88,8 +88,6 @@ class TokenService {
             result = await tokenModel.deleteOne({ user: userId, userAgent: session });
         }
 
-        console.log({ session, userAgent, result });
-
         if (result.deletedCount === 0) throw ApiError.BadRequest("Сессия не была найдена");
 
         return result;

@@ -1,13 +1,14 @@
-import { Navigate } from "react-router-dom";
-import { SearchPage } from "pages/SearchPage";
-import { MainPage } from "pages/MainPage/";
 import { DetailsPage } from "pages/DetailsPage";
 import { FavoritePage } from "pages/FavoritePage";
 import { LoginPage } from "pages/LoginPage";
+import { MainPage } from "pages/MainPage/";
+import { SearchPage } from "pages/SearchPage";
+import { Navigate } from "react-router-dom";
 
-import { IRoute } from "./types";
 import { StatisticsPage } from "pages/StatisticsPage";
 import { UserPage } from "pages/UserPage";
+import { IRoute } from "./types";
+import { EmailIsVerified } from "widgets/Messages/EmailIsVerified";
 
 export enum AppRoutes {
     MAIN = "main",
@@ -18,6 +19,8 @@ export enum AppRoutes {
     LOGIN = "login",
     STATISTICS = "statistics",
     USER = "user",
+    RESETPASSWORD = "resetpassword",
+    EMAILVERIFICATION = "emailverificaiton",
 }
 
 export const routePath: Record<AppRoutes, string> = {
@@ -29,6 +32,8 @@ export const routePath: Record<AppRoutes, string> = {
     [AppRoutes.LOGIN]: "/login",
     [AppRoutes.STATISTICS]: "/statistics",
     [AppRoutes.USER]: "/me",
+    [AppRoutes.RESETPASSWORD]: "/login",
+    [AppRoutes.EMAILVERIFICATION]: "/emailverificaiton",
 };
 
 export const routeConfig: Record<AppRoutes, IRoute> = {
@@ -71,6 +76,13 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         auth: false,
         allowedRoles: [],
     },
+    [AppRoutes.RESETPASSWORD]: {
+        element: <LoginPage />,
+        path: routePath.login,
+        label: "r-login",
+        auth: false,
+        allowedRoles: [],
+    },
 
     [AppRoutes.FAVORITE]: {
         element: <FavoritePage />,
@@ -92,5 +104,13 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         label: "r-user",
         auth: true,
         allowedRoles: ["user", "admin"],
+    },
+
+    [AppRoutes.EMAILVERIFICATION]: {
+        element: <EmailIsVerified />,
+        path: routePath.emailverificaiton,
+        label: "",
+        auth: false,
+        allowedRoles: [],
     },
 };

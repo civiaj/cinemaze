@@ -10,7 +10,6 @@ import { useInfiniteScroll } from "shared/hooks/useInfiniteScroll";
 import { Box } from "shared/ui/Boxes/Box";
 import { EndBox } from "shared/ui/Boxes/EndBox";
 import { Button } from "shared/ui/Button/Button";
-import { Message } from "shared/ui/Text/Message";
 import { FilmsList } from "widgets/FilmsList";
 import { favoritePageActions } from "../model/slice";
 import { FavoriteListVariantT } from "../model/types";
@@ -22,6 +21,7 @@ import {
     getUserPageInfiniteFilmsById,
 } from "../model/selectors";
 import { FavoriteRemoveModal } from "../ui/FavoriteRemoveModal";
+import { Text } from "shared/ui/Text/Text";
 
 interface UserPageBodyProps {
     listVariant: FavoriteListVariantT;
@@ -65,7 +65,8 @@ export const FavoritePageBody = (props: UserPageBodyProps) => {
         return (
             <Page>
                 <Box className="items-center">
-                    <Message message="Для просмотра статистики добавьте или оцените несколько фильмов." />
+                    <Text>"Для просмотра статистики добавьте или оцените несколько фильмов."</Text>
+
                     <Button onClick={() => navigate(routePath.main)} theme="regular">
                         Перейти на главную
                     </Button>

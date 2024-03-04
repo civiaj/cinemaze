@@ -1,6 +1,7 @@
 import { authAndUserSliceActions } from "entities/AuthAndUser";
 import { LoginRequest, RegisterRequest, GenericResponse } from "entities/Authorization/model/types";
 import { userActions, userApi } from "entities/User";
+import { filmApi } from "shared/api/filmApi";
 import { serverApi } from "shared/api/serverApi";
 
 const authApi = serverApi.injectEndpoints({
@@ -54,6 +55,8 @@ const authApi = serverApi.injectEndpoints({
             async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
                 try {
                     await queryFulfilled;
+                    dispatch(serverApi.util.resetApiState());
+                    dispatch(filmApi.util.resetApiState());
                     dispatch(userActions.logout());
                 } catch (e) {
                     // errorMiddleware
@@ -68,9 +71,23 @@ const authApi = serverApi.injectEndpoints({
                 credentials: "include",
             }),
         }),
-        // verifyEmail: builder.mutation<GenericResponse, string>({
-        //     query: (verificationCode) => ({ url: `/activate/${verificationCode}` }),
-        // }),
+        forgotPassword: builder.mutation<{ message: string }, { email: string }>({
+            query: (body) => ({ url: "/forgot", method: "POST", body, credentials: "include" }),
+        }),
+        resetPassword: builder.mutation<
+            { message: string },
+            { password: string; confirmPassword: string; resetToken: string }
+        >({
+            query: (payload) => {
+                const { resetToken, ...body } = payload;
+
+                return {
+                    url: `/reset/${resetToken}`,
+                    method: "POST",
+                    body,
+                };
+            },
+        }),
     }),
     overrideExisting: false,
 });
@@ -80,4 +97,6 @@ export const {
     useLoginMutation,
     useLogoutMutation,
     useCheckPasswordMutation,
+    useForgotPasswordMutation,
+    useResetPasswordMutation,
 } = authApi;

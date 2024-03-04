@@ -17,23 +17,25 @@ export type Favorite = {
 const favoriteSchema = new mongoose.Schema<Favorite>(
     {
         user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, unique: true },
-        favorites: [
-            new mongoose.Schema(
+        favorites: {
+            type: [
                 {
                     film: {
                         type: mongoose.Schema.Types.ObjectId,
                         ref: "Film",
                         required: true,
-                        unique: true,
-                        select: false,
                     },
                     userScore: { type: Number, default: null },
                     bookmarked: { type: Boolean, default: false },
                     hidden: { type: Boolean, default: false },
                 },
-                { timestamps: true }
-            ),
-        ],
+
+                { timestamps: true },
+            ],
+
+            default: undefined,
+            sparse: true,
+        },
     },
     { versionKey: false }
 );

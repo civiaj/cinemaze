@@ -1,6 +1,12 @@
 import { CookieOptions, NextFunction, Request, Response } from "express";
-import { API_URL, JWT_ACCESS_TTL, JWT_REFRESH_TTL, NODE_ENV } from "../../config";
-import { CreateUserInput, LoginUserInput, VerifyEmailInput } from "../schema/user.schema";
+import { API_URL, CLIENT_URL, JWT_ACCESS_TTL, JWT_REFRESH_TTL, NODE_ENV } from "../../config";
+import {
+    CreateUserInput,
+    EmailInput,
+    LoginUserInput,
+    ResetPasswordInput,
+    VerifyEmailInput,
+} from "../schema/user.schema";
 import userService from "../service/user.service";
 import mailService from "../service/mail.service";
 import tokenService from "../service/token.service";
@@ -34,6 +40,7 @@ class AuthController {
 
             const activationUrl = `${API_URL}/api/activate/${verificationCode}`;
             await mailService.sendVerification(user, activationUrl);
+
             await favoriteService.createFavoriteUser(user._id);
 
             return res.status(201).json({ message: "success" });
@@ -117,21 +124,81 @@ class AuthController {
                 .update(req.params.verificationCode)
                 .digest("hex");
 
+            const redirectUrl = CLIENT_URL + "/emailverificaiton?status=";
+
             const user = await userService.findUser({ verificationCode });
             if (!user) {
-                throw ApiError.BadRequest("Невозможно верифицировать адрес электронной почты");
+                return res.redirect(redirectUrl + "error");
             }
 
             user.verificationCode = null;
             user.verified = true;
             await user.save({ validateBeforeSave: false });
 
-            return res
-                .status(200)
-                .json({
-                    message: "Электронная почта успешно подтверждена",
-                })
-                .redirect(API_URL);
+            return res.redirect(redirectUrl + "success");
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async forgotPassword(req: Request<{}, {}, EmailInput>, res: Response, next: NextFunction) {
+        try {
+            const user = await userService.findUser({ email: req.body.email });
+            if (!user) throw ApiError.BadRequest("Неверный адрес электронной почты.");
+            if (!user.verified)
+                throw ApiError.BadRequest("Электронный адрес почты не подтвержден.");
+
+            const resetToken = user.createResetToken();
+            await user.save({ validateBeforeSave: false });
+
+            const resetPasswordPath = "/login?section=reset&t=";
+            const url = `${CLIENT_URL}${resetPasswordPath}${resetToken}`;
+
+            try {
+                await mailService.sendPasswordReset(user, url);
+                return res.json({
+                    message: "Ссылка для изменения пароля была отправлена на вашу почту.",
+                });
+            } catch (e) {
+                user.passwordResetToken = null;
+                user.passwordResetAt = null;
+                await user.save();
+                throw ApiError.MailError();
+            }
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async resetPassword(
+        req: Request<ResetPasswordInput["params"], {}, ResetPasswordInput["body"]>,
+        res: Response,
+        next: NextFunction
+    ) {
+        try {
+            console.log("works");
+            const resetToken = crypto
+                .createHash("sha256")
+                .update(req.params.resetToken)
+                .digest("hex");
+
+            const user = await userService.findUser({
+                passwordResetToken: resetToken,
+                passwordResetAt: { $gt: new Date() },
+            });
+
+            if (!user)
+                throw ApiError.BadRequest("Токен недействителен или срок его действия истек.");
+
+            user.password = req.body.password;
+            user.passwordResetToken = null;
+            user.passwordResetAt = null;
+            await user.save();
+
+            res.status(200).json({
+                message:
+                    "Данные пароля успешно обновлены. Пожалуйста, войдите в систему, используя новые учетные данные.",
+            });
         } catch (e) {
             next(e);
         }

@@ -1,12 +1,12 @@
 import { AnimatedComponent, animated, useTransition } from "@react-spring/web";
-import { routeConfig } from "app/router/router";
+import { routePath } from "app/router/router";
 import { useAppDispatch, useAppSelector } from "app/store";
 import { getSidebarCollapsed, uiActions } from "entities/Ui";
 import { CSSProperties, FC, memo, useCallback, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { Overlay } from "shared/ui/Boxes/Overlay";
-import { SidebarItem } from "./SidebarItem";
 import { getSidebarItems } from "../model/selectors";
+import { SidebarItem } from "./SidebarItem";
 
 type WrappedOverlayProps = {
     style: CSSProperties;
@@ -36,7 +36,7 @@ export const Sidebar = memo(() => {
         []
     );
 
-    if (pathname.includes(routeConfig.login.path)) return null;
+    if (pathname.includes(routePath.login)) return null;
 
     return transitions(
         (style, item) =>

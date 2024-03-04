@@ -6,14 +6,16 @@ import { Box } from "shared/ui/Boxes/Box";
 import { Button } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
 import { Heading } from "shared/ui/Text/Heading";
+import { LoginSections } from "pages/LoginPage/model/types";
+import { Text } from "shared/ui/Text/Text";
 
 type Props = {
-    onFormTypeChange: () => void;
+    onSectionChange: (newValue?: LoginSections) => void;
     isLoading: boolean;
 };
 
 export const RegistrateForm = (props: Props) => {
-    const { onFormTypeChange, isLoading } = props;
+    const { onSectionChange, isLoading } = props;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -31,12 +33,9 @@ export const RegistrateForm = (props: Props) => {
         });
     };
 
-    let message: string | null = null;
-    if (error) message = formatServerError(error);
-
     return (
         <form onSubmit={onSubmitHandler}>
-            <Box className="w-80">
+            <Box className="w-80 px-6">
                 <Heading headinglevel={1}>Регистрация</Heading>
                 <div className="w-full flex flex-col gap-2">
                     <Input
@@ -70,14 +69,18 @@ export const RegistrateForm = (props: Props) => {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
-                    <FormErrorMsg msg={message} isError={isError} />
+                    <FormErrorMsg msg={formatServerError(error)} isError={isError} />
                 </div>
                 <div className="flex justify-center flex-col gap-2">
                     <Button isLoading={isLoading} theme="blue" type="submit">
-                        Зарегистрироваться
+                        <Text>Зарегистрироваться</Text>
                     </Button>
-                    <Button theme="clean" onClick={onFormTypeChange} className="justify-center">
-                        Войти
+                    <Button
+                        theme="clean"
+                        onClick={() => onSectionChange("login")}
+                        className="justify-center"
+                    >
+                        <Text>Войти</Text>
                     </Button>
                 </div>
             </Box>
