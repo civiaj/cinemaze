@@ -22,7 +22,7 @@ type Props = {
 export const FavoritePageHeader = memo(({ listVariant }: Props) => {
     const dispatch = useAppDispatch();
     const { currentData } = useGetSyncDataQuery();
-    const { t } = useTranslation("favoritePage");
+    const { t } = useTranslation();
 
     const options = useMemo(
         () =>
@@ -51,7 +51,6 @@ export const FavoritePageHeader = memo(({ listVariant }: Props) => {
             <Heading headinglevel={1}>{t("favoriteList")}</Heading>
             <ControllsBox>
                 <AppSelect
-                    translationKey="favoritePage"
                     className="w-44"
                     options={options}
                     value={listVariant}

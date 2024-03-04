@@ -1,7 +1,6 @@
 import { AppRouter } from "app/router/AppRouter";
 import { useAppSelector } from "app/store";
 import { getIsLogged, useGetMeQuery } from "entities/User";
-import { Suspense } from "react";
 
 import { ID_MAIN } from "shared/const/const";
 import { FullscreenSpinner } from "shared/ui/Spinner/FullscreenSpinner";
@@ -18,22 +17,20 @@ function App() {
     if (isLoading) return <FullscreenSpinner className="bg-my-neutral-50 dark:bg-my-neutral-50" />;
 
     return (
-        <Suspense>
-            <div
-                className="text-my-neutral-800 bg-my-neutral-50 font-normal font-custom antialiased h-full w-full min-h-[100svh]"
-                id={ID_MAIN}
-            >
-                <Navbar />
+        <div
+            className="text-my-neutral-800 bg-my-neutral-50 font-normal font-custom antialiased h-full w-full min-h-[100svh]"
+            id={ID_MAIN}
+        >
+            <Navbar />
 
-                <div className="relative">
-                    <ProgressBar />
-                    <Sidebar />
-                </div>
-
-                <AppRouter />
-                <CleanInfinite />
+            <div className="relative">
+                <ProgressBar />
+                <Sidebar />
             </div>
-        </Suspense>
+
+            <AppRouter />
+            <CleanInfinite />
+        </div>
     );
 }
 

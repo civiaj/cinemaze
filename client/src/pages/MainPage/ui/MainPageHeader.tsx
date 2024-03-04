@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 
 export const MainPageHeader = () => {
     const mainQuery = useAppSelector(getMainQuery);
-    const { t } = useTranslation("mainPage");
+    const { t } = useTranslation();
 
     const dispatch = useAppDispatch();
 
@@ -29,7 +29,6 @@ export const MainPageHeader = () => {
                     options={mainQueryOptions}
                     value={mainQuery}
                     actionChange={onMainQueryChange}
-                    translationKey="mainPage"
                 />
             </ControllsBox>
         </HeaderWithControlls>

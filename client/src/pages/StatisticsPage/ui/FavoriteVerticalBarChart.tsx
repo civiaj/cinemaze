@@ -48,7 +48,7 @@ const CustomTooltip = ({
     payload,
     total,
 }: TooltipProps<VBStat["avgUserScore"], VBStat["count"]> & { total: number }) => {
-    const { t } = useTranslation("statisticsPage");
+    const { t } = useTranslation();
     if (active && payload && payload.length) {
         const item = payload[0].payload as VBStat;
         const percantage =
@@ -111,7 +111,7 @@ const CustomLabelList = (props: any) => {
 
 export const FavoriteVerticalBarChart = () => {
     const dispatch = useAppDispatch();
-    const { t } = useTranslation("statisticsPage");
+    const { t } = useTranslation();
     const { filter, order, showAll, sort } = useAppSelector(getVB);
 
     const selectByFilter = useMemo(() => getSelectByFilter, []);
@@ -179,7 +179,6 @@ export const FavoriteVerticalBarChart = () => {
                     </Text>
                     <div className="flex gap-2">
                         <AppSelect
-                            translationKey="statisticsPage"
                             options={vbFilters}
                             actionChange={onFilterChange}
                             value={filter}
@@ -200,7 +199,6 @@ export const FavoriteVerticalBarChart = () => {
                     </Text>
                     <div className="flex gap-2">
                         <AppSelect
-                            translationKey="statisticsPage"
                             options={vbSortOptions}
                             actionChange={onSortChange}
                             value={sort}

@@ -26,7 +26,7 @@ import { statisticsActions } from "../model/slice";
 import { TLIntervals, TLStat } from "../model/types";
 
 const CustomTooltip = ({ payload, active }: TooltipProps<TLStat["userScore"], TLStat["date"]>) => {
-    const { t } = useTranslation("statisticsPage");
+    const { t } = useTranslation();
     if (active && payload && payload.length) {
         const item = payload[0].payload as TLStat;
 
@@ -50,7 +50,7 @@ const CustomTooltip = ({ payload, active }: TooltipProps<TLStat["userScore"], TL
 };
 
 export const FavoriteTimelineChart = () => {
-    const { t, i18n } = useTranslation("statisticsPage");
+    const { t, i18n } = useTranslation();
     const { theme } = useTheme();
     const [tooltip, setTooltip] = useState<"hover" | "click">("hover");
     const onToggleTooltip = () => setTooltip((p) => (p === "click" ? "hover" : "click"));
@@ -78,7 +78,6 @@ export const FavoriteTimelineChart = () => {
                     actionChange={onIntervalChange}
                     value={interval}
                     className="w-40"
-                    translationKey="statisticsPage"
                 />
             </div>
             <div className="font-medium text-sm h-72">

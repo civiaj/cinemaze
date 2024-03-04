@@ -6,10 +6,10 @@ import { useInitialEffect } from "shared/hooks/useInitialEffect";
 import { useIntersectionObserver } from "shared/hooks/useIntersectionObserver";
 import { classNames } from "shared/lib/classNames";
 
+import { useThrottle } from "shared/hooks/useThrottle";
 import { getScrollByPath } from "../model/selectors";
 import { uiActions } from "../model/slice";
 import { ScrollButton } from "./ScrollButton";
-import { useThrottle } from "shared/hooks/useThrottle";
 
 interface PageProps {
     className?: string;

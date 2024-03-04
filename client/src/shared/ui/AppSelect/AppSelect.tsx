@@ -34,7 +34,6 @@ type Props = {
     disabled?: boolean;
     theme?: Themes;
     render?: (props: ListChildComponentProps, onClose: () => void) => ReactNode;
-    translationKey?: string;
 };
 
 export const AppSelect = (props: Props) => {
@@ -47,13 +46,12 @@ export const AppSelect = (props: Props) => {
         wrapperClassName,
         disabled,
         render,
-        translationKey = "",
         theme = "regular",
         ...otherProps
     } = props;
 
     const [isOpen, setIsOpen] = useState(false);
-    const { t } = useTranslation(translationKey);
+    const { t } = useTranslation();
 
     const handleClose = () => setIsOpen(false);
     const handleToggle = () => setIsOpen((p) => !p);

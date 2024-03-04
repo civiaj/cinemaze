@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const FavoriteRemoveModal = (props: Props) => {
-    const { t } = useTranslation("favoritePage");
+    const { t } = useTranslation();
     const { onClose, listVariant, film } = props;
     const { nameEn, nameRu, nameOriginal, filmId } = film ?? {};
     const title = nameRu ?? nameEn ?? nameOriginal;

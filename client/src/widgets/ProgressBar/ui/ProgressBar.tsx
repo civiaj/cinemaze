@@ -1,4 +1,4 @@
-import { useProgress } from "app/progress/model/useProgress";
+import { useProgress } from "app/progress";
 import { Bar } from "./Bar";
 import { Container } from "./Container";
 import { useEffect, useRef } from "react";

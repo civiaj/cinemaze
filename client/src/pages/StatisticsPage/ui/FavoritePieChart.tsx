@@ -89,7 +89,7 @@ const CustomTooltip = ({
     payload,
     total,
 }: TooltipProps<TScore["score"], TScore["count"]> & { total: number }) => {
-    const { t } = useTranslation("statisticsPage");
+    const { t } = useTranslation();
     if (active && payload && payload.length) {
         const item = payload[0].payload.payload as TScore;
         const percantage =
@@ -112,7 +112,7 @@ const CustomTooltip = ({
 };
 
 export const FavoritePieChart = () => {
-    const { t } = useTranslation("statisticsPage");
+    const { t } = useTranslation();
     const [filter, setFilter] = useState<ScoreFilters>("userScore");
     const selectByScore = useMemo(() => getSelectByScore, []);
     const { scores } = useGetStatisticsQuery(undefined, {

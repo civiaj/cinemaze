@@ -1,7 +1,7 @@
 import { ErrorBoundary } from "app/error";
 import "app/index.css";
 import { PersistProvider } from "app/persist/PersistProvider.tsx";
-import { ProgressProvider } from "app/progress/ui/ProgressProvider.tsx";
+import { ProgressProvider } from "app/progress";
 import { StoreProvider } from "app/store/StoreProvider.tsx";
 import { ThemeProvider } from "app/theme/index.ts";
 import { ToasterProvider } from "app/toaster";
