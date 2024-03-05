@@ -19,18 +19,19 @@ const favoriteSchema = new mongoose.Schema<Favorite>(
         user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, unique: true },
         favorites: {
             type: [
-                {
-                    film: {
-                        type: mongoose.Schema.Types.ObjectId,
-                        ref: "Film",
-                        required: true,
+                new mongoose.Schema(
+                    {
+                        film: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: "Film",
+                            required: true,
+                        },
+                        userScore: { type: Number, default: null },
+                        bookmarked: { type: Boolean, default: false },
+                        hidden: { type: Boolean, default: false },
                     },
-                    userScore: { type: Number, default: null },
-                    bookmarked: { type: Boolean, default: false },
-                    hidden: { type: Boolean, default: false },
-                },
-
-                { timestamps: true },
+                    { timestamps: true }
+                ),
             ],
 
             default: undefined,

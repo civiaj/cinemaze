@@ -9,7 +9,7 @@ export const UnauthorizedMessage = () => {
     const navigate = useNavigate();
     return (
         <Page>
-            <Box className="items-center">
+            <Box className="items-center text-center">
                 <Text>
                     Пользователь не обладает требуемыми правами для просмотра данной страницы.
                 </Text>

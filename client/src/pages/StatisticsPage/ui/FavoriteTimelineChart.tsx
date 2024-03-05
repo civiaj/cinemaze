@@ -69,6 +69,8 @@ export const FavoriteTimelineChart = () => {
         dispatch(statisticsActions.tlSetInterval(newValue as TLIntervals));
     };
 
+    if (!data.length) return null;
+
     return (
         <Box>
             <div className="flex items-center gap-2 justify-between">

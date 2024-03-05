@@ -55,7 +55,7 @@ export const DetailsPageBody = () => {
 
     const { nameRu, nameEn, nameOriginal, ratingImdb, rating } = details.data;
     const label = nameRu ?? nameEn ?? nameOriginal ?? EMPTY_LINE;
-    const disabled = isLoading || favorite.isFetching;
+    const disabled = isLoading || favorite.isFetching || favorite.isLoading;
 
     return (
         <Page className={classNames("", { ["animate-pulse"]: details.isFetching })}>

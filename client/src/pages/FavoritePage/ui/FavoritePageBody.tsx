@@ -64,8 +64,11 @@ export const FavoritePageBody = (props: UserPageBodyProps) => {
     if (!stats?.data?.all && !stats.isLoading && !isLoading && !isFetching)
         return (
             <Page>
-                <Box className="items-center">
-                    <Text>"Для просмотра статистики добавьте или оцените несколько фильмов."</Text>
+                <Box className="items-center text-center">
+                    <Text>
+                        Прежде чем продолжить, добавьте какой-нибудь фильм в список 'Буду смотреть'
+                        или поставьте оценку.
+                    </Text>
 
                     <Button onClick={() => navigate(routePath.main)} theme="regular">
                         Перейти на главную

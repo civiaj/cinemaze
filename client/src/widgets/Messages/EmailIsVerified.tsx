@@ -17,7 +17,7 @@ export const EmailIsVerified = () => {
 
     return (
         <Page>
-            <Box className="items-center">
+            <Box className="items-center text-center">
                 {isSuccess && (
                     <div className="rounded-full bg-my-green-500 p-2">
                         <Checked className="text-3xl" />

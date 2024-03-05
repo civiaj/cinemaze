@@ -9,7 +9,7 @@ export const persistConfig = {
 export const uiConfig = {
     key: "uiConfig",
     storage,
-    whitelist: ["sb", "appearance"],
+    whitelist: ["sb", "appearance", "breadcrumbs"],
     blaclist: ["na"],
 };
 

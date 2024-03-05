@@ -30,7 +30,7 @@ export const ForgotForm = ({ onSectionChange }: Props) => {
 
     if (data)
         return (
-            <Box className="items-center">
+            <Box className="items-center text-center">
                 <div className="rounded-full bg-my-green-500 p-2">
                     <Checked className="text-3xl" />
                 </div>
