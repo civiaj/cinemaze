@@ -117,29 +117,42 @@ export const getSelectByDate = createSelector(
             const { filmId, year, nameRu, updatedAt, userScore, hidden } = curr;
             if (userScore && !hidden) {
                 const updateAtDate = new Date(updatedAt).getTime();
-                let dateFilter;
+                let dateFilter = new Date().setDate(new Date().getDate() - Number(interval));
+                let date;
 
                 switch (interval) {
-                    case "1":
-                    case "7":
+                    case "1": {
+                        date = formatDate(updateAtDate, locales, {
+                            hour: "numeric",
+                            minute: "numeric",
+                        });
+                        break;
+                    }
+                    case "7": {
+                        date = formatDate(updateAtDate, locales, { weekday: "short" });
+                        break;
+                    }
                     case "30": {
-                        dateFilter = new Date().setDate(new Date().getDate() - Number(interval));
+                        date = formatDate(updateAtDate, locales, {
+                            day: "numeric",
+                            month: "short",
+                        });
                         break;
                     }
                     case "year": {
+                        date = formatDate(updateAtDate, locales);
                         dateFilter = new Date().setFullYear(new Date().getFullYear() - 1);
                         break;
                     }
 
                     case "all": {
+                        date = formatDate(updateAtDate, locales);
                         dateFilter = 0;
                         break;
                     }
                 }
 
                 if (updateAtDate > dateFilter) {
-                    const date = formatDate(updateAtDate, locales);
-
                     acc.push({ filmId, name: nameRu || EMPTY_LINE, year, date, userScore });
                 }
             }

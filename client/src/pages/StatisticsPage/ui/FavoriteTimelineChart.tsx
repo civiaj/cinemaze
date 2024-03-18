@@ -25,6 +25,7 @@ import { getSelectByDate, getTL } from "../model/selectors";
 import { statisticsActions } from "../model/slice";
 import { TLIntervals, TLStat } from "../model/types";
 import { Elipsis } from "shared/ui/Text/Elipsis";
+import { classNames } from "shared/lib/classNames";
 
 /* eslint-disable @typescript-eslint/no-explicit-any*/
 
@@ -32,7 +33,6 @@ const CustomTooltip = ({ payload, active }: TooltipProps<TLStat["userScore"], TL
     const { t } = useTranslation();
     if (active && payload && payload.length) {
         const item = payload[0].payload as TLStat;
-
         return (
             <div className="max-w-[300px] overflow-hidden">
                 <div className="bg-my-neutral-50 bg-opacity-10 px-6 py-4 flex flex-col">
@@ -91,8 +91,6 @@ export const FavoriteTimelineChart = () => {
         dispatch(statisticsActions.tlSetInterval(newValue as TLIntervals));
     };
 
-    if (!data.length) return null;
-
     return (
         <Box>
             <div className="flex items-center gap-2 justify-between">
@@ -104,7 +102,12 @@ export const FavoriteTimelineChart = () => {
                     className="w-40"
                 />
             </div>
-            <div className="font-medium text-sm h-72">
+
+            <div
+                className={classNames("font-medium text-sm h-72", {
+                    ["pointer-events-none"]: data.length === 0,
+                })}
+            >
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart
                         onClick={onToggleTooltip}

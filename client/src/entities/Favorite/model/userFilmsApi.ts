@@ -131,15 +131,7 @@ const userFilmsApi = serverApi.injectEndpoints({
                 credentials: "include",
             }),
             transformResponse: (response: { data: TStatistics[] }) => response.data,
-            providesTags: (result) =>
-                result
-                    ? [
-                          ...result.map(({ filmId }) => ({
-                              type: "Favorites" as const,
-                              id: filmId,
-                          })),
-                      ]
-                    : [{ type: "Favorites", id: "LIST" }],
+            providesTags: ["Favorites"],
         }),
     }),
     overrideExisting: false,
