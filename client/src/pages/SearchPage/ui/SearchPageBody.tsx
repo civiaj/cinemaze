@@ -1,5 +1,7 @@
+import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "app/store";
-import { Page, PageError } from "entities/Ui";
+import { Page } from "entities/Ui";
 import { useInfiniteScroll } from "shared/hooks/useInfiniteScroll";
 import { getNoun } from "shared/lib/getNoun";
 import { Box } from "shared/ui/Boxes/Box";
@@ -8,19 +10,15 @@ import { FilmsList } from "widgets/FilmsList";
 import { Text } from "shared/ui/Text/Text";
 import { EndBox } from "shared/ui/Boxes/EndBox";
 import formatFilmError from "shared/api/helpers/formatFilmError";
-
+import { PageLikeBox } from "shared/ui/Boxes/PageLikeBox";
+import { StatusBox } from "shared/ui/Boxes/StatusBox";
 import { useFiltersQuery, useSearchQuery } from "../model/searchPageApi";
-import {
-    getPreviousQuery,
-    getSearchIsInitial,
-    getSearchPage,
-    getSearchPageInfiniteFilms,
-} from "../model/selectors";
+import { getSearchOrder, getSearchPage, getSearchPageInfiniteFilms } from "../model/selectors";
 import { searchPageActions } from "../model/slice";
 import { SearchPageHeader } from "../ui/SearchPageHeader";
 import { SearchExtendedSmall } from "../ui/SearchExtendedSmall";
 import { SearchExtended } from "./SearchExtended";
-import { SearchQueryT } from "../model/types";
+import { SearchQuery, SearchQueryT } from "../model/types";
 
 const cardStyles: TCardStyles = {
     label: "text-xl",
@@ -30,17 +28,19 @@ const tileStyles =
     "grid gap-x-2 gap-y-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 mdb:grid-cols-5 lg:grid-cols-4";
 
 export const SearchPageBody = () => {
+    const [searchParams] = useSearchParams();
     const dispatch = useAppDispatch();
-    const isInitial = useAppSelector(getSearchIsInitial);
-    const query = useAppSelector(getPreviousQuery);
     const page = useAppSelector(getSearchPage);
+    const order = useAppSelector(getSearchOrder);
     const infiniteFilms = useAppSelector(getSearchPageInfiniteFilms);
+
+    const [query, setQuery] = useState<SearchQuery | null>(null);
 
     const { isEnd, isError, isFetching, isLoading, onScrollEnd, data, error } = useInfiniteScroll({
         queryHook: useSearchQuery,
-        queryParams: { ...query, page },
+        queryParams: { ...query, page, order },
         setPage: (newPage: number) => dispatch(searchPageActions.setPage(newPage)),
-        queryHookSettings: { skip: isInitial },
+        queryHookSettings: { skip: !query },
         setFilms: (films) => dispatch(searchPageActions.setSearchFilms(films)),
     });
 
@@ -50,26 +50,26 @@ export const SearchPageBody = () => {
     const disabled = isLoading || isFetching;
     const { total } = (data as SearchQueryT) ?? {};
 
-    const {
-        data: filters,
-        isError: isFilterError,
-        error: filterError,
-        isLoading: isFiltLoad,
-        isFetching: isFiltFetch,
-    } = useFiltersQuery();
+    const filters = useFiltersQuery();
 
-    const isFilterLoading = isFiltLoad || isFiltFetch;
+    const onUpdateQuery = (newQuery: SearchQuery) => setQuery(newQuery);
 
-    let message: string | null = null;
-    if (error || filterError) message = formatFilmError(error ?? filterError);
-    if (!infiniteFilms.length && (isError || isFilterError)) return <PageError message={message} />;
+    if (!infiniteFilms.length && (isError || filters.isError))
+        return (
+            <PageLikeBox>
+                <StatusBox
+                    isError={isError || filters.isError}
+                    errorMsg={formatFilmError(error ?? filters.error)}
+                />
+            </PageLikeBox>
+        );
 
     return (
         <Page onScrollEnd={onScrollEnd}>
             <Box>
                 <div className="gap-4 flex items-center justify-between flex-wrap">
                     <Heading className="max-w-[100%]" headinglevel={1}>
-                        {query.keyword ? query.keyword : "Поиск"}
+                        {searchParams.get("k") || "Поиск"}
                     </Heading>
                     {total !== undefined && (
                         <Text as="p" className="font-medium">
@@ -78,16 +78,19 @@ export const SearchPageBody = () => {
                         </Text>
                     )}
                 </div>
-                <SearchExtendedSmall
-                    disabled={disabled}
-                    data={filters}
-                    isFilterLoading={isFilterLoading}
-                />
+                {filters.data && (
+                    <SearchExtendedSmall
+                        prevQuery={query}
+                        disabled={disabled}
+                        data={filters.data}
+                        onUpdateQuery={onUpdateQuery}
+                    />
+                )}
             </Box>
 
             <div className="grid grid-cols-3 gap-4 items-start">
                 <div className="flex flex-col gap-2 col-span-3 lg:col-span-2">
-                    {isInitial ? (
+                    {!query ? (
                         <Box className="text-center">
                             <Text className="font-medium" as="p">
                                 Настройте параметры для лучшего поиска.
@@ -111,15 +114,14 @@ export const SearchPageBody = () => {
                     )}
                     {showEnd && <EndBox />}
                 </div>
-
-                <Box className="sticky !gap-4 top-[72px] hidden lg:flex">
-                    <Heading headinglevel={3}>Расширенный поиск</Heading>
+                {filters.data && (
                     <SearchExtended
+                        prevQuery={query}
                         disabled={disabled}
-                        data={filters}
-                        isFilterLoading={isFilterLoading}
+                        data={filters.data}
+                        onUpdateQuery={onUpdateQuery}
                     />
-                </Box>
+                )}
             </div>
         </Page>
     );

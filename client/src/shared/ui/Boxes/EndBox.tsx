@@ -7,8 +7,8 @@ type Props = {
 
 export const EndBox = ({ text = "Вы достигли конца списка." }: Props) => {
     return (
-        <Box className="text-center py-2 sm:py-2">
-            <Text className="font-medium">{text}</Text>
+        <Box className="text-center py-4 sm:py-4">
+            <Text>{text}</Text>
         </Box>
     );
 };

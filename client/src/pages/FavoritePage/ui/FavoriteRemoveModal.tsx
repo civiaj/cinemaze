@@ -1,12 +1,13 @@
-import { routePath } from "app/router/router";
-import { TFavorite, useRemoveOneFavoriteMutation } from "entities/Favorite";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { routePath } from "app/router/router";
+import { TFavorite, useRemoveOneFavoriteMutation } from "entities/Favorite";
 import { Checked } from "shared/assets/icons";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Modal } from "shared/ui/Boxes/Modal";
 import { Button } from "shared/ui/Button/Button";
 import { Text } from "shared/ui/Text/Text";
+
 import { listVariants } from "../model/data";
 import { FavoriteListVariantT } from "../model/types";
 

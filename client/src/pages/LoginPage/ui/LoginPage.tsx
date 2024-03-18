@@ -3,12 +3,14 @@ import { useAppSelector } from "app/store";
 import { getAuthAndUserIsLoading } from "entities/AuthAndUser";
 import { Page } from "entities/Ui";
 import { selectUser } from "entities/User";
-import { LoginSections } from "pages/LoginPage/model/types";
-import { ForgotForm } from "pages/LoginPage/ui/ForgotForm";
-import { LoginForm } from "pages/LoginPage/ui/LoginForm";
-import { RegistrateForm } from "pages/LoginPage/ui/RegistrateForm";
-import { ResetForm } from "pages/LoginPage/ui/ResetForm";
 import { useCallback } from "react";
+
+import { LoginSections } from "../model/types";
+import { ForgotForm } from "../ui/ForgotForm";
+import { LoginForm } from "../ui/LoginForm";
+import { RegistrateForm } from "../ui/RegistrateForm";
+import { ResetForm } from "../ui/ResetForm";
+
 import { Navigate, useSearchParams } from "react-router-dom";
 
 const LoginPage = () => {

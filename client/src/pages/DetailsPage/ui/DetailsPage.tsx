@@ -1,6 +1,8 @@
 import { useLocation } from "react-router-dom";
-import { DetailsPageBody } from "./DetailsPageBody";
 import { useEffect } from "react";
+import { Page } from "entities/Ui";
+
+import { DetailsPageBody } from "./DetailsPageBody";
 
 const DetailsPage = () => {
     const { pathname } = useLocation();
@@ -9,7 +11,11 @@ const DetailsPage = () => {
         window.scrollTo(0, 0);
     }, [pathname]);
 
-    return <DetailsPageBody />;
+    return (
+        <Page>
+            <DetailsPageBody />
+        </Page>
+    );
 };
 
 export default DetailsPage;

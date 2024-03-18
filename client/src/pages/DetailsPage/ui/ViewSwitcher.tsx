@@ -1,12 +1,12 @@
 import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { FilmImages } from "widgets/FilmImages";
+import { FilmAwards } from "widgets/FilmAwards";
+import { Description } from "widgets/Details";
 import { classNames } from "shared/lib/classNames";
 import { Button } from "shared/ui/Button/Button";
 import { Heading } from "shared/ui/Text/Heading";
-import { FilmImages } from "widgets/FilmImages";
-import { FilmAwards } from "widgets/FilmAwards";
 import { Box } from "shared/ui/Boxes/Box";
 import { useInitialEffect } from "shared/hooks/useInitialEffect";
-import { Description } from "widgets/Details";
 import { ID_VIEW_SWITCHER } from "shared/const/const";
 
 import { ViewSwitcherTypes } from "../model/types";

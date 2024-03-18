@@ -29,6 +29,7 @@
     "Film length": "Film length",
     "Countries": "Countries",
     "select-msg": "Select a value...",
+    "Cancel": "Cancel",
 
     "FAVORITE_PAGE": "FAVORITE_PAGE",
     "favoriteList": "Favorite list",
@@ -40,7 +41,6 @@
     "delete-msg-from": "from",
     "Film": "Film",
     "Deletion": "Deletion",
-    "Cancel": "Cancel",
 
     "MAIN_PAGE": "MAIN_PAGE",
     "mq-popular": "Popular",
@@ -73,5 +73,31 @@
     "films_one": "film",
     "films_other": "films",
     "stars_one": "star",
-    "stars_other": "stars"
+    "stars_other": "stars",
+
+    "LOGIN_PAGE": "LOGIN_PAGE",
+    "Recovery": "Recover",
+    "t_Recovery": "Recovery",
+    "p_reset": "Reset password",
+    "e_p_address": "E-mail address",
+    "e_p_password": "Password",
+    "e_p_conf_p": "Confirm password",
+    "e_p_name": "Name",
+    "Reg": "Create new account",
+    "t_Reg": "Registration",
+    "Login": "Login",
+    "t_Login": "Login",
+    "q_Forgot": "Forgot password",
+
+    "SEARCH_PAGE": "SEARCH_PAGE",
+    "Keyword": "Keyword",
+    "title_enter": "Enter the title",
+    "Сountry": "Country",
+    "country_enter": "Choose the country",
+    "Genre": "Genre",
+    "genre_enter": "Choose the genre",
+    "Rating": "Rating",
+    "min-from": "from",
+    "max-to": "to",
+    "Apply": "Apply"
 }

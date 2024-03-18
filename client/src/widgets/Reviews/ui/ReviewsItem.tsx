@@ -6,6 +6,7 @@ import { ReviewT } from "../model/types";
 import { Heading } from "shared/ui/Text/Heading";
 import { Box } from "shared/ui/Boxes/Box";
 import { ArrowDown, ArrowUp } from "shared/assets/icons";
+import { useTranslation } from "react-i18next";
 
 interface ReviewsItemProps {
     item: ReviewT;
@@ -14,6 +15,7 @@ interface ReviewsItemProps {
 export const ReviewsItem = memo(({ item }: ReviewsItemProps) => {
     const { author, date, description, negativeRating, positiveRating, title, type } = item;
     const [showMore, setShowMore] = useState(false);
+    const { i18n } = useTranslation();
 
     const onShowMore = () => setShowMore(true);
 
@@ -31,7 +33,13 @@ export const ReviewsItem = memo(({ item }: ReviewsItemProps) => {
                     )}
                 >
                     <span className="text-sm font-bold">{author}</span>
-                    <span className="font-normal text-xs">{formatDate(date)}</span>
+                    <span className="font-normal text-xs">
+                        {formatDate(new Date(date), i18n.language, {
+                            month: "long",
+                            day: "2-digit",
+                            year: "numeric",
+                        })}
+                    </span>
                 </div>
                 <div className="py-2 flex flex-col gap-1 ">
                     {title && <Heading headinglevel={4}>{title}</Heading>}

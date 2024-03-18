@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from "app/store";
-
-import { orderOptions } from "pages/SearchPage/config/data";
-import { getSearchOrder } from "pages/SearchPage/model/selectors";
-import { searchPageActions } from "pages/SearchPage/model/slice";
-import { SearchOrderT } from "pages/SearchPage/model/types";
 import { AppSelect } from "shared/ui/AppSelect/AppSelect";
 import { Box } from "shared/ui/Boxes/Box";
+
+import { orderOptions } from "../config/data";
+import { getSearchOrder } from "../model/selectors";
+import { searchPageActions } from "../model/slice";
+import { SearchOrderT } from "../model/types";
 
 interface SearchPageHeaderProps {
     disabled?: boolean;
@@ -17,7 +17,6 @@ export const SearchPageHeader = ({ disabled }: SearchPageHeaderProps) => {
 
     const handleOrderChange = (newOrder: string) => {
         dispatch(searchPageActions.setOrder(newOrder as SearchOrderT));
-        dispatch(searchPageActions.startSearch());
     };
 
     return (

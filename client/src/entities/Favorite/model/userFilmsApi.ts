@@ -23,7 +23,7 @@ const userFilmsApi = serverApi.injectEndpoints({
                 body,
                 credentials: "include",
             }),
-            invalidatesTags: ["Favorites"],
+            invalidatesTags: (_result, _error, arg) => [{ type: "Favorites", id: arg.film.filmId }],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 const {
                     film: { filmId },
@@ -62,7 +62,15 @@ const userFilmsApi = serverApi.injectEndpoints({
             }),
             transformResponse: (response: { data: FavoriteItemT }) => response.data,
 
-            providesTags: ["Favorites"],
+            providesTags: (result) =>
+                result
+                    ? [
+                          ...result.films.map(({ filmId }) => ({
+                              type: "Favorites" as const,
+                              id: filmId,
+                          })),
+                      ]
+                    : [{ type: "Favorites", id: "LIST" }],
         }),
         getOneFavorite: builder.query<TFavorite | null, number>({
             query: (filmId) => ({
@@ -80,7 +88,7 @@ const userFilmsApi = serverApi.injectEndpoints({
                 body: payload.body,
                 credentials: "include",
             }),
-            invalidatesTags: ["Favorites"],
+            invalidatesTags: (_result, _error, arg) => [{ type: "Favorites", id: arg.body.filmId }],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     await queryFulfilled;
@@ -106,15 +114,32 @@ const userFilmsApi = serverApi.injectEndpoints({
                 credentials: "include",
             }),
             transformResponse: (response: { data: SyncDataResponse }) => response.data,
-            providesTags: ["Favorites"],
+            providesTags: (result) =>
+                result
+                    ? [
+                          ...result.films.map(({ filmId }) => ({
+                              type: "Favorites" as const,
+                              id: filmId,
+                          })),
+                      ]
+                    : [{ type: "Favorites", id: "LIST" }],
         }),
+
         getStatistics: builder.query<TStatistics[], void>({
             query: () => ({
                 url: "/favorite/statistics",
                 credentials: "include",
             }),
             transformResponse: (response: { data: TStatistics[] }) => response.data,
-            providesTags: ["Favorites"],
+            providesTags: (result) =>
+                result
+                    ? [
+                          ...result.map(({ filmId }) => ({
+                              type: "Favorites" as const,
+                              id: filmId,
+                          })),
+                      ]
+                    : [{ type: "Favorites", id: "LIST" }],
         }),
     }),
     overrideExisting: false,

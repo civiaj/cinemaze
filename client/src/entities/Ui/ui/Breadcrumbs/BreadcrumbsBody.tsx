@@ -71,8 +71,6 @@ export const BreadcrumbsBody = () => {
         };
     }, [onResize]);
 
-    console.log(initial.current);
-
     return (
         <Box
             className={"flex-row items-center whitespace-nowrap sm:py-2 py-2 sm:gap-4 gap-4 h-12"}

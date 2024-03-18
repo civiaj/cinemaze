@@ -52,9 +52,13 @@ class UserController {
             const newPassword = req.body.password;
 
             if (!user) throw ApiError.BadRequest("Нет пользователя с таким id");
-            if (user.comparePassword(newPassword)) throw ApiError.BadRequest();
+
+            // throw error if same password was provided
+            if (user.comparePassword(newPassword))
+                throw ApiError.BadRequest("Новый пароль должен отличаться от старого.");
 
             user.password = newPassword;
+
             await user.save();
 
             return res.status(200).json({ data: "success" });

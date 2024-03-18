@@ -52,20 +52,23 @@ const cls: Record<Themes, string> = {
     login: "text-neutral-50 rounded-xl [&>*]:stroke-2 active:translate-y-[1px] h-10 w-10 justify-center text-xl bg-gradient-to-br from-blue-400 from-40% to-purple-400 to-90%",
 };
 
+const defaultSpinner =
+    "fill-neutral-600 dark:fill-neutral-400 text-neutral-300 dark:text-neutral-950";
+
 const spinner: Record<Themes, string> = {
-    regular: "text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
-    blue: "text-neutral-50 dark:text-neutral-50 fill-neutral-800",
-    danger: "text-neutral-50 dark:text-neutral-50 fill-neutral-800",
-    regularTag: "text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
-    category: "text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
-    clean: "text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
-    controlIcon: "text-neutral-500 dark:text-neutral-500 fill-neutral-50",
-    pagination: "text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
-    popup: "text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
-    regularIcon: "text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
-    regularNav: "text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
-    regularNavIcon: "text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
-    login: "text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
+    regular: defaultSpinner,
+    blue: "fill-neutral-950 text-neutral-300 dark:fill-neutral-950 dark:text-neutral-300",
+    danger: "fill-neutral-950 text-neutral-300 dark:fill-neutral-950 dark:text-neutral-300",
+    regularTag: defaultSpinner,
+    category: defaultSpinner,
+    clean: defaultSpinner,
+    controlIcon: defaultSpinner,
+    pagination: defaultSpinner,
+    popup: defaultSpinner,
+    regularIcon: defaultSpinner,
+    regularNav: defaultSpinner,
+    regularNavIcon: defaultSpinner,
+    login: defaultSpinner,
 };
 
 export const Button = memo((props: ButtonProps) => {

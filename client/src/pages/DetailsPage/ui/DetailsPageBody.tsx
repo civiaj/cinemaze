@@ -1,26 +1,21 @@
-import { Breadcrumbs } from "entities/Ui/ui/Breadcrumbs/Breadcrumbs";
-import { useDetailsQuery } from "pages/DetailsPage/model/detailsApi";
-
-import { DetailsPageSkeleton } from "./DetailsPageSkeleton";
-
-import { ViewSwitcher } from "pages/DetailsPage/ui/ViewSwitcher";
-
 import { useParams } from "react-router-dom";
-import { EMPTY_LINE } from "shared/const/const";
-import { Reviews } from "widgets/Reviews";
-import { Similars } from "widgets/Similars";
-
-import { useAppSelector } from "app/store";
-import { useAddFavoriteMutation, useGetOneFavoriteQuery } from "entities/Favorite";
-import { TFavorite } from "entities/Favorite/model/types";
-import { Page, PageError } from "entities/Ui";
-import { selectUser } from "entities/User";
 import { useCallback } from "react";
 import toast from "react-hot-toast";
-import formatFilmError from "shared/api/helpers/formatFilmError";
-import remapDetailsToFilm from "shared/lib/remapDetailsToFilm";
+import { useAppSelector } from "app/store";
+import { Breadcrumbs } from "entities/Ui";
+import { TFavorite, useAddFavoriteMutation, useGetOneFavoriteQuery } from "entities/Favorite";
+import { selectUser } from "entities/User";
+import { Reviews } from "widgets/Reviews";
+import { Similars } from "widgets/Similars";
 import { AboutMain, Rating } from "widgets/Details";
-import { classNames } from "shared/lib/classNames";
+import { EMPTY_LINE } from "shared/const/const";
+import remapDetailsToFilm from "shared/lib/remapDetailsToFilm";
+import { StatusBox } from "shared/ui/Boxes/StatusBox";
+
+import { useDetailsQuery } from "../model/detailsApi";
+import { ViewSwitcher } from "../ui/ViewSwitcher";
+import { DetailsPageSkeleton } from "./DetailsPageSkeleton";
+import formatFilmError from "shared/api/helpers/formatFilmError";
 
 export const DetailsPageBody = () => {
     const { id } = useParams();
@@ -49,16 +44,15 @@ export const DetailsPageBody = () => {
 
     if (loading) return <DetailsPageSkeleton />;
 
-    let message: string | null = null;
-    if (details.error) message = formatFilmError(details.error);
-    if (details.isError || !details.data) return <PageError message={message} />;
+    if (details.isError || !details.data)
+        return <StatusBox isError={details.isError} errorMsg={formatFilmError(details.error)} />;
 
     const { nameRu, nameEn, nameOriginal, ratingImdb, rating } = details.data;
     const label = nameRu ?? nameEn ?? nameOriginal ?? EMPTY_LINE;
     const disabled = isLoading || favorite.isFetching || favorite.isLoading;
 
     return (
-        <Page className={classNames("", { ["animate-pulse"]: details.isFetching })}>
+        <>
             <Breadcrumbs label={label} />
             <AboutMain
                 filmId={filmId}
@@ -76,6 +70,6 @@ export const DetailsPageBody = () => {
             />
             <Similars filmId={filmId} />
             <Reviews filmId={filmId} />
-        </Page>
+        </>
     );
 };

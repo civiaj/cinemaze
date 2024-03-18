@@ -1,6 +1,11 @@
-import { format } from "date-fns";
-import { ru } from "date-fns/locale";
-
-export const formatDate = (dateString: string) => {
-    return format(new Date(dateString), "d MMMM yyyy в kk:mm", { locale: ru });
+export const formatDate = (
+    date: Date | number,
+    locales: string | string[],
+    options: Intl.DateTimeFormatOptions = {
+        month: "2-digit",
+        year: "numeric",
+        day: "numeric",
+    }
+) => {
+    return new Intl.DateTimeFormat(locales, options).format(date);
 };

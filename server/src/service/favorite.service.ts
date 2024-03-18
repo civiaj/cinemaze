@@ -24,8 +24,6 @@ class FavoriteService {
     ) {
         const favorite = await this.getFavorite(userId, filmDocumentId);
 
-        console.log(favorite);
-
         return favorite.length
             ? this.updateFavorite(userId, filmDocumentId, payload)
             : this.createFavorite(userId, filmDocumentId, payload);
@@ -256,7 +254,7 @@ class FavoriteService {
         payload: CreateFavoriteInput["favorite"]
     ) {
         const addToSet = { favorites: { film: filmDocumentId, ...payload } };
-        console.log(addToSet);
+
         return favoriteModel.updateOne({ user: userId }, { $addToSet: addToSet }, { upsert: true });
     }
 

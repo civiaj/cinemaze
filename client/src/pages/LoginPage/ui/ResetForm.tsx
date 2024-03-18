@@ -1,8 +1,8 @@
 import { routePath } from "app/router/router";
-import { useResetPasswordMutation } from "entities/Authorization";
 import { FormEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
-
+import { useResetPasswordMutation } from "entities/Authorization";
 import formatServerError from "shared/api/helpers/formatServerError";
 import { Checked } from "shared/assets/icons";
 import { Box } from "shared/ui/Boxes/Box";
@@ -18,6 +18,7 @@ export const ResetForm = () => {
     const [searchParams] = useSearchParams();
     const resetToken = searchParams.get("t");
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const [resetPassword, { data, isLoading, isError, error }] = useResetPasswordMutation();
 
@@ -40,7 +41,7 @@ export const ResetForm = () => {
                     theme="regular"
                     onClick={() => navigate(routePath.login, { replace: true })}
                 >
-                    Войти
+                    {t("Login")}
                 </Button>
             </Box>
         );
@@ -48,13 +49,13 @@ export const ResetForm = () => {
     return (
         <form onSubmit={onResetPasswrod}>
             <Box className="w-80 px-6">
-                <Heading headinglevel={1}>Восстановление</Heading>
+                <Heading headinglevel={1}>{t("t_Recovery")}</Heading>
 
                 <div className="w-full flex flex-col gap-2">
                     <Input
                         type="password"
                         autoComplete="new-password"
-                        placeholder="Пароль"
+                        placeholder={t("e_p_password")}
                         className="placeholder:text-sm"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -62,7 +63,7 @@ export const ResetForm = () => {
                     <Input
                         type="password"
                         autoComplete="new-password"
-                        placeholder="Подтвердите пароль"
+                        placeholder={t("e_p_conf_p")}
                         className="placeholder:text-sm"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
@@ -72,7 +73,7 @@ export const ResetForm = () => {
 
                 <div className="flex justify-center flex-col gap-2">
                     <Button theme="blue" type="submit" isLoading={isLoading}>
-                        <Text>Восстановить</Text>
+                        <Text>{t("Recovery")}</Text>
                     </Button>
                 </div>
             </Box>

@@ -10,7 +10,7 @@ export const Spinner = ({ className, container }: SpinnerProps) => {
             <svg
                 aria-hidden="true"
                 className={classNames(
-                    "w-8 h-8 animate-spin text-my-neutral-300 dark:text-my-neutral-200 fill-blue-500",
+                    "w-7 h-7 animate-spin fill-neutral-600 dark:fill-neutral-400 text-neutral-300 dark:text-neutral-950",
                     {},
                     [className]
                 )}

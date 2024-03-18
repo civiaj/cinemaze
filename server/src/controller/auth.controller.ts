@@ -91,7 +91,7 @@ class AuthController {
             if (!decoded) throw new ApiError(message, 403);
 
             const token = await tokenService.findToken({ refreshToken, userAgent: res.locals.ua });
-            console.log(res.locals.ua);
+
             if (!token) throw new ApiError(message, 403);
 
             const user = await userService.findUser({ id: decoded.id });
@@ -176,7 +176,6 @@ class AuthController {
         next: NextFunction
     ) {
         try {
-            console.log("works");
             const resetToken = crypto
                 .createHash("sha256")
                 .update(req.params.resetToken)

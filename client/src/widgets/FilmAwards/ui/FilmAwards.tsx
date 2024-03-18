@@ -17,12 +17,17 @@ export const FilmAwards = ({ filmId }: FilmAwardsProps) => {
 
     if (isLoading || isFetching)
         return (
-            <div className="py-3 self-center">
+            <div className="self-center">
                 <Spinner />
             </div>
         );
 
-    if (!data?.total) return <Text>Нет наград.</Text>;
+    if (!data?.total)
+        return (
+            <div className="h-7 flex items-center justify-center">
+                <Text>Нет наград</Text>
+            </div>
+        );
 
     return data.items.map((award) => (
         <ul key={award.name} className="flex gap-2 px-2 py-2 sm:px-4 rounded-xl">

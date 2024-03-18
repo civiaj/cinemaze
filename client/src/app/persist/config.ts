@@ -7,7 +7,7 @@ export const persistConfig = {
 };
 
 export const uiConfig = {
-    key: "uiConfig",
+    key: "ui",
     storage,
     whitelist: ["sb", "appearance", "breadcrumbs"],
     blaclist: ["na"],
@@ -35,3 +35,13 @@ export const statisticsPagePersistConfig = {
     key: "statisticsPage",
     storage,
 };
+
+// add all keys here to remove from local storage after logout
+export const persistConfigKeys = [
+    "appstorage",
+    "ui",
+    "mainPage",
+    "favoritePage",
+    "searchPage",
+    "statisticsPage",
+];

@@ -1,27 +1,24 @@
 import { routePath } from "app/router/router";
-import { useAppDispatch, useAppSelector } from "app/store";
+import { useAppDispatch } from "app/store";
+import { uiActions } from "entities/Ui";
 import { ChangeEvent, KeyboardEventHandler, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { GoToSearch, Search } from "shared/assets/icons";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { Close, GoToSearch, Search } from "shared/assets/icons";
+import { DEBOUNCE_SEARCH } from "shared/const/const";
 import { useDebouncedValue } from "shared/hooks/useDebouncedValue";
+import { useUpdateHeight } from "shared/hooks/useUpdateHeight";
 import { classNames } from "shared/lib/classNames";
 import { AppLink } from "shared/ui/AppLink/AppLink";
+import { Overlay } from "shared/ui/Boxes/Overlay";
 import { Button } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
 import { OutsideClickWrapper } from "shared/ui/OutsideClickWrapper/OutsideClickWrapper";
-import { Close } from "shared/assets/icons";
-import { useSearchQuery } from "pages/SearchPage/model/searchPageApi";
-import { geInitialSearchQuery } from "pages/SearchPage/model/selectors";
-import { searchPageActions } from "pages/SearchPage/model/slice";
 
+import { useSearchQuery } from "../../model/searchPageApi";
+import { searchPageActions } from "../../model/slice";
 import { SearchQueryResults } from "./SearchQueryResults";
 import { SearchUserQueries } from "./SearchUserQueries";
-import { uiActions } from "entities/Ui";
-import { useUpdateHeight } from "shared/hooks/useUpdateHeight";
-import { Overlay } from "shared/ui/Boxes/Overlay";
-import { DEBOUNCE_SEARCH } from "shared/const/const";
-import { useHideScroll } from "shared/hooks/useHideScroll";
-import { useTranslation } from "react-i18next";
 
 const extraHeight = 56 + (window.innerHeight / 100) * 10; //3.5rem + 10%
 
@@ -32,7 +29,6 @@ type Props = {
 
 export const SearchInput = (props: Props) => {
     const { isActive, setActive } = props;
-    const { pathname } = useLocation();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const { t } = useTranslation();
@@ -65,11 +61,10 @@ export const SearchInput = (props: Props) => {
             return;
         }
         const searchValue = query ?? inputValue;
-        dispatch(searchPageActions.searchBarStart(searchValue));
         dispatch(searchPageActions.addUserQuery(searchValue));
         cleanInput();
         isActive && onSetInactive();
-        pathname !== routePath.search && navigate(`${routePath.search}`);
+        navigate(`${routePath.search}?keyword=${searchValue}`);
     };
 
     const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
@@ -157,15 +152,14 @@ type SearchBodyProps = {
 };
 
 const SearchBody = ({ inputValue, onSetInactive, handleStartSearch }: SearchBodyProps) => {
-    const query = useAppSelector(geInitialSearchQuery);
     const debouncedInputValue = useDebouncedValue(inputValue, DEBOUNCE_SEARCH);
     const maxHeight = useUpdateHeight(extraHeight);
     const { data, isLoading, isFetching, isError } = useSearchQuery(
-        { ...query, keyword: debouncedInputValue, page: 1 },
+        { keyword: debouncedInputValue, page: 1 },
         { skip: !debouncedInputValue || !inputValue }
     );
     const { t } = useTranslation();
-    useHideScroll();
+
     return (
         <div
             style={{ maxHeight }}

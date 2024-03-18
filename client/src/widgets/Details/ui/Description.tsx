@@ -10,8 +10,8 @@ export const Description = ({ filmId }: DescriptionProps) => {
 
     if (!currentData?.description)
         return (
-            <div className="h-20 flex items-center justify-center">
-                <Text>Обзор недоступен.</Text>
+            <div className="h-7 flex items-center justify-center">
+                <Text>Обзор недоступен</Text>
             </div>
         );
 

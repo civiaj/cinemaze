@@ -1,27 +1,25 @@
 import { useAppDispatch, useAppSelector } from "app/store";
-import { Page, PageError } from "entities/Ui";
-import { Box } from "shared/ui/Boxes/Box";
+import { useMemo } from "react";
+import { Page } from "entities/Ui";
 import { FilmsList } from "widgets/FilmsList";
-import { getMainPage, getMainPageInfiniteFilms } from "pages/MainPage/model/selectors";
-import { useFilmsQuery } from "../model/mainPageApi";
-import { mainPageActions } from "../model/slice";
-import { MainQueryT } from "../model/types";
-import { MainPageHeader } from "./MainPageHeader";
 import { useInfiniteScroll } from "shared/hooks/useInfiniteScroll";
 import { EndBox } from "shared/ui/Boxes/EndBox";
-import { useMemo } from "react";
+import { Box } from "shared/ui/Boxes/Box";
 import formatFilmError from "shared/api/helpers/formatFilmError";
+import { PageLikeBox } from "shared/ui/Boxes/PageLikeBox";
+import { StatusBox } from "shared/ui/Boxes/StatusBox";
 
-interface MainPageBodyProps {
-    mainQuery: MainQueryT;
-}
+import { getMainPage, getMainPageInfiniteFilms, getMainQuery } from "../model/selectors";
+import { useFilmsQuery } from "../model/mainPageApi";
+import { mainPageActions } from "../model/slice";
+import { MainPageHeader } from "./MainPageHeader";
 
 const cardStyles: TCardStyles = {
     label: "text-xl",
 };
 
-export const MainPageBody = (props: MainPageBodyProps) => {
-    const { mainQuery } = props;
+export const MainPageBody = () => {
+    const mainQuery = useAppSelector(getMainQuery);
     const dispatch = useAppDispatch();
     const infiniteFilms = useAppSelector(getMainPageInfiniteFilms);
     const page = useAppSelector(getMainPage);
@@ -36,9 +34,12 @@ export const MainPageBody = (props: MainPageBodyProps) => {
     const films = useMemo(() => infiniteFilms ?? [], [infiniteFilms]);
     const showEnd = !isLoading && !isFetching && isEnd && !!films.length;
 
-    let message: string | null = null;
-    if (error) message = formatFilmError(error);
-    if (!infiniteFilms.length && isError) return <PageError message={message} />;
+    if (!infiniteFilms.length && isError)
+        return (
+            <PageLikeBox>
+                <StatusBox errorMsg={formatFilmError(error)} isError={isError} />
+            </PageLikeBox>
+        );
 
     return (
         <Page onScrollEnd={onScrollEnd}>

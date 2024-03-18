@@ -75,5 +75,31 @@
     "films_many": "фильмов",
     "stars_one": "звезда",
     "stars_few": "звезды",
-    "stars_many": "звезд"
+    "stars_many": "звезд",
+
+    "LOGIN_PAGE": "LOGIN_PAGE",
+    "Recovery": "Восстановить",
+    "t_Recovery": "Восстановление",
+    "p_reset": "Восстановить пароль",
+    "e_p_address": "Адрес электронной почты",
+    "e_p_password": "Пароль",
+    "e_p_conf_p": "Подтверждение пароля",
+    "e_p_name": "Имя",
+    "Reg": "Зарегистрироваться",
+    "t_Reg": "Регистрация",
+    "Login": "Войти",
+    "t_Login": "Вход",
+    "q_Forgot": "Забыли пароль",
+
+    "SEARCH_PAGE": "SEARCH_PAGE",
+    "Keyword": "Ключевое слово",
+    "title_enter": "Введите название",
+    "Сountry": "Страна",
+    "country_enter": "Выберите страну",
+    "Genre": "Жанр",
+    "genre_enter": "Выберите жанр",
+    "Rating": "Рейтинг",
+    "min-from": "от",
+    "max-to": "до",
+    "Apply": "Применить"
 }

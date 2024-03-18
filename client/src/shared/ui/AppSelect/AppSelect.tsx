@@ -61,7 +61,7 @@ export const AppSelect = (props: Props) => {
         handleClose();
     };
 
-    const selectedValue = options?.find((e) => e.value === value)?.label ?? placeholder;
+    const selectedValue = options?.find((e) => e.value === value)?.label;
 
     const defaultRender = ({ index, style }: ListChildComponentProps) => (
         <Button
@@ -88,14 +88,15 @@ export const AppSelect = (props: Props) => {
                     className={classNames(
                         "gap-2 font-medium",
                         {
-                            ["font-normal text-my-neutral-400"]:
-                                !value && typeof value !== "number",
+                            ["font-normal text-my-neutral-400"]: selectedValue === undefined,
                         },
                         [cls[theme], className]
                     )}
                     {...otherProps}
                 >
-                    <span className="line-clamp-1 text-start">{t(String(selectedValue))}</span>
+                    <span className="line-clamp-1 text-start">
+                        {t(String(selectedValue ?? placeholder))}
+                    </span>
                     <Down className="shrink-0" />
                 </Button>
             </div>

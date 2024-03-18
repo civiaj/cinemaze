@@ -12,6 +12,7 @@ import {
 } from "./types";
 import { RootState } from "app/store";
 import { EMPTY_LINE } from "shared/const/const";
+import { formatDate } from "shared/lib/formatDate";
 
 export const getSelectByScore = createSelector(
     [(res: { data?: TStatistics[] }) => res.data, (_, filter: ScoreFilters) => filter],
@@ -137,11 +138,8 @@ export const getSelectByDate = createSelector(
                 }
 
                 if (updateAtDate > dateFilter) {
-                    const date = new Intl.DateTimeFormat(locales, {
-                        month: "numeric",
-                        year: "numeric",
-                        day: "numeric",
-                    }).format(updateAtDate);
+                    const date = formatDate(updateAtDate, locales);
+
                     acc.push({ filmId, name: nameRu || EMPTY_LINE, year, date, userScore });
                 }
             }

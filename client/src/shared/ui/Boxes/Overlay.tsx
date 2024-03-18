@@ -6,28 +6,14 @@ import { classNames } from "shared/lib/classNames";
 type Props = {
     className?: string;
     children?: ReactNode;
+    hideScroll?: boolean;
+    withInert?: boolean;
     theme?: "modal";
 } & HTMLAttributes<HTMLDivElement>;
 
 export const Overlay = (props: Props) => {
-    const { children, className, theme, ...otherProps } = props;
-
+    const { children, className, withInert, hideScroll, theme, ...otherProps } = props;
     const overlay = useRef<HTMLDivElement>(null);
-
-    useHideScroll();
-
-    useEffect(() => {
-        const root = document.getElementById("root");
-        if (root && theme === "modal") {
-            root.inert = true;
-        }
-
-        return () => {
-            if (root && theme === "modal") {
-                root.inert = false;
-            }
-        };
-    }, [theme]);
 
     const Component = (
         <div
@@ -40,6 +26,8 @@ export const Overlay = (props: Props) => {
             )}
             {...otherProps}
         >
+            {withInert && <WithInert />}
+            {hideScroll && <HideScroll />}
             {children}
         </div>
     );
@@ -47,4 +35,25 @@ export const Overlay = (props: Props) => {
     if (theme === "modal") return createPortal(Component, document.getElementById("modal")!);
 
     return Component;
+};
+
+const HideScroll = () => {
+    useHideScroll();
+    return null;
+};
+
+const WithInert = () => {
+    useEffect(() => {
+        const root = document.getElementById("root");
+        if (root) {
+            root.inert = true;
+        }
+
+        return () => {
+            if (root) {
+                root.inert = false;
+            }
+        };
+    }, []);
+    return null;
 };

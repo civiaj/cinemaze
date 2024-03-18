@@ -1,15 +1,16 @@
+import { FormEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useForgotPasswordMutation } from "entities/Authorization";
 import { Box } from "shared/ui/Boxes/Box";
 import { FormErrorMsg } from "shared/ui/FormErrorMsg/FormErrorMsg";
 import { Input } from "shared/ui/Input/Input";
 import { Heading } from "shared/ui/Text/Heading";
-
-import { useForgotPasswordMutation } from "entities/Authorization";
-import { FormEvent, useState } from "react";
 import formatServerError from "shared/api/helpers/formatServerError";
 import { Checked } from "shared/assets/icons";
 import { trimInput } from "shared/lib/trimInput";
 import { Button } from "shared/ui/Button/Button";
 import { Text } from "shared/ui/Text/Text";
+
 import { LoginSections } from "../model/types";
 
 type Props = {
@@ -19,6 +20,7 @@ type Props = {
 export const ForgotForm = ({ onSectionChange }: Props) => {
     const [email, setEmail] = useState("");
     const trimmedEmail = trimInput(email, "name");
+    const { t } = useTranslation();
 
     const [requestPasswordReset, { data, isLoading, isError, error }] = useForgotPasswordMutation();
 
@@ -42,12 +44,12 @@ export const ForgotForm = ({ onSectionChange }: Props) => {
     return (
         <form onSubmit={onRequestPasswordReset}>
             <Box className="w-80 px-6">
-                <Heading headinglevel={1}>Восстановление</Heading>
+                <Heading headinglevel={1}>{t("t_Recovery")}</Heading>
                 <div className="w-full flex flex-col gap-2">
                     <Input
                         autoComplete="username"
                         name="email"
-                        placeholder="Адрес электронной почты"
+                        placeholder={t("e_p_address")}
                         className="placeholder:text-sm"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -57,14 +59,14 @@ export const ForgotForm = ({ onSectionChange }: Props) => {
                 </div>
                 <div className="flex justify-center flex-col gap-2">
                     <Button isLoading={isLoading} theme="blue" type="submit">
-                        <Text>Восстановить пароль</Text>
+                        <Text>{t("p_reset")}</Text>
                     </Button>
                     <Button
                         theme="clean"
                         onClick={() => onSectionChange("login")}
                         className="justify-center"
                     >
-                        <Text>Отмена</Text>
+                        <Text>{t("Cancel")}</Text>
                     </Button>
                 </div>
             </Box>

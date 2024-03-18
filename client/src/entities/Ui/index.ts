@@ -9,6 +9,5 @@ export {
 
 export type { TAppearances, UiSchema, TAppearancesRecord } from "./model/types";
 export { APPEARANCES, appearances } from "./model/types";
-
-export { PageError } from "./ui/PageError";
 export { Page } from "./ui/Page";
+export { Breadcrumbs } from "./ui/Breadcrumbs/Breadcrumbs";

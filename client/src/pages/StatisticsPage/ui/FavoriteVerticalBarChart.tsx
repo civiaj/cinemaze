@@ -144,7 +144,6 @@ export const FavoriteVerticalBarChart = () => {
         displayed.length * CATEGORY_HEIGHT + TICK_HEIGHT + MARGIN.top + MARGIN.bottom
     }px`;
 
-    console.log(height);
     const width = longestWord * LETTER_WIDTH;
     const { theme } = useTheme();
     const color = COLORS[theme];

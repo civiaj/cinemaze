@@ -1,11 +1,19 @@
 import { Overlay } from "shared/ui/Boxes/Overlay";
 import { Spinner } from "./Spinner";
+import { classNames } from "shared/lib/classNames";
 
-type Props = { className?: string };
-export const FullscreenSpinner = ({ className }: Props) => {
+type Props = {
+    hideScroll?: boolean;
+    withInert?: boolean;
+    theme?: "modal";
+    className?: string;
+};
+
+export const FullscreenSpinner = (props: Props) => {
+    const { className, ...other } = props;
     return (
-        <Overlay className={className}>
-            <Spinner className="text-neutral-200 dark:text-neutral-800 fill-blue-500" />
+        <Overlay withInert hideScroll {...other} className={classNames("z-50", {}, [className])}>
+            <Spinner />
         </Overlay>
     );
 };

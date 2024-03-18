@@ -1,44 +1,41 @@
-import { routePath } from "app/router/router";
-import { useAppDispatch, useAppSelector } from "app/store";
-import { TFavorite, useGetAllFavoriteQuery, useGetSyncDataQuery } from "entities/Favorite";
-import { Page, PageError } from "entities/Ui";
-
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import formatFilmError from "shared/api/helpers/formatFilmError";
+import { useAppDispatch, useAppSelector } from "app/store";
+import { routePath } from "app/router/router";
+import { TFavorite, useGetAllFavoriteQuery, useGetSyncDataQuery } from "entities/Favorite";
+import { Page } from "entities/Ui";
+import { FilmsList } from "widgets/FilmsList";
 import { useInfiniteScroll } from "shared/hooks/useInfiniteScroll";
 import { Box } from "shared/ui/Boxes/Box";
 import { EndBox } from "shared/ui/Boxes/EndBox";
 import { Button } from "shared/ui/Button/Button";
-import { FilmsList } from "widgets/FilmsList";
-import { favoritePageActions } from "../model/slice";
-import { FavoriteListVariantT } from "../model/types";
-import { FavoritePageHeader } from "./FavoritePageHeader";
+import { Text } from "shared/ui/Text/Text";
+import { StatusBox } from "shared/ui/Boxes/StatusBox";
+import { PageLikeBox } from "shared/ui/Boxes/PageLikeBox";
+import formatServerError from "shared/api/helpers/formatServerError";
 
+import { favoritePageActions } from "../model/slice";
+import { FavoritePageHeader } from "./FavoritePageHeader";
 import {
-    getUserPage,
+    getFavoritePage,
+    getListVariant,
     getUserPageInfiniteFilms,
     getUserPageInfiniteFilmsById,
 } from "../model/selectors";
 import { FavoriteRemoveModal } from "../ui/FavoriteRemoveModal";
-import { Text } from "shared/ui/Text/Text";
-
-interface UserPageBodyProps {
-    listVariant: FavoriteListVariantT;
-}
 
 const cardStyles: TCardStyles = {
     label: "text-xl",
 };
 
-export const FavoritePageBody = (props: UserPageBodyProps) => {
-    const { listVariant } = props;
+export const FavoritePageBody = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const page = useAppSelector(getUserPage);
+    const page = useAppSelector(getFavoritePage);
     const infiniteFilms = useAppSelector(getUserPageInfiniteFilms);
+    const listVariant = useAppSelector(getListVariant);
     const [stateFilmId, setStateFilmId] = useState<number | null>(null);
-    const film = useAppSelector(getUserPageInfiniteFilmsById(stateFilmId));
+    const removeFilm = useAppSelector(getUserPageInfiniteFilmsById(stateFilmId));
 
     const { isEnd, isError, isFetching, isLoading, onScrollEnd, error } = useInfiniteScroll({
         queryHook: useGetAllFavoriteQuery,
@@ -60,10 +57,11 @@ export const FavoritePageBody = (props: UserPageBodyProps) => {
     const onCloseDeleteDialog = useCallback(() => setIsOpen(false), []);
     const stats = useGetSyncDataQuery();
     const showEnd = !isLoading && !isFetching && isEnd && !!films.length;
+    const isEmpty = !stats?.data?.all && !stats.isLoading && !isLoading && !isFetching;
 
-    if (!stats?.data?.all && !stats.isLoading && !isLoading && !isFetching)
+    if (isEmpty)
         return (
-            <Page>
+            <PageLikeBox>
                 <Box className="items-center text-center">
                     <Text>
                         Прежде чем продолжить, добавьте какой-нибудь фильм в список 'Буду смотреть'
@@ -74,12 +72,15 @@ export const FavoritePageBody = (props: UserPageBodyProps) => {
                         Перейти на главную
                     </Button>
                 </Box>
-            </Page>
+            </PageLikeBox>
         );
 
-    let message: string | null = null;
-    if (error) message = formatFilmError(error);
-    if (!infiniteFilms.length && isError) return <PageError message={message} />;
+    if (!infiniteFilms.length && isError)
+        return (
+            <PageLikeBox>
+                <StatusBox isError={isError} errorMsg={formatServerError(error)} />
+            </PageLikeBox>
+        );
 
     return (
         <Page onScrollEnd={onScrollEnd}>
@@ -100,7 +101,7 @@ export const FavoritePageBody = (props: UserPageBodyProps) => {
                 <FavoriteRemoveModal
                     listVariant={listVariant}
                     onClose={onCloseDeleteDialog}
-                    film={film}
+                    film={removeFilm}
                 />
             )}
         </Page>

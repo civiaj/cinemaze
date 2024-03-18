@@ -3,17 +3,18 @@ import { Settings } from "shared/assets/icons";
 import { Button } from "shared/ui/Button/Button";
 import { Heading } from "shared/ui/Text/Heading";
 
-import { SearchFiltersT } from "../model/types";
+import { SearchFiltersT, SearchQuery } from "../model/types";
 import { SearchExtended } from "../ui/SearchExtended";
 
 type Props = {
     disabled: boolean;
     data?: SearchFiltersT;
-    isFilterLoading: boolean;
+    onUpdateQuery: (newQuery: SearchQuery) => void;
+    prevQuery: SearchQuery | null;
 };
 
 export const SearchExtendedSmall = (props: Props) => {
-    const { disabled, data, isFilterLoading } = props;
+    const { disabled, data, onUpdateQuery, prevQuery } = props;
     const [isOpen, setIsOpen] = useState(false);
     const handleToggle = () => setIsOpen((p) => !p);
     const handleClose = () => setIsOpen(false);
@@ -28,10 +29,11 @@ export const SearchExtendedSmall = (props: Props) => {
             </div>
             {isOpen && (
                 <SearchExtended
+                    prevQuery={prevQuery}
                     data={data}
                     disabled={disabled}
                     onClose={handleClose}
-                    isFilterLoading={isFilterLoading}
+                    onUpdateQuery={onUpdateQuery}
                 />
             )}
         </div>

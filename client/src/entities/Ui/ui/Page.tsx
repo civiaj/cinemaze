@@ -15,7 +15,6 @@ interface PageProps {
     className?: string;
     onScrollEnd?: () => void;
     children: ReactNode;
-    onPageDestroy?: () => void;
 }
 
 export const Page = forwardRef<HTMLDivElement, PageProps>((props, ref) => {

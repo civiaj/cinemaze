@@ -1,10 +1,7 @@
 import { routePath } from "app/router/router";
 import { Page } from "entities/Ui";
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
-import { Checked, Close } from "shared/assets/icons";
-import { Box } from "shared/ui/Boxes/Box";
-import { Button } from "shared/ui/Button/Button";
-import { Text } from "shared/ui/Text/Text";
+import { StatusBox } from "shared/ui/Boxes/StatusBox";
 
 export const EmailIsVerified = () => {
     const navigate = useNavigate();
@@ -17,26 +14,13 @@ export const EmailIsVerified = () => {
 
     return (
         <Page>
-            <Box className="items-center text-center">
-                {isSuccess && (
-                    <div className="rounded-full bg-my-green-500 p-2">
-                        <Checked className="text-3xl" />
-                    </div>
-                )}
-                {isError && (
-                    <div className="rounded-full bg-my-red-500 p-2">
-                        <Close className="text-3xl" />
-                    </div>
-                )}
-
-                <Text>
-                    {isSuccess && "Электронный адрес почты подтвержден."}
-                    {isError && "Невозможно верифицировать адрес электронной почты."}
-                </Text>
-                <Button theme="regular" onClick={() => navigate(routePath.main, { replace: true })}>
-                    Перейти на главную
-                </Button>
-            </Box>
+            <StatusBox
+                isError={isError}
+                isSuccess={isSuccess}
+                errorMsg={"Невозможно верифицировать адрес электронной почты."}
+                successMsg={"Электронный адрес почты подтвержден."}
+                onClick={() => navigate(routePath.main, { replace: true })}
+            />
         </Page>
     );
 };

@@ -24,6 +24,9 @@ import { tlIntervals } from "../model/data";
 import { getSelectByDate, getTL } from "../model/selectors";
 import { statisticsActions } from "../model/slice";
 import { TLIntervals, TLStat } from "../model/types";
+import { Elipsis } from "shared/ui/Text/Elipsis";
+
+/* eslint-disable @typescript-eslint/no-explicit-any*/
 
 const CustomTooltip = ({ payload, active }: TooltipProps<TLStat["userScore"], TLStat["date"]>) => {
     const { t } = useTranslation();
@@ -31,22 +34,41 @@ const CustomTooltip = ({ payload, active }: TooltipProps<TLStat["userScore"], TL
         const item = payload[0].payload as TLStat;
 
         return (
-            <div className="bg-my-neutral-50 bg-opacity-10 px-6 py-4 flex items-end flex-col">
-                <AppLink
-                    to={`${routePath.details}/${item.filmId}`}
-                    className="font-medium text-xl pointer-events-auto text-my-neutral-800 hover:text-blue-500"
-                >
-                    {item.name} {item.year && <span>({item.year})</span>}
-                </AppLink>
-                <div className="flex gap-2 items-center text-base font-normal">
-                    <p>
-                        {item.userScore} <span>{t("stars", { count: item.userScore })}</span>
-                    </p>
+            <div className="max-w-[300px] overflow-hidden">
+                <div className="bg-my-neutral-50 bg-opacity-10 px-6 py-4 flex flex-col">
+                    <Elipsis>
+                        <AppLink
+                            to={`${routePath.details}/${item.filmId}`}
+                            className="font-medium text-xl pointer-events-auto text-my-neutral-800 hover:text-blue-500"
+                            title={item.name}
+                        >
+                            {item.name}
+                            {item.year && <span>({item.year})</span>}
+                        </AppLink>
+                    </Elipsis>
+                    <div className="flex gap-2 items-center text-base font-normal self-end">
+                        <p>
+                            {item.userScore} <span>{t("stars", { count: item.userScore })}</span>
+                        </p>
+                    </div>
+                    <div className="font-normal self-end">{item.date}</div>
                 </div>
             </div>
         );
     }
     return null;
+};
+
+const CustomizedGroupTick = (props: any) => {
+    const { x, y, payload, color } = props;
+
+    return (
+        <g fill={color} textAnchor="end">
+            <text dy={15} x={x} y={y}>
+                {payload.value}
+            </text>
+        </g>
+    );
 };
 
 export const FavoriteTimelineChart = () => {
@@ -95,10 +117,8 @@ export const FavoriteTimelineChart = () => {
                         <XAxis
                             type="category"
                             dataKey="date"
-                            tick={{ fill: color }}
-                            tickCount={20}
+                            tick={<CustomizedGroupTick color={color} />}
                             tickLine={false}
-                            dy={15}
                         />
                         <YAxis
                             domain={[0, 10]}
@@ -117,7 +137,7 @@ export const FavoriteTimelineChart = () => {
                         <Line
                             animationDuration={ANIMATION_DURATION}
                             animationBegin={ANIMATION_BEGIN}
-                            type="natural"
+                            type="bump"
                             dataKey="userScore"
                             activeDot={{ r: 5 }}
                             stroke={BLUE}

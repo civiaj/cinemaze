@@ -29,7 +29,7 @@ export const Modal = ({
     };
 
     return (
-        <Overlay theme="modal" className="z-50">
+        <Overlay withInert hideScroll theme="modal" className="z-50">
             <Box className="gap-0 p-0 sm:p-0 shadow-0 min-w-[300px] w-[clamp(500px,90%,800px)] max-h-[90%] overflow-hidden mx-2 relative">
                 <OutsideClickWrapper
                     onClose={onClose}

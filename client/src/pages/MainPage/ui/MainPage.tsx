@@ -1,11 +1,7 @@
-import { useAppSelector } from "app/store";
-import { getMainQuery } from "../model/selectors";
-
-import { MainPageBody } from "pages/MainPage/ui/MainPageBody";
+import { MainPageBody } from "./MainPageBody";
 
 const MainPage = () => {
-    const mainQuery = useAppSelector(getMainQuery);
-    return <MainPageBody mainQuery={mainQuery} />;
+    return <MainPageBody />;
 };
 
 export default MainPage;

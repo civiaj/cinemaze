@@ -3,10 +3,12 @@ import { filmApi } from "shared/api/filmApi";
 import {
     SearchFiltersQueryT,
     SearchFiltersT,
-    SearchQueryProps,
+    SearchOrderT,
+    SearchQuery,
     SearchQueryResultT,
     SearchQueryT,
 } from "../model/types";
+import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "shared/const/const";
 
 const searchPageApi = filmApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -28,24 +30,29 @@ const searchPageApi = filmApi.injectEndpoints({
                 };
             },
         }),
-        search: builder.query<SearchQueryT, SearchQueryProps>({
-            query: ({
-                country,
-                genre,
-                keyword,
-                order,
-                ratingFrom,
-                ratingTo,
-                yearFrom,
-                yearTo,
-                page,
-            }) => ({
-                url: `/v2.2/films?${country ? `countries=${country}` : ""}&${
-                    genre ? `genres=${genre}` : ""
-                }&order=${order}&type=ALL&ratingFrom=${ratingFrom}&ratingTo=${ratingTo}&yearFrom=${yearFrom}&yearTo=${yearTo}&${
-                    keyword ? `keyword=${keyword}` : ""
-                }&page=${page}`,
-            }),
+        search: builder.query<
+            SearchQueryT,
+            Partial<SearchQuery & { order: SearchOrderT; page: number }>
+        >({
+            query: (payload) => {
+                const {
+                    country,
+                    genre,
+                    keyword,
+                    order = "NUM_VOTE",
+                    page = 1,
+                    ratingFrom = RATING_FROM_MIN,
+                    ratingTo = RATING_TO_MAX,
+                    yearFrom = YEAR_FROM_MIN,
+                    yearTo = YEAR_TO_MAX,
+                } = payload;
+
+                const pCountry = country ? `countries=${country}` : "";
+                const pGenre = genre ? `genres=${genre}` : "";
+                const pKeyword = keyword ? `keyword=${keyword}` : "";
+
+                return `/v2.2/films?${pCountry}&${pGenre}&order=${order}&type=ALL&ratingFrom=${ratingFrom}&ratingTo=${ratingTo}&yearFrom=${yearFrom}&yearTo=${yearTo}&${pKeyword}&page=${page}`;
+            },
 
             transformResponse: (response: SearchQueryResultT) => {
                 return {

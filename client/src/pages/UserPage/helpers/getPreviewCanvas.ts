@@ -29,8 +29,6 @@ export function getPreviewCanvas(
     const cropX = crop.x * scaleX;
     const cropY = crop.y * scaleY;
 
-    console.log(canvas.height, canvas.width);
-
     ctx.save();
 
     // 5) Move the crop origin to the canvas origin (0,0)

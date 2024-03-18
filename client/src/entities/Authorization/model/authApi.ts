@@ -1,7 +1,6 @@
 import { authAndUserSliceActions } from "entities/AuthAndUser";
-import { LoginRequest, RegisterRequest, GenericResponse } from "entities/Authorization/model/types";
+import { GenericResponse, LoginRequest, RegisterRequest } from "entities/Authorization/model/types";
 import { userActions, userApi } from "entities/User";
-import { filmApi } from "shared/api/filmApi";
 import { serverApi } from "shared/api/serverApi";
 
 const authApi = serverApi.injectEndpoints({
@@ -55,9 +54,12 @@ const authApi = serverApi.injectEndpoints({
             async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
                 try {
                     await queryFulfilled;
-                    dispatch(serverApi.util.resetApiState());
-                    dispatch(filmApi.util.resetApiState());
+
+                    // RESET EVERYTHING AFTER LOGOUT
+                    // When calling dispatch in other order there is infinite loading on useGetMeQuery hook, that shows fullscreen spinner. Can't understand why...
+
                     dispatch(userActions.logout());
+                    dispatch(serverApi.util.resetApiState());
                 } catch (e) {
                     // errorMiddleware
                 }

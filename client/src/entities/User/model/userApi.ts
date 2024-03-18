@@ -25,12 +25,12 @@ export const userApi = serverApi.injectEndpoints({
                 }
             },
 
-            transformErrorResponse(response, _, arg) {
-                if (arg === "withoutError") {
-                    response.data = "withoutError";
-                }
-                return response;
-            },
+            // transformErrorResponse(response, _, arg) {
+            //     if (arg === "withoutError") {
+            //         response.data = "withoutError";
+            //     }
+            //     return response;
+            // },
         }),
         getSessions: builder.query<SessionsResponse, void>({
             query: () => ({

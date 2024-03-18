@@ -1,17 +1,12 @@
 import { RootState } from "app/store";
-import { searchPageAdapter } from "./slice";
 import { createSelector } from "@reduxjs/toolkit";
 
-export const getSearchPageState = (state: RootState) => state.searchPage;
-export const getPreviousQuery = (state: RootState) => state.searchPage.previousQuery;
-export const getSearchQuery = (state: RootState) => state.searchPage.query;
-export const getSearchIsInitial = (state: RootState) => state.searchPage.isInitial;
-export const getSearchPage = (state: RootState) => state.searchPage.page;
-export const getSearchOrder = (state: RootState) => state.searchPage.query.order;
-export const getSearchKeyword = (state: RootState) => state.searchPage.query.keyword;
-export const geInitialSearchQuery = (state: RootState) => state.searchPage.initialQuery;
-const getSearchUserQueries = (state: RootState) => state.searchPage.userQueries;
+import { searchPageAdapter } from "./slice";
 
+export const getSearchPageState = (state: RootState) => state.searchPage;
+export const getSearchPage = (state: RootState) => state.searchPage.page;
+const getSearchUserQueries = (state: RootState) => state.searchPage.userQueries;
+export const getSearchOrder = (state: RootState) => state.searchPage.order;
 export const getSearchUserQueriesByInput = createSelector(
     [getSearchUserQueries, (_, query: string) => query],
     (userQueries, query) => {

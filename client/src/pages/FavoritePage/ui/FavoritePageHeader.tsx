@@ -1,19 +1,16 @@
+import { memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "app/store";
+import { useGetSyncDataQuery } from "entities/Favorite";
 import { AppSelect } from "shared/ui/AppSelect/AppSelect";
 import { Heading } from "shared/ui/Text/Heading";
-
 import { ControllsBox } from "shared/ui/Boxes/ControllsBox";
 import { HeaderWithControlls } from "shared/ui/Boxes/HeaderWithControlls";
-
-import { favoritePageActions } from "../model/slice";
-import { FavoriteListVariantT } from "../model/types";
-
-import { memo, useMemo } from "react";
 import { Button } from "shared/ui/Button/Button";
 
-import { useGetSyncDataQuery } from "entities/Favorite";
 import { listVariants } from "../model/data";
-import { useTranslation } from "react-i18next";
+import { favoritePageActions } from "../model/slice";
+import { FavoriteListVariantT } from "../model/types";
 
 type Props = {
     listVariant: FavoriteListVariantT;

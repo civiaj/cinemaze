@@ -104,7 +104,7 @@ const NewPasswordSection = (props: Props) => {
     const onPasswordUpdate = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const password = new FormData(e.currentTarget).get("password") as string;
-        const confirmPassword = new FormData(e.currentTarget).get("password") as string;
+        const confirmPassword = new FormData(e.currentTarget).get("confirmPassword") as string;
         if (!password || !confirmPassword) return;
         updatePassword({ password, confirmPassword })
             .unwrap()
@@ -145,13 +145,7 @@ const NewPasswordSection = (props: Props) => {
                     <Button type="submit" isLoading={isLoading} theme="blue">
                         <Text>Изменить</Text>
                     </Button>
-                    <Button
-                        onClick={() => {
-                            console.log("clicked");
-                            onClose();
-                        }}
-                        theme="regular"
-                    >
+                    <Button onClick={onClose} theme="regular">
                         <Text>Отмена</Text>
                     </Button>
                 </div>

@@ -62,6 +62,8 @@ export const FilmsList = memo((props: FilmsListPropsT) => {
         skip: !user,
     });
 
+    console.log("render");
+
     const findIsHidden = useCallback(
         (filmId: number) => {
             return user && pathname !== routePath.favorite
@@ -96,7 +98,7 @@ export const FilmsList = memo((props: FilmsListPropsT) => {
 
     return (
         <>
-            {isSyncFetching && page > 1 && <FullscreenSpinner className="mt-0" />}
+            {isSyncFetching && page > 1 && <FullscreenSpinner />}
             <ul className={`${containerStyle[appearance]}`}>
                 {films.map((film) => (
                     <FilmCard

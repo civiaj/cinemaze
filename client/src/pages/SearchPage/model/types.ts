@@ -18,7 +18,14 @@ export const searchOrders = {
 
 export type SearchOrderT = ObjectValues<typeof searchOrders>;
 
-export type SearchParamsT = {
+export interface SearchPageSchema {
+    searchPageFilms: EntityState<FilmT>;
+    page: number;
+    order: SearchOrderT;
+    userQueries: string[];
+}
+
+export type SearchQuery = {
     country: number | null;
     genre: number | null;
     ratingFrom: number;
@@ -26,22 +33,9 @@ export type SearchParamsT = {
     yearFrom: number;
     yearTo: number;
     keyword: string;
-    order: SearchOrderT;
 };
 
-export interface SearchPageSchema {
-    searchPageFilms: EntityState<FilmT>;
-    previousQuery: SearchParamsT;
-    isInitial: boolean;
-    page: number;
-    query: SearchParamsT;
-    userQueries: string[];
-    initialQuery: SearchParamsT;
-}
-
-export interface SearchQueryProps extends SearchParamsT {
-    page: number;
-}
+export type SearchQueryKeys = keyof SearchQuery;
 
 export interface SearchQueryResultT {
     total: number;
