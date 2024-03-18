@@ -1,6 +1,5 @@
 import { routePath } from "app/router/router";
 import { useGetStatisticsQuery } from "entities/Favorite";
-import { PageError } from "entities/Ui";
 import { FavoritePieChart } from "pages/StatisticsPage/ui/FavoritePieChart";
 import { FavoriteTimelineChart } from "pages/StatisticsPage/ui/FavoriteTimelineChart";
 import { FavoriteVerticalBarChart } from "pages/StatisticsPage/ui/FavoriteVerticalBarChart";
@@ -8,6 +7,8 @@ import { StatisticsSkeleton } from "pages/StatisticsPage/ui/StatisticsSkeleton";
 import { useNavigate } from "react-router-dom";
 import formatFilmError from "shared/api/helpers/formatFilmError";
 import { Box } from "shared/ui/Boxes/Box";
+import { PageLikeBox } from "shared/ui/Boxes/PageLikeBox";
+import { StatusBox } from "shared/ui/Boxes/StatusBox";
 import { Button } from "shared/ui/Button/Button";
 import { Text } from "shared/ui/Text/Text";
 
@@ -17,9 +18,12 @@ export const StatisticsPageBody = () => {
 
     if (isLoading) return <StatisticsSkeleton />;
 
-    let message: string | null = null;
-    if (error) message = formatFilmError(error);
-    if (isError) return <PageError message={message} />;
+    if (isError)
+        return (
+            <PageLikeBox>
+                <StatusBox errorMsg={formatFilmError(error)} isError={isError} />
+            </PageLikeBox>
+        );
 
     if (!data?.length)
         return (
