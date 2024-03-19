@@ -9,12 +9,12 @@ import { SearchExtended } from "../ui/SearchExtended";
 type Props = {
     disabled: boolean;
     data?: SearchFiltersT;
-    onUpdateQuery: (newQuery: SearchQuery) => void;
-    prevQuery: SearchQuery | null;
+    skip: boolean;
+    prevQuery: SearchQuery;
 };
 
 export const SearchExtendedSmall = (props: Props) => {
-    const { disabled, data, onUpdateQuery, prevQuery } = props;
+    const { disabled, data, skip, prevQuery } = props;
     const [isOpen, setIsOpen] = useState(false);
     const handleToggle = () => setIsOpen((p) => !p);
     const handleClose = () => setIsOpen(false);
@@ -33,7 +33,7 @@ export const SearchExtendedSmall = (props: Props) => {
                     data={data}
                     disabled={disabled}
                     onClose={handleClose}
-                    onUpdateQuery={onUpdateQuery}
+                    skip={skip}
                 />
             )}
         </div>

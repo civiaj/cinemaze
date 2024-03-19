@@ -1,5 +1,5 @@
 import { useAppSelector } from "app/store";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { ID_BREADCRUMBS } from "shared/const/const";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Box } from "shared/ui/Boxes/Box";
@@ -59,7 +59,7 @@ export const BreadcrumbsBody = () => {
         setDisplayedIndex(index);
     }, [displayedIndex, branches]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (initial.current) {
             onResize();
             initial.current = false;

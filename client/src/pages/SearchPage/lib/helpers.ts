@@ -16,10 +16,10 @@ export const checkSearchParams = (
     switch (queryName) {
         case "country":
         case "genre": {
-            if (value === null || isNaN(Number(value))) return null;
+            if (value === null || isNaN(Number(value))) return 0;
             const nValue = Number(value);
             const exist = compareValue.data?.countries.find((country) => country?.value === nValue);
-            return exist ? nValue : null;
+            return exist ? nValue : 0;
         }
 
         case "ratingFrom":
@@ -39,7 +39,7 @@ export const checkSearchParams = (
             return isCorrect ? nValue : max;
         }
         default: {
-            return null;
+            return 0;
         }
     }
 };

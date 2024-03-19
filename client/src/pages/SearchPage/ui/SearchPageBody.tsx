@@ -1,24 +1,26 @@
-import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "app/store";
 import { Page } from "entities/Ui";
+import { checkSearchParams } from "pages/SearchPage/lib/helpers";
+import { useEffect, useMemo } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
+import formatFilmError from "shared/api/helpers/formatFilmError";
+import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "shared/const/const";
 import { useInfiniteScroll } from "shared/hooks/useInfiniteScroll";
 import { getNoun } from "shared/lib/getNoun";
 import { Box } from "shared/ui/Boxes/Box";
-import { Heading } from "shared/ui/Text/Heading";
-import { FilmsList } from "widgets/FilmsList";
-import { Text } from "shared/ui/Text/Text";
 import { EndBox } from "shared/ui/Boxes/EndBox";
-import formatFilmError from "shared/api/helpers/formatFilmError";
 import { PageLikeBox } from "shared/ui/Boxes/PageLikeBox";
 import { StatusBox } from "shared/ui/Boxes/StatusBox";
+import { Heading } from "shared/ui/Text/Heading";
+import { Text } from "shared/ui/Text/Text";
+import { FilmsList } from "widgets/FilmsList";
 import { useFiltersQuery, useSearchQuery } from "../model/searchPageApi";
 import { getSearchOrder, getSearchPage, getSearchPageInfiniteFilms } from "../model/selectors";
 import { searchPageActions } from "../model/slice";
-import { SearchPageHeader } from "../ui/SearchPageHeader";
-import { SearchExtendedSmall } from "../ui/SearchExtendedSmall";
-import { SearchExtended } from "./SearchExtended";
 import { SearchQuery, SearchQueryT } from "../model/types";
+import { SearchExtendedSmall } from "../ui/SearchExtendedSmall";
+import { SearchPageHeader } from "../ui/SearchPageHeader";
+import { SearchExtended } from "./SearchExtended";
 
 const cardStyles: TCardStyles = {
     label: "text-xl",
@@ -33,26 +35,84 @@ export const SearchPageBody = () => {
     const page = useAppSelector(getSearchPage);
     const order = useAppSelector(getSearchOrder);
     const infiniteFilms = useAppSelector(getSearchPageInfiniteFilms);
+    const filters = useFiltersQuery();
+    const { search } = useLocation();
 
-    const [query, setQuery] = useState<SearchQuery | null>(null);
+    const country = useMemo(
+        () =>
+            checkSearchParams("country", searchParams.get("country"), {
+                data: filters.data,
+                min: 0,
+                max: 0,
+            }),
+        [filters.data, searchParams]
+    );
+
+    const genre = useMemo(
+        () =>
+            checkSearchParams("genre", searchParams.get("genre"), {
+                data: filters.data,
+                min: 0,
+                max: 0,
+            }),
+        [filters.data, searchParams]
+    );
+    const ratingFrom = useMemo(
+        () =>
+            checkSearchParams("ratingFrom", searchParams.get("ratingFrom"), {
+                min: RATING_FROM_MIN,
+                max: RATING_TO_MAX,
+            }),
+        [searchParams]
+    );
+    const ratingTo = useMemo(
+        () =>
+            checkSearchParams("ratingTo", searchParams.get("ratingTo"), {
+                min: ratingFrom ?? RATING_FROM_MIN,
+                max: RATING_TO_MAX,
+            }),
+        [searchParams, ratingFrom]
+    );
+    const yearFrom = useMemo(
+        () =>
+            checkSearchParams("yearFrom", searchParams.get("yearFrom"), {
+                min: YEAR_FROM_MIN,
+                max: YEAR_TO_MAX,
+            }),
+        [searchParams]
+    );
+    const yearTo = useMemo(
+        () =>
+            checkSearchParams("yearTo", searchParams.get("yearTo"), {
+                min: yearFrom ?? YEAR_FROM_MIN,
+                max: YEAR_TO_MAX,
+            }),
+        [searchParams, yearFrom]
+    );
+    const keyword = searchParams.get("keyword") ?? "";
+
+    const query: SearchQuery = { keyword, yearTo, yearFrom, ratingTo, genre, country, ratingFrom };
+    const skip = searchParams.size === 0;
+
+    console.log(query);
 
     const { isEnd, isError, isFetching, isLoading, onScrollEnd, data, error } = useInfiniteScroll({
         queryHook: useSearchQuery,
-        queryParams: { ...query, page, order },
+        queryParams: { page, order, ...query },
         setPage: (newPage: number) => dispatch(searchPageActions.setPage(newPage)),
-        queryHookSettings: { skip: !query },
+        queryHookSettings: { skip },
         setFilms: (films) => dispatch(searchPageActions.setSearchFilms(films)),
     });
 
     const films = infiniteFilms ?? [];
-    const showEnd = !isLoading && !isFetching && isEnd && !!films.length;
+    const showEnd = !skip && !isLoading && !isFetching && isEnd && !!films.length;
     const showHeader = !!infiniteFilms.length || isLoading || isFetching;
     const disabled = isLoading || isFetching;
     const { total } = (data as SearchQueryT) ?? {};
 
-    const filters = useFiltersQuery();
-
-    const onUpdateQuery = (newQuery: SearchQuery) => setQuery(newQuery);
+    useEffect(() => {
+        dispatch(searchPageActions.cleanInfiniteFilms());
+    }, [search, dispatch]);
 
     if (!infiniteFilms.length && (isError || filters.isError))
         return (
@@ -80,17 +140,18 @@ export const SearchPageBody = () => {
                 </div>
                 {filters.data && (
                     <SearchExtendedSmall
-                        prevQuery={query}
+                        key={search}
                         disabled={disabled}
                         data={filters.data}
-                        onUpdateQuery={onUpdateQuery}
+                        prevQuery={query}
+                        skip={skip}
                     />
                 )}
             </Box>
 
             <div className="grid grid-cols-3 gap-4 items-start">
                 <div className="flex flex-col gap-2 col-span-3 lg:col-span-2">
-                    {!query ? (
+                    {skip ? (
                         <Box className="text-center">
                             <Text className="font-medium" as="p">
                                 Настройте параметры для лучшего поиска.
@@ -116,10 +177,11 @@ export const SearchPageBody = () => {
                 </div>
                 {filters.data && (
                     <SearchExtended
-                        prevQuery={query}
+                        key={search}
                         disabled={disabled}
                         data={filters.data}
-                        onUpdateQuery={onUpdateQuery}
+                        prevQuery={query}
+                        skip={skip}
                     />
                 )}
             </div>

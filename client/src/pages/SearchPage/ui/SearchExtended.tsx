@@ -1,17 +1,16 @@
 import { useAppDispatch } from "app/store";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { Close, Refresh } from "shared/assets/icons";
 import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "shared/const/const";
-import { useInitialEffect } from "shared/hooks/useInitialEffect";
 import { AppSelect } from "shared/ui/AppSelect/AppSelect";
 import { Box } from "shared/ui/Boxes/Box";
 import { Button } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
 import { Heading } from "shared/ui/Text/Heading";
 
-import { checkSearchParams, generateNumberOptions } from "../lib/helpers";
+import { generateNumberOptions } from "../lib/helpers";
 import { searchPageActions } from "../model/slice";
 import { SearchFiltersT, SearchQuery, SearchQueryKeys } from "../model/types";
 
@@ -19,8 +18,8 @@ interface SearchExtendedProps {
     disabled: boolean;
     onClose?: () => void;
     data?: SearchFiltersT;
-    onUpdateQuery: (newQuery: SearchQuery) => void;
-    prevQuery: SearchQuery | null;
+    prevQuery: SearchQuery;
+    skip: boolean;
 }
 
 const resetFiltersValue: SearchQuery = {
@@ -34,70 +33,19 @@ const resetFiltersValue: SearchQuery = {
 };
 
 export const SearchExtended = (props: SearchExtendedProps) => {
-    const { disabled, onClose, data, onUpdateQuery, prevQuery } = props;
+    const { disabled, onClose, data, prevQuery, skip } = props;
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const country = useMemo(
-        () => checkSearchParams("country", searchParams.get("country"), { data, min: 0, max: 0 }),
-        [data, searchParams]
-    );
+    const [query, setQuery] = useState<SearchQuery>(prevQuery);
+    const { country, genre, keyword, ratingFrom, ratingTo, yearFrom, yearTo } = query;
 
-    const genre = useMemo(
-        () => checkSearchParams("genre", searchParams.get("genre"), { data, min: 0, max: 0 }),
-        [data, searchParams]
-    );
-    const ratingFrom = useMemo(
-        () =>
-            checkSearchParams("ratingFrom", searchParams.get("ratingFrom"), {
-                min: RATING_FROM_MIN,
-                max: RATING_TO_MAX,
-            }),
-        [searchParams]
-    );
-    const ratingTo = useMemo(
-        () =>
-            checkSearchParams("ratingTo", searchParams.get("ratingTo"), {
-                min: ratingFrom ?? RATING_FROM_MIN,
-                max: RATING_TO_MAX,
-            }),
-        [searchParams, ratingFrom]
-    );
-    const yearFrom = useMemo(
-        () =>
-            checkSearchParams("yearFrom", searchParams.get("yearFrom"), {
-                min: YEAR_FROM_MIN,
-                max: YEAR_TO_MAX,
-            }),
-        [searchParams]
-    );
-    const yearTo = useMemo(
-        () =>
-            checkSearchParams("yearTo", searchParams.get("yearTo"), {
-                min: yearFrom ?? YEAR_FROM_MIN,
-                max: YEAR_TO_MAX,
-            }),
-        [searchParams, yearFrom]
-    );
-    const keyword = searchParams.get("keyword") ?? "";
-    const [query, setQuery] = useState<SearchQuery>(
-        () =>
-            ({
-                country,
-                genre,
-                ratingFrom,
-                ratingTo,
-                keyword,
-                yearFrom,
-                yearTo,
-            } as SearchQuery)
-    );
-    const ratingFromOptions = generateNumberOptions(RATING_FROM_MIN, ratingTo!);
-    const ratingToOptions = generateNumberOptions(ratingFrom! + 1, RATING_TO_MAX);
-    const yearFromOptions = generateNumberOptions(YEAR_FROM_MIN, yearTo!);
-    const yearToOptions = generateNumberOptions(yearFrom! + 1, YEAR_TO_MAX);
+    const ratingFromOptions = generateNumberOptions(RATING_FROM_MIN, ratingTo);
+    const ratingToOptions = generateNumberOptions(ratingFrom + 1, RATING_TO_MAX);
+    const yearFromOptions = generateNumberOptions(YEAR_FROM_MIN, yearTo);
+    const yearToOptions = generateNumberOptions(yearFrom + 1, YEAR_TO_MAX);
 
     const onUpdateFilters = (queryName: SearchQueryKeys, newValue: number | string | null) => {
         if (newValue === null) {
@@ -112,15 +60,12 @@ export const SearchExtended = (props: SearchExtendedProps) => {
     };
 
     const handleStartSearch = () => {
-        onUpdateQuery(query);
-
         Object.entries(query).forEach(([key, value]) => {
-            if (value) searchParams.set(key, String(value));
+            if (value !== null) searchParams.set(key, String(value));
         });
         setSearchParams(searchParams);
 
-        dispatch(searchPageActions.addUserQuery(query.keyword));
-        dispatch(searchPageActions.cleanInfiniteFilms());
+        dispatch(searchPageActions.addUserQuery(keyword));
 
         window.scrollTo(0, 0);
         onClose?.();
@@ -128,23 +73,11 @@ export const SearchExtended = (props: SearchExtendedProps) => {
 
     const handleReset = () => {
         setQuery(resetFiltersValue);
+        dispatch(searchPageActions.cleanInfiniteFilms());
         if (searchParams.size) setSearchParams({});
     };
 
-    useInitialEffect(() => {
-        if (
-            Object.entries(query).some(
-                ([key, value]) =>
-                    Boolean(value) &&
-                    resetFiltersValue[key as keyof typeof resetFiltersValue] !== value
-            )
-        ) {
-            window.scrollTo(0, 0);
-            onUpdateQuery(query);
-        }
-    });
-
-    const areSame = JSON.stringify(prevQuery) === JSON.stringify(query);
+    const areSame = skip ? false : JSON.stringify(prevQuery) === JSON.stringify(query);
 
     return (
         <Box className="sticky !gap-4 top-[72px] hidden lg:flex">
@@ -155,7 +88,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
                 <Input
                     className="text-sm"
                     placeholder={t("title_enter")}
-                    value={query.keyword}
+                    value={keyword}
                     onChange={(e) => onUpdateFilters("keyword", e.target.value)}
                 />
             </div>
@@ -167,10 +100,10 @@ export const SearchExtended = (props: SearchExtendedProps) => {
                             theme="search"
                             placeholder={t("country_enter")}
                             options={data.countries}
-                            value={query.country}
+                            value={country}
                             actionChange={(newValue) => onUpdateFilters("country", newValue)}
                         />
-                        {Boolean(query.country) && (
+                        {Boolean(country) && (
                             <Button
                                 onClick={() => onUpdateFilters("country", null)}
                                 theme="regularIcon"
@@ -191,10 +124,10 @@ export const SearchExtended = (props: SearchExtendedProps) => {
                             theme="search"
                             placeholder={t("genre_enter")}
                             options={data.genres}
-                            value={query.genre}
+                            value={genre}
                             actionChange={(newValue) => onUpdateFilters("genre", newValue)}
                         />
-                        {Boolean(query.genre) && (
+                        {Boolean(genre) && (
                             <Button
                                 onClick={() => onUpdateFilters("genre", null)}
                                 theme="regularIcon"
@@ -214,7 +147,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
                         <span className="text-sm">{t("min-from")}:</span>
                         <AppSelect
                             theme="search"
-                            value={query.ratingFrom}
+                            value={ratingFrom}
                             options={ratingFromOptions}
                             actionChange={(newValue) => onUpdateFilters("ratingFrom", newValue)}
                         />
@@ -225,7 +158,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
                             <span className="text-sm">{t("max-to")}:</span>
                             <AppSelect
                                 theme="search"
-                                value={query.ratingTo}
+                                value={ratingTo}
                                 options={ratingToOptions}
                                 actionChange={(newValue) => onUpdateFilters("ratingTo", newValue)}
                             />
@@ -240,7 +173,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
                         <span className="text-sm">{t("min-from")}:</span>
                         <AppSelect
                             theme="search"
-                            value={query.yearFrom}
+                            value={yearFrom}
                             options={yearFromOptions}
                             actionChange={(newValue) => onUpdateFilters("yearFrom", newValue)}
                         />
@@ -250,7 +183,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
                         <div className="flex items-center gap-2 flex-1">
                             <span className="text-sm">{t("max-to")}:</span>
                             <AppSelect
-                                value={query.yearTo}
+                                value={yearTo}
                                 options={yearToOptions}
                                 actionChange={(newValue) => onUpdateFilters("yearTo", newValue)}
                                 theme="search"
