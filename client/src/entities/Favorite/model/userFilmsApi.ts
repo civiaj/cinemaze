@@ -42,6 +42,7 @@ const userFilmsApi = serverApi.injectEndpoints({
                         success: getAddFavoriteToastMsg(favorite),
                         error: `Ошибка во время выполнения запроса`,
                     });
+                    dispatch(userFilmsApi.util.invalidateTags(["Favorites"]));
                 } catch (e) {
                     patchResult.undo();
                     //error middleware
@@ -131,7 +132,15 @@ const userFilmsApi = serverApi.injectEndpoints({
                 credentials: "include",
             }),
             transformResponse: (response: { data: TStatistics[] }) => response.data,
-            providesTags: ["Favorites"],
+            providesTags: (result) =>
+                result
+                    ? [
+                          ...result.map(({ filmId }) => ({
+                              type: "Favorites" as const,
+                              id: filmId,
+                          })),
+                      ]
+                    : [{ type: "Favorites", id: "LIST" }],
         }),
     }),
     overrideExisting: false,
