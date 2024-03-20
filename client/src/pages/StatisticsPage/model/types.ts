@@ -20,6 +20,7 @@ export type TLStat = {
     filmId: number;
     year?: string;
     userScore: number;
+    fullDate: string;
 };
 
 export type StatisticsSchema = {

@@ -153,7 +153,20 @@ export const getSelectByDate = createSelector(
                 }
 
                 if (updateAtDate > dateFilter) {
-                    acc.push({ filmId, name: nameRu || EMPTY_LINE, year, date, userScore });
+                    acc.push({
+                        filmId,
+                        name: nameRu || EMPTY_LINE,
+                        year,
+                        date,
+                        userScore,
+                        fullDate: formatDate(updateAtDate, locales, {
+                            hour: "numeric",
+                            minute: "numeric",
+                            month: "2-digit",
+                            year: "numeric",
+                            day: "numeric",
+                        }),
+                    });
                 }
             }
 
