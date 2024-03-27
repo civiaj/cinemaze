@@ -1,10 +1,11 @@
 import { routeConfig, routePath } from "app/router/router";
 import { SideBarItem } from "./types";
-import { Home, Favorite, Search, Statistics } from "shared/assets/icons";
+import { Home, Favorite, Search, Statistics, UserGroup } from "shared/assets/icons";
 import { createSelector } from "@reduxjs/toolkit";
 import { getIsLogged } from "entities/User";
+import { getIsAdmin } from "entities/User/model/selectors";
 
-export const getSidebarItems = createSelector(getIsLogged, (isLogged) => {
+export const getSidebarItems = createSelector([getIsLogged, getIsAdmin], (isLogged, isAdmin) => {
     const sidebarItems: SideBarItem[] = [
         {
             label: routeConfig.main.label,
@@ -30,6 +31,13 @@ export const getSidebarItems = createSelector(getIsLogged, (isLogged) => {
         to: routePath.search,
         Icon: Search,
     });
+
+    if (isAdmin)
+        sidebarItems.push({
+            label: routeConfig.manage.label,
+            to: routePath.manage,
+            Icon: UserGroup,
+        });
 
     return sidebarItems;
 });

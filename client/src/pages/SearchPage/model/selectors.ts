@@ -11,7 +11,7 @@ export const getSearchUserQueriesByInput = createSelector(
     [getSearchUserQueries, (_, query: string) => query],
     (userQueries, query) => {
         return userQueries.filter((str) =>
-            str.trim().toLowerCase().includes(query.trim().toLowerCase())
+            String(str).trim().toLowerCase().includes(query.trim().toLowerCase())
         );
     }
 );

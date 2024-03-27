@@ -1,6 +1,7 @@
 import { FilterQuery, QueryOptions, Types } from "mongoose";
 import userModel, { User } from "../model/user.model";
 import ApiError from "../exceptions/api.error";
+import { GetAllUsersInput } from "../schema/manage.schema";
 
 class UserService {
     async createUser(input: Partial<User>) {
@@ -22,8 +23,54 @@ class UserService {
         return userModel.findOne(filter, {}, options).select("+password");
     }
 
-    async getAll() {
-        return userModel.find().lean();
+    async getAll(
+        pageNumber: number,
+        sortField: GetAllUsersInput["filter"],
+        orderQuery: 1 | -1,
+        searchQuery?: string
+    ) {
+        const limit = 20;
+        const skip = (pageNumber - 1) * limit;
+
+        let filter: FilterQuery<User> = {};
+        let order = orderQuery;
+        let sort = sortField;
+        let sortIfEqual = {};
+
+        if (searchQuery) {
+            filter = { displayName: { $regex: new RegExp(searchQuery, "i") } };
+            order = 1;
+            sort = "displayName";
+        }
+
+        if (sort === "createdAt" || sort === "verified") {
+            order = order === 1 ? -1 : 1;
+        }
+
+        if (sort !== "displayName") {
+            sortIfEqual = { displayName: 1 };
+        }
+
+        const users = await userModel
+            .find(
+                filter,
+                {
+                    createdAt: 1,
+                    updatedAt: 1,
+                    id: 1,
+                    email: 1,
+                    role: 1,
+                    photo: 1,
+                    displayName: 1,
+                    verified: 1,
+                },
+                { sort: { [sort]: order, ...sortIfEqual }, skip, limit }
+            )
+            .lean();
+
+        const total = await userModel.countDocuments(filter);
+
+        return { users, totalPages: Math.ceil(total / limit) };
     }
 }
 

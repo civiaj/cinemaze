@@ -36,6 +36,12 @@ export const statisticsPagePersistConfig = {
     storage,
 };
 
+export const managePagePersistConfig = {
+    key: "manage",
+    storage,
+    whitelist: ["order", "filter"],
+};
+
 // add all keys here to remove from local storage after logout
 export const persistConfigKeys = [
     "appstorage",
@@ -44,4 +50,5 @@ export const persistConfigKeys = [
     "favoritePage",
     "searchPage",
     "statisticsPage",
+    "manage",
 ];

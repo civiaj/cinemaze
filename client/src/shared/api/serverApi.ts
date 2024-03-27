@@ -22,7 +22,9 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     extraOptions
 ) => {
     await mutex.waitForUnlock();
+
     let result = await baseQuery(args, api, extraOptions);
+
     if (result.error && result.error.status === 401) {
         if (!mutex.isLocked()) {
             const release = await mutex.acquire();
@@ -36,7 +38,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
                 if (refreshResult.data) {
                     result = await baseQuery(args, api, extraOptions);
                 } else {
-                    api.dispatch(userActions.logout());
+                    api.dispatch(userActions.setIsLogged(false));
                 }
             } finally {
                 release();
@@ -52,6 +54,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const serverApi = createApi({
     reducerPath: "serverApi",
     baseQuery: baseQueryWithReauth,
-    tagTypes: ["User", "Favorites", "Session"],
+    tagTypes: ["User", "Favorites", "Session", "Manage"],
     endpoints: () => ({}),
 });

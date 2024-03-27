@@ -1,3 +1,4 @@
+import { routePath } from "app/router/router";
 import { Checked, Close } from "shared/assets/icons";
 import { Box } from "shared/ui/Boxes/Box";
 import { Button } from "shared/ui/Button/Button";
@@ -13,10 +14,16 @@ type Props = {
 };
 
 export const StatusBox = (props: Props) => {
-    const { errorMsg, isError, isSuccess, successMsg, onClick, label } = props;
+    const {
+        errorMsg = "Возникла ошибка",
+        isError,
+        isSuccess,
+        successMsg = "Запрос выполнен успешно",
+        onClick,
+        label = "Перейти на главную",
+    } = props;
 
-    const text = label ?? "Перейти на главную";
-    const handleClick = onClick ? onClick : () => window.location.reload();
+    const handleClick = onClick ? onClick : () => window.location.replace(routePath.main);
 
     if (isSuccess)
         return (
@@ -27,7 +34,7 @@ export const StatusBox = (props: Props) => {
 
                 <Text>{successMsg}</Text>
                 <Button theme="regular" onClick={handleClick}>
-                    {text}
+                    {label}
                 </Button>
             </Box>
         );
@@ -41,7 +48,7 @@ export const StatusBox = (props: Props) => {
 
                 <Text>{errorMsg}</Text>
                 <Button theme="regular" onClick={handleClick}>
-                    {text}
+                    {label}
                 </Button>
             </Box>
         );

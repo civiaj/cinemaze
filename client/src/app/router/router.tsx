@@ -1,14 +1,15 @@
+import { Navigate } from "react-router-dom";
 import { DetailsPage } from "pages/DetailsPage";
 import { FavoritePage } from "pages/FavoritePage";
 import { LoginPage } from "pages/LoginPage";
 import { MainPage } from "pages/MainPage/";
 import { SearchPage } from "pages/SearchPage";
-import { Navigate } from "react-router-dom";
-
+import { ManagePage } from "pages/ManagePage";
 import { StatisticsPage } from "pages/StatisticsPage";
 import { UserPage } from "pages/UserPage";
-import { IRoute } from "./types";
 import { EmailIsVerified } from "widgets/Messages/EmailIsVerified";
+
+import { IRoute } from "./types";
 
 export enum AppRoutes {
     MAIN = "main",
@@ -21,6 +22,7 @@ export enum AppRoutes {
     USER = "user",
     RESETPASSWORD = "resetpassword",
     EMAILVERIFICATION = "emailverificaiton",
+    MANAGE_USERS = "manage",
 }
 
 export const routePath: Record<AppRoutes, string> = {
@@ -34,6 +36,7 @@ export const routePath: Record<AppRoutes, string> = {
     [AppRoutes.USER]: "/me",
     [AppRoutes.RESETPASSWORD]: "/login",
     [AppRoutes.EMAILVERIFICATION]: "/emailverificaiton",
+    [AppRoutes.MANAGE_USERS]: "/manage",
 };
 
 export const routeConfig: Record<AppRoutes, IRoute> = {
@@ -42,7 +45,7 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.default,
         label: "",
         auth: false,
-        allowedRoles: [],
+        allowedRoles: ["user", "admin"],
     },
 
     [AppRoutes.MAIN]: {
@@ -50,7 +53,7 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.main,
         label: "r-main",
         auth: false,
-        allowedRoles: [],
+        allowedRoles: ["user", "admin"],
     },
 
     [AppRoutes.DETAILS]: {
@@ -58,7 +61,7 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.details + "/:id",
         label: "",
         auth: false,
-        allowedRoles: [],
+        allowedRoles: ["user", "admin"],
     },
 
     [AppRoutes.SEARCH]: {
@@ -66,7 +69,7 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.search,
         label: "r-search",
         auth: false,
-        allowedRoles: [],
+        allowedRoles: ["user", "admin"],
     },
 
     [AppRoutes.LOGIN]: {
@@ -74,14 +77,14 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.login,
         label: "r-login",
         auth: false,
-        allowedRoles: [],
+        allowedRoles: ["user", "admin"],
     },
     [AppRoutes.RESETPASSWORD]: {
         element: <LoginPage />,
         path: routePath.login,
         label: "r-login",
         auth: false,
-        allowedRoles: [],
+        allowedRoles: ["user", "admin"],
     },
 
     [AppRoutes.FAVORITE]: {
@@ -112,5 +115,12 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         label: "",
         auth: false,
         allowedRoles: [],
+    },
+    [AppRoutes.MANAGE_USERS]: {
+        element: <ManagePage />,
+        path: routePath.manage,
+        label: "r-manage",
+        auth: true,
+        allowedRoles: ["admin"],
     },
 };

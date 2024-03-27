@@ -22,6 +22,8 @@ import {
 import favoriteController from "../controller/favorite.controller";
 import { createFilmSchema } from "../schema/film.schema";
 import { resizeSingleImage, uploadSingleImage } from "../upload/single.image";
+import manageController from "../controller/manage.controller";
+import { getAllUsersSchema } from "../schema/manage.schema";
 
 const router = Router();
 
@@ -38,7 +40,6 @@ router.post("/reset/:resetToken", validate(resetPasswordSchema), authController.
 
 // Пользователь
 router.get("/user/me", deserializeUser, userController.getMe);
-router.get("/user/all", deserializeUser, roles(["admin"]), userController.getAll);
 router.get("/user/sessions", deserializeUser, userController.getUserSessions);
 router.patch(
     "/user/update/displayName",
@@ -98,5 +99,17 @@ router.post(
 );
 
 router.get("/favorite/statistics", deserializeUser, favoriteController.getStatistics);
+
+//manage
+router.get(
+    "/manage/users",
+    deserializeUser,
+    roles(["admin"]),
+    validate(getAllUsersSchema),
+    manageController.getAllUsers
+);
+
+// router.delete("/deleteTest", userController.deleteManyUsers);
+router.post("/addUsersOfNumber", userController.addUsersOfNumber);
 
 export default router;

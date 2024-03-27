@@ -4,7 +4,7 @@ import { useLoginMutation } from "entities/Authorization";
 import formatServerError from "shared/api/helpers/formatServerError";
 import { Box } from "shared/ui/Boxes/Box";
 import { Button } from "shared/ui/Button/Button";
-import { FormErrorMsg } from "shared/ui/FormErrorMsg/FormErrorMsg";
+import { GridMsg } from "shared/ui/GridMsg/GridMsg";
 import { Input } from "shared/ui/Input/Input";
 import { Heading } from "shared/ui/Text/Heading";
 import { Text } from "shared/ui/Text/Text";
@@ -54,7 +54,11 @@ export const LoginForm = (props: Props) => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <FormErrorMsg msg={formatServerError(error)} isError={isError} />
+                <GridMsg
+                    msg={formatServerError(error)}
+                    isOpen={isError}
+                    className="bg-my-red-300"
+                />
 
                 <Button onClick={() => onSectionChange("forgot")}>{t("q_Forgot")}?</Button>
 

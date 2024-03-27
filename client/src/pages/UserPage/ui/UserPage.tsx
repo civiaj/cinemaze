@@ -8,6 +8,7 @@ import { UserSectionHome } from "pages/UserPage/ui/UserSectionHome";
 import { UserSectionName } from "pages/UserPage/ui/UserSectionName";
 import { UserSectionPassword } from "pages/UserPage/ui/UserSectionPassword";
 import { UserSectionPhoto } from "pages/UserPage/ui/UserSectionPhoto/UserSectionPhoto";
+import { UserSectionRole } from "pages/UserPage/ui/UserSectionRole";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const UserPage = () => {
@@ -24,7 +25,8 @@ const UserPage = () => {
             {(!section ||
                 section.startsWith("password") ||
                 section.startsWith("photo") ||
-                section.startsWith("name")) && <UserSectionHome user={user} />}
+                section.startsWith("name") ||
+                section.startsWith("role")) && <UserSectionHome user={user} />}
 
             {section?.startsWith("photo") && (
                 <UserSectionPhoto onClose={onClose} photo={user.photo} />
@@ -41,6 +43,7 @@ const UserPage = () => {
                     onClose={onClose}
                 />
             )}
+            {section?.startsWith("role") && <UserSectionRole onClose={onClose} role={user.role} />}
         </Page>
     );
 };

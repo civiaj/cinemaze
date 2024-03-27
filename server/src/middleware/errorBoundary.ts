@@ -4,7 +4,6 @@ import { ZodError } from "zod";
 import logger from "../utils/logger";
 
 export default (err: any, req: Request, res: Response, next: NextFunction) => {
-    logger.error(err);
     logger.error(err.message ? err.message : err);
     if (err instanceof ApiError)
         return res.status(err.status).json({ message: err.message, errors: err.errors });

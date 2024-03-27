@@ -1,4 +1,4 @@
-import { TypeOf, object, string } from "zod";
+import { TypeOf, array, number, object, string } from "zod";
 
 const displayName = string()
     .transform((value) => value.replace(/\s+/g, " "))

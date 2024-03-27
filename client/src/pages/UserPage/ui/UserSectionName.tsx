@@ -9,7 +9,7 @@ import { Pencil } from "shared/assets/icons";
 import { trimInput } from "shared/lib/trimInput";
 import { Modal } from "shared/ui/Boxes/Modal";
 import { Button } from "shared/ui/Button/Button";
-import { FormErrorMsg } from "shared/ui/FormErrorMsg/FormErrorMsg";
+import { GridMsg } from "shared/ui/GridMsg/GridMsg";
 import { Input } from "shared/ui/Input/Input";
 import { Elipsis } from "shared/ui/Text/Elipsis";
 import { Text } from "shared/ui/Text/Text";
@@ -55,7 +55,11 @@ export const UserSectionName = (props: Props) => {
                             <Elipsis className="sm:text-lg text-base">{name}</Elipsis>
                         )}
                         {isChanging && (
-                            <FormErrorMsg className="self-start" msg={message} isError={isError} />
+                            <GridMsg
+                                className="self-start bg-my-red-300"
+                                msg={message}
+                                isOpen={isError}
+                            />
                         )}
                     </div>
                     {!isChanging && (

@@ -19,6 +19,7 @@
     --red-500: rgb(239 68 68);
     --red-300: rgb(220 38 38);
     --red-200: rgb(255, 75, 75);
+    --blue-500: rgb(59 130 246);
 
     --image-grayscale: 0;
     --image-opacity: 100%;
@@ -60,6 +61,7 @@ img {
 /* width */
 ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
 }
 
 /* Track */

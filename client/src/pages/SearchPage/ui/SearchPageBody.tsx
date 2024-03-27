@@ -176,13 +176,16 @@ export const SearchPageBody = () => {
                     {showEnd && <EndBox />}
                 </div>
                 {filters.data && (
-                    <SearchExtended
-                        key={search}
-                        disabled={disabled}
-                        data={filters.data}
-                        prevQuery={query}
-                        skip={skip}
-                    />
+                    <Box className="lg:sticky hidden !gap-4 top-[72px] lg:flex">
+                        <Heading headinglevel={3}>Расширенный поиск</Heading>
+                        <SearchExtended
+                            key={search}
+                            disabled={disabled}
+                            data={filters.data}
+                            prevQuery={query}
+                            skip={skip}
+                        />
+                    </Box>
                 )}
             </div>
         </Page>

@@ -5,10 +5,8 @@ import { useSearchParams } from "react-router-dom";
 import { Close, Refresh } from "shared/assets/icons";
 import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "shared/const/const";
 import { AppSelect } from "shared/ui/AppSelect/AppSelect";
-import { Box } from "shared/ui/Boxes/Box";
 import { Button } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
-import { Heading } from "shared/ui/Text/Heading";
 
 import { generateNumberOptions } from "../lib/helpers";
 import { searchPageActions } from "../model/slice";
@@ -80,9 +78,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
     const areSame = skip ? false : JSON.stringify(prevQuery) === JSON.stringify(query);
 
     return (
-        <Box className="sticky !gap-4 top-[72px] hidden lg:flex">
-            <Heading headinglevel={3}>Расширенный поиск</Heading>
-
+        <>
             <div className="flex flex-col gap-1">
                 <span>{t("Keyword")}</span>
                 <Input
@@ -206,6 +202,6 @@ export const SearchExtended = (props: SearchExtendedProps) => {
                     <Refresh />
                 </Button>
             </div>
-        </Box>
+        </>
     );
 };

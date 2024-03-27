@@ -22,6 +22,9 @@ const userSlice = createSlice({
             state.user = action.payload;
             state.isLogged = true;
         },
+        setIsLogged: (state, action: PayloadAction<boolean>) => {
+            state.isLogged = action.payload;
+        },
     },
 });
 

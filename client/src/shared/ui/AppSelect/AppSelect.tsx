@@ -34,6 +34,7 @@ type Props = {
     disabled?: boolean;
     theme?: Themes;
     render?: (props: ListChildComponentProps, onClose: () => void) => ReactNode;
+    itemHeight?: number;
 };
 
 export const AppSelect = (props: Props) => {
@@ -47,6 +48,7 @@ export const AppSelect = (props: Props) => {
         disabled,
         render,
         theme = "regular",
+        itemHeight,
         ...otherProps
     } = props;
 
@@ -106,6 +108,7 @@ export const AppSelect = (props: Props) => {
                 className="absolute top-0 left-0 w-full z-20"
                 render={render ? (props) => render?.(props, handleClose) : defaultRender}
                 itemCount={options.length}
+                itemHeight={itemHeight}
             />
         </OutsideClickWrapper>
     );

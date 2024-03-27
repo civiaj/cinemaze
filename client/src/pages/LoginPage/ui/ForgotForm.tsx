@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useForgotPasswordMutation } from "entities/Authorization";
 import { Box } from "shared/ui/Boxes/Box";
-import { FormErrorMsg } from "shared/ui/FormErrorMsg/FormErrorMsg";
+import { GridMsg } from "shared/ui/GridMsg/GridMsg";
 import { Input } from "shared/ui/Input/Input";
 import { Heading } from "shared/ui/Text/Heading";
 import formatServerError from "shared/api/helpers/formatServerError";
@@ -55,7 +55,11 @@ export const ForgotForm = ({ onSectionChange }: Props) => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
 
-                    <FormErrorMsg msg={formatServerError(error)} isError={isError} />
+                    <GridMsg
+                        msg={formatServerError(error)}
+                        isOpen={isError}
+                        className="bg-my-red-300"
+                    />
                 </div>
                 <div className="flex justify-center flex-col gap-2">
                     <Button isLoading={isLoading} theme="blue" type="submit">

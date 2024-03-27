@@ -14,13 +14,13 @@ export const RequireAuth = ({ children, allowedRoles = [] }: RequireAuthProps) =
     const user = useAppSelector(selectUser);
     const isLogged = useAppSelector(getIsLogged);
 
-    useGetMeQuery("withoutError", {
+    const { isError } = useGetMeQuery("withoutError", {
         skip: !isLogged,
     });
 
-    const roleCondition = user && allowedRoles.includes(user.role);
+    const roleCondition = user && allowedRoles.includes(user?.role);
 
-    if (!isLogged) return <Navigate to={routePath.login} replace={true} />;
+    if (!isLogged || isError) return <Navigate to={routePath.login} replace={true} />;
     if (user && !roleCondition) return <UnauthorizedMessage />;
     if (user && roleCondition) return children;
 };

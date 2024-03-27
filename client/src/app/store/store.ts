@@ -6,6 +6,7 @@ import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer } fro
 import {
     favoritePagePersistConfig,
     mainPagePersistConfig,
+    managePagePersistConfig,
     persistConfig,
     persistConfigKeys,
     searchPagePersistConfig,
@@ -25,6 +26,7 @@ import { filmApi } from "shared/api/filmApi";
 import { serverApi } from "shared/api/serverApi";
 import { DispatchFunc, RootState } from "./types";
 import storage from "redux-persist/lib/storage";
+import { manageReducer } from "pages/ManagePage";
 
 const appReducer = combineReducers({
     user: userReducer,
@@ -34,6 +36,7 @@ const appReducer = combineReducers({
     favoritePage: persistReducer(favoritePagePersistConfig, favoritePageReducer),
     searchPage: persistReducer(searchPagePersistConfig, searchPageReducer),
     statisticsPage: persistReducer(statisticsPagePersistConfig, statisticsReducer),
+    manage: persistReducer(managePagePersistConfig, manageReducer),
     [filmApi.reducerPath]: filmApi.reducer,
     [serverApi.reducerPath]: serverApi.reducer,
 });

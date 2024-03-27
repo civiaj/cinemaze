@@ -5,6 +5,5 @@ export default (roles: string[]) => (req: Request, res: Response, next: NextFunc
     const role = res.locals.user.role;
     const isAllowed = roles.includes(role);
     if (!isAllowed) return next(ApiError.NotAllowed());
-
     next();
 };

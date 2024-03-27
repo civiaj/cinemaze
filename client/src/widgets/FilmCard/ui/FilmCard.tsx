@@ -56,67 +56,67 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
     if (appearance === "tile")
         return (
             <li
-                className={classNames("relative group w-full h-72 overflow-hidden", {}, [
+                className={classNames("relative h-72 overflow-hidden group", {}, [
                     cardStyles?.card,
                 ])}
             >
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-80% to-neutral-950/90 to-90% z-[1]" />
+                <AppImage src={posterUrlPreview} alt={`${filmTitle} poster`} />
                 <AppLink
                     to={`${routePath.details}/${String(filmId)}`}
                     theme="card"
-                    className="absolute inset-0 z-[5]"
+                    className="inset-0 z-[5] w-full h-full absolute group"
                     onClick={handleClick}
-                />
-                <AppImage src={posterUrlPreview} alt={`${filmTitle} poster`} />
-
-                <div className="absolute inset-0 group-hover:bg-neutral-900/50 group-focus:bg-neutral-900/50 z-[2]" />
-                <div className="absolute left-2 bottom-2 z-[1]">
-                    <Heading
-                        headinglevel={4}
+                >
+                    <div className="absolute inset-0 group-hover:bg-neutral-900/50 group-focus:bg-neutral-900/50 z-[2]" />
+                    <div className="absolute left-2 bottom-2 z-[1]">
+                        <Heading
+                            headinglevel={4}
+                            className={classNames(
+                                "text-neutral-50 w-full line-clamp-1 pr-2 break-words text-start",
+                                {},
+                                [cardStyles?.title]
+                            )}
+                        >
+                            {filmTitle}
+                        </Heading>
+                    </div>
+                    <span
                         className={classNames(
-                            "text-neutral-50 w-full line-clamp-1 pr-2 break-words text-start",
+                            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-neutral-50 opacity-0 group-hover:opacity-100 group-focus:opacity-100 z-[2] font-medium",
                             {},
-                            [cardStyles?.title]
+                            [cardStyles?.label]
                         )}
                     >
-                        {filmTitle}
-                    </Heading>
-                </div>
-                <span
-                    className={classNames(
-                        "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-neutral-50 opacity-0 group-hover:opacity-100 group-focus:opacity-100 z-[2] font-medium",
-                        {},
-                        [cardStyles?.label]
-                    )}
-                >
-                    {t(label)}
-                </span>
+                        {t(label)}
+                    </span>
 
-                <div className="absolute top-2 left-2 flex items-center gap-2">
-                    {stats.map(
-                        (item) =>
-                            item.value && (
-                                <span
-                                    key={item.key}
-                                    className={classNames(
-                                        "py-1 px-2 text-xs font-medium rounded-md text-neutral-50",
-                                        {},
-                                        [item.styles]
-                                    )}
-                                >
-                                    {item.value}
-                                </span>
-                            )
-                    )}
-                </div>
+                    <div className="absolute top-2 left-2 flex items-center gap-2">
+                        {stats.map(
+                            (item) =>
+                                item.value && (
+                                    <span
+                                        key={item.key}
+                                        className={classNames(
+                                            "py-1 px-2 text-xs font-medium rounded-md text-neutral-50",
+                                            {},
+                                            [item.styles]
+                                        )}
+                                    >
+                                        {item.value}
+                                    </span>
+                                )
+                        )}
+                    </div>
+                </AppLink>
                 {onDelete && (
                     <button
                         onClick={() => onDelete(filmId)}
-                        className="bg-my-red-200 absolute right-2 top-2 h-6 w-6 rounded-full flex items-center justify-center z-[6] text-neutral-50 hover:bg-my-red-300 opacity-0 group-hover:opacity-100"
+                        className="bg-my-red-200 absolute right-2 top-2 h-6 w-6 rounded-full flex items-center justify-center z-[6] text-neutral-50 hover:bg-my-red-300 opacity-0 group-hover:opacity-100 focus-within:opacity-100"
                     >
                         <Close className="text-lg stroke-2" />
                     </button>
                 )}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-80% to-neutral-950/90 to-90%" />
             </li>
         );
 

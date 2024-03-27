@@ -33,15 +33,13 @@ export const UserSectionHome = ({ user }: Props) => {
         <Box className="sm:p-0 p-0 gap-0 sm:gap-0">
             <UserBox className="gap-0">
                 <Heading headinglevel={1}>{t("Profile")}</Heading>
-                <div className="flex gap-2 self-end">
+                <div className="grid grid-cols-[1fr_max-content] place-items-end gap-x-2">
                     <Text className="text-xs sm:text-xs">Создан:</Text>
-                    <Text className="text-xs sm:text-xs">
+                    <Text className="text-xs sm:text-xs place-self-start">
                         {formatDate(i18n.language, user.createdAt)}
                     </Text>
-                </div>
-                <div className="flex gap-2 self-end">
                     <Text className="text-xs sm:text-xs">Последнее обновление:</Text>
-                    <Text className="text-xs sm:text-xs">
+                    <Text className="text-xs sm:text-xs place-self-start">
                         {formatDate(i18n.language, user.updatedAt)}
                     </Text>
                 </div>
@@ -113,11 +111,22 @@ export const UserSectionHome = ({ user }: Props) => {
                 </UserBox>
             </AppLink>
             <AppLink to={`${routePath.user}?section=${SECTIONS_USER.PASSWORD}`} theme="user-menu">
-                <UserBox className="border-0">
+                <UserBox>
                     <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
                         <div className="font-medium">Пароль</div>
                         <div className="flex justify-between items-center">
                             <div>Изменить пароль</div>
+                            <Right className="text-xl" />
+                        </div>
+                    </div>
+                </UserBox>
+            </AppLink>
+            <AppLink to={`${routePath.user}?section=${SECTIONS_USER.ROLE}`} theme="user-menu">
+                <UserBox className="border-0">
+                    <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
+                        <div className="font-medium">Роль</div>
+                        <div className="flex justify-between items-center">
+                            <div>{user.role}</div>
                             <Right className="text-xl" />
                         </div>
                     </div>

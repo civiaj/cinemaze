@@ -19,6 +19,7 @@
     "r-search": "Search",
     "r-login": "Login page",
     "r-user": "User",
+    "r-manage": "Manage",
     "Search": "Search",
     "Search-extd": "Extended search",
     "Search-recent": "Recent queries",
@@ -30,7 +31,6 @@
     "Countries": "Countries",
     "select-msg": "Select a value...",
     "Cancel": "Cancel",
-
     "FAVORITE_PAGE": "FAVORITE_PAGE",
     "favoriteList": "Favorite list",
     "q-all": "All",

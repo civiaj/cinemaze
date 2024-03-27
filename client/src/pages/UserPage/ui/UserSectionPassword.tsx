@@ -6,7 +6,7 @@ import { AppImage } from "shared/ui/AppImage/AppImage";
 import { Modal } from "shared/ui/Boxes/Modal";
 import { UserBox } from "shared/ui/Boxes/UserBox";
 import { Button } from "shared/ui/Button/Button";
-import { FormErrorMsg } from "shared/ui/FormErrorMsg/FormErrorMsg";
+import { GridMsg } from "shared/ui/GridMsg/GridMsg";
 import { Input } from "shared/ui/Input/Input";
 import { Elipsis } from "shared/ui/Text/Elipsis";
 import { Text } from "shared/ui/Text/Text";
@@ -76,7 +76,11 @@ const CheckPasswordSection = (props: Props & { onSetChecked: () => void }) => {
                     <Input name="password" type="password" autoComplete="password" ref={inputRef} />
                 </div>
 
-                <FormErrorMsg isError={isError} msg={formatServerError(error)} />
+                <GridMsg
+                    isOpen={isError}
+                    msg={formatServerError(error)}
+                    className="bg-my-red-300"
+                />
 
                 <div className="flex self-end gap-2">
                     <Button type="submit" isLoading={isLoading} theme="blue">
@@ -139,7 +143,11 @@ const NewPasswordSection = (props: Props) => {
                         <Input name="confirmPassword" type="password" autoComplete="new-password" />
                     </div>
                 </div>
-                <FormErrorMsg isError={isError} msg={formatServerError(error)} />
+                <GridMsg
+                    isOpen={isError}
+                    msg={formatServerError(error)}
+                    className="bg-my-red-300"
+                />
 
                 <div className="flex self-end gap-2">
                     <Button type="submit" isLoading={isLoading} theme="blue">

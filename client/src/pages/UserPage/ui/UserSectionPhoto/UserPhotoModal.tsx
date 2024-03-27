@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import formatServerError from "shared/api/helpers/formatServerError";
 import { UserBox, UserBoxSeparator } from "shared/ui/Boxes/UserBox";
 import { Button } from "shared/ui/Button/Button";
-import { FormErrorMsg } from "shared/ui/FormErrorMsg/FormErrorMsg";
+import { GridMsg } from "shared/ui/GridMsg/GridMsg";
 import { Heading } from "shared/ui/Text/Heading";
 import { Text } from "shared/ui/Text/Text";
 
@@ -80,7 +80,11 @@ const Modal = ({ image, crop, onCloseModal, isModal }: Props) => {
                     <canvas className="w-[250px] h-[250px] rounded-xl" ref={canvasRef} />
                 </div>
 
-                <FormErrorMsg isError={isError} msg={formatServerError(error)} />
+                <GridMsg
+                    isOpen={isError}
+                    msg={formatServerError(error)}
+                    className="bg-my-red-300"
+                />
                 <UserBoxSeparator />
                 <div className="border-0 flex self-center gap-2">
                     <Button isLoading={isLoading} onClick={onSave} theme="blue">

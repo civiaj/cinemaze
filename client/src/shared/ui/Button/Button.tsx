@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, memo } from "react";
+import { ButtonHTMLAttributes, ForwardedRef, forwardRef } from "react";
 import { classNames } from "shared/lib/classNames";
 import { Spinner } from "shared/ui/Spinner/Spinner";
 
@@ -47,7 +47,7 @@ const cls: Record<Themes, string> = {
         "text-inherit rounded-md px-2 [&>*]:stroke-2 active:translate-y-[1px] bg-my-neutral-100 hover:bg-my-neutral-200 focus-visible:bg-my-neutral-200 h-auto py-1 text-sm font-medium",
     pagination:
         "!text-sm bg-my-neutral-100 rounded-full !h-8 !w-8 justify-center font-medium hover:bg-my-neutral-200",
-    clean: "text-inherit rounded-xl px-4 [&>*]:stroke-2 active:translate-y-[1px] bg-transparent hover:bg-my-neutral-200 focus-visible:bg-my-neutral-200 text-blue-500",
+    clean: "text-inherit rounded-xl px-4 [&>*]:stroke-2 active:translate-y-[1px] bg-transparent hover:bg-my-neutral-100 focus-visible:bg-my-neutral-100 justify-center",
     danger: "text-inherit rounded-xl px-4 [&>*]:stroke-2 active:translate-y-[1px] bg-my-red-200 hover:bg-my-red-300 focus-visible:bg-my-red-300 text-neutral-50",
     login: "text-neutral-50 rounded-xl [&>*]:stroke-2 active:translate-y-[1px] h-10 w-10 justify-center text-xl bg-gradient-to-br from-blue-400 from-40% to-purple-400 to-90%",
 };
@@ -71,7 +71,7 @@ const spinner: Record<Themes, string> = {
     login: defaultSpinner,
 };
 
-export const Button = memo((props: ButtonProps) => {
+export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
     const {
         children,
         className,
@@ -86,6 +86,7 @@ export const Button = memo((props: ButtonProps) => {
     // bg-[radial-gradient(circle, rgba(230,80,255,1) 0%, rgba(59,130,246,1) 100%)]
     return (
         <button
+            ref={ref}
             className={classNames(
                 "outline-none focus-visible:ring-2 focus-visible:ring-blue-500 flex items-center justify-between h-10 text-base text-start shrink-0 ring-offset-0 relative",
                 {

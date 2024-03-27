@@ -42,6 +42,7 @@ export {
     TbPencil as Pencil,
     TbHandStop as Stop,
     TbFile as File,
+    TbUsersGroup as UserGroup,
 } from "react-icons/tb";
 
 export { IoClose as Close } from "react-icons/io5";

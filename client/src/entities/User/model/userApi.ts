@@ -19,18 +19,13 @@ export const userApi = serverApi.injectEndpoints({
                     const { data } = await queryFulfilled;
                     dispatch(userActions.setUser(data));
                 } catch (e) {
+                    dispatch(userActions.setIsLogged(false));
+                    // console.log("GETME", e);
                     // error middleware
                 } finally {
                     dispatch(authAndUserSliceActions.endLoading());
                 }
             },
-
-            // transformErrorResponse(response, _, arg) {
-            //     if (arg === "withoutError") {
-            //         response.data = "withoutError";
-            //     }
-            //     return response;
-            // },
         }),
         getSessions: builder.query<SessionsResponse, void>({
             query: () => ({
@@ -57,6 +52,7 @@ export const userApi = serverApi.injectEndpoints({
                     //error middleware
                 }
             },
+            invalidatesTags: ["Manage"],
         }),
         updatePassword: builder.mutation<
             { message: string },
@@ -96,6 +92,7 @@ export const userApi = serverApi.injectEndpoints({
                     //error middleware
                 }
             },
+            invalidatesTags: ["Manage"],
         }),
 
         deletePhoto: builder.mutation<{ message: string }, void>({
@@ -114,6 +111,7 @@ export const userApi = serverApi.injectEndpoints({
                     //error middleware
                 }
             },
+            invalidatesTags: ["Manage"],
         }),
 
         removeSession: builder.mutation<{ message: string }, { session: string }>({

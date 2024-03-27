@@ -1,6 +1,6 @@
-import mongoose, { mongo } from "mongoose";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
+import mongoose from "mongoose";
 import { BCRYPT_SALT_ROUNDS } from "../../config";
 
 export type User = {
@@ -14,9 +14,10 @@ export type User = {
     verificationCode: string | null;
     passwordResetToken: string | null;
     passwordResetAt: Date | null;
-    provider: string;
-    createdAt: Date | string;
-    updatedAt: Date | string;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+    blockedUntil: Date | null;
+    blockedMessage: string | null;
 };
 
 type TUserMethods = {
@@ -33,13 +34,12 @@ const userSchema = new mongoose.Schema<User, TUserModel, TUserMethods>(
         email: { type: String, required: true, unique: true },
         displayName: { type: String, required: true },
         password: { type: String, required: true, min: 8, max: 32, select: false },
-        role: { type: String, required: true, default: "user" },
-        photo: { type: String, required: true, default: "default-user.jpeg" },
+        role: { type: String, default: "user" },
+        photo: { type: String, default: "default-user.jpeg" },
         verified: { type: Boolean, default: false },
-        verificationCode: { type: String, select: false },
-        passwordResetToken: { type: String, select: false },
+        verificationCode: { type: String, select: false, default: null },
+        passwordResetToken: { type: String, select: false, default: null },
         passwordResetAt: { type: Date, select: false },
-        provider: { type: String, default: "local" },
     },
     {
         versionKey: false,

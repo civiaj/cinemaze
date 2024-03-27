@@ -19,6 +19,8 @@ export const SearchExtendedSmall = (props: Props) => {
     const handleToggle = () => setIsOpen((p) => !p);
     const handleClose = () => setIsOpen(false);
 
+    console.log(isOpen);
+
     return (
         <div className="flex lg:hidden flex-col gap-2 sm:gap-4">
             <div className="flex items-center justify-between flex-1">

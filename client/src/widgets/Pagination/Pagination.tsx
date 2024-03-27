@@ -99,7 +99,7 @@ export const Pagination = (props: PaginationProps) => {
                     <Right className="text-lg" />
                 </Button>
             )}
-            {activePage < numOfPages - 2 && (
+            {activePage <= numOfPages - 2 && (
                 <Button
                     disabled={disabled}
                     theme="pagination"

@@ -5,6 +5,7 @@ import ApiError from "../exceptions/api.error";
 import { DisplayNameInput, RemoveSessionInput, UpdatePasswordInput } from "../schema/user.schema";
 import fs from "fs";
 import path from "path";
+import userModel, { User } from "../model/user.model";
 
 class UserController {
     async getMe(_req: Request, res: Response, next: NextFunction) {
@@ -16,14 +17,6 @@ class UserController {
         }
     }
 
-    async getAll(_req: Request, res: Response, next: NextFunction) {
-        try {
-            const users = await userService.getAll();
-            return res.status(200).json({ data: users, count: users.length });
-        } catch (e) {
-            next(e);
-        }
-    }
     async updateUserDisplayName(
         req: Request<{}, {}, DisplayNameInput>,
         res: Response,
@@ -89,16 +82,16 @@ class UserController {
     async deleteUserPhoto(_req: Request, res: Response, next: NextFunction) {
         try {
             const user = await userService.findUser({ id: res.locals.user.id });
-            const defPhoto = "default-user.jpeg";
             if (!user) throw ApiError.BadRequest("Нет пользователя с таким id");
-            if (user.photo && user.photo !== defPhoto) {
+
+            const defaultName = "default-user.jpeg";
+            if (user.photo && user.photo !== defaultName) {
                 try {
                     fs.unlinkSync(path.join(__dirname, "../../static/profiles", user.photo));
+                    user.photo = defaultName;
+                    await user.save({ validateBeforeSave: false });
                 } catch (e) {}
             }
-            user.photo = defPhoto;
-            await user.save({ validateBeforeSave: false });
-
             return res.status(200).json({ data: "success" });
         } catch (e) {
             next(e);
@@ -125,6 +118,35 @@ class UserController {
                 res.locals.ua,
                 req.body.session
             );
+            return res.status(200).json({ data });
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    // async deleteManyUsers(req: Request, res: Response, next: NextFunction) {
+    //     const p = "testemail";
+    //     await userModel.deleteMany({ email: { $regex: p } });
+
+    //     return res.status(200);
+    // }
+
+    async addUsersOfNumber(req: Request, res: Response, next: NextFunction) {
+        try {
+            const number = req.body.number;
+            const users: Pick<User, "email" | "displayName" | "password" | "id">[] = [];
+
+            for (let i = 0; i < number; i++) {
+                const newUser: Pick<User, "email" | "displayName" | "password" | "id"> = {
+                    email: `testemail${i}@mail.com`,
+                    displayName: `Name ${i}`,
+                    password: `123${i}`,
+                    id: String(Math.random() + i),
+                };
+                users[i] = newUser;
+            }
+
+            const data = await userModel.insertMany(users);
             return res.status(200).json({ data });
         } catch (e) {
             next(e);

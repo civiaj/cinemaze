@@ -10,7 +10,7 @@ import { Box } from "shared/ui/Boxes/Box";
 import { Modal } from "shared/ui/Boxes/Modal";
 import { UserBox } from "shared/ui/Boxes/UserBox";
 import { Button } from "shared/ui/Button/Button";
-import { FormErrorMsg } from "shared/ui/FormErrorMsg/FormErrorMsg";
+import { GridMsg } from "shared/ui/GridMsg/GridMsg";
 import { Skeleton } from "shared/ui/Skeleton/Skeleton";
 import { Elipsis } from "shared/ui/Text/Elipsis";
 import { Heading } from "shared/ui/Text/Heading";
@@ -134,7 +134,7 @@ const DevicesModal = ({ modalData, onClose }: { modalData: ModalData; onClose: (
                     </UserBox>
                 </>
             )}
-            {<FormErrorMsg isError={isError} msg={formatServerError(error)} />}
+            {<GridMsg isOpen={isError} msg={formatServerError(error)} className="bg-my-red-300" />}
             <div className="flex gap-2 self-end">
                 <Button isLoading={isLoading} onClick={onRemoveSession} theme="danger">
                     <Text>Завершить</Text>

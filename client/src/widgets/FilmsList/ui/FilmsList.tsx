@@ -6,11 +6,11 @@ import { selectUser } from "entities/User";
 import { memo, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { Box } from "shared/ui/Boxes/Box";
-import { FullscreenSpinner } from "shared/ui/Spinner/FullscreenSpinner";
 import { Spinner } from "shared/ui/Spinner/Spinner";
 import { Text } from "shared/ui/Text/Text";
 import { FilmCard, FilmCardPropsT } from "widgets/FilmCard";
 
+import { classNames } from "shared/lib/classNames";
 import { FilmListSkeleton } from "./FilmListSkeleton";
 
 type FilmsListPropsT = {
@@ -62,8 +62,6 @@ export const FilmsList = memo((props: FilmsListPropsT) => {
         skip: !user,
     });
 
-    console.log("render");
-
     const findIsHidden = useCallback(
         (filmId: number) => {
             return user && pathname !== routePath.favorite
@@ -98,8 +96,16 @@ export const FilmsList = memo((props: FilmsListPropsT) => {
 
     return (
         <>
-            {isSyncFetching && page > 1 && <FullscreenSpinner />}
-            <ul className={`${containerStyle[appearance]}`}>
+            {isSyncFetching && page > 1 && (
+                <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
+                    <Spinner />
+                </div>
+            )}
+            <ul
+                className={classNames(`${containerStyle[appearance]}`, {
+                    ["opacity-20 pointer-events-none"]: isSyncFetching && page > 1,
+                })}
+            >
                 {films.map((film) => (
                     <FilmCard
                         key={film.filmId}
