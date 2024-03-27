@@ -65,7 +65,9 @@ class UserController {
             const user = await userService.findUser({ id: res.locals.user.id });
 
             if (!user) throw ApiError.BadRequest("Нет пользователя с таким id");
-            if (user.photo) {
+            const defaultName = "default-user.jpeg";
+
+            if (user.photo && user.photo !== defaultName) {
                 try {
                     fs.unlinkSync(path.join(__dirname, "../../static/profiles", user.photo));
                 } catch (e) {}
