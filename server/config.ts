@@ -32,3 +32,4 @@ export const API_URL = `http://localhost:${PORT}`;
 export const CLIENT_URL = `http://localhost:5173`;
 export const BCRYPT_SALT_ROUNDS = 10;
 export const EMAIL_FROM = "Rest Api Test";
+export const DEFAULT_USER_PHOTO = "default-user.jpeg";

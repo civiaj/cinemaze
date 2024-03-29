@@ -2,12 +2,12 @@ import { Router } from "express";
 import validate from "../middleware/validate";
 import {
     createUserSchema,
-    displayNameSchema,
     emailSchema,
     loginUserSchema,
-    passwordSchema,
+    setPasswordSchema,
     removeSessionSchema,
     resetPasswordSchema,
+    setDisplayNameSchema,
     verifyEmailSchema,
 } from "../schema/user.schema";
 import authController from "../controller/auth.controller";
@@ -23,7 +23,8 @@ import favoriteController from "../controller/favorite.controller";
 import { createFilmSchema } from "../schema/film.schema";
 import { resizeSingleImage, uploadSingleImage } from "../upload/single.image";
 import manageController from "../controller/manage.controller";
-import { getAllUsersSchema } from "../schema/manage.schema";
+import { getAllUsersSchema, getOneUserSchema, mangeUserBanSchema } from "../schema/manage.schema";
+import { manageUserChangeSchema } from "../schema/manage.schema";
 
 const router = Router();
 
@@ -44,13 +45,13 @@ router.get("/user/sessions", deserializeUser, userController.getUserSessions);
 router.patch(
     "/user/update/displayName",
     deserializeUser,
-    validate(displayNameSchema),
+    validate(setDisplayNameSchema),
     userController.updateUserDisplayName
 );
 router.patch(
     "/user/update/password",
     deserializeUser,
-    validate(passwordSchema),
+    validate(setPasswordSchema),
     userController.updatePassword
 );
 router.patch(
@@ -106,10 +107,35 @@ router.get(
     deserializeUser,
     roles(["admin"]),
     validate(getAllUsersSchema),
-    manageController.getAllUsers
+    manageController.getAll
 );
 
+router.get(
+    "/manage/users/:userId",
+    deserializeUser,
+    roles(["admin"]),
+    validate(getOneUserSchema),
+    manageController.getOne
+);
+
+router.post(
+    "/manage/change",
+    deserializeUser,
+    roles(["admin"]),
+    validate(manageUserChangeSchema),
+    manageController.updateOne
+);
+
+router.post(
+    "/manage/ban",
+    deserializeUser,
+    roles(["admin"]),
+    validate(mangeUserBanSchema),
+    manageController.banOne
+);
+
+// Create and delete num of users for test
 // router.delete("/deleteTest", userController.deleteManyUsers);
-router.post("/addUsersOfNumber", userController.addUsersOfNumber);
+// router.post("/addUsersOfNumber", userController.addUsersOfNumber);
 
 export default router;

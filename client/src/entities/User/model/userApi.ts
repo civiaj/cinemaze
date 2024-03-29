@@ -3,6 +3,7 @@ import { userActions } from "entities/User";
 import { SessionsResponse, TUser } from "entities/User/model/types";
 import toast from "react-hot-toast";
 import { serverApi } from "shared/api/serverApi";
+import { ServerMessageResponse } from "shared/api/types";
 
 export const userApi = serverApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -35,7 +36,7 @@ export const userApi = serverApi.injectEndpoints({
             transformResponse: (response: { data: SessionsResponse }) => response.data,
             providesTags: ["Session"],
         }),
-        updateDisplayName: builder.mutation<{ message: string }, { displayName: string }>({
+        updateDisplayName: builder.mutation<ServerMessageResponse, { displayName: string }>({
             query: (body) => ({
                 url: "user/update/displayName",
                 credentials: "include",
@@ -55,7 +56,7 @@ export const userApi = serverApi.injectEndpoints({
             invalidatesTags: ["Manage"],
         }),
         updatePassword: builder.mutation<
-            { message: string },
+            ServerMessageResponse,
             { password: string; confirmPassword: string }
         >({
             query: (body) => ({
@@ -75,7 +76,7 @@ export const userApi = serverApi.injectEndpoints({
                 }
             },
         }),
-        updatePhoto: builder.mutation<{ message: string }, FormData>({
+        updatePhoto: builder.mutation<ServerMessageResponse, FormData>({
             query: (formData) => ({
                 url: "user/update/photo",
                 credentials: "include",
@@ -95,7 +96,7 @@ export const userApi = serverApi.injectEndpoints({
             invalidatesTags: ["Manage"],
         }),
 
-        deletePhoto: builder.mutation<{ message: string }, void>({
+        deletePhoto: builder.mutation<ServerMessageResponse, void>({
             query: () => ({
                 url: "user/remove/photo",
                 credentials: "include",
@@ -114,7 +115,7 @@ export const userApi = serverApi.injectEndpoints({
             invalidatesTags: ["Manage"],
         }),
 
-        removeSession: builder.mutation<{ message: string }, { session: string }>({
+        removeSession: builder.mutation<ServerMessageResponse, { session: string }>({
             query: (body) => ({
                 url: "user/sessions",
                 method: "DELETE",

@@ -1,10 +1,16 @@
-import { TypeOf, array, number, object, string } from "zod";
+import { TypeOf, object, string, z } from "zod";
 
-const displayName = string()
-    .transform((value) => value.replace(/\s+/g, " "))
-    .pipe(string().trim().min(3, "Минимальная длина имени 3 символа"));
+export const displayNameSchema = z
+    .string()
+    .transform((value) => value.trim().replace(/\s+/g, " "))
+    .pipe(
+        string()
+            .trim()
+            .min(4, "Минимальная длина имени 4 символа")
+            .max(30, "Максимальная длина имени 30 символов")
+    );
 
-const password = string()
+export const passwordSchema = string()
     .transform((value) => value.replaceAll(" ", ""))
     .pipe(
         string()
@@ -18,8 +24,8 @@ const email = string().trim().min(1, "Неверный адрес почты");
 export const createUserSchema = object({
     body: object({
         email,
-        displayName,
-        password,
+        displayName: displayNameSchema,
+        password: passwordSchema,
         confirmPassword: string().trim().min(1, "Необходимо заполнить подтверждение пароля"),
     }).refine((data) => data.password === data.confirmPassword, {
         message: "Пароли не совпадают",
@@ -30,7 +36,7 @@ export const createUserSchema = object({
 export const loginUserSchema = object({
     body: object({
         email,
-        password,
+        password: passwordSchema,
     }),
 });
 
@@ -42,7 +48,7 @@ export const emailSchema = object({
 
 export const resetPasswordSchema = object({
     body: object({
-        password,
+        password: passwordSchema,
         confirmPassword: string().trim().min(1, "Необходимо заполнить подтверждение пароля"),
     }).refine((data) => data.password === data.confirmPassword, {
         message: "Пароли не совпадают",
@@ -59,15 +65,15 @@ export const verifyEmailSchema = object({
     }),
 });
 
-export const displayNameSchema = object({
+export const setDisplayNameSchema = object({
     body: object({
-        displayName,
+        displayName: displayNameSchema,
     }),
 });
 
-export const passwordSchema = object({
+export const setPasswordSchema = object({
     body: object({
-        password,
+        password: passwordSchema,
         confirmPassword: string().trim().min(1, "Необходимо заполнить"),
     }).refine((data) => data.password === data.confirmPassword, {
         message: "Пароли не совпадают",
@@ -84,8 +90,8 @@ export const removeSessionSchema = object({
 export type CreateUserInput = TypeOf<typeof createUserSchema>["body"];
 export type LoginUserInput = TypeOf<typeof loginUserSchema>["body"];
 export type VerifyEmailInput = TypeOf<typeof verifyEmailSchema>["params"];
-export type DisplayNameInput = TypeOf<typeof displayNameSchema>["body"];
+export type DisplayNameInput = TypeOf<typeof setDisplayNameSchema>["body"];
 export type RemoveSessionInput = TypeOf<typeof removeSessionSchema>["body"];
-export type UpdatePasswordInput = TypeOf<typeof passwordSchema>["body"];
+export type UpdatePasswordInput = TypeOf<typeof setPasswordSchema>["body"];
 export type EmailInput = TypeOf<typeof emailSchema>["body"];
 export type ResetPasswordInput = TypeOf<typeof resetPasswordSchema>;

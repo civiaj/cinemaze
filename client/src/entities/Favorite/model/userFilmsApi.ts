@@ -13,17 +13,18 @@ import {
     TFavorite,
     TStatistics,
 } from "../model/types";
+import { ServerMessageResponse } from "shared/api/types";
 
 const userFilmsApi = serverApi.injectEndpoints({
     endpoints: (builder) => ({
-        addFavorite: builder.mutation<{ message: string }, AddFavoriteRequest>({
+        addFavorite: builder.mutation<ServerMessageResponse, AddFavoriteRequest>({
             query: (body) => ({
                 url: "/favorite/add",
                 method: "POST",
                 body,
                 credentials: "include",
             }),
-            invalidatesTags: (_result, _error, arg) => [{ type: "Favorites", id: arg.film.filmId }],
+            invalidatesTags: (_result, _error, arg) => [{ type: "Favorite", id: arg.film.filmId }],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 const {
                     film: { filmId },
@@ -63,15 +64,7 @@ const userFilmsApi = serverApi.injectEndpoints({
             }),
             transformResponse: (response: { data: FavoriteItemT }) => response.data,
 
-            providesTags: (result) =>
-                result
-                    ? [
-                          ...result.films.map(({ filmId }) => ({
-                              type: "Favorites" as const,
-                              id: filmId,
-                          })),
-                      ]
-                    : [{ type: "Favorites", id: "LIST" }],
+            providesTags: () => ["Favorites"],
         }),
         getOneFavorite: builder.query<TFavorite | null, number>({
             query: (filmId) => ({
@@ -79,17 +72,17 @@ const userFilmsApi = serverApi.injectEndpoints({
                 credentials: "include",
             }),
             transformResponse: (reponse: { data: TFavorite }) => reponse.data,
-            providesTags: (_result, _error, arg) => [{ type: "Favorites", id: arg }],
+            providesTags: (_result, _error, arg) => [{ type: "Favorite", id: arg }],
         }),
 
-        removeOneFavorite: builder.mutation<{ message: string }, RemoveFavoriteRequest>({
+        removeOneFavorite: builder.mutation<ServerMessageResponse, RemoveFavoriteRequest>({
             query: (payload) => ({
                 url: "favorite/remove",
                 method: "POST",
                 body: payload.body,
                 credentials: "include",
             }),
-            invalidatesTags: (_result, _error, arg) => [{ type: "Favorites", id: arg.body.filmId }],
+            invalidatesTags: () => ["Favorites"],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     await queryFulfilled;
@@ -115,15 +108,7 @@ const userFilmsApi = serverApi.injectEndpoints({
                 credentials: "include",
             }),
             transformResponse: (response: { data: SyncDataResponse }) => response.data,
-            providesTags: (result) =>
-                result
-                    ? [
-                          ...result.films.map(({ filmId }) => ({
-                              type: "Favorites" as const,
-                              id: filmId,
-                          })),
-                      ]
-                    : [{ type: "Favorites", id: "LIST" }],
+            providesTags: () => ["Favorites"],
         }),
 
         getStatistics: builder.query<TStatistics[], void>({
@@ -132,15 +117,7 @@ const userFilmsApi = serverApi.injectEndpoints({
                 credentials: "include",
             }),
             transformResponse: (response: { data: TStatistics[] }) => response.data,
-            providesTags: (result) =>
-                result
-                    ? [
-                          ...result.map(({ filmId }) => ({
-                              type: "Favorites" as const,
-                              id: filmId,
-                          })),
-                      ]
-                    : [{ type: "Favorites", id: "LIST" }],
+            providesTags: () => ["Favorites"],
         }),
     }),
     overrideExisting: false,

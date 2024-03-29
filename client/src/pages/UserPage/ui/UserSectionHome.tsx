@@ -50,20 +50,20 @@ export const UserSectionHome = ({ user }: Props) => {
                     <div className="flex flex-col gap-1 min-w-0">
                         <div>{user.email}</div>
                         {user.verified ? (
-                            <div className="text-sm flex gap-2 items-center">
-                                <div className="h-4 w-4 rounded-full bg-my-green-500 flex items-center justify-center">
-                                    <Checked className="text-my-neutral-50" />
+                            <div className="flex gap-2 items-center">
+                                <div className="rounded-full text-my-green-500 flex items-center justify-center border-2 border-my-green-500 text-base">
+                                    <Checked />
                                 </div>
-                                <Elipsis className="text-my-green-500">
+                                <Elipsis className="text-my-green-500 sm:text-sm">
                                     Адрес электронной почты подтвержден
                                 </Elipsis>
                             </div>
                         ) : (
-                            <div className="text-sm flex items-center gap-2">
-                                <div className="h-4 w-4 rounded-full bg-my-red-500 flex items-center justify-center">
-                                    <Close className="text-my-neutral-50" />
+                            <div className="flex items-center gap-2">
+                                <div className="rounded-full text-my-neutral-500 flex items-center justify-center border-2 border-my-neutral-500 text-base">
+                                    <Close />
                                 </div>
-                                <span className="text-my-red-500">
+                                <span className="text-my-neutral-500 sm:text-sm">
                                     Адрес электронной почты не подтвержден
                                 </span>
                             </div>

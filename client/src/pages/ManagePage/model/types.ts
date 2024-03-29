@@ -1,4 +1,5 @@
 import { TUser } from "entities/User";
+import { TLngs } from "shared/i18n/types";
 
 export type GetAllUsersFilter =
     | "displayName"
@@ -6,7 +7,8 @@ export type GetAllUsersFilter =
     | "updatedAt"
     | "createdAt"
     | "role"
-    | "verified";
+    | "verified"
+    | "isBanned";
 
 export type GetAllUsersOrder = 1 | -1;
 
@@ -15,12 +17,11 @@ export type GetAllUsersQuery = {
     query?: string;
     order: GetAllUsersOrder;
     filter: GetAllUsersFilter;
+    locale: TLngs;
 };
 
-export type GetAllUserData = Omit<TUser, "_id" | "provider">;
-
 export type GetAllUsersData = {
-    users: GetAllUserData[];
+    users: TUser[];
     totalPages: number;
 };
 
@@ -30,6 +31,15 @@ export type GetAllUsersResponse = {
 
 export type ManageSchema = Omit<GetAllUsersQuery, "page" | "query">;
 
-export type BlockUserData = { date: Date | null; msg: string };
+export type BlockUserData = { banExpiration: Date | null; banMessage: string };
+export type BlockUserRequest = {
+    banExpiration: string;
+    banMessage: string;
+    displayName: string;
+    manageUserId: string;
+};
+
 export type ChangeUserData = { displayName: string; role: string; deletePhoto: boolean };
-export type ManageAction = "change" | "block" | null;
+export type ManageActionViews = "update" | "ban" | "info";
+
+export type ManageUpdateOne = ChangeUserData & { manageUserId: string };

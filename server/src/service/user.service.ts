@@ -2,6 +2,7 @@ import { FilterQuery, QueryOptions, Types } from "mongoose";
 import userModel, { User } from "../model/user.model";
 import ApiError from "../exceptions/api.error";
 import { GetAllUsersInput } from "../schema/manage.schema";
+import { Locale, Order } from "../types/types";
 
 class UserService {
     async createUser(input: Partial<User>) {
@@ -26,7 +27,8 @@ class UserService {
     async getAll(
         pageNumber: number,
         sortField: GetAllUsersInput["filter"],
-        orderQuery: 1 | -1,
+        orderQuery: Order,
+        locale: Locale,
         searchQuery?: string
     ) {
         const limit = 20;
@@ -43,7 +45,7 @@ class UserService {
             sort = "displayName";
         }
 
-        if (sort === "createdAt" || sort === "verified") {
+        if (sort === "createdAt" || sort === "verified" || sort === "isBanned") {
             order = order === 1 ? -1 : 1;
         }
 
@@ -54,17 +56,13 @@ class UserService {
         const users = await userModel
             .find(
                 filter,
+                {},
                 {
-                    createdAt: 1,
-                    updatedAt: 1,
-                    id: 1,
-                    email: 1,
-                    role: 1,
-                    photo: 1,
-                    displayName: 1,
-                    verified: 1,
-                },
-                { sort: { [sort]: order, ...sortIfEqual }, skip, limit }
+                    collation: { locale, caseLevel: false },
+                    sort: { [sort]: order, ...sortIfEqual },
+                    skip,
+                    limit,
+                }
             )
             .lean();
 

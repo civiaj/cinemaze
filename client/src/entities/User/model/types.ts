@@ -5,10 +5,12 @@ export type TUser = {
     role: string;
     photo: string;
     verified: boolean;
-    provider: string;
     createdAt: string;
     updatedAt: string;
     id: string;
+    isBanned: boolean;
+    banExpiration?: string | null;
+    banMessage?: string | null;
 };
 
 export type SessionIdentifier = { os: string; browser: string; version: string };

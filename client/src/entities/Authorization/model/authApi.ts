@@ -73,11 +73,11 @@ const authApi = serverApi.injectEndpoints({
                 credentials: "include",
             }),
         }),
-        forgotPassword: builder.mutation<{ message: string }, { email: string }>({
+        forgotPassword: builder.mutation<ServerMessageResponse, { email: string }>({
             query: (body) => ({ url: "/forgot", method: "POST", body, credentials: "include" }),
         }),
         resetPassword: builder.mutation<
-            { message: string },
+            ServerMessageResponse,
             { password: string; confirmPassword: string; resetToken: string }
         >({
             query: (payload) => {

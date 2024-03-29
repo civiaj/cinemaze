@@ -6,6 +6,7 @@ import { DisplayNameInput, RemoveSessionInput, UpdatePasswordInput } from "../sc
 import fs from "fs";
 import path from "path";
 import userModel, { User } from "../model/user.model";
+import { DEFAULT_USER_PHOTO } from "../../config";
 
 class UserController {
     async getMe(_req: Request, res: Response, next: NextFunction) {
@@ -65,9 +66,8 @@ class UserController {
             const user = await userService.findUser({ id: res.locals.user.id });
 
             if (!user) throw ApiError.BadRequest("Нет пользователя с таким id");
-            const defaultName = "default-user.jpeg";
 
-            if (user.photo && user.photo !== defaultName) {
+            if (user.photo && user.photo !== DEFAULT_USER_PHOTO) {
                 try {
                     fs.unlinkSync(path.join(__dirname, "../../static/profiles", user.photo));
                 } catch (e) {}
@@ -86,11 +86,10 @@ class UserController {
             const user = await userService.findUser({ id: res.locals.user.id });
             if (!user) throw ApiError.BadRequest("Нет пользователя с таким id");
 
-            const defaultName = "default-user.jpeg";
-            if (user.photo && user.photo !== defaultName) {
+            if (user.photo && user.photo !== DEFAULT_USER_PHOTO) {
                 try {
                     fs.unlinkSync(path.join(__dirname, "../../static/profiles", user.photo));
-                    user.photo = defaultName;
+                    user.photo = DEFAULT_USER_PHOTO;
                     await user.save({ validateBeforeSave: false });
                 } catch (e) {}
             }

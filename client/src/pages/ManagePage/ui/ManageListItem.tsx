@@ -1,5 +1,4 @@
-import { GetAllUserData } from "pages/ManagePage/model/types";
-import { Checked, Close } from "shared/assets/icons";
+import { Block, Checked, Close, Minus } from "shared/assets/icons";
 import { classNames } from "shared/lib/classNames";
 import { formatDate } from "shared/lib/formatDate";
 import { AppImage } from "shared/ui/AppImage/AppImage";
@@ -7,9 +6,10 @@ import { Elipsis } from "shared/ui/Text/Elipsis";
 
 import { ManageListItemActions } from "pages/ManagePage/ui/ManageListItemActions";
 import { useTranslation } from "react-i18next";
+import { TUser } from "entities/User";
 
 type Props = {
-    user: GetAllUserData;
+    user: TUser;
     index: number;
     activeUser: string | null;
     onSetActive: (newId: string | null) => void;
@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const ManageListItem = ({ user, index, activeUser, onSetActive, className }: Props) => {
-    const { createdAt, displayName, email, id, photo, role, updatedAt, verified } = user;
+    const { createdAt, displayName, email, id, photo, role, updatedAt, verified, isBanned } = user;
     const { i18n } = useTranslation();
     const currentIsActive = activeUser === id;
 
@@ -35,9 +35,9 @@ export const ManageListItem = ({ user, index, activeUser, onSetActive, className
                 aria-pressed="false"
                 onClick={() => onSetActive(currentIsActive ? null : id)}
             >
-                <th scope="row" className="w-250px px-1 rounded-l-xl">
+                <th scope="row" className="px-1 rounded-l-xl">
                     <div className="flex gap-2 items-center max-w-[250px]">
-                        <p className="font-normal w-10">{index + 1}</p>
+                        <p className="font-normal w-10 shrink-0">{index + 1}</p>
                         <AppImage
                             containerClassName="w-10 h-10 shrink-0 rounded-xl"
                             onErrorSrc="user"
@@ -53,29 +53,44 @@ export const ManageListItem = ({ user, index, activeUser, onSetActive, className
                                 <Checked />
                             </div>
                         ) : (
-                            <div className="rounded-full p-[1px] text-my-red-500 border-2 border-my-red-500">
+                            <div className="rounded-full p-[1px] text-my-neutral-500 border-2 border-my-neutral-500">
                                 <Close />
                             </div>
                         )}
                     </div>
                 </td>
-                <td className="align-center text-center px-1 whitespace-nowrap hidden md:table-cell">
-                    {email}
+                <td className="align-center text-center px-1 whitespace-nowrap">
+                    <div className="flex items-center justify-center">
+                        {isBanned ? (
+                            <div className="rounded-full p-[1px] text-my-red-500 border-2 border-my-red-500">
+                                <Block />
+                            </div>
+                        ) : (
+                            <div className="rounded-full p-[1px] text-my-neutral-500 border-2 border-my-neutral-500">
+                                <Minus />
+                            </div>
+                        )}
+                    </div>
                 </td>
-                <td className="align-center text-center px-1 whitespace-nowrap rounded-r-xl mdb:rounded-r-none">
+                <td className="px-1 whitespace-nowrap hidden mdb:table-cell">
+                    <div className="max-w-[250px] flex justify-center">
+                        <Elipsis>{email}</Elipsis>
+                    </div>
+                </td>
+                <td className="align-center text-center px-1 whitespace-nowrap rounded-r-xl appcontainer:rounded-r-none">
                     {role}
                 </td>
-                <td className="align-center text-center px-1 whitespace-nowrap hidden mdb:table-cell">
+                <td className="align-center text-center px-1 whitespace-nowrap hidden appcontainer:table-cell">
                     {formatDate(new Date(updatedAt), i18n.language)}
                 </td>
-                <td className="align-center text-center px-1 whitespace-nowrap hidden mdb:table-cell rounded-r-xl">
+                <td className="align-center text-center px-1 whitespace-nowrap hidden appcontainer:table-cell rounded-r-xl">
                     {formatDate(new Date(createdAt), i18n.language)}
                 </td>
             </tr>
             {currentIsActive && (
                 <tr className={className}>
                     <td colSpan={7}>
-                        <ManageListItemActions user={user} />
+                        <ManageListItemActions user={user} onSetActive={onSetActive} />
                     </td>
                 </tr>
             )}

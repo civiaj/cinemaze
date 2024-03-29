@@ -6,9 +6,11 @@ import { manageActions } from "pages/ManagePage/model/slice";
 import { GetAllUsersFilter } from "pages/ManagePage/model/types";
 import { ManageListItem } from "pages/ManagePage/ui/ManageListItem";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import formatServerError from "shared/api/helpers/formatServerError";
 import { Ascending, Descending } from "shared/assets/icons";
 import { useDebouncedValue } from "shared/hooks/useDebouncedValue";
+import { TLngs } from "shared/i18n/types";
 import { classNames } from "shared/lib/classNames";
 import { Box } from "shared/ui/Boxes/Box";
 import { StatusBox } from "shared/ui/Boxes/StatusBox";
@@ -22,6 +24,7 @@ import { Pagination } from "widgets/Pagination/Pagination";
 
 export const ManageList = () => {
     const { filter, order } = useAppSelector(getManageState);
+    const { i18n } = useTranslation();
     const dispatch = useAppDispatch();
     const [page, setPage] = useState(1);
     const [activeUser, setActiveUser] = useState<string | null>(null);
@@ -33,6 +36,7 @@ export const ManageList = () => {
         order,
         page,
         query: debouncedQuery,
+        locale: i18n.language as TLngs,
     });
 
     const onSetActive = (newId: string | null) => setActiveUser(newId);
@@ -87,7 +91,7 @@ export const ManageList = () => {
                     <tbody className="relative">
                         {isLoading && (
                             <tr>
-                                <td scope="row" colSpan={6}>
+                                <td scope="row" colSpan={8}>
                                     <div className="h-56 flex items-center justify-center">
                                         <Spinner />
                                     </div>
@@ -139,12 +143,14 @@ export const ManageList = () => {
                     </tbody>
                 </table>
             </OutsideClickWrapper>
-            <Pagination
-                disabled={isLoading || isFetching}
-                activePage={page}
-                numOfPages={data?.totalPages}
-                changePage={setPage}
-            />
+            {!isLoading && (
+                <Pagination
+                    disabled={isFetching}
+                    activePage={page}
+                    numOfPages={data?.totalPages}
+                    changePage={setPage}
+                />
+            )}
         </Box>
     );
 };

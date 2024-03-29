@@ -43,6 +43,8 @@ export {
     TbHandStop as Stop,
     TbFile as File,
     TbUsersGroup as UserGroup,
+    TbLock as Block,
+    TbMinus as Minus,
 } from "react-icons/tb";
 
 export { IoClose as Close } from "react-icons/io5";

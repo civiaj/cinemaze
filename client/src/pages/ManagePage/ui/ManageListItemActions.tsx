@@ -1,72 +1,54 @@
-import {
-    BlockUserData,
-    ChangeUserData,
-    GetAllUserData,
-    ManageAction,
-} from "pages/ManagePage/model/types";
-import { useState } from "react";
+import { ManageActionViews } from "pages/ManagePage/model/types";
+import { useMemo, useState } from "react";
 
-import { ManageBlock } from "pages/ManagePage/ui/ManageBlock";
-import { ManageChange } from "pages/ManagePage/ui/ManageChange";
-import { Button } from "shared/ui/Button/Button";
+import { TUser } from "entities/User";
+import { ManageBan } from "pages/ManagePage/ui/ManageBan";
+import { ManageViewAndUpdate } from "pages/ManagePage/ui/ManageViewAndUpdate";
+import { ManageListItemActionsHeader } from "pages/ManagePage/ui/ManageListItemActionsHead";
 import { GridMsg } from "shared/ui/GridMsg/GridMsg";
+import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
 
 type Props = {
-    user: GetAllUserData;
+    user: TUser;
+    onSetActive: (newId: string | null) => void;
 };
 
-export const ManageListItemActions = ({ user }: Props) => {
+export const ManageListItemActions = ({ user, onSetActive }: Props) => {
     const { displayName } = user;
-    const [manageAction, setManageAction] = useState<ManageAction>(null);
+    const [manageView, setManageView] = useState<ManageActionViews>("info");
+    const onSetManageView = (newView: ManageActionViews) => setManageView(newView);
 
-    const onCancel = () => setManageAction(null);
-    const onSave = (data: BlockUserData | ChangeUserData) => {
-        if (manageAction === "change") {
-            console.log("saving changes...", data);
-        }
-
-        if (manageAction === "block") {
-            console.log("blocking user...", data);
-        }
-    };
+    const manageActionHeader: Record<ManageActionViews, string> = useMemo(
+        () => ({
+            ban: `Запрет доступа ${displayName}`,
+            update: `Изменение ${displayName}`,
+            info: ` Информация о ${displayName}`,
+        }),
+        [displayName]
+    );
 
     return (
         <GridMsg isOpen={true} className="border border-border rounded-xl my-2">
-            <div className="px-4 py-2 flex items-center justify-center flex-col">
-                <div className="w-full flex flex-col gap-2">
-                    {manageAction !== "block" ? (
-                        <ManageChange
-                            manageAction={manageAction}
-                            user={user}
-                            onCancel={onCancel}
-                            onSave={onSave}
-                        />
-                    ) : (
-                        <ManageBlock
-                            displayName={displayName}
-                            onCancel={onCancel}
-                            onSave={onSave}
-                        />
-                    )}
-                </div>
+            <div className="w-full flex flex-col gap-4 px-4 py-4">
+                <ManageListItemActionsHeader headerText={manageActionHeader[manageView]} />
 
-                {!manageAction && (
-                    <div className="flex gap-4 self-end">
-                        <Button
-                            className="py-1 h-auto text-sm font-medium"
-                            onClick={() => setManageAction("change")}
-                            theme="regular"
-                        >
-                            Изменить
-                        </Button>
-                        <Button
-                            theme="danger"
-                            className="py-1 h-auto text-sm font-medium"
-                            onClick={() => setManageAction("block")}
-                        >
-                            Заблокировать
-                        </Button>
-                    </div>
+                <UserBoxSeparator />
+
+                {(manageView === "info" || manageView === "update") && (
+                    <ManageViewAndUpdate
+                        manageView={manageView}
+                        user={user}
+                        onSetManageView={onSetManageView}
+                        onSetActive={onSetActive}
+                    />
+                )}
+
+                {manageView === "ban" && (
+                    <ManageBan
+                        user={user}
+                        onSetManageView={onSetManageView}
+                        onSetActive={onSetActive}
+                    />
                 )}
             </div>
         </GridMsg>

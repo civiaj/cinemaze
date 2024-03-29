@@ -1,7 +1,8 @@
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 import mongoose from "mongoose";
-import { BCRYPT_SALT_ROUNDS } from "../../config";
+import { BCRYPT_SALT_ROUNDS, DEFAULT_USER_PHOTO } from "../../config";
+import { displayNameSchema, passwordSchema } from "../schema/user.schema";
 
 export type User = {
     displayName: string;
@@ -16,8 +17,9 @@ export type User = {
     passwordResetAt: Date | null;
     createdAt: Date | null;
     updatedAt: Date | null;
-    blockedUntil: Date | null;
-    blockedMessage: string | null;
+    isBanned: boolean;
+    banExpiration: Date | null;
+    banMessage: string | null;
 };
 
 type TUserMethods = {
@@ -35,11 +37,14 @@ const userSchema = new mongoose.Schema<User, TUserModel, TUserMethods>(
         displayName: { type: String, required: true },
         password: { type: String, required: true, min: 8, max: 32, select: false },
         role: { type: String, default: "user" },
-        photo: { type: String, default: "default-user.jpeg" },
+        photo: { type: String, default: DEFAULT_USER_PHOTO },
         verified: { type: Boolean, default: false },
         verificationCode: { type: String, select: false, default: null },
         passwordResetToken: { type: String, select: false, default: null },
         passwordResetAt: { type: Date, select: false },
+        isBanned: { type: Boolean, default: false },
+        banMessage: { type: String },
+        banExpiration: { type: Date },
     },
     {
         versionKey: false,
@@ -77,10 +82,15 @@ const userSchema = new mongoose.Schema<User, TUserModel, TUserMethods>(
 
 userSchema.pre("save", function (next: (err?: Error) => void) {
     this.id = this._id;
-    if (!this.isModified("password")) return next();
-    const salt = bcrypt.genSaltSync(BCRYPT_SALT_ROUNDS);
-    const hash = bcrypt.hashSync(this.password, salt);
-    this.password = hash;
+    if (this.isModified("password")) {
+        const salt = bcrypt.genSaltSync(BCRYPT_SALT_ROUNDS);
+        const hash = bcrypt.hashSync(passwordSchema.parse(this.password), salt);
+        this.password = hash;
+    }
+    if (this.isModified("displayName")) {
+        this.displayName = displayNameSchema.parse(this.displayName);
+    }
+
     next();
 });
 
