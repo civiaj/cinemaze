@@ -9,6 +9,7 @@ import errorBoundary from "./middleware/errorBoundary";
 import useragent from "express-useragent";
 import userAgent from "./middleware/userAgent";
 import path from "path";
+import "./schedules/unbanSchedule";
 
 const app = express();
 

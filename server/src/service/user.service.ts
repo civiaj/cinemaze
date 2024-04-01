@@ -81,6 +81,23 @@ class UserService {
 
         return { users, totalPages: Math.ceil(total / limit) };
     }
+
+    async checkForExpiredBan() {
+        const expiredUsers = await userModel.find(
+            {
+                banExpiration: { $lte: new Date() },
+            },
+            {},
+            { lean: true }
+        );
+
+        const result = await userModel.updateMany(
+            { _id: { $in: expiredUsers.map((user) => user._id) } },
+            { $set: { isBanned: false, banExpiration: null, banMessage: null } }
+        );
+
+        return result.modifiedCount;
+    }
 }
 
 const hideEmail = (email: string) => {
