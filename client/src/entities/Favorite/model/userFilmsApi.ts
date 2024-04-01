@@ -49,10 +49,6 @@ const userFilmsApi = serverApi.injectEndpoints({
                     //error middleware
                 }
             },
-            transformErrorResponse: (response) => {
-                response.data = "withoutError";
-                return response;
-            },
         }),
         getAllFavorite: builder.query<
             FavoriteItemT,

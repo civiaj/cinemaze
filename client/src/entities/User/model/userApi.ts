@@ -1,13 +1,13 @@
 import { authAndUserSliceActions } from "entities/AuthAndUser";
 import { userActions } from "entities/User";
-import { SessionsResponse, TRoles, TUser } from "../model/types";
 import toast from "react-hot-toast";
 import { serverApi } from "shared/api/serverApi";
 import { ServerMessageResponse } from "shared/api/types";
+import { SessionsResponse, TRoles, TUser } from "../model/types";
 
 export const userApi = serverApi.injectEndpoints({
     endpoints: (builder) => ({
-        getMe: builder.query<TUser, void | "withoutError">({
+        getMe: builder.query<TUser, void>({
             query: () => ({
                 url: "user/me",
                 credentials: "include",
@@ -21,7 +21,6 @@ export const userApi = serverApi.injectEndpoints({
                     dispatch(userActions.setUser(data));
                 } catch (e) {
                     dispatch(userActions.setIsLogged(false));
-                    // console.log("GETME", e);
                     // error middleware
                 } finally {
                     dispatch(authAndUserSliceActions.endLoading());
@@ -47,7 +46,7 @@ export const userApi = serverApi.injectEndpoints({
                 try {
                     await queryFulfilled;
                     toast.success(`Имя обновлено`);
-                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate("withoutError"));
+                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate());
                     refetch();
                 } catch (e) {
                     //error middleware
@@ -69,7 +68,7 @@ export const userApi = serverApi.injectEndpoints({
                 try {
                     await queryFulfilled;
                     toast.success(`Пароль обновлен`);
-                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate("withoutError"));
+                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate());
                     refetch();
                 } catch (e) {
                     //error middleware
@@ -87,7 +86,7 @@ export const userApi = serverApi.injectEndpoints({
                 try {
                     await queryFulfilled;
                     toast.success(`Фото профиля обновлено`);
-                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate("withoutError"));
+                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate());
                     refetch();
                 } catch (e) {
                     //error middleware
@@ -106,7 +105,7 @@ export const userApi = serverApi.injectEndpoints({
                 try {
                     await queryFulfilled;
                     toast.success(`Фото профиля удалено`);
-                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate("withoutError"));
+                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate());
                     refetch();
                 } catch (e) {
                     //error middleware
@@ -126,15 +125,11 @@ export const userApi = serverApi.injectEndpoints({
                 try {
                     await queryFulfilled;
                     toast.success(`Сессия удалена`);
-                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate("withoutError"));
+                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate());
                     refetch();
                 } catch (e) {
                     //error middleware
                 }
-            },
-            transformErrorResponse: (response) => {
-                response.data = "withoutError";
-                return response;
             },
             invalidatesTags: ["Session"],
         }),
@@ -150,7 +145,7 @@ export const userApi = serverApi.injectEndpoints({
                 try {
                     await queryFulfilled;
                     toast.success(`Роль изменена на ${arg}`);
-                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate("withoutError"));
+                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate());
                     refetch();
                 } catch (e) {
                     //error middleware

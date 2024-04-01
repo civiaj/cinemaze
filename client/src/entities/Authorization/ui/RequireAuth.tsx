@@ -15,7 +15,7 @@ export const RequireAuth = ({ children, allowedRoles = [] }: RequireAuthProps) =
     const isLogged = useAppSelector(getIsLogged);
     const { pathname } = useLocation();
 
-    const { isError } = useGetMeQuery("withoutError", {
+    const { isError } = useGetMeQuery(undefined, {
         skip: !isLogged,
     });
 

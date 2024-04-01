@@ -13,7 +13,7 @@ import { Sidebar } from "widgets/Sidebar";
 
 function App() {
     const isLogged = useAppSelector(getIsLogged);
-    const { isLoading } = useGetMeQuery("withoutError", {
+    const { isLoading } = useGetMeQuery(undefined, {
         skip: !isLogged,
     });
 

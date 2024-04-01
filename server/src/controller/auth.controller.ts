@@ -54,14 +54,16 @@ class AuthController {
             const { email, password } = req.body;
             const user = await userService.findUserWithPassword({ email });
 
-            if (!user || !user.comparePassword(password)) {
-                throw ApiError.BadRequest("Неверный адрес электронной почты или пароль");
-            }
+            throw ApiError.NotAllowed();
 
-            const tokens = await tokenService.signTokens(user, res.locals.ua);
-            this.addAuthCookies(res, tokens);
+            // if (!user || !user.comparePassword(password)) {
+            //     throw ApiError.BadRequest("Неверный адрес электронной почты или пароль");
+            // }
 
-            return res.status(201).json({ message: "success" });
+            // const tokens = await tokenService.signTokens(user, res.locals.ua);
+            // this.addAuthCookies(res, tokens);
+
+            // return res.status(201).json({ message: "success" });
         } catch (e) {
             next(e);
         }
