@@ -1,13 +1,14 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
+import { ID_REVIEWS } from "shared/const/const";
 import { classNames } from "shared/lib/classNames";
 import { Box } from "shared/ui/Boxes/Box";
+import { Spinner } from "shared/ui/Spinner/Spinner";
 import { Pagination } from "widgets/Pagination/Pagination";
 import { reviewApi } from "../model/reviewsApi";
 import { ReviewSortT } from "../model/types";
 import { ReviewsHeader } from "./ReviewsHeader";
 import { ReviewsList } from "./ReviewsList";
-import { ID_REVIEWS } from "shared/const/const";
-import { Spinner } from "shared/ui/Spinner/Spinner";
 
 interface ReviewsProps {
     filmId: number;
@@ -16,16 +17,26 @@ interface ReviewsProps {
 export const Reviews = (props: ReviewsProps) => {
     const { filmId } = props;
 
-    const [page, setPage] = useState(1);
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const page = searchParams.get("p") ? Number(searchParams.get("p")) : 1;
+    const type = (searchParams.get("type") ?? "DATE_DESC") as ReviewSortT;
 
     const onChangeTypeOption = useCallback(
-        (newOption: string) => setTypeOption(newOption as ReviewSortT),
-        []
+        (newOption: string) => {
+            searchParams.set("type", newOption);
+            setSearchParams(searchParams);
+        },
+        [setSearchParams, searchParams]
     );
 
-    const [type, setTypeOption] = useState<ReviewSortT>("DATE_ASC");
-
-    const onChangePage = useCallback((newPage: number) => setPage(newPage), []);
+    const onChangePage = useCallback(
+        (newPage: number) => {
+            searchParams.set("p", String(newPage));
+            setSearchParams(searchParams);
+        },
+        [setSearchParams, searchParams]
+    );
 
     const { data, isFetching, isLoading } = reviewApi.useGetReviewsQuery({
         id: filmId,
@@ -35,8 +46,8 @@ export const Reviews = (props: ReviewsProps) => {
 
     if (isLoading) return <Spinner container="flex items-center justify-center" />;
 
-    return (
-        !!data?.items.length && (
+    if (data) {
+        return (
             <div
                 className={classNames(
                     "flex flex-col gap-4",
@@ -65,6 +76,6 @@ export const Reviews = (props: ReviewsProps) => {
                     />
                 </Box>
             </div>
-        )
-    );
+        );
+    }
 };

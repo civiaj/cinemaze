@@ -1,14 +1,14 @@
-import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
-import { FilmImages } from "widgets/FilmImages";
-import { FilmAwards } from "widgets/FilmAwards";
-import { Description } from "widgets/Details";
+import { ReactNode, useCallback, useEffect, useRef } from "react";
+import { ID_VIEW_SWITCHER } from "shared/const/const";
 import { classNames } from "shared/lib/classNames";
+import { Box } from "shared/ui/Boxes/Box";
 import { Button } from "shared/ui/Button/Button";
 import { Heading } from "shared/ui/Text/Heading";
-import { Box } from "shared/ui/Boxes/Box";
-import { useInitialEffect } from "shared/hooks/useInitialEffect";
-import { ID_VIEW_SWITCHER } from "shared/const/const";
+import { Description } from "widgets/Details";
+import { FilmAwards } from "widgets/FilmAwards";
+import { FilmImages } from "widgets/FilmImages";
 
+import { useSearchParams } from "react-router-dom";
 import { ViewSwitcherTypes } from "../model/types";
 
 interface ViewSwitcherProps {
@@ -23,6 +23,7 @@ const categories: { title: string; value: ViewSwitcherTypes }[] = [
 
 export const ViewSwitcher = (props: ViewSwitcherProps) => {
     const { filmId } = props;
+    const listRef = useRef<HTMLUListElement>(null);
     const markerRef = useRef<HTMLDivElement>(null);
     const itemRef = useRef<Map<string, HTMLLIElement> | null>(null);
 
@@ -31,9 +32,9 @@ export const ViewSwitcher = (props: ViewSwitcherProps) => {
         return itemRef.current;
     };
 
-    const scrollToItem = useCallback((itemId: string) => {
+    const scrollToItem = useCallback((view: ViewSwitcherTypes) => {
         const map = getMap();
-        const node = map.get(itemId);
+        const node = map.get(view);
 
         if (node && markerRef.current) {
             markerRef.current.style.left = `${node.offsetLeft}px`;
@@ -41,7 +42,13 @@ export const ViewSwitcher = (props: ViewSwitcherProps) => {
         }
     }, []);
 
-    const [nowIsShown, setNowIsShown] = useState<ViewSwitcherTypes>("description");
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const nowIsShown = (
+        categories.find((cat) => cat.value === searchParams.get("view"))
+            ? searchParams.get("view")
+            : "description"
+    ) as ViewSwitcherTypes;
 
     const renderedView: { [key in ViewSwitcherTypes]: ReactNode } = {
         description: <Description filmId={filmId} />,
@@ -50,21 +57,25 @@ export const ViewSwitcher = (props: ViewSwitcherProps) => {
     };
 
     const handleChangeCategory = (category: ViewSwitcherTypes) => {
-        setNowIsShown(category);
+        searchParams.set("view", category);
+        setSearchParams(searchParams);
         scrollToItem(category);
     };
 
-    useInitialEffect(() => scrollToItem(nowIsShown));
-
     useEffect(() => {
-        const updateMarker = () => scrollToItem(nowIsShown);
-        window.addEventListener("resize", updateMarker);
-        return () => window.removeEventListener("resize", updateMarker);
+        if (!listRef.current) return;
+        const resizeObserver = new ResizeObserver(() => {
+            scrollToItem(nowIsShown);
+        });
+        resizeObserver.observe(listRef.current);
+        return () => resizeObserver.disconnect();
     }, [scrollToItem, nowIsShown]);
+
+    const component = renderedView[nowIsShown] || renderedView.description;
 
     return (
         <Box id={ID_VIEW_SWITCHER} className="onPageNavigation">
-            <ul className="flex gap-2 relative">
+            <ul className="flex gap-2 relative self-start" ref={listRef}>
                 {categories.map((category) => (
                     <li
                         key={category.value}
@@ -79,7 +90,7 @@ export const ViewSwitcher = (props: ViewSwitcherProps) => {
                     >
                         <Button
                             className={classNames("", {
-                                ["text-my-neutral-800 border-b-transparent hover:border-b-transparent focus:border-b-transparent"]:
+                                ["text-my-neutral-800 border-b-transparent hover:border-b-transparent focus:border-b-transparent botft"]:
                                     nowIsShown === category.value,
                             })}
                             theme="category"
@@ -95,7 +106,7 @@ export const ViewSwitcher = (props: ViewSwitcherProps) => {
                 />
             </ul>
 
-            {renderedView[nowIsShown]}
+            {component}
         </Box>
     );
 };
