@@ -1,5 +1,5 @@
 import { TUser } from "entities/User";
-import { useUpdateOneMutation } from "pages/ManagePage/model/manageApi";
+import { useUnbanOneMutation, useUpdateOneMutation } from "pages/ManagePage/model/manageApi";
 import { ChangeUserData, ManageActionViews } from "pages/ManagePage/model/types";
 import { roleOptions } from "pages/UserPage/model/data";
 import { useState } from "react";
@@ -10,19 +10,28 @@ import { classNames } from "shared/lib/classNames";
 import { formatDate } from "shared/lib/formatDate";
 import { trimInput } from "shared/lib/trimInput";
 import { AppSelect } from "shared/ui/AppSelect/AppSelect";
-import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
+import { Modal } from "shared/ui/Boxes/Modal";
+import { UserBox, UserBoxSeparator } from "shared/ui/Boxes/UserBox";
 import { Button } from "shared/ui/Button/Button";
 import { GridMsg } from "shared/ui/GridMsg/GridMsg";
 import { Input } from "shared/ui/Input/Input";
+import { Text } from "shared/ui/Text/Text";
 
 type Props = {
     user: TUser;
     manageView: ManageActionViews;
     onSetManageView: (newView: ManageActionViews) => void;
     onSetActive: (newId: string | null) => void;
+    onPreventCloseActive: (newValue: boolean) => void;
 };
 
-export const ManageViewAndUpdate = ({ user, manageView, onSetManageView, onSetActive }: Props) => {
+export const ManageViewAndUpdate = ({
+    user,
+    manageView,
+    onSetManageView,
+    onSetActive,
+    onPreventCloseActive,
+}: Props) => {
     const {
         displayName,
         role,
@@ -34,7 +43,9 @@ export const ManageViewAndUpdate = ({ user, manageView, onSetManageView, onSetAc
         isBanned,
         banExpiration,
         banMessage,
+        id,
     } = user;
+    const [isUnban, setIsUnban] = useState(false);
     const defaultChange: ChangeUserData = { displayName, role, deletePhoto: false };
     const [changeData, setChangeData] = useState(defaultChange);
     const { i18n } = useTranslation();
@@ -43,9 +54,27 @@ export const ManageViewAndUpdate = ({ user, manageView, onSetManageView, onSetAc
         trimInput(changeData.displayName, "name") === displayName && changeData.role === role;
 
     const [updateOne, { isLoading, isError, error, reset }] = useUpdateOneMutation();
+    const [unbanOne, unban] = useUnbanOneMutation();
 
-    const onUpdateUser = async (data: ChangeUserData) => {
+    const onOpenUnban = () => {
+        onPreventCloseActive(true);
+        setIsUnban(true);
+    };
+
+    const onCloseUnban = () => {
+        onPreventCloseActive(false);
+        setIsUnban(false);
+        unban.reset();
+    };
+
+    const onUpdateUser = (data: ChangeUserData) => {
         updateOne({ ...data, manageUserId: user.id })
+            .unwrap()
+            .then(() => onSetActive(null));
+    };
+
+    const onUnbanUser = () => {
+        unbanOne({ id, displayName })
             .unwrap()
             .then(() => onSetActive(null));
     };
@@ -185,6 +214,15 @@ export const ManageViewAndUpdate = ({ user, manageView, onSetManageView, onSetAc
                 )}
                 {manageView === "info" && (
                     <>
+                        {isBanned && (
+                            <Button
+                                theme="success"
+                                className="py-1 h-auto text-sm font-medium"
+                                onClick={onOpenUnban}
+                            >
+                                Разблокировать
+                            </Button>
+                        )}
                         <Button
                             className="py-1 h-auto text-sm font-medium"
                             onClick={() => onSetManageView("update")}
@@ -202,6 +240,50 @@ export const ManageViewAndUpdate = ({ user, manageView, onSetManageView, onSetAc
                     </>
                 )}
             </div>
+            {isUnban && (
+                <Modal
+                    theme="success"
+                    header={`Разблокировать пользователя`}
+                    onClose={onCloseUnban}
+                >
+                    <Text>Вы действильно хотите разблокировать пользователя {displayName}?</Text>
+                    {banExpiration && (
+                        <UserBox className="border rounded-xl">
+                            <Text className="sm:text-sm">
+                                Ban until:{" "}
+                                {formatDate(new Date(banExpiration), i18n.language, "long")}
+                            </Text>
+                            <Text className="sm:text-sm">
+                                Ban message: {banMessage || "Сообщение не было указано"}
+                            </Text>
+                        </UserBox>
+                    )}
+                    {unban.isError && (
+                        <GridMsg
+                            className="bg-my-red-200"
+                            isOpen={unban.isError}
+                            msg={formatServerError(unban.error)}
+                        />
+                    )}
+                    <div className="self-end flex items-center justify-center gap-2">
+                        <Button
+                            className="font-medium"
+                            theme="success"
+                            onClick={onUnbanUser}
+                            isLoading={unban.isLoading}
+                        >
+                            <Text>Разблокировать</Text>
+                        </Button>
+                        <Button
+                            onClick={() => setIsUnban(false)}
+                            theme="regular"
+                            className="font-medium"
+                        >
+                            <Text>Отмена</Text>
+                        </Button>
+                    </div>
+                </Modal>
+            )}
         </>
     );
 };

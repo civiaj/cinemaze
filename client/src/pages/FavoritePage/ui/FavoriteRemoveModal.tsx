@@ -10,6 +10,8 @@ import { Text } from "shared/ui/Text/Text";
 
 import { listVariants } from "../model/data";
 import { FavoriteListVariantT } from "../model/types";
+import { GridMsg } from "shared/ui/GridMsg/GridMsg";
+import formatServerError from "shared/api/helpers/formatServerError";
 
 type Props = {
     onClose: () => void;
@@ -27,16 +29,17 @@ export const FavoriteRemoveModal = (props: Props) => {
     const [all, setAll] = useState(false);
     const toggleAll = () => setAll((p) => !p);
 
-    const [removeOneFavorite, { isLoading }] = useRemoveOneFavoriteMutation();
+    const [removeOneFavorite, { isLoading, isError, error }] = useRemoveOneFavoriteMutation();
 
     const onDelete = async () => {
         if (!filmId) return;
-        await removeOneFavorite({
+        removeOneFavorite({
             body: { filmId, field: all ? "all" : listVariant },
             listVariant: all ? "all" : listVariant,
             filmTitle: title,
-        });
-        onClose();
+        })
+            .unwrap()
+            .then(() => onClose());
     };
     const link = `${routePath.details}/${film?.filmId}`;
 
@@ -73,6 +76,13 @@ export const FavoriteRemoveModal = (props: Props) => {
                     <Text>Удалить из всех списков</Text>
                     <Checked className="text-my-neutral-50 absolute left-0 top-1/2 -translate-y-1/2 hidden peer-checked:block" />
                 </label>
+            )}
+            {isError && (
+                <GridMsg
+                    className="bg-my-red-200"
+                    isOpen={isError}
+                    msg={formatServerError(error)}
+                />
             )}
             <div className="self-end flex items-center justify-center gap-2">
                 <Button

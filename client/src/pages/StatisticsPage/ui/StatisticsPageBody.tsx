@@ -7,7 +7,6 @@ import { StatisticsSkeleton } from "pages/StatisticsPage/ui/StatisticsSkeleton";
 import { useNavigate } from "react-router-dom";
 import formatFilmError from "shared/api/helpers/formatFilmError";
 import { Box } from "shared/ui/Boxes/Box";
-import { PageLikeBox } from "shared/ui/Boxes/PageLikeBox";
 import { StatusBox } from "shared/ui/Boxes/StatusBox";
 import { Button } from "shared/ui/Button/Button";
 import { Text } from "shared/ui/Text/Text";
@@ -18,12 +17,7 @@ export const StatisticsPageBody = () => {
 
     if (isLoading) return <StatisticsSkeleton />;
 
-    if (isError)
-        return (
-            <PageLikeBox>
-                <StatusBox errorMsg={formatFilmError(error)} isError={isError} />
-            </PageLikeBox>
-        );
+    if (isError) return <StatusBox errorMsg={formatFilmError(error)} isError={isError} />;
 
     if (!data?.length)
         return (

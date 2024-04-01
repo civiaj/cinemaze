@@ -6,6 +6,7 @@ import {
     GetOneUserInput,
     ManageUserBanInput,
     ManageUserChangeInput,
+    ManageUserUnbanInput,
 } from "../schema/manage.schema";
 import userService from "../service/user.service";
 import { Order } from "../types/types";
@@ -70,6 +71,25 @@ class ManageController {
             user.isBanned = true;
             user.banMessage = banMessage;
             user.banExpiration = new Date(new Date(banExpiration).setHours(0, 0, 0, 0));
+
+            await user.save();
+
+            return res.status(200).json({ message: "success" });
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async unbanOne(req: Request<ManageUserUnbanInput>, res: Response, next: NextFunction) {
+        try {
+            const { manageUserId } = req.params;
+
+            const user = await userService.findUser({ id: manageUserId });
+            if (!user) throw ApiError.BadRequest("Нет пользователя с таким id");
+
+            user.isBanned = false;
+            user.banMessage = null;
+            user.banExpiration = null;
 
             await user.save();
 

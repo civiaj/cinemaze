@@ -82,7 +82,7 @@ const userFilmsApi = serverApi.injectEndpoints({
                 body: payload.body,
                 credentials: "include",
             }),
-            invalidatesTags: () => ["Favorites"],
+
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     await queryFulfilled;
@@ -95,6 +95,7 @@ const userFilmsApi = serverApi.injectEndpoints({
                     toast.success(getRemoveToastMsg({ filmId, filmTitle, listVariant }), {
                         id: String(filmId),
                     });
+                    dispatch(userFilmsApi.util.invalidateTags(["Favorites"]));
                     dispatch(favoritePageActions.removeFilm(filmId));
                 } catch (e) {
                     // error middleware

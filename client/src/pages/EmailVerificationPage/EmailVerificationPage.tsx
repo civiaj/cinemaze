@@ -3,7 +3,7 @@ import { Page } from "entities/Ui";
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { StatusBox } from "shared/ui/Boxes/StatusBox";
 
-export const EmailIsVerified = () => {
+export const EmailVerificationPage = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
 

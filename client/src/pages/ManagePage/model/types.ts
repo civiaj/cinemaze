@@ -43,3 +43,7 @@ export type ChangeUserData = { displayName: string; role: string; deletePhoto: b
 export type ManageActionViews = "update" | "ban" | "info";
 
 export type ManageUpdateOne = ChangeUserData & { manageUserId: string };
+export type UnbanUserRequest = {
+    id: string;
+    displayName: string;
+};

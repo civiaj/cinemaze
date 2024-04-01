@@ -1,0 +1,1 @@
+export { BanPage } from "./BanPage";

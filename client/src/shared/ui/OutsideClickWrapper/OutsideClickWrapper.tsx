@@ -2,7 +2,7 @@ import { ReactNode, useEffect } from "react";
 import { useOutsideClick } from "shared/hooks/useOutsideClick";
 
 interface OutsideClickWrapperProps {
-    onClose: () => void;
+    onClose: (e: MouseEvent | globalThis.KeyboardEvent) => void;
     children: ReactNode;
     capture?: boolean;
     className?: string;
@@ -19,7 +19,7 @@ export const OutsideClickWrapper = ({
     useEffect(() => {
         const onKeyDown = (e: globalThis.KeyboardEvent) => {
             if (e.key === "Escape") {
-                onClose();
+                onClose(e);
             }
         };
         document.addEventListener("keydown", onKeyDown);

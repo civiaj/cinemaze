@@ -30,6 +30,14 @@ export const ManageList = () => {
     const [activeUser, setActiveUser] = useState<string | null>(null);
     const [query, setQuery] = useState("");
     const debouncedQuery = useDebouncedValue(query);
+    const [preventCloseActive, setPreventCloseActive] = useState(false);
+
+    const onPreventCloseActive = (newValue: boolean) => setPreventCloseActive(newValue);
+
+    const onCloseActive = () => {
+        if (preventCloseActive) return;
+        onSetActive(null);
+    };
 
     const { data, isLoading, isFetching, isError, error } = useGetUsersQuery({
         filter,
@@ -62,7 +70,7 @@ export const ManageList = () => {
                 />
             </div>
             <OutsideClickWrapper
-                onClose={() => onSetActive(null)}
+                onClose={onCloseActive}
                 className="overflow-x-auto w-full relative"
             >
                 <table className={"w-full text-sm sm:text-sm"}>
@@ -119,6 +127,7 @@ export const ManageList = () => {
                                 ) : (
                                     data?.users.map((user, index) => (
                                         <ManageListItem
+                                            onPreventCloseActive={onPreventCloseActive}
                                             onSetActive={onSetActive}
                                             activeUser={activeUser}
                                             key={user.id}

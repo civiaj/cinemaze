@@ -18,7 +18,13 @@ app.use("/api/static/profiles", express.static(path.join(__dirname, "../static/p
 
 app.use(cookieParser());
 
-app.use(cors({ credentials: true, origin: [CLIENT_URL, "http://192.168.1.59:5173"] }));
+app.use(
+    cors({
+        credentials: true,
+        origin: [CLIENT_URL, "http://192.168.1.59:5173"],
+    })
+);
+app.options("*", cors());
 
 app.use(useragent.express());
 app.use(userAgent);

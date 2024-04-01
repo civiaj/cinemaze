@@ -16,6 +16,7 @@ const themes = {
     clean: "clean",
     danger: "danger",
     login: "login",
+    success: "success",
 } as const;
 
 type Themes = ObjectValues<typeof themes>;
@@ -49,6 +50,8 @@ const cls: Record<Themes, string> = {
         "!text-sm bg-my-neutral-100 rounded-full !h-8 !w-8 justify-center font-medium hover:bg-my-neutral-200",
     clean: "text-inherit rounded-xl px-4 [&>*]:stroke-2 active:translate-y-[1px] bg-transparent hover:bg-my-neutral-100 focus-visible:bg-my-neutral-100 justify-center",
     danger: "text-inherit rounded-xl px-4 [&>*]:stroke-2 active:translate-y-[1px] bg-my-red-200 hover:bg-my-red-300 focus-visible:bg-my-red-300 text-neutral-50",
+    success:
+        "text-inherit rounded-xl px-4 [&>*]:stroke-2 active:translate-y-[1px] bg-my-green-500 hover:bg-my-green-600 focus-visible:bg-my-green-600 text-neutral-50",
     login: "text-neutral-50 rounded-xl [&>*]:stroke-2 active:translate-y-[1px] h-10 w-10 justify-center text-xl bg-gradient-to-br from-blue-400 from-40% to-purple-400 to-90%",
 };
 
@@ -69,6 +72,7 @@ const spinner: Record<Themes, string> = {
     regularNav: defaultSpinner,
     regularNavIcon: defaultSpinner,
     login: defaultSpinner,
+    success: "fill-neutral-950 text-neutral-300 dark:fill-neutral-950 dark:text-neutral-300",
 };
 
 export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {

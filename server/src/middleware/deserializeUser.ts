@@ -1,4 +1,4 @@
-import { NextFunction, Response, Request } from "express";
+import { NextFunction, Request, Response } from "express";
 import ApiError from "../exceptions/api.error";
 import tokenService from "../service/token.service";
 import userService from "../service/user.service";

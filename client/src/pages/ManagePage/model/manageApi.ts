@@ -4,6 +4,7 @@ import {
     GetAllUsersQuery,
     GetAllUsersResponse,
     ManageUpdateOne,
+    UnbanUserRequest,
 } from "pages/ManagePage/model/types";
 import toast from "react-hot-toast";
 import { serverApi } from "shared/api/serverApi";
@@ -51,11 +52,25 @@ const manageApi = serverApi.injectEndpoints({
             }),
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
-                    await toast.promise(queryFulfilled, {
-                        loading: "Обновление пользователя...",
-                        success: `Пользователь ${arg.displayName} успешно заблокирован`,
-                        error: `Ошибка во время выполнения запроса`,
-                    });
+                    await queryFulfilled;
+                    toast.success(`Пользователь ${arg.displayName} успешно заблокирован`);
+
+                    dispatch(manageApi.util.invalidateTags(["Manage"]));
+                } catch (e) {
+                    //error middleware
+                }
+            },
+        }),
+        unbanOne: builder.mutation<ServerMessageResponse, UnbanUserRequest>({
+            query: ({ id }) => ({
+                url: `/manage/unban/${id}`,
+                credentials: "include",
+            }),
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled;
+                    toast.success(`Пользователь ${arg.displayName} успешно разблокирован`);
+
                     dispatch(manageApi.util.invalidateTags(["Manage"]));
                 } catch (e) {
                     //error middleware
@@ -65,4 +80,5 @@ const manageApi = serverApi.injectEndpoints({
     }),
 });
 
-export const { useGetUsersQuery, useUpdateOneMutation, useBanOneMutation } = manageApi;
+export const { useGetUsersQuery, useUpdateOneMutation, useBanOneMutation, useUnbanOneMutation } =
+    manageApi;

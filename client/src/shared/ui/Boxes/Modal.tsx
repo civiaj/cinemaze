@@ -13,7 +13,7 @@ export const Modal = ({
     header,
 }: {
     children: ReactNode;
-    onClose: () => void;
+    onClose: (e: MouseEvent | globalThis.KeyboardEvent) => void;
     className?: string;
     theme?: "danger" | "confirm" | "success" | "none";
     header: ReactNode;

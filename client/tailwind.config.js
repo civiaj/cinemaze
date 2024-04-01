@@ -92,6 +92,7 @@ export default {
                 "my-red-200": "var(--red-200)",
                 "my-red-300": "var(--red-300)",
                 "my-red-500": "var(--red-500)",
+                "my-green-600": "var(--green-600)",
                 border: "var(--border)",
             },
         },

@@ -67,7 +67,17 @@ export const mangeUserBanSchema = object({
     }),
 });
 
+export const mangeUserUnbanSchema = object({
+    params: object({
+        manageUserId: z.string({
+            required_error: "параметр manageUserId обязателен",
+            invalid_type_error: "неверно указан manageUserId",
+        }),
+    }),
+});
+
 export type GetOneUserInput = TypeOf<typeof getOneUserSchema>["params"];
 export type GetAllUsersInput = TypeOf<typeof getAllUsersSchema>["query"];
 export type ManageUserChangeInput = TypeOf<typeof manageUserChangeSchema>["body"];
 export type ManageUserBanInput = TypeOf<typeof mangeUserBanSchema>["body"];
+export type ManageUserUnbanInput = TypeOf<typeof mangeUserUnbanSchema>["params"];

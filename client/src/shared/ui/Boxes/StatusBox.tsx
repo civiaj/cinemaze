@@ -1,4 +1,5 @@
 import { routePath } from "app/router/router";
+import { ReactNode } from "react";
 import { Checked, Close } from "shared/assets/icons";
 import { Box } from "shared/ui/Boxes/Box";
 import { Button } from "shared/ui/Button/Button";
@@ -7,8 +8,8 @@ import { Text } from "shared/ui/Text/Text";
 type Props = {
     isSuccess?: boolean;
     isError?: boolean;
-    successMsg?: string;
-    errorMsg?: string;
+    successMsg?: ReactNode;
+    errorMsg?: ReactNode;
     onClick?: () => void;
     label?: string;
 };
@@ -32,7 +33,7 @@ export const StatusBox = (props: Props) => {
                     <Checked className="text-3xl" />
                 </div>
 
-                <Text>{successMsg}</Text>
+                {typeof successMsg === "string" ? <Text>{successMsg}</Text> : successMsg}
                 <Button theme="regular" onClick={handleClick}>
                     {label}
                 </Button>
@@ -46,7 +47,7 @@ export const StatusBox = (props: Props) => {
                     <Close className="text-3xl" />
                 </div>
 
-                <Text>{errorMsg}</Text>
+                {typeof errorMsg === "string" ? <Text>{errorMsg}</Text> : errorMsg}
                 <Button theme="regular" onClick={handleClick}>
                     {label}
                 </Button>

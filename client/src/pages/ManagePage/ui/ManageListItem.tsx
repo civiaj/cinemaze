@@ -13,10 +13,18 @@ type Props = {
     index: number;
     activeUser: string | null;
     onSetActive: (newId: string | null) => void;
+    onPreventCloseActive: (newValue: boolean) => void;
     className?: string;
 };
 
-export const ManageListItem = ({ user, index, activeUser, onSetActive, className }: Props) => {
+export const ManageListItem = ({
+    user,
+    index,
+    activeUser,
+    onSetActive,
+    className,
+    onPreventCloseActive,
+}: Props) => {
     const { createdAt, displayName, email, id, photo, role, updatedAt, verified, isBanned } = user;
     const { i18n } = useTranslation();
     const currentIsActive = activeUser === id;
@@ -90,7 +98,11 @@ export const ManageListItem = ({ user, index, activeUser, onSetActive, className
             {currentIsActive && (
                 <tr className={className}>
                     <td colSpan={7}>
-                        <ManageListItemActions user={user} onSetActive={onSetActive} />
+                        <ManageListItemActions
+                            onPreventCloseActive={onPreventCloseActive}
+                            user={user}
+                            onSetActive={onSetActive}
+                        />
                     </td>
                 </tr>
             )}

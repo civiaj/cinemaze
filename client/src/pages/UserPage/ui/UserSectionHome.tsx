@@ -122,7 +122,7 @@ export const UserSectionHome = ({ user }: Props) => {
                 </UserBox>
             </AppLink>
             <AppLink to={`${routePath.user}?section=${SECTIONS_USER.ROLE}`} theme="user-menu">
-                <UserBox className="border-0">
+                <UserBox>
                     <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
                         <div className="font-medium">Роль</div>
                         <div className="flex justify-between items-center">
@@ -132,6 +132,14 @@ export const UserSectionHome = ({ user }: Props) => {
                     </div>
                 </UserBox>
             </AppLink>
+            {user.isBanned && (
+                <AppLink
+                    to={routePath.ban}
+                    className="text-sm rounded-b-xl hover:bg-my-red-300 bg-my-red-200 font-medium text-center text-neutral-50"
+                >
+                    <UserBox className="py-1 rounded-b-xl">Your Account is Banned</UserBox>
+                </AppLink>
+            )}
         </Box>
     );
 };

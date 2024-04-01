@@ -23,8 +23,14 @@ import favoriteController from "../controller/favorite.controller";
 import { createFilmSchema } from "../schema/film.schema";
 import { resizeSingleImage, uploadSingleImage } from "../upload/single.image";
 import manageController from "../controller/manage.controller";
-import { getAllUsersSchema, getOneUserSchema, mangeUserBanSchema } from "../schema/manage.schema";
+import {
+    getAllUsersSchema,
+    getOneUserSchema,
+    mangeUserBanSchema,
+    mangeUserUnbanSchema,
+} from "../schema/manage.schema";
 import { manageUserChangeSchema } from "../schema/manage.schema";
+import detectBan from "../middleware/detectBan";
 
 const router = Router();
 
@@ -51,6 +57,7 @@ router.patch(
 router.patch(
     "/user/update/password",
     deserializeUser,
+
     validate(setPasswordSchema),
     userController.updatePassword
 );
@@ -86,6 +93,7 @@ router.get(
 router.post(
     "/favorite/add",
     deserializeUser,
+    detectBan,
     validate(createFilmSchema),
     favoriteController.addFavorite
 );
@@ -95,16 +103,18 @@ router.get("/favorite/sync", deserializeUser, favoriteController.syncApis);
 router.post(
     "/favorite/remove",
     deserializeUser,
+    detectBan,
     validate(removeFavoriteOneSchema),
     favoriteController.removeFavorite
 );
 
-router.get("/favorite/statistics", deserializeUser, favoriteController.getStatistics);
+router.get("/favorite/statistics", deserializeUser, detectBan, favoriteController.getStatistics);
 
 //manage
 router.get(
     "/manage/users",
     deserializeUser,
+    detectBan,
     roles(["admin"]),
     validate(getAllUsersSchema),
     manageController.getAll
@@ -113,6 +123,7 @@ router.get(
 router.get(
     "/manage/users/:userId",
     deserializeUser,
+    detectBan,
     roles(["admin"]),
     validate(getOneUserSchema),
     manageController.getOne
@@ -121,6 +132,7 @@ router.get(
 router.post(
     "/manage/change",
     deserializeUser,
+    detectBan,
     roles(["admin"]),
     validate(manageUserChangeSchema),
     manageController.updateOne
@@ -129,9 +141,19 @@ router.post(
 router.post(
     "/manage/ban",
     deserializeUser,
+    detectBan,
     roles(["admin"]),
     validate(mangeUserBanSchema),
     manageController.banOne
+);
+
+router.get(
+    "/manage/unban/:manageUserId",
+    deserializeUser,
+    detectBan,
+    roles(["admin"]),
+    validate(mangeUserUnbanSchema),
+    manageController.unbanOne
 );
 
 // Create and delete num of users for test

@@ -11,9 +11,10 @@ import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
 type Props = {
     user: TUser;
     onSetActive: (newId: string | null) => void;
+    onPreventCloseActive: (newValue: boolean) => void;
 };
 
-export const ManageListItemActions = ({ user, onSetActive }: Props) => {
+export const ManageListItemActions = ({ user, onSetActive, onPreventCloseActive }: Props) => {
     const { displayName } = user;
     const [manageView, setManageView] = useState<ManageActionViews>("info");
     const onSetManageView = (newView: ManageActionViews) => setManageView(newView);
@@ -36,6 +37,7 @@ export const ManageListItemActions = ({ user, onSetActive }: Props) => {
 
                 {(manageView === "info" || manageView === "update") && (
                     <ManageViewAndUpdate
+                        onPreventCloseActive={onPreventCloseActive}
                         manageView={manageView}
                         user={user}
                         onSetManageView={onSetManageView}

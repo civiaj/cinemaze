@@ -7,9 +7,10 @@ import { SearchPage } from "pages/SearchPage";
 import { ManagePage } from "pages/ManagePage";
 import { StatisticsPage } from "pages/StatisticsPage";
 import { UserPage } from "pages/UserPage";
-import { EmailIsVerified } from "widgets/Messages/EmailIsVerified";
+import { EmailVerificationPage } from "pages/EmailVerificationPage";
 
 import { IRoute } from "./types";
+import { BanPage } from "pages/BanPage";
 
 export enum AppRoutes {
     MAIN = "main",
@@ -23,6 +24,7 @@ export enum AppRoutes {
     RESETPASSWORD = "resetpassword",
     EMAILVERIFICATION = "emailverificaiton",
     MANAGE_USERS = "manage",
+    BAN = "ban",
 }
 
 export const routePath: Record<AppRoutes, string> = {
@@ -37,6 +39,7 @@ export const routePath: Record<AppRoutes, string> = {
     [AppRoutes.RESETPASSWORD]: "/login",
     [AppRoutes.EMAILVERIFICATION]: "/emailverificaiton",
     [AppRoutes.MANAGE_USERS]: "/manage",
+    [AppRoutes.BAN]: "/ban",
 };
 
 export const routeConfig: Record<AppRoutes, IRoute> = {
@@ -110,7 +113,7 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
     },
 
     [AppRoutes.EMAILVERIFICATION]: {
-        element: <EmailIsVerified />,
+        element: <EmailVerificationPage />,
         path: routePath.emailverificaiton,
         label: "",
         auth: false,
@@ -122,5 +125,12 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         label: "r-manage",
         auth: true,
         allowedRoles: ["admin"],
+    },
+    [AppRoutes.BAN]: {
+        element: <BanPage />,
+        path: routePath.ban,
+        label: "r-ban",
+        auth: true,
+        allowedRoles: ["user", "admin"],
     },
 };
