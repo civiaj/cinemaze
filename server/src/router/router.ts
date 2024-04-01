@@ -9,6 +9,7 @@ import {
     resetPasswordSchema,
     setDisplayNameSchema,
     verifyEmailSchema,
+    updateRoleSchema,
 } from "../schema/user.schema";
 import authController from "../controller/auth.controller";
 import deserializeUser from "../middleware/deserializeUser";
@@ -57,7 +58,6 @@ router.patch(
 router.patch(
     "/user/update/password",
     deserializeUser,
-
     validate(setPasswordSchema),
     userController.updatePassword
 );
@@ -67,6 +67,12 @@ router.patch(
     uploadSingleImage,
     resizeSingleImage,
     userController.updateUserPhoto
+);
+router.patch(
+    "/user/update/role",
+    deserializeUser,
+    validate(updateRoleSchema),
+    userController.updateRole
 );
 router.patch("/user/remove/photo", deserializeUser, userController.deleteUserPhoto);
 
@@ -115,7 +121,7 @@ router.get(
     "/manage/users",
     deserializeUser,
     detectBan,
-    roles(["admin"]),
+    roles(["admin", "admin-test"]),
     validate(getAllUsersSchema),
     manageController.getAll
 );

@@ -2,7 +2,12 @@ import { NextFunction, Response, Request } from "express";
 import userService from "../service/user.service";
 import tokenService from "../service/token.service";
 import ApiError from "../exceptions/api.error";
-import { DisplayNameInput, RemoveSessionInput, UpdatePasswordInput } from "../schema/user.schema";
+import {
+    DisplayNameInput,
+    RemoveSessionInput,
+    UpdatePasswordInput,
+    UpdateRolesInput,
+} from "../schema/user.schema";
 import fs from "fs";
 import path from "path";
 import userModel, { User } from "../model/user.model";
@@ -125,6 +130,23 @@ class UserController {
         }
     }
 
+    async updateRole(req: Request<{}, {}, UpdateRolesInput>, res: Response, next: NextFunction) {
+        try {
+            const user = await userService.findUser({ id: res.locals.user.id });
+            if (!user) throw ApiError.BadRequest("Нет пользователя с таким id");
+
+            const { role } = req.body;
+            if (role === "admin") throw ApiError.NotAllowed();
+
+            user.role = role;
+            user.save();
+
+            return res.json({ message: "success" });
+        } catch (e) {
+            next(e);
+        }
+    }
+
     // async deleteManyUsers(req: Request, res: Response, next: NextFunction) {
     //     const p = "testemail";
     //     await userModel.deleteMany({ email: { $regex: p } });
@@ -132,27 +154,27 @@ class UserController {
     //     return res.status(200);
     // }
 
-    async addUsersOfNumber(req: Request, res: Response, next: NextFunction) {
-        try {
-            const number = req.body.number;
-            const users: Pick<User, "email" | "displayName" | "password" | "id">[] = [];
+    // async addUsersOfNumber(req: Request, res: Response, next: NextFunction) {
+    //     try {
+    //         const number = req.body.number;
+    //         const users: Pick<User, "email" | "displayName" | "password" | "id">[] = [];
 
-            for (let i = 0; i < number; i++) {
-                const newUser: Pick<User, "email" | "displayName" | "password" | "id"> = {
-                    email: `testemail${i}@mail.com`,
-                    displayName: `Name ${i}`,
-                    password: `123${i}`,
-                    id: String(Math.random() + i),
-                };
-                users[i] = newUser;
-            }
+    //         for (let i = 0; i < number; i++) {
+    //             const newUser: Pick<User, "email" | "displayName" | "password" | "id"> = {
+    //                 email: `testemail${i}@mail.com`,
+    //                 displayName: `Name ${i}`,
+    //                 password: `123${i}`,
+    //                 id: String(Math.random() + i),
+    //             };
+    //             users[i] = newUser;
+    //         }
 
-            const data = await userModel.insertMany(users);
-            return res.status(200).json({ data });
-        } catch (e) {
-            next(e);
-        }
-    }
+    //         const data = await userModel.insertMany(users);
+    //         return res.status(200).json({ data });
+    //     } catch (e) {
+    //         next(e);
+    //     }
+    // }
 }
 
 export default new UserController();

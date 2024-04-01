@@ -6,6 +6,4 @@ export const SECTIONS_USER = {
     ROLE: "role",
 } as const;
 
-export type TRoles = "user" | "admin" | "fake-admin";
-
 export type TUserSection = ObjectValues<typeof SECTIONS_USER>;

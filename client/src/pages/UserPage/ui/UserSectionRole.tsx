@@ -3,10 +3,12 @@ import { Button } from "shared/ui/Button/Button";
 import { GridMsg } from "shared/ui/GridMsg/GridMsg";
 import { Text } from "shared/ui/Text/Text";
 
-import { TRoles } from "pages/UserPage/model/types";
 import { useState } from "react";
 import { classNames } from "shared/lib/classNames";
 import { roleOptions } from "../model/data";
+import { TRoles } from "entities/User";
+import { useUpdateRoleMutation } from "entities/User/model/userApi";
+import formatServerError from "shared/api/helpers/formatServerError";
 
 type Props = {
     onClose: () => void;
@@ -15,6 +17,14 @@ type Props = {
 
 export const UserSectionRole = ({ onClose, role }: Props) => {
     const [newRole, setNewRole] = useState<TRoles | null>(null);
+    const [updateRole, { isLoading, isError, error }] = useUpdateRoleMutation();
+
+    const onUpdateRole = () => {
+        if (!newRole) return;
+        updateRole(newRole)
+            .unwrap()
+            .then(() => onClose());
+    };
 
     return (
         <Modal onClose={onClose} header={"Изменение роли"}>
@@ -48,10 +58,19 @@ export const UserSectionRole = ({ onClose, role }: Props) => {
                         })}
                     </div>
                 </div>
-                <GridMsg className="self-start bg-my-red-300" msg={""} isOpen={false} />
+                <GridMsg
+                    className="self-start bg-my-red-300"
+                    msg={formatServerError(error)}
+                    isOpen={isError}
+                />
             </div>
             <div className="flex gap-2 justify-end">
-                <Button disabled={!newRole} isLoading={false} onClick={() => {}} theme="blue">
+                <Button
+                    disabled={!newRole}
+                    isLoading={isLoading}
+                    onClick={onUpdateRole}
+                    theme="blue"
+                >
                     Сохранить
                 </Button>
                 <Button theme="regular" onClick={onClose}>

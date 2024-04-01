@@ -1,4 +1,5 @@
 import { TypeOf, object, string, z } from "zod";
+import { roles } from "../types/types";
 
 export const displayNameSchema = z
     .string()
@@ -87,6 +88,15 @@ export const removeSessionSchema = object({
     }),
 });
 
+export const updateRoleSchema = object({
+    body: object({
+        role: z.enum(roles, {
+            required_error: "параметр role обязателен",
+            invalid_type_error: "неверно указан role",
+        }),
+    }),
+});
+
 export type CreateUserInput = TypeOf<typeof createUserSchema>["body"];
 export type LoginUserInput = TypeOf<typeof loginUserSchema>["body"];
 export type VerifyEmailInput = TypeOf<typeof verifyEmailSchema>["params"];
@@ -95,3 +105,4 @@ export type RemoveSessionInput = TypeOf<typeof removeSessionSchema>["body"];
 export type UpdatePasswordInput = TypeOf<typeof setPasswordSchema>["body"];
 export type EmailInput = TypeOf<typeof emailSchema>["body"];
 export type ResetPasswordInput = TypeOf<typeof resetPasswordSchema>;
+export type UpdateRolesInput = TypeOf<typeof updateRoleSchema>["body"];

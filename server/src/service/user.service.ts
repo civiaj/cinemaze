@@ -2,7 +2,16 @@ import { FilterQuery, QueryOptions, Types } from "mongoose";
 import userModel, { User } from "../model/user.model";
 import ApiError from "../exceptions/api.error";
 import { GetAllUsersInput } from "../schema/manage.schema";
-import { Locale, Order } from "../types/types";
+import { Locale, Order, Roles } from "../types/types";
+
+type GetAllUsersProps = {
+    pageNumber: number;
+    sortField: GetAllUsersInput["filter"];
+    orderQuery: Order;
+    locale: Locale;
+    searchQuery?: string;
+    role: Roles;
+};
 
 class UserService {
     async createUser(input: Partial<User>) {
@@ -24,13 +33,9 @@ class UserService {
         return userModel.findOne(filter, {}, options).select("+password");
     }
 
-    async getAll(
-        pageNumber: number,
-        sortField: GetAllUsersInput["filter"],
-        orderQuery: Order,
-        locale: Locale,
-        searchQuery?: string
-    ) {
+    async getAll(getAll: GetAllUsersProps) {
+        const { locale, orderQuery, pageNumber, sortField, searchQuery, role } = getAll;
+
         const limit = 20;
         const skip = (pageNumber - 1) * limit;
 
@@ -53,7 +58,7 @@ class UserService {
             sortIfEqual = { displayName: 1 };
         }
 
-        const users = await userModel
+        let users = await userModel
             .find(
                 filter,
                 {},
@@ -66,10 +71,20 @@ class UserService {
             )
             .lean();
 
+        if (role === "admin-test") {
+            users = users.map((user) => {
+                return { ...user, email: hideEmail(user.email) };
+            });
+        }
+
         const total = await userModel.countDocuments(filter);
 
         return { users, totalPages: Math.ceil(total / limit) };
     }
 }
+
+const hideEmail = (email: string) => {
+    return email.slice(0, 2) + "*".repeat(10) + email.slice(-1);
+};
 
 export default new UserService();

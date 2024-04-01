@@ -9,4 +9,4 @@ export {
     useDeletePhotoMutation,
 } from "./model/userApi";
 export { selectUser, getIsLogged } from "./model/selectors";
-export type { TUser, SessionIdentifier } from "./model/types";
+export type { TUser, SessionIdentifier, TRoles } from "./model/types";

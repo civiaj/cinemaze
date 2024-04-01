@@ -1,6 +1,6 @@
 import { TypeOf, boolean, object, string, z } from "zod";
 import { displayNameSchema } from "./user.schema";
-import { locales } from "../types/types";
+import { locales, roles } from "../types/types";
 
 const filters = [
     "displayName",
@@ -11,8 +11,6 @@ const filters = [
     "verified",
     "isBanned",
 ] as const;
-
-const roles = ["user", "admin", "admin-test"] as const;
 
 export const getOneUserSchema = object({
     params: object({

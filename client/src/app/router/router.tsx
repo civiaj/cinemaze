@@ -48,7 +48,7 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.default,
         label: "",
         auth: false,
-        allowedRoles: ["user", "admin"],
+        allowedRoles: ["user", "admin", "admin-test"],
     },
 
     [AppRoutes.MAIN]: {
@@ -56,7 +56,7 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.main,
         label: "r-main",
         auth: false,
-        allowedRoles: ["user", "admin"],
+        allowedRoles: ["user", "admin", "admin-test"],
     },
 
     [AppRoutes.DETAILS]: {
@@ -64,7 +64,7 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.details + "/:id",
         label: "",
         auth: false,
-        allowedRoles: ["user", "admin"],
+        allowedRoles: ["user", "admin", "admin-test"],
     },
 
     [AppRoutes.SEARCH]: {
@@ -72,7 +72,7 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.search,
         label: "r-search",
         auth: false,
-        allowedRoles: ["user", "admin"],
+        allowedRoles: ["user", "admin", "admin-test"],
     },
 
     [AppRoutes.LOGIN]: {
@@ -80,14 +80,14 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.login,
         label: "r-login",
         auth: false,
-        allowedRoles: ["user", "admin"],
+        allowedRoles: ["user", "admin", "admin-test"],
     },
     [AppRoutes.RESETPASSWORD]: {
         element: <LoginPage />,
         path: routePath.login,
         label: "r-login",
         auth: false,
-        allowedRoles: ["user", "admin"],
+        allowedRoles: ["user", "admin", "admin-test"],
     },
 
     [AppRoutes.FAVORITE]: {
@@ -95,21 +95,21 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.favorite,
         label: "r-favorite",
         auth: true,
-        allowedRoles: ["user", "admin"],
+        allowedRoles: ["user", "admin", "admin-test"],
     },
     [AppRoutes.STATISTICS]: {
         element: <StatisticsPage />,
         path: routePath.statistics,
         label: "r-statistics",
         auth: true,
-        allowedRoles: ["user", "admin"],
+        allowedRoles: ["user", "admin", "admin-test"],
     },
     [AppRoutes.USER]: {
         element: <UserPage />,
         path: routePath.user,
         label: "r-user",
         auth: true,
-        allowedRoles: ["user", "admin"],
+        allowedRoles: ["user", "admin", "admin-test"],
     },
 
     [AppRoutes.EMAILVERIFICATION]: {
@@ -124,13 +124,13 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.manage,
         label: "r-manage",
         auth: true,
-        allowedRoles: ["admin"],
+        allowedRoles: ["admin", "admin-test"],
     },
     [AppRoutes.BAN]: {
         element: <BanPage />,
         path: routePath.ban,
         label: "r-ban",
         auth: true,
-        allowedRoles: ["user", "admin"],
+        allowedRoles: ["user", "admin", "admin-test"],
     },
 };

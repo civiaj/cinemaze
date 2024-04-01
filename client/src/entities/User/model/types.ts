@@ -14,6 +14,7 @@ export type TUser = {
 };
 
 export type SessionIdentifier = { os: string; browser: string; version: string };
+export type TRoles = "user" | "admin" | "admin-test";
 
 export type SessionsResponse = {
     current: SessionIdentifier;

@@ -1,6 +1,6 @@
 import { authAndUserSliceActions } from "entities/AuthAndUser";
 import { userActions } from "entities/User";
-import { SessionsResponse, TUser } from "entities/User/model/types";
+import { SessionsResponse, TRoles, TUser } from "../model/types";
 import toast from "react-hot-toast";
 import { serverApi } from "shared/api/serverApi";
 import { ServerMessageResponse } from "shared/api/types";
@@ -138,6 +138,25 @@ export const userApi = serverApi.injectEndpoints({
             },
             invalidatesTags: ["Session"],
         }),
+
+        updateRole: builder.mutation<ServerMessageResponse, TRoles>({
+            query: (newRole) => ({
+                url: "/user/update/role",
+                method: "PATCH",
+                credentials: "include",
+                body: { role: newRole },
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    await queryFulfilled;
+                    toast.success(`Роль изменена на ${arg}`);
+                    const { refetch } = dispatch(userApi.endpoints.getMe.initiate("withoutError"));
+                    refetch();
+                } catch (e) {
+                    //error middleware
+                }
+            },
+        }),
     }),
     overrideExisting: false,
 });
@@ -151,4 +170,5 @@ export const {
     useUpdatePasswordMutation,
     useUpdatePhotoMutation,
     useDeletePhotoMutation,
+    useUpdateRoleMutation,
 } = userApi;

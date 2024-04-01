@@ -26,13 +26,14 @@ class ManageController {
     async getAll(req: Request<{}, {}, {}, GetAllUsersInput>, res: Response, next: NextFunction) {
         try {
             const { page, filter, order, query, locale } = req.query;
-            const data = await userService.getAll(
-                Number(page),
-                filter,
-                Number(order) as Order,
+            const data = await userService.getAll({
                 locale,
-                query
-            );
+                orderQuery: Number(order) as Order,
+                pageNumber: Number(page),
+                role: res.locals.user.role,
+                sortField: filter,
+                searchQuery: query,
+            });
             return res.status(200).json({ data });
         } catch (e) {
             next(e);
