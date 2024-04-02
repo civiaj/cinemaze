@@ -22,9 +22,9 @@ class FavoriteService {
         filmDocumentId: Types.ObjectId,
         payload: CreateFavoriteInput["favorite"]
     ) {
-        const favorite = await this.getFavorite(userId, filmDocumentId);
+        const exists = Boolean((await this.getFavorite(userId, filmDocumentId)).length);
 
-        return favorite.length
+        return exists
             ? this.updateFavorite(userId, filmDocumentId, payload)
             : this.createFavorite(userId, filmDocumentId, payload);
     }

@@ -1,44 +1,49 @@
 import { Router } from "express";
-import validate from "../middleware/validate";
-import {
-    createUserSchema,
-    emailSchema,
-    loginUserSchema,
-    setPasswordSchema,
-    removeSessionSchema,
-    resetPasswordSchema,
-    setDisplayNameSchema,
-    verifyEmailSchema,
-    updateRoleSchema,
-} from "../schema/user.schema";
 import authController from "../controller/auth.controller";
-import deserializeUser from "../middleware/deserializeUser";
+import favoriteController from "../controller/favorite.controller";
+import manageController from "../controller/manage.controller";
 import userController from "../controller/user.controller";
+import deserializeUser from "../middleware/deserializeUser";
+import detectBan from "../middleware/detectBan";
 import roles from "../middleware/roles";
+import validate from "../middleware/validate";
 import {
     getFavoriteAllSchema,
     getFavoriteOneSchema,
     removeFavoriteOneSchema,
 } from "../schema/favorite.schema";
-import favoriteController from "../controller/favorite.controller";
 import { createFilmSchema } from "../schema/film.schema";
-import { resizeSingleImage, uploadSingleImage } from "../upload/single.image";
-import manageController from "../controller/manage.controller";
 import {
     getAllUsersSchema,
     getOneUserSchema,
+    manageUserChangeSchema,
     mangeUserBanSchema,
     mangeUserUnbanSchema,
 } from "../schema/manage.schema";
-import { manageUserChangeSchema } from "../schema/manage.schema";
-import detectBan from "../middleware/detectBan";
+import {
+    createUserSchema,
+    emailSchema,
+    loginUserSchema,
+    removeSessionSchema,
+    resetPasswordSchema,
+    setDisplayNameSchema,
+    setPasswordSchema,
+    updateRoleSchema,
+    verifyEmailSchema,
+} from "../schema/user.schema";
+import { resizeSingleImage, uploadSingleImage } from "../upload/single.image";
 
 const router = Router();
 
 // Авторизация
 router.post("/register", validate(createUserSchema), authController.register.bind(authController));
 router.post("/login", validate(loginUserSchema), authController.login.bind(authController));
-router.post("/checkPassword", validate(loginUserSchema), authController.checkPassword);
+router.post(
+    "/checkPassword",
+    deserializeUser,
+    validate(loginUserSchema),
+    authController.checkPassword
+);
 router.get("/refresh", authController.refresh.bind(authController));
 router.get("/logout", deserializeUser, authController.logout.bind(authController));
 router.get("/activate/:verificationCode", validate(verifyEmailSchema), authController.verifyEmail);
@@ -162,8 +167,12 @@ router.get(
     manageController.unbanOne
 );
 
+// OAuth
+
+router.get("/oauth/google", authController.googleOAuthHandler.bind(authController));
+
 // Create and delete num of users for test
-// router.delete("/deleteTest", userController.deleteManyUsers);
-// router.post("/addUsersOfNumber", userController.addUsersOfNumber);
+router.delete("/deleteTestUsers", userController.deleteTestUsers);
+router.post("/addTestUsers", userController.addTestUsers);
 
 export default router;

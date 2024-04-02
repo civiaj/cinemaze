@@ -1,8 +1,8 @@
-import { FilterQuery, QueryOptions, Types } from "mongoose";
+import { FilterQuery, ProjectionType, QueryOptions, Types, UpdateQuery } from "mongoose";
 import userModel, { User } from "../model/user.model";
 import ApiError from "../exceptions/api.error";
 import { GetAllUsersInput } from "../schema/manage.schema";
-import { Locale, Order, Roles } from "../types/types";
+import { Locale, Order, Providers, Roles } from "../types/types";
 
 type GetAllUsersProps = {
     pageNumber: number;
@@ -14,23 +14,19 @@ type GetAllUsersProps = {
 };
 
 class UserService {
-    async createUser(input: Partial<User>) {
-        const candidate = await userModel.findOne({ email: input.email });
+    async createUser(newUser: Partial<User>, provider: Providers = "local") {
+        const candidate = await userModel.findOne({ email: newUser.email, provider });
         if (candidate)
             throw ApiError.BadRequest("Пользователь с таким почтовым адресом существует.");
-        return userModel.create(input);
+        return userModel.create(newUser);
     }
 
-    async deleteUser(email: string) {
-        return userModel.deleteOne({ email }).lean();
-    }
-
-    async findUser(filter: FilterQuery<User>, options: QueryOptions = {}) {
-        return userModel.findOne(filter, {}, options).select("+photo");
-    }
-
-    async findUserWithPassword(filter: FilterQuery<User>, options: QueryOptions = {}) {
-        return userModel.findOne(filter, {}, options).select("+password");
+    async findUser(
+        filter: FilterQuery<User>,
+        projection: ProjectionType<User> = {},
+        options: QueryOptions = {}
+    ) {
+        return userModel.findOne(filter, projection, options);
     }
 
     async getAll(getAll: GetAllUsersProps) {
@@ -97,6 +93,14 @@ class UserService {
         );
 
         return result.modifiedCount;
+    }
+
+    async findAndUpdateUser(
+        filter: FilterQuery<User>,
+        update: UpdateQuery<User>,
+        options: QueryOptions<User> = {}
+    ) {
+        return userModel.findOneAndUpdate(filter, update, options);
     }
 }
 

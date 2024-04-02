@@ -36,7 +36,7 @@ export const UserSectionPassword = (props: Props) => {
 };
 
 const CheckPasswordSection = (props: Props & { onSetChecked: () => void }) => {
-    const { photo, name, email, onSetChecked, onClose } = props;
+    const { photo, name, onSetChecked, onClose } = props;
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [checkPassword, { isLoading, error, isError }] = useCheckPasswordMutation();
@@ -49,7 +49,7 @@ const CheckPasswordSection = (props: Props & { onSetChecked: () => void }) => {
         e.preventDefault();
         const password = new FormData(e.currentTarget).get("password") as string;
         if (!password) return;
-        checkPassword({ password, email })
+        checkPassword({ password })
             .unwrap()
             .then(() => onSetChecked());
     };

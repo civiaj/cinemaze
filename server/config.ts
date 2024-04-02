@@ -32,4 +32,13 @@ export const API_URL = `http://localhost:${PORT}`;
 export const CLIENT_URL = `http://localhost:5173`;
 export const BCRYPT_SALT_ROUNDS = 10;
 export const EMAIL_FROM = "Rest Api Test";
-export const DEFAULT_USER_PHOTO = "default-user.jpeg";
+
+export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID as string;
+export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET as string;
+export const GOOGLE_REDIRECT_URL = process.env.GOOGLE_REDIRECT_URL as string;
+
+export const STATIC_PROFILE_PATH = "/static/profiles/";
+export const STATIC_PROFILE_ROUTE = "/api/static/profiles/";
+export const STATIC_PROFILE_NEW = API_URL + STATIC_PROFILE_ROUTE;
+export const STATIC_PROFILE_DEFAULT = API_URL + STATIC_PROFILE_ROUTE + "default-user.jpeg";
+export const ADMINS = ["shlenskiyevgeniy@gmail.com"];

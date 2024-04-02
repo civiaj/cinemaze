@@ -115,7 +115,7 @@ export const ManageList = () => {
                                                 isFetching && !isLoading,
                                         })}
                                     >
-                                        <td scope="row" colSpan={6}>
+                                        <td scope="row" colSpan={8}>
                                             <div className="h-56 flex items-center justify-center">
                                                 <Text className="font-normal">
                                                     Ничего не найдено. Попробуйте изменить параметры

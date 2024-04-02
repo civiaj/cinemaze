@@ -44,6 +44,7 @@ export const ManageViewAndUpdate = ({
         banExpiration,
         banMessage,
         id,
+        provider,
     } = user;
     const [isUnban, setIsUnban] = useState(false);
     const defaultChange: ChangeUserData = { displayName, role, deletePhoto: false };
@@ -64,7 +65,6 @@ export const ManageViewAndUpdate = ({
     const onCloseUnban = () => {
         onPreventCloseActive(false);
         setIsUnban(false);
-        unban.reset();
     };
 
     const onUpdateUser = (data: ChangeUserData) => {
@@ -83,6 +83,11 @@ export const ManageViewAndUpdate = ({
         onSetManageView("info");
         setChangeData(defaultChange);
         reset();
+    };
+
+    const handleCancelUnban = () => {
+        setIsUnban(false);
+        onPreventCloseActive(false);
     };
 
     return (
@@ -130,6 +135,9 @@ export const ManageViewAndUpdate = ({
                         itemHeight={20}
                     />
                 )}
+
+                <p>Provider:</p>
+                <p className="truncate">{provider}</p>
 
                 <p>UpdatedAt:</p>
                 <p>{formatDate(new Date(updatedAt), i18n.language, "long")}</p>
@@ -274,11 +282,7 @@ export const ManageViewAndUpdate = ({
                         >
                             <Text>Разблокировать</Text>
                         </Button>
-                        <Button
-                            onClick={() => setIsUnban(false)}
-                            theme="regular"
-                            className="font-medium"
-                        >
+                        <Button onClick={handleCancelUnban} theme="regular" className="font-medium">
                             <Text>Отмена</Text>
                         </Button>
                     </div>

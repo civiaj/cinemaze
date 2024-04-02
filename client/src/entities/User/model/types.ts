@@ -11,10 +11,12 @@ export type TUser = {
     isBanned: boolean;
     banExpiration?: string | null;
     banMessage?: string | null;
+    provider: TProviders;
 };
 
 export type SessionIdentifier = { os: string; browser: string; version: string };
 export type TRoles = "user" | "admin" | "admin-test";
+export type TProviders = "local" | "google" | "test";
 
 export type SessionsResponse = {
     current: SessionIdentifier;

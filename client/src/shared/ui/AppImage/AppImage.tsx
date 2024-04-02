@@ -40,9 +40,6 @@ export const AppImage = (props: ImageProps) => {
 
     const imageRef = useRef() as MutableRefObject<HTMLImageElement>;
 
-    const source =
-        onErrorSrc === "user" ? import.meta.env.VITE_SERVER_STATIC_USER_PHOTO + src : src;
-
     return (
         <div
             style={containerStyle}
@@ -54,7 +51,7 @@ export const AppImage = (props: ImageProps) => {
                 ref={imageRef}
                 onError={handleImageError}
                 loading="lazy"
-                src={source}
+                src={src}
                 className={classNames(
                     "h-full w-full object-cover object-center opacity-100 transition-[opacity] duration-300",
                     {},

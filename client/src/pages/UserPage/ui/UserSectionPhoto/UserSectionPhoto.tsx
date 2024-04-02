@@ -15,10 +15,12 @@ type Props = {
     onClose: () => void;
 };
 
+const defaultPhoto = import.meta.env.VITE_STATIC_PROFILE_DEFAULT;
+
 export const UserSectionPhoto = (props: Props) => {
     const { photo, onClose } = props;
     const [searchParams, setSearchParams] = useSearchParams();
-    const noPhoto = Boolean(photo === "default-user.jpeg");
+    const noPhoto = photo === defaultPhoto;
 
     const isChanging = noPhoto || searchParams.get("change") === "1";
     const isDeleting = !noPhoto && searchParams.get("change") === "2";

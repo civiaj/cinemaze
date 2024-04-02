@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { DEFAULT_USER_PHOTO } from "../../config";
+import { STATIC_PROFILE_DEFAULT } from "../../config";
 import ApiError from "../exceptions/api.error";
 import {
     GetAllUsersInput,
@@ -53,7 +53,9 @@ class ManageController {
 
             user.displayName = displayName;
             user.role = role;
-            if (deletePhoto) user.photo = DEFAULT_USER_PHOTO;
+            if (deletePhoto && user.photo !== STATIC_PROFILE_DEFAULT) {
+                user.photo = STATIC_PROFILE_DEFAULT;
+            }
             await user.save();
 
             return res.status(200).json({ message: "success" });

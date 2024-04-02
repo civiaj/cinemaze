@@ -1,8 +1,9 @@
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 import mongoose from "mongoose";
-import { BCRYPT_SALT_ROUNDS, DEFAULT_USER_PHOTO } from "../../config";
+import { BCRYPT_SALT_ROUNDS, STATIC_PROFILE_DEFAULT } from "../../config";
 import { displayNameSchema, passwordSchema } from "../schema/user.schema";
+import { Providers } from "../types/types";
 
 export type User = {
     displayName: string;
@@ -20,6 +21,7 @@ export type User = {
     isBanned: boolean;
     banExpiration: Date | null;
     banMessage: string | null;
+    provider: Providers;
 };
 
 type TUserMethods = {
@@ -33,11 +35,11 @@ type TUserModel = mongoose.Model<User, {}, TUserMethods>;
 const userSchema = new mongoose.Schema<User, TUserModel, TUserMethods>(
     {
         id: { type: String },
-        email: { type: String, required: true, unique: true },
+        email: { type: String, required: true },
         displayName: { type: String, required: true },
-        password: { type: String, required: true, min: 8, max: 32, select: false },
-        role: { type: String, default: "user" },
-        photo: { type: String, default: DEFAULT_USER_PHOTO },
+        password: { type: String, min: 8, max: 32, select: false },
+        role: { type: String, default: "admin-test" },
+        photo: { type: String, default: STATIC_PROFILE_DEFAULT },
         verified: { type: Boolean, default: false },
         verificationCode: { type: String, select: false, default: null },
         passwordResetToken: { type: String, select: false, default: null },
@@ -45,6 +47,7 @@ const userSchema = new mongoose.Schema<User, TUserModel, TUserMethods>(
         isBanned: { type: Boolean, default: false },
         banMessage: { type: String },
         banExpiration: { type: Date },
+        provider: { type: String, default: "local" },
     },
     {
         versionKey: false,

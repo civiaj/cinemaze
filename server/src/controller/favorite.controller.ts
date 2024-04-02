@@ -21,7 +21,7 @@ class FavoriteController {
 
             if (!film) throw ApiError.BadRequest("Ошибка при обновлении фильма");
 
-            await favoriteService.modifyFavorite(res.locals.user, film._id, req.body.favorite);
+            await favoriteService.modifyFavorite(res.locals.user.id, film._id, req.body.favorite);
 
             return res.status(200).json({ message: "Добавлено в избранное" });
         } catch (e) {

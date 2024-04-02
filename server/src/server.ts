@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { CLIENT_URL, PORT } from "../config";
+import { CLIENT_URL, PORT, STATIC_PROFILE_PATH, STATIC_PROFILE_ROUTE } from "../config";
 import logger from "./utils/logger";
 import connect from "./utils/connect";
 import router from "./router/router";
@@ -15,7 +15,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/api/static/profiles", express.static(path.join(__dirname, "../static/profiles")));
+app.use(STATIC_PROFILE_ROUTE, express.static(path.join(__dirname, `..${STATIC_PROFILE_PATH}`)));
 
 app.use(cookieParser());
 

@@ -1,16 +1,16 @@
-import mongoose, { FilterQuery, Types } from "mongoose";
+import jwt from "jsonwebtoken";
+import { FilterQuery, Types } from "mongoose";
 import {
     JWT_ACCESS_PRIVATE_KEY,
-    JWT_REFRESH_PRIVATE_KEY,
     JWT_ACCESS_PUBLIC_KEY,
-    JWT_REFRESH_PUBLIC_KEY,
     JWT_ACCESS_TTL,
+    JWT_REFRESH_PRIVATE_KEY,
+    JWT_REFRESH_PUBLIC_KEY,
     JWT_REFRESH_TTL,
 } from "../../config";
+import ApiError from "../exceptions/api.error";
 import tokenModel, { Token } from "../model/token.model";
 import { User } from "../model/user.model";
-import jwt from "jsonwebtoken";
-import ApiError from "../exceptions/api.error";
 
 type Keys = "access" | "refresh";
 
@@ -37,7 +37,7 @@ class TokenService {
         }
     }
 
-    private async saveToken(id: Types.ObjectId | string, refreshToken: string, userAgent: string) {
+    async saveToken(id: Types.ObjectId | string, refreshToken: string, userAgent: string) {
         const tokenDocument = await tokenModel.findOne({ user: id, userAgent });
         if (tokenDocument) {
             tokenDocument.refreshToken = refreshToken;
@@ -46,15 +46,15 @@ class TokenService {
         return tokenModel.create({ user: id, refreshToken, userAgent });
     }
 
-    async signTokens(user: User, userAgent: string) {
-        const accessToken = this.signJwt({ id: user.id }, "access", {
+    async signTokens(id: User["id"], userAgent: string) {
+        const accessToken = this.signJwt({ id }, "access", {
             expiresIn: JWT_ACCESS_TTL,
         });
-        const refreshToken = this.signJwt({ id: user.id }, "refresh", {
+        const refreshToken = this.signJwt({ id }, "refresh", {
             expiresIn: JWT_REFRESH_TTL,
         });
 
-        await this.saveToken(user.id, refreshToken, userAgent);
+        await this.saveToken(id, refreshToken, userAgent);
 
         return { accessToken, refreshToken };
     }

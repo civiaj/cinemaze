@@ -10,6 +10,8 @@ import { Heading } from "shared/ui/Text/Heading";
 import { Text } from "shared/ui/Text/Text";
 
 import { LoginSections } from "../model/types";
+import { OAuthOptions } from "./OAuthOptions";
+import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
 
 type Props = {
     onSectionChange: (newValue?: LoginSections) => void;
@@ -31,9 +33,9 @@ export const LoginForm = (props: Props) => {
 
     return (
         <form onSubmit={onSubmitHandler}>
-            <Box className="w-80 px-6">
+            <Box className="w-80 px-6 gap-4">
                 <Heading headinglevel={1}>{t("t_Login")}</Heading>
-
+                <UserBoxSeparator />
                 <div className="w-full flex flex-col gap-2">
                     <Input
                         type="text"
@@ -75,6 +77,8 @@ export const LoginForm = (props: Props) => {
                         <Text>{t("Reg")}</Text>
                     </Button>
                 </div>
+                <UserBoxSeparator />
+                <OAuthOptions />
             </Box>
         </form>
     );

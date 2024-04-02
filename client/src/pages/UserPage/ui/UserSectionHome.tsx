@@ -110,17 +110,22 @@ export const UserSectionHome = ({ user }: Props) => {
                     </div>
                 </UserBox>
             </AppLink>
-            <AppLink to={`${routePath.user}?section=${SECTIONS_USER.PASSWORD}`} theme="user-menu">
-                <UserBox>
-                    <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
-                        <div className="font-medium">Пароль</div>
-                        <div className="flex justify-between items-center">
-                            <div>Изменить пароль</div>
-                            <Right className="text-xl" />
+            {["local", "test"].includes(user.provider) && (
+                <AppLink
+                    to={`${routePath.user}?section=${SECTIONS_USER.PASSWORD}`}
+                    theme="user-menu"
+                >
+                    <UserBox>
+                        <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
+                            <div className="font-medium">Пароль</div>
+                            <div className="flex justify-between items-center">
+                                <div>Изменить пароль</div>
+                                <Right className="text-xl" />
+                            </div>
                         </div>
-                    </div>
-                </UserBox>
-            </AppLink>
+                    </UserBox>
+                </AppLink>
+            )}
             <AppLink to={`${routePath.user}?section=${SECTIONS_USER.ROLE}`} theme="user-menu">
                 <UserBox>
                     <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
