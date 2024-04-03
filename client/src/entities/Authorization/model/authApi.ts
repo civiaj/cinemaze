@@ -72,10 +72,10 @@ const authApi = serverApi.injectEndpoints({
             },
         }),
         checkPassword: builder.mutation<GenericResponse, { password: string }>({
-            query: (body) => ({
+            query: ({ password }) => ({
                 url: "/checkPassword",
                 method: "POST",
-                body,
+                body: { password },
                 credentials: "include",
             }),
         }),

@@ -21,9 +21,11 @@ import {
     mangeUserUnbanSchema,
 } from "../schema/manage.schema";
 import {
+    checkPasswordSchema,
     createUserSchema,
     emailSchema,
     loginUserSchema,
+    passwordSchema,
     removeSessionSchema,
     resetPasswordSchema,
     setDisplayNameSchema,
@@ -41,7 +43,7 @@ router.post("/login", validate(loginUserSchema), authController.login.bind(authC
 router.post(
     "/checkPassword",
     deserializeUser,
-    validate(loginUserSchema),
+    validate(checkPasswordSchema),
     authController.checkPassword
 );
 router.get("/refresh", authController.refresh.bind(authController));

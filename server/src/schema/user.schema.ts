@@ -47,6 +47,12 @@ export const emailSchema = object({
     }),
 });
 
+export const checkPasswordSchema = object({
+    body: object({
+        password: passwordSchema,
+    }),
+});
+
 export const resetPasswordSchema = object({
     body: object({
         password: passwordSchema,
@@ -106,3 +112,4 @@ export type UpdatePasswordInput = TypeOf<typeof setPasswordSchema>["body"];
 export type EmailInput = TypeOf<typeof emailSchema>["body"];
 export type ResetPasswordInput = TypeOf<typeof resetPasswordSchema>;
 export type UpdateRolesInput = TypeOf<typeof updateRoleSchema>["body"];
+export type CheckPasswordInput = TypeOf<typeof checkPasswordSchema>["body"];
