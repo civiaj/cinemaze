@@ -47,7 +47,7 @@ export const ManageBan = ({ user, onSetManageView, onSetActive }: Props) => {
 
     return (
         <>
-            <div className="grid gap-x-4 grid-cols-[max-content,_1fr] gap-y-1 rounded-xl">
+            <div className="grid  grid-cols-[max-content,_1fr] gap-x-4 gap-y-1 rounded-xl">
                 <p>Заблокировать до:</p>
                 <div>
                     <AppDatePicker

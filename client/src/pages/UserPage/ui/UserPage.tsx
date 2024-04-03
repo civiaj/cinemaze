@@ -35,7 +35,7 @@ const UserPage = () => {
                 <UserSectionName onClose={onClose} name={user.displayName} />
             )}
             {section?.startsWith("devices") && <UserSectionDevices />}
-            {section?.startsWith("password") && (
+            {section?.startsWith("password") && user.provider === "local" && (
                 <UserSectionPassword
                     name={user.displayName}
                     photo={user.photo}

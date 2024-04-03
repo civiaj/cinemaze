@@ -46,7 +46,7 @@ export const Reviews = (props: ReviewsProps) => {
 
     if (isLoading) return <Spinner container="flex items-center justify-center" />;
 
-    if (data) {
+    if (data?.total) {
         return (
             <div
                 className={classNames(

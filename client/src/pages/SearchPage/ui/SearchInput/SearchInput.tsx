@@ -14,6 +14,7 @@ import { Overlay } from "shared/ui/Boxes/Overlay";
 import { Button } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
 import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
+import { useHideScroll } from "shared/hooks/useHideScroll";
 
 import { useSearchQuery } from "../../model/searchPageApi";
 import { searchPageActions } from "../../model/slice";
@@ -160,13 +161,16 @@ const SearchBody = ({ inputValue, onSetInactive, handleStartSearch }: SearchBody
     );
     const { t } = useTranslation();
 
+    useHideScroll();
+
     return (
-        <div
-            style={{ maxHeight }}
-            className="w-full bg-my-white border border-my-neutral-200 rounded-xl absolute top-full left-0 overflow-y-auto mb-5 mt-4"
-        >
-            <div className="flex flex-col px-2 py-2 gap-2">
+        <div className="overflow-hidden rounded-xl absolute top-full left-0 mb-5 mt-4 w-full">
+            <div
+                style={{ maxHeight }}
+                className="w-full bg-my-white border border-my-neutral-200 overflow-y-auto px-2 py-2 flex flex-col gap-2 overflow-x-hidden"
+            >
                 <SearchUserQueries inputValue={inputValue} startSearch={handleStartSearch} />
+
                 <SearchQueryResults
                     results={data?.films}
                     isLoading={isLoading || isFetching}

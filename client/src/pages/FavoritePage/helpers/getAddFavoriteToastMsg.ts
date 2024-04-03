@@ -9,8 +9,8 @@ const getAddFavoriteToastMsg = (favorite: Partial<TFavorite>) => {
         }
         case "hidden" in favorite: {
             message = favorite.hidden
-                ? `Фильм не будет отображаться в общей ленте`
-                : `Фильм снова отображается в общей ленте`;
+                ? `Фильм не будет отображаться в общей ленте и учитываться в статистике`
+                : `Фильм снова отображается в общей ленте и учитывается в статистике`;
             break;
         }
         case "userScore" in favorite: {

@@ -14,6 +14,7 @@ import {
     TStatistics,
 } from "../model/types";
 import { ServerMessageResponse } from "shared/api/types";
+import formatServerError from "shared/api/helpers/formatServerError";
 
 const userFilmsApi = serverApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -41,7 +42,9 @@ const userFilmsApi = serverApi.injectEndpoints({
                     await toast.promise(queryFulfilled, {
                         loading: getAddFavoriteToastMsg(favorite),
                         success: getAddFavoriteToastMsg(favorite),
-                        error: `Ошибка во время выполнения запроса`,
+                        error: (err) => {
+                            return formatServerError(err.error);
+                        },
                     });
                     dispatch(userFilmsApi.util.invalidateTags(["Favorites"]));
                 } catch (e) {

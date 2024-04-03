@@ -1,1 +1,1 @@
-export { BanPage } from "./BanPage";
+export { BanPageLazy as BanPage } from "./ui/BanPageLazy";

@@ -3,6 +3,7 @@ import { getSearchUserQueriesByInput } from "pages/SearchPage/model/selectors";
 import { searchPageActions } from "pages/SearchPage/model/slice";
 import { useTranslation } from "react-i18next";
 import { Search } from "shared/assets/icons";
+import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
 
 type Props = {
     inputValue?: string;
@@ -26,31 +27,34 @@ export const SearchUserQueries = ({ inputValue = "", startSearch }: Props) => {
     return (
         !!userQueries.length && (
             <>
-                <p className="px-2 text-sm font-medium">{t("Search-recent")}</p>
-                <ul className="flex flex-col">
-                    {userQueries.map((query) => (
-                        <li
-                            className="flex hover:bg-my-neutral-200 rounded-xl font-medium"
-                            key={query}
-                        >
-                            <button
-                                onClick={() => handleSearchUserQuery(query)}
-                                className="flex text-start items-center gap-2 px-2 py-1 flex-1"
+                <div className="flex flex-col gap-1">
+                    <p className="px-2 text-sm font-medium">{t("Search-recent")}</p>
+                    <ul className="flex flex-col">
+                        {userQueries.map((query) => (
+                            <li
+                                className="flex hover:bg-my-neutral-200 rounded-xl font-medium"
+                                key={query}
                             >
-                                <Search />
-                                <p className="font-medium line-clamp-1 text-ellipsis flex-1">
-                                    {query}
-                                </p>
-                            </button>
-                            <button
-                                onClick={() => handleDeleteUserQuery(query)}
-                                className="text-xs hover:underline shrink-0 pr-2 text-blue-500 z-50"
-                            >
-                                {t("Delete")}
-                            </button>
-                        </li>
-                    ))}
-                </ul>
+                                <button
+                                    onClick={() => handleSearchUserQuery(query)}
+                                    className="flex text-start items-center gap-2 px-2 py-1 flex-1"
+                                >
+                                    <Search />
+                                    <p className="font-medium line-clamp-1 text-ellipsis flex-1">
+                                        {query}
+                                    </p>
+                                </button>
+                                <button
+                                    onClick={() => handleDeleteUserQuery(query)}
+                                    className="text-xs hover:underline shrink-0 pr-2 text-blue-500 z-50"
+                                >
+                                    {t("Delete")}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <UserBoxSeparator />
             </>
         )
     );
