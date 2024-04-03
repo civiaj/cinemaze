@@ -1,6 +1,5 @@
 import { classNames } from "shared/lib/classNames";
 import { Button } from "shared/ui/Button/Button";
-
 import { TUser } from "entities/User";
 import { useBanOneMutation } from "pages/ManagePage/model/manageApi";
 import { BlockUserData, ManageActionViews } from "pages/ManagePage/model/types";
@@ -21,9 +20,8 @@ export const ManageBan = ({ user, onSetManageView, onSetActive }: Props) => {
     const [blockData, setBlockData] = useState(defaultBlock);
 
     const areSame =
-        blockData.banExpiration?.getDate() === defaultBlock.banExpiration?.getDate() &&
-        blockData.banExpiration?.getMonth() === defaultBlock.banExpiration?.getMonth() &&
-        blockData.banExpiration?.getFullYear() === defaultBlock.banExpiration?.getFullYear();
+        blockData.banExpiration?.setHours(0, 0, 0, 0) ===
+        defaultBlock.banExpiration?.setHours(0, 0, 0, 0);
 
     const [banOne, { isLoading, isError, error, reset }] = useBanOneMutation();
 
@@ -56,7 +54,9 @@ export const ManageBan = ({ user, onSetManageView, onSetActive }: Props) => {
                         selected={blockData.banExpiration}
                         minDate={new Date()}
                         showDisabledMonthNavigation
-                        onChange={(date) => setBlockData((p) => ({ ...p, banExpiration: date }))}
+                        onChange={(date) =>
+                            setBlockData((p) => ({ ...p, banExpiration: date as Date }))
+                        }
                     />
                 </div>
                 <p>Текст сообщения:</p>
