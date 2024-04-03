@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 
 export const useOutsideClick = (
     handleClose: (event: MouseEvent) => void,
+    preventClose: boolean = false,
     capture: boolean = true
 ) => {
     //eslint-disable-next-line
@@ -9,6 +10,7 @@ export const useOutsideClick = (
 
     useEffect(() => {
         const handleClick = (event: MouseEvent) => {
+            if (preventClose) return;
             if (ref.current && !ref.current.contains(event.target)) {
                 handleClose(event);
             }
@@ -19,7 +21,7 @@ export const useOutsideClick = (
         return () => {
             document.removeEventListener("click", handleClick, { capture });
         };
-    }, [ref, handleClose, capture]);
+    }, [ref, handleClose, capture, preventClose]);
 
     return ref;
 };

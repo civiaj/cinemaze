@@ -10,7 +10,7 @@ import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Box } from "shared/ui/Boxes/Box";
 import { Button } from "shared/ui/Button/Button";
 import { AppImage } from "shared/ui/AppImage/AppImage";
-import { OutsideClickWrapper } from "shared/ui/OutsideClickWrapper/OutsideClickWrapper";
+import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
 import { Elipsis } from "shared/ui/Text/Elipsis";
 
 import { NavbarOptions, NavbarViews } from "../../model/types";

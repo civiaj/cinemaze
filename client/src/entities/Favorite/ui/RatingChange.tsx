@@ -4,7 +4,7 @@ import { Change, Trashcan } from "shared/assets/icons";
 import { classNames } from "shared/lib/classNames";
 import { Button } from "shared/ui/Button/Button";
 import { ColoredNumber } from "shared/ui/ColoredNumber/ColoredNumber";
-import { OutsideClickWrapper } from "shared/ui/OutsideClickWrapper/OutsideClickWrapper";
+import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
 import { PopupList } from "shared/ui/PopupList/PopupList";
 
 import { TFavorite, useGetOneFavoriteQuery } from "entities/Favorite";

@@ -3,7 +3,7 @@ import { TFavorite, useGetOneFavoriteQuery } from "entities/Favorite";
 import { selectUser } from "entities/User";
 import { useState } from "react";
 import { Button } from "shared/ui/Button/Button";
-import { OutsideClickWrapper } from "shared/ui/OutsideClickWrapper/OutsideClickWrapper";
+import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
 import { RatingChangeNumbers } from "./RatingChangeNumbers";
 
 interface RatingSetgSet {

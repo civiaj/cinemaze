@@ -25,7 +25,11 @@ export const UserSectionPassword = (props: Props) => {
     const onSetChecked = () => setIsChecked(true);
 
     return (
-        <Modal onClose={onClose} header={isChecked ? "Изменить пароль" : "Подтвердите пароль"}>
+        <Modal
+            onClose={onClose}
+            preventClose={isChecked}
+            header={isChecked ? "Изменить пароль" : "Подтвердите пароль"}
+        >
             {!isChecked ? (
                 <CheckPasswordSection onSetChecked={onSetChecked} {...props} />
             ) : (
