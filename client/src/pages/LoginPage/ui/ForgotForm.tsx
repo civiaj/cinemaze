@@ -6,12 +6,14 @@ import { GridMsg } from "shared/ui/GridMsg/GridMsg";
 import { Input } from "shared/ui/Input/Input";
 import { Heading } from "shared/ui/Text/Heading";
 import formatServerError from "shared/api/helpers/formatServerError";
-import { Checked } from "shared/assets/icons";
 import { trimInput } from "shared/lib/trimInput";
 import { Button } from "shared/ui/Button/Button";
 import { Text } from "shared/ui/Text/Text";
 
 import { LoginSections } from "../model/types";
+import { AppLink } from "shared/ui/AppLink/AppLink";
+import { routePath } from "app/router/router";
+import { StatusBox } from "shared/ui/Boxes/StatusBox";
 
 type Props = {
     onSectionChange: (newValue?: LoginSections) => void;
@@ -32,13 +34,19 @@ export const ForgotForm = ({ onSectionChange }: Props) => {
 
     if (data)
         return (
-            <Box className="items-center text-center">
-                <div className="rounded-full bg-my-green-500 p-2">
-                    <Checked className="text-3xl" />
-                </div>
-                <Text>{data?.message}</Text>
-                <Text className="font-medium">{email}</Text>
-            </Box>
+            <StatusBox
+                className="w-full"
+                isSuccess={true}
+                msgOrChildren={
+                    <>
+                        <Text>{data.message}</Text>
+                        <Text className="font-medium">{email}</Text>
+                        <AppLink theme="button" to={routePath.login}>
+                            {t("Login")}
+                        </AppLink>
+                    </>
+                }
+            />
         );
 
     return (

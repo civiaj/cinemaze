@@ -12,14 +12,17 @@ export const EmailVerificationPage = () => {
 
     if (!isError && !isSuccess) return <Navigate to={routePath.main} replace />;
 
+    let msg;
+    if (isError) msg = "Невозможно верифицировать адрес электронной почты.";
+    if (isSuccess) msg = "Электронный адрес почты подтвержден.";
+
     return (
         <Page>
             <StatusBox
                 isError={isError}
                 isSuccess={isSuccess}
-                errorMsg={"Невозможно верифицировать адрес электронной почты."}
-                successMsg={"Электронный адрес почты подтвержден."}
-                onClick={() => navigate(routePath.main, { replace: true })}
+                msgOrChildren={msg}
+                onReload={() => navigate(routePath.main, { replace: true })}
             />
         </Page>
     );

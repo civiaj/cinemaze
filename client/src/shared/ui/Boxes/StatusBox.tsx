@@ -1,6 +1,7 @@
-import { routePath } from "app/router/router";
 import { ReactNode } from "react";
 import { Checked, Close } from "shared/assets/icons";
+import { classNames } from "shared/lib/classNames";
+import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Box } from "shared/ui/Boxes/Box";
 import { Button } from "shared/ui/Button/Button";
 import { Text } from "shared/ui/Text/Text";
@@ -8,51 +9,55 @@ import { Text } from "shared/ui/Text/Text";
 type Props = {
     isSuccess?: boolean;
     isError?: boolean;
-    successMsg?: ReactNode;
-    errorMsg?: ReactNode;
-    onClick?: () => void;
+    msgOrChildren: ReactNode;
+    className?: string;
+    to?: string;
+    reload?: boolean;
     label?: string;
+    onReload?: () => void;
 };
 
 export const StatusBox = (props: Props) => {
     const {
-        errorMsg = "Возникла ошибка",
+        msgOrChildren,
         isError,
         isSuccess,
-        successMsg = "Запрос выполнен успешно",
-        onClick,
-        label = "Перейти на главную",
+        label = "Перезагрузить",
+        className,
+        to,
+        reload,
+        onReload,
     } = props;
 
-    const handleClick = onClick ? onClick : () => window.location.replace(routePath.main);
+    if (!isSuccess && !isError) return null;
 
-    if (isSuccess)
-        return (
-            <Box className="items-center text-center">
+    const handleReload = () => {
+        onReload ? onReload() : window.location.reload();
+    };
+
+    return (
+        <Box className={classNames("items-center text-center", {}, [className])}>
+            {isSuccess ? (
                 <div className="rounded-full bg-my-green-500 p-2 text-neutral-50">
                     <Checked className="text-3xl" />
                 </div>
-
-                {typeof successMsg === "string" ? <Text>{successMsg}</Text> : successMsg}
-                <Button theme="regular" onClick={handleClick}>
-                    {label}
-                </Button>
-            </Box>
-        );
-
-    if (isError)
-        return (
-            <Box className="items-center text-center">
+            ) : (
                 <div className="rounded-full bg-my-red-500 p-2 text-neutral-50">
                     <Close className="text-3xl" />
                 </div>
+            )}
+            {typeof msgOrChildren === "string" ? <Text>{msgOrChildren}</Text> : msgOrChildren}
 
-                {typeof errorMsg === "string" ? <Text>{errorMsg}</Text> : errorMsg}
-                <Button theme="regular" onClick={handleClick}>
+            {to && (
+                <AppLink theme="button" to={to}>
+                    {label}
+                </AppLink>
+            )}
+            {(reload || onReload) && (
+                <Button theme="regular" onClick={handleReload}>
                     {label}
                 </Button>
-            </Box>
-        );
-
-    return null;
+            )}
+        </Box>
+    );
 };

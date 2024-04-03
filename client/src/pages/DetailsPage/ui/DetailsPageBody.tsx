@@ -45,7 +45,13 @@ export const DetailsPageBody = () => {
     if (loading) return <DetailsPageSkeleton />;
 
     if (details.isError || !details.data)
-        return <StatusBox isError={details.isError} errorMsg={formatFilmError(details.error)} />;
+        return (
+            <StatusBox
+                isError={details.isError}
+                msgOrChildren={formatFilmError(details.error)}
+                reload
+            />
+        );
 
     const { nameRu, nameEn, nameOriginal, ratingImdb, rating } = details.data;
     const label = nameRu ?? nameEn ?? nameOriginal ?? EMPTY_LINE;

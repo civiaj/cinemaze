@@ -1,11 +1,12 @@
 import { routePath } from "app/router/router";
+import { useResetPasswordMutation } from "entities/Authorization";
 import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
-import { useResetPasswordMutation } from "entities/Authorization";
+import { Navigate, useSearchParams } from "react-router-dom";
 import formatServerError from "shared/api/helpers/formatServerError";
-import { Checked } from "shared/assets/icons";
+import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Box } from "shared/ui/Boxes/Box";
+import { StatusBox } from "shared/ui/Boxes/StatusBox";
 import { Button } from "shared/ui/Button/Button";
 import { GridMsg } from "shared/ui/GridMsg/GridMsg";
 import { Input } from "shared/ui/Input/Input";
@@ -17,7 +18,6 @@ export const ResetForm = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [searchParams] = useSearchParams();
     const resetToken = searchParams.get("t");
-    const navigate = useNavigate();
     const { t } = useTranslation();
 
     const [resetPassword, { data, isLoading, isError, error }] = useResetPasswordMutation();
@@ -32,18 +32,18 @@ export const ResetForm = () => {
 
     if (data)
         return (
-            <Box className="items-center">
-                <div className="rounded-full bg-my-green-500 p-2">
-                    <Checked className="text-3xl" />
-                </div>
-                <Text>{data?.message}</Text>
-                <Button
-                    theme="regular"
-                    onClick={() => navigate(routePath.login, { replace: true })}
-                >
-                    {t("Login")}
-                </Button>
-            </Box>
+            <StatusBox
+                className="w-full"
+                isSuccess={true}
+                msgOrChildren={
+                    <>
+                        <Text>{data?.message}</Text>
+                        <AppLink theme="button" to={routePath.login}>
+                            {t("Login")}
+                        </AppLink>
+                    </>
+                }
+            />
         );
 
     return (

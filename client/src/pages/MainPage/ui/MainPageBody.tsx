@@ -37,7 +37,7 @@ export const MainPageBody = () => {
     if (!infiniteFilms.length && isError)
         return (
             <PageLikeBox>
-                <StatusBox errorMsg={formatFilmError(error)} isError={isError} />
+                <StatusBox msgOrChildren={formatFilmError(error)} isError={isError} reload />
             </PageLikeBox>
         );
 

@@ -17,7 +17,8 @@ export const StatisticsPageBody = () => {
 
     if (isLoading) return <StatisticsSkeleton />;
 
-    if (isError) return <StatusBox errorMsg={formatFilmError(error)} isError={isError} />;
+    if (isError)
+        return <StatusBox msgOrChildren={formatFilmError(error)} isError={isError} reload />;
 
     if (!data?.length)
         return (

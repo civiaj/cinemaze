@@ -119,7 +119,8 @@ export const SearchPageBody = () => {
             <PageLikeBox>
                 <StatusBox
                     isError={isError || filters.isError}
-                    errorMsg={formatFilmError(error ?? filters.error)}
+                    msgOrChildren={formatFilmError(error ?? filters.error)}
+                    reload
                 />
             </PageLikeBox>
         );

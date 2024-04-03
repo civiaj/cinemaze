@@ -51,7 +51,8 @@ export const ManageList = () => {
         setPage(1);
     };
 
-    if (isError) return <StatusBox isError={isError} errorMsg={formatServerError(error)} />;
+    if (isError)
+        return <StatusBox isError={isError} msgOrChildren={formatServerError(error)} reload />;
 
     const noResults = !data?.users.length;
 

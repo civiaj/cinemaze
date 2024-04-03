@@ -78,7 +78,7 @@ export const FavoritePageBody = () => {
     if (!infiniteFilms.length && isError)
         return (
             <PageLikeBox>
-                <StatusBox isError={isError} errorMsg={formatServerError(error)} />
+                <StatusBox isError={isError} msgOrChildren={formatServerError(error)} reload />
             </PageLikeBox>
         );
 
