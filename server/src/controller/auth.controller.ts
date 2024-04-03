@@ -11,6 +11,7 @@ import {
 import ApiError from "../exceptions/api.error";
 import { GoogleOAuthInput } from "../schema/oauth.schema";
 import {
+    CheckPasswordInput,
     CreateUserInput,
     EmailInput,
     LoginUserInput,
@@ -82,7 +83,11 @@ class AuthController {
         }
     }
 
-    async checkPassword(req: Request<{}, {}, LoginUserInput>, res: Response, next: NextFunction) {
+    async checkPassword(
+        req: Request<{}, {}, CheckPasswordInput>,
+        res: Response,
+        next: NextFunction
+    ) {
         try {
             const { password } = req.body;
             const { id, provider } = res.locals.user;
