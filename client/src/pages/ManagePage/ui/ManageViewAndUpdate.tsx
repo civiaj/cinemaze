@@ -22,7 +22,7 @@ type Props = {
     manageView: ManageActionViews;
     onSetManageView: (newView: ManageActionViews) => void;
     onSetActive: (newId: string | null) => void;
-    onPreventCloseActive: (newValue: boolean) => void;
+    onPreventClose: (newValue: boolean) => void;
 };
 
 export const ManageViewAndUpdate = ({
@@ -30,7 +30,7 @@ export const ManageViewAndUpdate = ({
     manageView,
     onSetManageView,
     onSetActive,
-    onPreventCloseActive,
+    onPreventClose,
 }: Props) => {
     const {
         displayName,
@@ -58,12 +58,12 @@ export const ManageViewAndUpdate = ({
     const [unbanOne, unban] = useUnbanOneMutation();
 
     const onOpenUnban = () => {
-        onPreventCloseActive(true);
+        onPreventClose(true);
         setIsUnban(true);
     };
 
     const onCloseUnban = () => {
-        onPreventCloseActive(false);
+        onPreventClose(false);
         setIsUnban(false);
     };
 
@@ -87,7 +87,7 @@ export const ManageViewAndUpdate = ({
 
     const handleCancelUnban = () => {
         setIsUnban(false);
-        onPreventCloseActive(false);
+        onPreventClose(false);
     };
 
     return (

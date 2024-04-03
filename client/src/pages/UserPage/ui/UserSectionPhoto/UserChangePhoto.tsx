@@ -136,7 +136,12 @@ export const UserChangePhoto = () => {
                     keepSelection
                     className="w-full h-full"
                 >
-                    <img ref={imgRef} src={file} onLoad={onSetCrop} className="w-full h-full" />
+                    <img
+                        ref={imgRef}
+                        src={file}
+                        onLoad={onSetCrop}
+                        className="w-full h-full select-none"
+                    />
                 </ReactCrop>
             </div>
 

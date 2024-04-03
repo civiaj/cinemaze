@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AddBookmark, Bookmarked, Copy, Dots, Hide, Show } from "shared/assets/icons";
 import { copyClipboard } from "shared/lib/copyClipboard";
 import { Button } from "shared/ui/Button/Button";
-import { OutsideClickWrapper } from "shared/ui/OutsideClickWrapper/OutsideClickWrapper";
+import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
 import { PopupList } from "shared/ui/PopupList/PopupList";
 
 import { TFavorite } from "entities/Favorite";

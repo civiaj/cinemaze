@@ -6,6 +6,7 @@ interface OutsideClickWrapperProps {
     children: ReactNode;
     capture?: boolean;
     className?: string;
+    preventClose?: boolean;
 }
 
 export const OutsideClickWrapper = ({
@@ -13,8 +14,9 @@ export const OutsideClickWrapper = ({
     children,
     capture,
     className,
+    preventClose,
 }: OutsideClickWrapperProps) => {
-    const ref = useOutsideClick(onClose, capture);
+    const ref = useOutsideClick(onClose, preventClose, capture);
 
     useEffect(() => {
         const onKeyDown = (e: globalThis.KeyboardEvent) => {

@@ -13,7 +13,7 @@ import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Overlay } from "shared/ui/Boxes/Overlay";
 import { Button } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
-import { OutsideClickWrapper } from "shared/ui/OutsideClickWrapper/OutsideClickWrapper";
+import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
 
 import { useSearchQuery } from "../../model/searchPageApi";
 import { searchPageActions } from "../../model/slice";

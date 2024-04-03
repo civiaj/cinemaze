@@ -20,7 +20,7 @@ import { AppSelect } from "shared/ui/AppSelect/AppSelect";
 import { Box } from "shared/ui/Boxes/Box";
 import { SettingsBox } from "shared/ui/Boxes/SettingsBox";
 import { Button } from "shared/ui/Button/Button";
-import { OutsideClickWrapper } from "shared/ui/OutsideClickWrapper/OutsideClickWrapper";
+import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
 import { Heading } from "shared/ui/Text/Heading";
 import { Text } from "shared/ui/Text/Text";
 

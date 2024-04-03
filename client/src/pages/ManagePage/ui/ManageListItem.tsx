@@ -13,7 +13,7 @@ type Props = {
     index: number;
     activeUser: string | null;
     onSetActive: (newId: string | null) => void;
-    onPreventCloseActive: (newValue: boolean) => void;
+    onPreventClose: (newValue: boolean) => void;
     className?: string;
 };
 
@@ -23,7 +23,7 @@ export const ManageListItem = ({
     activeUser,
     onSetActive,
     className,
-    onPreventCloseActive,
+    onPreventClose,
 }: Props) => {
     const { createdAt, displayName, email, id, photo, role, updatedAt, verified, isBanned } = user;
     const { i18n } = useTranslation();
@@ -99,7 +99,7 @@ export const ManageListItem = ({
                 <tr className={className}>
                     <td colSpan={7}>
                         <ManageListItemActions
-                            onPreventCloseActive={onPreventCloseActive}
+                            onPreventClose={onPreventClose}
                             user={user}
                             onSetActive={onSetActive}
                         />

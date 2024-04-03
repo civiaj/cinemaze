@@ -3,7 +3,7 @@ import { classNames } from "shared/lib/classNames";
 import { Box } from "shared/ui/Boxes/Box";
 import { Overlay } from "shared/ui/Boxes/Overlay";
 import { UserBox } from "shared/ui/Boxes/UserBox";
-import { OutsideClickWrapper } from "shared/ui/OutsideClickWrapper/OutsideClickWrapper";
+import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
 import { Heading } from "shared/ui/Text/Heading";
 
 export const Modal = ({
@@ -11,12 +11,14 @@ export const Modal = ({
     onClose,
     theme = "none",
     header,
+    preventClose,
 }: {
     children: ReactNode;
     onClose: (e: MouseEvent | globalThis.KeyboardEvent) => void;
     className?: string;
     theme?: "danger" | "confirm" | "success" | "none";
     header: ReactNode;
+    preventClose?: boolean;
 }) => {
     const HeaderComponent = () => {
         if (typeof header === "string") {
@@ -32,6 +34,7 @@ export const Modal = ({
         <Overlay withInert hideScroll theme="modal" className="z-50">
             <Box className="gap-0 p-0 sm:p-0 shadow-0 min-w-[300px] w-[clamp(500px,90%,800px)] max-h-[90%] overflow-hidden mx-2 relative">
                 <OutsideClickWrapper
+                    preventClose={preventClose}
                     onClose={onClose}
                     className="overflow-hidden h-full overflow-y-auto"
                 >

@@ -16,7 +16,7 @@ import { Box } from "shared/ui/Boxes/Box";
 import { StatusBox } from "shared/ui/Boxes/StatusBox";
 import { Button } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
-import { OutsideClickWrapper } from "shared/ui/OutsideClickWrapper/OutsideClickWrapper";
+import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
 import { Spinner } from "shared/ui/Spinner/Spinner";
 import { Heading } from "shared/ui/Text/Heading";
 import { Text } from "shared/ui/Text/Text";
@@ -30,14 +30,10 @@ export const ManageList = () => {
     const [activeUser, setActiveUser] = useState<string | null>(null);
     const [query, setQuery] = useState("");
     const debouncedQuery = useDebouncedValue(query);
-    const [preventCloseActive, setPreventCloseActive] = useState(false);
+    const [preventClose, setPreventClose] = useState(false);
 
-    const onPreventCloseActive = (newValue: boolean) => setPreventCloseActive(newValue);
-
-    const onCloseActive = () => {
-        if (preventCloseActive) return;
-        onSetActive(null);
-    };
+    const onPreventClose = (newValue: boolean) => setPreventClose(newValue);
+    const onCloseActive = () => onSetActive(null);
 
     const { data, isLoading, isFetching, isError, error } = useGetUsersQuery({
         filter,
@@ -72,6 +68,7 @@ export const ManageList = () => {
             <OutsideClickWrapper
                 onClose={onCloseActive}
                 className="overflow-x-auto w-full relative"
+                preventClose={preventClose}
             >
                 <table className={"w-full text-sm sm:text-sm"}>
                     <thead>
@@ -127,7 +124,7 @@ export const ManageList = () => {
                                 ) : (
                                     data?.users.map((user, index) => (
                                         <ManageListItem
-                                            onPreventCloseActive={onPreventCloseActive}
+                                            onPreventClose={onPreventClose}
                                             onSetActive={onSetActive}
                                             activeUser={activeUser}
                                             key={user.id}

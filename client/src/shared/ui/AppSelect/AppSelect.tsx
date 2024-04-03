@@ -4,7 +4,7 @@ import { ListChildComponentProps } from "react-window";
 import { Down } from "shared/assets/icons";
 import { classNames } from "shared/lib/classNames";
 import { Button } from "shared/ui/Button/Button";
-import { OutsideClickWrapper } from "shared/ui/OutsideClickWrapper/OutsideClickWrapper";
+import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
 import { PopupList } from "shared/ui/PopupList/PopupList";
 
 const themes = {
