@@ -172,16 +172,7 @@ class UserController {
             const users = [];
 
             for (let i = 0; i < number; i++) {
-                const newUser: Pick<
-                    User,
-                    | "email"
-                    | "displayName"
-                    | "password"
-                    | "id"
-                    | "provider"
-                    | "verified"
-                    | "isBanned"
-                > = {
+                const newUser: Partial<User> = {
                     email: `testemail${i}@mail.com`,
                     displayName: `Test User №${i}`,
                     password: `123${i}`,
@@ -189,6 +180,8 @@ class UserController {
                     provider: "test",
                     isBanned: i % 2 ? true : false,
                     verified: i % 2 ? false : true,
+                    banMessage: "Toxic Behaviour",
+                    banExpiration: new Date(),
                 };
                 users[i] = newUser;
             }
