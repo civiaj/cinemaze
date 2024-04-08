@@ -53,11 +53,11 @@ export const NavbarMain = ({ onSetOpenView, onClose }: Props) => {
             <div className="py-2 px-4 border-b border-border">
                 {user ? (
                     <AppLink to={routePath.user} theme="button" onClick={onClose}>
-                        {t("myprofile")}
+                        {t("nav.profile")}
                     </AppLink>
                 ) : (
                     <AppLink theme="button-blue" to={routePath.login} onClick={onClose}>
-                        {t("signin")}
+                        {t("btn.log-in")}
                     </AppLink>
                 )}
             </div>
@@ -93,7 +93,7 @@ export const NavbarMain = ({ onSetOpenView, onClose }: Props) => {
                         className="self-end"
                         onClick={onLogout}
                     >
-                        {t("signout")}
+                        {t("btn.log-out")}
                     </Button>
                 </div>
             )}

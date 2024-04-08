@@ -1,6 +1,7 @@
 import { useAppSelector } from "app/store";
 import { TFavorite, useGetOneFavoriteQuery } from "entities/Favorite";
 import { selectUser } from "entities/User";
+import { useTranslation } from "react-i18next";
 import { User } from "shared/assets/icons";
 import { RatingBox } from "shared/ui/Boxes/RatingBox";
 import { Button } from "shared/ui/Button/Button";
@@ -14,7 +15,7 @@ interface RatingUserScoreProps {
 
 export const RatingUserScore = ({ filmId, updateFavorite, disabled }: RatingUserScoreProps) => {
     const user = useAppSelector(selectUser);
-
+    const { t } = useTranslation();
     const { currentData: favorite } = useGetOneFavoriteQuery(filmId, { skip: !user });
 
     const handleDeleteScore = () => {
@@ -28,7 +29,7 @@ export const RatingUserScore = ({ filmId, updateFavorite, disabled }: RatingUser
             <RatingBox>
                 <div className="flex items-center gap-2">
                     <User className="text-xl" />
-                    <span className="font-medium">Ваша оценка: </span>
+                    <span className="font-medium">{t("details.your-score")}: </span>
                     <ColoredNumber
                         coloredBackground
                         className="w-6 h-6 rounded-full text-sm font-bold text-white shrink-0 block"
@@ -41,7 +42,7 @@ export const RatingUserScore = ({ filmId, updateFavorite, disabled }: RatingUser
                     theme="regular"
                     className="text-sm px-4 py-1 justify-center h-auto"
                 >
-                    Удалить
+                    {t("btn.delete")}
                 </Button>
             </RatingBox>
         )

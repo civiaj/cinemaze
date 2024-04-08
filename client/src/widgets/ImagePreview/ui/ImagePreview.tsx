@@ -8,6 +8,7 @@ import { FilmImages } from "widgets/FilmImages/model/types";
 
 import { ImagePreviewBody } from "./ImagePreviewBody";
 import { ImagePreviewSlider } from "./ImagePreviewSlider";
+import { useTranslation } from "react-i18next";
 
 interface ImagePreviewProps {
     onClose: () => void;
@@ -20,6 +21,8 @@ export const ImagePreview = (props: ImagePreviewProps) => {
     const [activeSlide, setActiveSlide] = useState(activeIndex);
     const [isShown, setIsShown] = useState(false);
     const onSetIsShown = useCallback(() => setIsShown(true), []);
+
+    const { t } = useTranslation();
 
     const lastSlide = images.length - 1;
     const firstSlide = 0;
@@ -56,7 +59,7 @@ export const ImagePreview = (props: ImagePreviewProps) => {
             <div className="flex flex-col gap-4 p-2 h-full">
                 <div className=" flex items-center gap-2 z-20 self-end">
                     <AppLink to={activeImageUrl} target="_blank" theme="sourceBig">
-                        Открыть источник
+                        {t("details.images-source")}
                     </AppLink>
                     <Button theme="controlIcon" onClick={handleClose}>
                         <Close className="text-xl " />

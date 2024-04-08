@@ -15,6 +15,7 @@ type Props = {
     reload?: boolean;
     label?: string;
     onReload?: () => void;
+    withoutBox?: boolean;
 };
 
 export const StatusBox = (props: Props) => {
@@ -27,6 +28,7 @@ export const StatusBox = (props: Props) => {
         to,
         reload,
         onReload,
+        withoutBox,
     } = props;
 
     if (!isSuccess && !isError) return null;
@@ -35,8 +37,8 @@ export const StatusBox = (props: Props) => {
         onReload ? onReload() : window.location.reload();
     };
 
-    return (
-        <Box className={classNames("items-center text-center", {}, [className])}>
+    const content = (
+        <>
             {isSuccess ? (
                 <div className="rounded-full bg-my-green-500 p-2 text-neutral-50">
                     <Checked className="text-3xl" />
@@ -58,6 +60,10 @@ export const StatusBox = (props: Props) => {
                     {label}
                 </Button>
             )}
-        </Box>
+        </>
     );
+
+    if (withoutBox) return content;
+
+    return <Box className={classNames("items-center text-center", {}, [className])}>{content}</Box>;
 };

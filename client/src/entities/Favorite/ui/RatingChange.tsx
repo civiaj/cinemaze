@@ -10,6 +10,7 @@ import { PopupList } from "shared/ui/PopupList/PopupList";
 import { TFavorite, useGetOneFavoriteQuery } from "entities/Favorite";
 import { selectUser } from "entities/User";
 import { RatingChangeNumbers } from "./RatingChangeNumbers";
+import { useTranslation } from "react-i18next";
 
 interface RatingChangeProps {
     filmId: number;
@@ -20,6 +21,7 @@ interface RatingChangeProps {
 export const RatingChange = ({ filmId, updateFavorite, disabled }: RatingChangeProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isChange, setIsChange] = useState(false);
+    const { t } = useTranslation();
 
     const user = useAppSelector(selectUser);
     const { currentData: favorite } = useGetOneFavoriteQuery(filmId, { skip: !user });
@@ -43,8 +45,8 @@ export const RatingChange = ({ filmId, updateFavorite, disabled }: RatingChangeP
     };
 
     const options = [
-        { action: onStartChange, title: "Изменить", Icon: <Change /> },
-        { action: () => onUpdateScore(null), title: "Удалить", Icon: <Trashcan /> },
+        { action: onStartChange, title: t("details.change"), Icon: <Change /> },
+        { action: () => onUpdateScore(null), title: t("details.delete"), Icon: <Trashcan /> },
     ];
 
     return userScore ? (
@@ -64,7 +66,7 @@ export const RatingChange = ({ filmId, updateFavorite, disabled }: RatingChangeP
                             }
                         )}
                     >
-                        <p className="whitespace-nowrap">Ваша оценка</p>
+                        <span className="whitespace-nowrap">{t("details.your-score")}</span>
                         <ColoredNumber
                             className="w-6 h-6 rounded-full text-sm font-bold text-white shrink-0"
                             coloredBackground

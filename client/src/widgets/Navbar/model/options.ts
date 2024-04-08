@@ -9,19 +9,19 @@ export const options: Record<
     NavbarOptionsType<"language"> | NavbarOptionsType<"theme"> | NavbarOptionsType<"appearance">
 > = {
     language: {
-        label: "Language",
+        label: "nav.language-t",
         value: "language",
         variants: lngs,
         Icon: Language,
     },
     theme: {
-        label: "Theme",
+        label: "nav.theme-t",
         value: "theme",
         variants: themes,
         Icon: Sun,
     },
     appearance: {
-        label: "Appearance",
+        label: "nav.appearance-t",
         value: "appearance",
         variants: appearances,
         Icon: Grid,

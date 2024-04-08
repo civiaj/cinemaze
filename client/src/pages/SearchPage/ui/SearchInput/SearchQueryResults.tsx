@@ -1,26 +1,35 @@
 import { routePath } from "app/router/router";
 import { useAppDispatch } from "app/store";
+import { useSearchQuery } from "pages/SearchPage/model/searchPageApi";
 import { searchPageActions } from "pages/SearchPage/model/slice";
 import { useTranslation } from "react-i18next";
-import { EMPTY_LINE } from "shared/const/const";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { ColoredNumber } from "shared/ui/ColoredNumber/ColoredNumber";
+import formatFilmError from "shared/api/helpers/formatFilmError";
+import { DEBOUNCE_SEARCH } from "shared/const/const";
+import { useDebouncedValue } from "shared/hooks/useDebouncedValue";
+import { TLngs } from "shared/i18n/types";
+import { getFilmTitle } from "shared/lib/getFilmTitle";
 import { AppImage } from "shared/ui/AppImage/AppImage";
-import { Spinner } from "shared/ui/Spinner/Spinner";
+import { AppLink } from "shared/ui/AppLink/AppLink";
+import { StatusBox } from "shared/ui/Boxes/StatusBox";
 import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
+import { ColoredNumber } from "shared/ui/ColoredNumber/ColoredNumber";
+import { Spinner } from "shared/ui/Spinner/Spinner";
 
 type Props = {
-    results?: FilmT[];
-    isLoading: boolean;
-    isError: boolean;
     inputValue?: string;
     onClose: () => void;
 };
 
 export const SearchQueryResults = (props: Props) => {
-    const { results, isError, isLoading, inputValue, onClose } = props;
+    const { inputValue, onClose } = props;
     const dispatch = useAppDispatch();
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const debouncedInputValue = useDebouncedValue(inputValue, DEBOUNCE_SEARCH);
+
+    const { data, isLoading, isError, error, isFetching } = useSearchQuery(
+        { keyword: debouncedInputValue, page: 1 },
+        { skip: !debouncedInputValue || !inputValue }
+    );
 
     const handleQueryClick = (queryName?: string) => {
         onClose();
@@ -28,7 +37,7 @@ export const SearchQueryResults = (props: Props) => {
         dispatch(searchPageActions.addUserQuery(queryName));
     };
 
-    if (isLoading && inputValue)
+    if (isLoading || isFetching || (inputValue !== debouncedInputValue && inputValue !== ""))
         return (
             <>
                 <div className="flex items-center justify-center py-2">
@@ -41,30 +50,34 @@ export const SearchQueryResults = (props: Props) => {
     if (isError && inputValue)
         return (
             <>
-                <div className="flex items-center justify-center py-2">
-                    <p className="font-medium">Что-то пошло не так.</p>
+                <div className="flex items-center flex-col gap-2">
+                    <StatusBox
+                        isError={isError}
+                        msgOrChildren={formatFilmError(error)}
+                        withoutBox
+                    />
                 </div>
                 <UserBoxSeparator />
             </>
         );
 
-    if (results && !results.length && inputValue)
+    if (data && !data.films.length && inputValue)
         return (
             <>
                 <div className="flex items-center justify-center py-2">
-                    <p className="font-medium">Ничего не найдено.</p>
+                    <p className="font-medium">{t("search.empty-msg")}</p>
                 </div>
                 <UserBoxSeparator />
             </>
         );
 
     return (
-        !!results?.length && (
+        !!data?.films?.length && (
             <>
                 <div className="flex flex-col gap-1">
-                    <p className="px-2 text-sm font-medium">{t("Results")}</p>
+                    <p className="px-2 text-sm font-medium">{t("search.input-results")}</p>
                     <ul className="flex flex-col">
-                        {results.map((item) => (
+                        {data.films.map((item) => (
                             <li key={item.filmId} className="rounded-xl overflow-hidden">
                                 <AppLink
                                     theme="clean"
@@ -82,12 +95,14 @@ export const SearchQueryResults = (props: Props) => {
                                         </div>
                                         <div className="flex-1 flex flex-col justify-between">
                                             <p className="font-medium line-clamp-1 text-ellipsis flex-1">
-                                                {item.nameRu ?? EMPTY_LINE}
+                                                {getFilmTitle(item, i18n.language as TLngs)}
                                             </p>
 
-                                            <p className="line-clamp-1 text-ellipsis flex-1 text-sm font-normal">
-                                                {item.nameEn ?? item.nameOriginal ?? EMPTY_LINE}
-                                            </p>
+                                            {item.nameOriginal && (
+                                                <p className="line-clamp-1 text-ellipsis flex-1 text-sm font-normal">
+                                                    {item.nameOriginal}
+                                                </p>
+                                            )}
                                             <ColoredNumber number={Number(item.rating)} />
                                             <p className="font-base">{item.year}</p>
                                         </div>

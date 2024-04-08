@@ -6,19 +6,6 @@ export const LOCAL_STORAGE_THEME = "theme";
 export const SKELETON_REVIEWS_LENGTH = 2;
 export const SKELETON_FILMS_LENGTH = 20;
 
-export const PARAMS_VIEW = "view";
-export const PARAMS_MAIN_QUERY = "query";
-export const PARAMS_USER_LIST = "list";
-
-export const PARAMS_COUNTRY = "countries";
-export const PARAMS_GENRE = "genres";
-export const PARAMS_KEYWORD = "keyword";
-export const PARAMS_ORDER = "order";
-export const PARAMS_RATING_FROM = "ratingFrom";
-export const PARAMS_RATING_TO = "ratingTo";
-export const PARAMS_YEAR_FROM = "yearFrom";
-export const PARAMS_YEAR_TO = "yearTo";
-
 export const THROTTLE_SCROLL = 200;
 
 export const EMPTY_LINE = "—";

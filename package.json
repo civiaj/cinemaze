@@ -1,8 +1,12 @@
 {
+    "type": "module",
     "scripts": {
         "dev": "concurrently \"npm run dev --prefix ./client/\" \"npm run dev --prefix ./server/\""
     },
     "dependencies": {
         "concurrently": "^8.2.2"
+    },
+    "devDependencies": {
+        "@types/node": "^20.12.4"
     }
 }

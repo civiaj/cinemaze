@@ -12,6 +12,7 @@ import { FilmCard, FilmCardPropsT } from "widgets/FilmCard";
 
 import { classNames } from "shared/lib/classNames";
 import { FilmListSkeleton } from "./FilmListSkeleton";
+import { useTranslation } from "react-i18next";
 
 type FilmsListPropsT = {
     films: FilmT[];
@@ -39,10 +40,10 @@ export const FilmsList = memo((props: FilmsListPropsT) => {
         listStyles,
         tileStyles,
         isError,
-        noFilmsMessage = "Нет элементов для отображения.",
         showEnd,
         onFilmCardClick,
         onFilmCardDelete,
+        noFilmsMessage,
     } = props;
 
     const containerStyle: Record<TAppearances, string> = {
@@ -51,7 +52,7 @@ export const FilmsList = memo((props: FilmsListPropsT) => {
             tileStyles ??
             "grid gap-x-2 gap-y-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 mdb:grid-cols-5 lg:grid-cols-5",
     };
-
+    const { t } = useTranslation();
     const { pathname } = useLocation();
     const user = useAppSelector(selectUser);
     const {
@@ -90,7 +91,7 @@ export const FilmsList = memo((props: FilmsListPropsT) => {
     if (films.length === 0 && !isFetching && !isLoading)
         return (
             <Box>
-                <Text className="font-medium text-center">{noFilmsMessage}</Text>
+                <Text className="text-center">{noFilmsMessage ?? t("no-film-msg")}</Text>
             </Box>
         );
 
@@ -124,7 +125,7 @@ export const FilmsList = memo((props: FilmsListPropsT) => {
                     {page > 1 && isFetching && <Spinner />}
                 </div>
             )}
-            {films.length && isError && <Text>При загрузке возникла ошибка.</Text>}
+            {films.length && isError && <Text>{t("error-film-msg")}</Text>}
         </>
     );
 });

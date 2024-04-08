@@ -5,8 +5,7 @@ import { ChangeEvent, KeyboardEventHandler, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Close, GoToSearch, Search } from "shared/assets/icons";
-import { DEBOUNCE_SEARCH } from "shared/const/const";
-import { useDebouncedValue } from "shared/hooks/useDebouncedValue";
+import { useHideScroll } from "shared/hooks/useHideScroll";
 import { useUpdateHeight } from "shared/hooks/useUpdateHeight";
 import { classNames } from "shared/lib/classNames";
 import { AppLink } from "shared/ui/AppLink/AppLink";
@@ -14,9 +13,7 @@ import { Overlay } from "shared/ui/Boxes/Overlay";
 import { Button } from "shared/ui/Button/Button";
 import { Input } from "shared/ui/Input/Input";
 import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
-import { useHideScroll } from "shared/hooks/useHideScroll";
 
-import { useSearchQuery } from "../../model/searchPageApi";
 import { searchPageActions } from "../../model/slice";
 import { SearchQueryResults } from "./SearchQueryResults";
 import { SearchUserQueries } from "./SearchUserQueries";
@@ -114,7 +111,7 @@ export const SearchInput = (props: Props) => {
 
                         <Input
                             className="w-full md:w-96 pr-10"
-                            placeholder={t("Search")}
+                            placeholder={t("searc.input-p")}
                             theme="regularNav"
                             value={inputValue}
                             onMouseDown={onSetActive}
@@ -137,7 +134,7 @@ export const SearchInput = (props: Props) => {
                         theme="regularNav"
                         onClick={() => handleStartSearch()}
                     >
-                        {t("Find")}
+                        {t("btn.search")}
                     </Button>
                 </OutsideClickWrapper>
             </div>
@@ -153,14 +150,8 @@ type SearchBodyProps = {
 };
 
 const SearchBody = ({ inputValue, onSetInactive, handleStartSearch }: SearchBodyProps) => {
-    const debouncedInputValue = useDebouncedValue(inputValue, DEBOUNCE_SEARCH);
     const maxHeight = useUpdateHeight(extraHeight);
-    const { data, isLoading, isFetching, isError } = useSearchQuery(
-        { keyword: debouncedInputValue, page: 1 },
-        { skip: !debouncedInputValue || !inputValue }
-    );
     const { t } = useTranslation();
-
     useHideScroll();
 
     return (
@@ -171,13 +162,7 @@ const SearchBody = ({ inputValue, onSetInactive, handleStartSearch }: SearchBody
             >
                 <SearchUserQueries inputValue={inputValue} startSearch={handleStartSearch} />
 
-                <SearchQueryResults
-                    results={data?.films}
-                    isLoading={isLoading || isFetching}
-                    isError={isError}
-                    inputValue={inputValue}
-                    onClose={onSetInactive}
-                />
+                <SearchQueryResults inputValue={inputValue} onClose={onSetInactive} />
 
                 <AppLink
                     theme="clean"
@@ -187,7 +172,7 @@ const SearchBody = ({ inputValue, onSetInactive, handleStartSearch }: SearchBody
                 >
                     <div className="flex-1 flex items-center justify-center gap-2">
                         <GoToSearch className="shrink-0" />
-                        <span>{t("Search-extd")}</span>
+                        <span>{t("search.extended")}</span>
                     </div>
                 </AppLink>
             </div>

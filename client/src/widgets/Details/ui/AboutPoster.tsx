@@ -1,6 +1,7 @@
 import { classNames } from "shared/lib/classNames";
 import { Button } from "shared/ui/Button/Button";
 import { AppImage } from "shared/ui/AppImage/AppImage";
+import { useTranslation } from "react-i18next";
 
 interface PosterProps {
     posterUrl?: string;
@@ -10,6 +11,7 @@ interface PosterProps {
 
 export const AboutPoster = (props: PosterProps) => {
     const { posterUrl, link, className } = props;
+    const { t } = useTranslation();
 
     return (
         <div className={classNames("flex flex-col gap-4", {}, [className])}>
@@ -31,7 +33,7 @@ export const AboutPoster = (props: PosterProps) => {
                         className="w-full"
                         theme="blue"
                     >
-                        На Кинопоиск
+                        {t("btn.to-kp")}
                     </Button>
                 </form>
             )}

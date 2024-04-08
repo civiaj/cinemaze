@@ -2,11 +2,11 @@ import { useAppDispatch, useAppSelector } from "app/store";
 import { Page } from "entities/Ui";
 import { checkSearchParams } from "pages/SearchPage/lib/helpers";
 import { useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useSearchParams } from "react-router-dom";
 import formatFilmError from "shared/api/helpers/formatFilmError";
 import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "shared/const/const";
 import { useInfiniteScroll } from "shared/hooks/useInfiniteScroll";
-import { getNoun } from "shared/lib/getNoun";
 import { Box } from "shared/ui/Boxes/Box";
 import { EndBox } from "shared/ui/Boxes/EndBox";
 import { PageLikeBox } from "shared/ui/Boxes/PageLikeBox";
@@ -109,6 +109,7 @@ export const SearchPageBody = () => {
     const showHeader = !!infiniteFilms.length || isLoading || isFetching;
     const disabled = isLoading || isFetching;
     const { total } = (data as SearchQueryT) ?? {};
+    const { t } = useTranslation();
 
     useEffect(() => {
         dispatch(searchPageActions.cleanInfiniteFilms());
@@ -130,12 +131,13 @@ export const SearchPageBody = () => {
             <Box>
                 <div className="gap-4 flex items-center justify-between flex-wrap">
                     <Heading className="max-w-[100%]" headinglevel={1}>
-                        {searchParams.get("k") || "Поиск"}
+                        {searchParams.get("keyword") || t("search-t")}
                     </Heading>
                     {total !== undefined && (
                         <Text as="p" className="font-medium">
-                            Найдено: <span className="text-blue-500 font-bold">{total}</span>{" "}
-                            {getNoun(total, "результат", "результата", "результатов")}
+                            {t("search.found")}:{" "}
+                            <span className="text-blue-500 font-bold">{total}</span>{" "}
+                            {t("results", { count: total })}
                         </Text>
                     )}
                 </div>
@@ -154,9 +156,7 @@ export const SearchPageBody = () => {
                 <div className="flex flex-col gap-2 col-span-3 lg:col-span-2">
                     {skip ? (
                         <Box className="text-center">
-                            <Text className="font-medium" as="p">
-                                Настройте параметры для лучшего поиска.
-                            </Text>
+                            <Text as="p">{t("search.initial-msg")}</Text>
                         </Box>
                     ) : (
                         <div className="flex flex-col gap-4">
@@ -167,7 +167,7 @@ export const SearchPageBody = () => {
                                 isLoading={isLoading}
                                 isFetching={isFetching}
                                 isError={isError}
-                                noFilmsMessage="Ничего не найдено. Попробуйте изменить параметры поиска."
+                                noFilmsMessage={t("search.empty-msg")}
                                 tileStyles={tileStyles}
                                 cardProps={{ cardStyles }}
                                 showEnd={showEnd}
@@ -178,7 +178,7 @@ export const SearchPageBody = () => {
                 </div>
                 {filters.data && (
                     <Box className="lg:sticky hidden !gap-4 top-[72px] lg:flex">
-                        <Heading headinglevel={3}>Расширенный поиск</Heading>
+                        <Heading headinglevel={3}>{t("search.extended")}</Heading>
                         <SearchExtended
                             key={search}
                             disabled={disabled}

@@ -5,7 +5,7 @@ import formatServerError, { isServerError } from "shared/api/helpers/formatServe
 
 export const storeErrors: Middleware = (_api: MiddlewareAPI) => (next) => (action) => {
     if (isRejectedWithValue(action)) {
-        let message = "Неизвестная ошибка";
+        let message = "toast.error-default";
 
         if (isServerError(action.payload)) {
             message = formatServerError(action.payload);
@@ -16,7 +16,7 @@ export const storeErrors: Middleware = (_api: MiddlewareAPI) => (next) => (actio
         }
 
         if (action.payload && action.payload.status && action.payload.status === "FETCH_ERROR") {
-            message = "Невозможно подключиться к серверу";
+            message = "toast.error-fetch";
         }
 
         if (action.payload?.toast === true) {

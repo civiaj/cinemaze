@@ -31,11 +31,10 @@ const Modal = ({ onClose }: Props) => {
     return (
         <Box className={classNames("gap-0 sm:gap-0 p-0 sm:p-0 shadow-0")}>
             <UserBox>
-                <Heading headinglevel={1}>Удаление</Heading>
+                <Heading headinglevel={1}>{t("user.photo-delete")}</Heading>
             </UserBox>
             <UserBox className="gap-2 sm:gap-4">
-                <Text>Вы действительно хотите удалить фото профиля?</Text>
-
+                <Text>{t("user.photo-delete-msg")}</Text>
                 <GridMsg
                     isOpen={isError}
                     msg={formatServerError(error)}
@@ -49,10 +48,10 @@ const Modal = ({ onClose }: Props) => {
                         onClick={onDelete}
                         isLoading={isLoading}
                     >
-                        <Text>{t("Delete")}</Text>
+                        <Text>{t("btn.delete")}</Text>
                     </Button>
                     <Button onClick={onClose} theme="regular" className="font-medium">
-                        <Text>{t("Cancel")}</Text>
+                        <Text>{t("btn.cancel")}</Text>
                     </Button>
                 </div>
             </UserBox>

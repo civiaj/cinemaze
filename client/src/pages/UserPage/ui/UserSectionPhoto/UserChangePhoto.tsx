@@ -8,6 +8,7 @@ import { Text } from "shared/ui/Text/Text";
 
 import { CROP_ASPECT, CROP_MIN_WIDTH, acceptInput, formatError, formats } from "../../model/config";
 import { UserPhotoModal } from "./UserPhotoModal";
+import { useTranslation } from "react-i18next";
 
 export const UserChangePhoto = () => {
     const [isDrag, setIsDrag] = useState(false);
@@ -79,6 +80,8 @@ export const UserChangePhoto = () => {
         fileReader.readAsDataURL(file);
     };
 
+    const { t } = useTranslation();
+
     return !file ? (
         <>
             <div
@@ -94,7 +97,7 @@ export const UserChangePhoto = () => {
                 onDrop={onFileDrop}
             >
                 <div className="z-[1] pointer-events-none flex flex-col text-center">
-                    <Text>{isDrag ? "Отпустите файл" : "Перенесите файл"}</Text>
+                    <Text>{isDrag ? t("user.photo-drop") : t("user.photo-drag")}</Text>
                     {wrongFormat && <Text className="font-medium">{wrongFormat}</Text>}
                 </div>
                 <File
@@ -112,7 +115,7 @@ export const UserChangePhoto = () => {
                 className="self-center"
                 onClick={() => filePicker.current?.click()}
             >
-                <Text>Выбрать</Text>
+                <Text>{t("btn.choose")}</Text>
             </Button>
 
             <input
@@ -149,10 +152,10 @@ export const UserChangePhoto = () => {
 
             <div className="flex gap-2 self-center">
                 <Button onClick={onOpenModal} theme="blue">
-                    <Text>Подтвердить</Text>
+                    <Text>{t("btn.confirm")}</Text>
                 </Button>
                 <Button theme="regular" onClick={onCancel}>
-                    <Text>Назад</Text>
+                    <Text>{t("btn.back")}</Text>
                 </Button>
             </div>
 

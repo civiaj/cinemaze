@@ -1,26 +1,24 @@
 import { TFavorite } from "entities/Favorite";
+import i18n from "shared/i18n/config";
 
 const getAddFavoriteToastMsg = (favorite: Partial<TFavorite>) => {
     let message = "";
     switch (true) {
         case "bookmarked" in favorite: {
-            message = favorite.bookmarked ? `Добавлено в "Буду смотреть` : `Убрано из закладок`;
+            message = favorite.bookmarked ? `toast.book-add` : `toast.book-remove`;
             break;
         }
         case "hidden" in favorite: {
-            message = favorite.hidden
-                ? `Фильм не будет отображаться в общей ленте и учитываться в статистике`
-                : `Фильм снова отображается в общей ленте и учитывается в статистике`;
+            message = favorite.hidden ? `toast.hidden-add` : `toast.hidden-remove`;
             break;
         }
         case "userScore" in favorite: {
-            message = favorite.userScore
-                ? `Вы поставили оценку ${favorite.userScore}`
-                : `Оценка удалена`;
+            message = favorite.userScore ? `toast.user-score-add` : `toast.user-score-remove`;
             break;
         }
     }
-    return message;
+
+    return i18n.t(message, { score: favorite.userScore });
 };
 
 export default getAddFavoriteToastMsg;

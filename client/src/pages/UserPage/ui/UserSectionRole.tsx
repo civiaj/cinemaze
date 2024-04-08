@@ -9,6 +9,7 @@ import { roleOptions } from "../model/data";
 import { TRoles } from "entities/User";
 import { useUpdateRoleMutation } from "entities/User/model/userApi";
 import formatServerError from "shared/api/helpers/formatServerError";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     onClose: () => void;
@@ -18,7 +19,7 @@ type Props = {
 export const UserSectionRole = ({ onClose, role }: Props) => {
     const [newRole, setNewRole] = useState<TRoles | null>(null);
     const [updateRole, { isLoading, isError, error }] = useUpdateRoleMutation();
-
+    const { t } = useTranslation();
     const onUpdateRole = () => {
         if (!newRole) return;
         updateRole(newRole)
@@ -30,13 +31,13 @@ export const UserSectionRole = ({ onClose, role }: Props) => {
         <Modal onClose={onClose} header={"Изменение роли"}>
             <div className="flex flex-col gap-2">
                 <div className="flex gap-4 items-center">
-                    <Text className="font-medium">Текущая роль:</Text>
+                    <Text className="font-medium">{t("user.role-change-current")}:</Text>
                     <Button theme="regularTag" className="pointer-events-none" disabled>
                         <Text>{role}</Text>
                     </Button>
                 </div>
                 <div className="flex gap-2 items-center">
-                    <Text className="font-medium">Выберите новую роль:</Text>
+                    <Text className="font-medium">{t("user.role-change-new")}:</Text>
                     <div className="flex gap-2">
                         {roleOptions.map((roleOption) => {
                             if (roleOption.value !== role) {
@@ -71,10 +72,10 @@ export const UserSectionRole = ({ onClose, role }: Props) => {
                     onClick={onUpdateRole}
                     theme="blue"
                 >
-                    Сохранить
+                    {t("btn.save")}
                 </Button>
                 <Button theme="regular" onClick={onClose}>
-                    Отмена
+                    {t("btn.cancel")}
                 </Button>
             </div>
         </Modal>

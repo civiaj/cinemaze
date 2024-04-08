@@ -42,7 +42,7 @@ export const ForgotForm = ({ onSectionChange }: Props) => {
                         <Text>{data.message}</Text>
                         <Text className="font-medium">{email}</Text>
                         <AppLink theme="button" to={routePath.login}>
-                            {t("Login")}
+                            {t("login-t")}
                         </AppLink>
                     </>
                 }
@@ -52,12 +52,12 @@ export const ForgotForm = ({ onSectionChange }: Props) => {
     return (
         <form onSubmit={onRequestPasswordReset}>
             <Box className="w-80 px-6">
-                <Heading headinglevel={1}>{t("t_Recovery")}</Heading>
+                <Heading headinglevel={1}>{t("login.forget-t")}</Heading>
                 <div className="w-full flex flex-col gap-2">
                     <Input
                         autoComplete="username"
                         name="email"
-                        placeholder={t("e_p_address")}
+                        placeholder={t("login.email")}
                         className="placeholder:text-sm"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -71,14 +71,14 @@ export const ForgotForm = ({ onSectionChange }: Props) => {
                 </div>
                 <div className="flex justify-center flex-col gap-2">
                     <Button isLoading={isLoading} theme="blue" type="submit">
-                        <Text>{t("p_reset")}</Text>
+                        <Text>{t("btn.recover")}</Text>
                     </Button>
                     <Button
                         theme="clean"
                         onClick={() => onSectionChange("login")}
                         className="justify-center"
                     >
-                        <Text>{t("Cancel")}</Text>
+                        <Text>{t("btn.cancel")}</Text>
                     </Button>
                 </div>
             </Box>

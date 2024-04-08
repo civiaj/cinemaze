@@ -44,13 +44,17 @@ export const UserSectionName = (props: Props) => {
     if (error) message = formatServerError(error);
 
     return (
-        <Modal header={t("Name")} onClose={onClose}>
+        <Modal header={t("user.name")} onClose={onClose} preventClose={isChanging}>
             <div className="flex justify-between gap-1 flex-col">
-                <Text className="font-medium">Имя</Text>
+                <Text className="font-medium">{t("user.name-change-l")}</Text>
                 <div className="flex items-center gap-4">
                     <div className="w-full flex flex-col gap-2">
                         {isChanging ? (
-                            <Input value={newName} onChange={(e) => setNewName(e.target.value)} />
+                            <Input
+                                value={newName}
+                                onChange={(e) => setNewName(e.target.value)}
+                                placeholder={t("user.name-change-p")}
+                            />
                         ) : (
                             <Elipsis className="sm:text-lg text-base">{name}</Elipsis>
                         )}
@@ -82,10 +86,10 @@ export const UserSectionName = (props: Props) => {
                         disabled={name === trimmedNewName}
                         theme="blue"
                     >
-                        Сохранить
+                        {t("btn.save")}
                     </Button>
                     <Button theme="regular" onClick={onCancel}>
-                        Отмена
+                        {t("btn.cancel")}
                     </Button>
                 </div>
             )}

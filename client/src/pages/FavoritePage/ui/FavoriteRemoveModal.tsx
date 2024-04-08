@@ -12,6 +12,8 @@ import { listVariants } from "../model/data";
 import { FavoriteListVariantT } from "../model/types";
 import { GridMsg } from "shared/ui/GridMsg/GridMsg";
 import formatServerError from "shared/api/helpers/formatServerError";
+import { getFilmTitle } from "shared/lib/getFilmTitle";
+import { TLngs } from "shared/i18n/types";
 
 type Props = {
     onClose: () => void;
@@ -20,10 +22,10 @@ type Props = {
 };
 
 export const FavoriteRemoveModal = (props: Props) => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { onClose, listVariant, film } = props;
-    const { nameEn, nameRu, nameOriginal, filmId } = film ?? {};
-    const title = nameRu ?? nameEn ?? nameOriginal;
+    const { filmId } = film ?? {};
+    const title = getFilmTitle(film, i18n.language as TLngs);
     const category = listVariants.find((e) => e.value === listVariant)!.label;
 
     const [all, setAll] = useState(false);
@@ -44,10 +46,10 @@ export const FavoriteRemoveModal = (props: Props) => {
     const link = `${routePath.details}/${film?.filmId}`;
 
     return (
-        <Modal onClose={onClose} header={t("Deletion")} theme="danger">
+        <Modal onClose={onClose} header={t("favorite.remove-t")} theme="danger">
             <div>
                 <Text as="span" className="text-start">
-                    {t("delete-msg")}{" "}
+                    {t("favortie.remove-b")}{" "}
                 </Text>
                 {title ? (
                     <AppLink
@@ -59,7 +61,7 @@ export const FavoriteRemoveModal = (props: Props) => {
                 ) : (
                     <Text as="span">{t("Film")}</Text>
                 )}
-                <Text as="span"> {t("delete-msg-from")} </Text>
+                <Text as="span"> {t("favorite.remove-from-list")} </Text>
                 <Text as="span" className="font-medium">
                     {t(category)}?
                 </Text>
@@ -73,7 +75,7 @@ export const FavoriteRemoveModal = (props: Props) => {
                         checked={all}
                         onChange={toggleAll}
                     />
-                    <Text>Удалить из всех списков</Text>
+                    <Text>{t("favorite.remove-all")}</Text>
                     <Checked className="text-my-neutral-50 absolute left-0 top-1/2 -translate-y-1/2 hidden peer-checked:block" />
                 </label>
             )}
@@ -91,10 +93,10 @@ export const FavoriteRemoveModal = (props: Props) => {
                     onClick={onDelete}
                     isLoading={isLoading}
                 >
-                    <Text>{t("Delete")}</Text>
+                    <Text>{t("btn.delete")}</Text>
                 </Button>
                 <Button onClick={onClose} theme="regular" className="font-medium">
-                    <Text>{t("Cancel")}</Text>
+                    <Text>{t("btn.cancel")}</Text>
                 </Button>
             </div>
         </Modal>

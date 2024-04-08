@@ -23,6 +23,7 @@ import {
     getUserPageInfiniteFilmsById,
 } from "../model/selectors";
 import { FavoriteRemoveModal } from "../ui/FavoriteRemoveModal";
+import { useTranslation } from "react-i18next";
 
 const cardStyles: TCardStyles = {
     label: "text-xl",
@@ -36,6 +37,7 @@ export const FavoritePageBody = () => {
     const listVariant = useAppSelector(getListVariant);
     const [stateFilmId, setStateFilmId] = useState<number | null>(null);
     const removeFilm = useAppSelector(getUserPageInfiniteFilmsById(stateFilmId));
+    const { t } = useTranslation();
 
     const { isEnd, isError, isFetching, isLoading, onScrollEnd, error } = useInfiniteScroll({
         queryHook: useGetAllFavoriteQuery,
@@ -63,13 +65,10 @@ export const FavoritePageBody = () => {
         return (
             <PageLikeBox>
                 <Box className="items-center text-center">
-                    <Text>
-                        Прежде чем продолжить, добавьте какой-нибудь фильм в список 'Буду смотреть'
-                        или поставьте оценку.
-                    </Text>
+                    <Text>{t("favoirite.empty-msg")}</Text>
 
                     <Button onClick={() => navigate(routePath.main)} theme="regular">
-                        Перейти на главную
+                        {t("btn.main")}
                     </Button>
                 </Box>
             </PageLikeBox>

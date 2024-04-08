@@ -22,5 +22,5 @@ export default (error: unknown) => {
     }
     if (isServerError(error) && error.data.message) return error.data.message;
 
-    return "Ошибка сервера";
+    return "toast.error-server-default";
 };

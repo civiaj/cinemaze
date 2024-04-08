@@ -9,6 +9,7 @@ import { PopupList } from "shared/ui/PopupList/PopupList";
 
 import { TFavorite } from "entities/Favorite";
 import { useGetOneFavoriteQuery } from "../model/userFilmsApi";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     filmId: number;
@@ -20,6 +21,7 @@ export const PageActions = ({ filmId, updateFavorite, disabled }: Props) => {
     const [isOpen, setIsOpen] = useState(false);
     const onClose = () => setIsOpen(false);
     const onToggle = () => setIsOpen((p) => !p);
+    const { t } = useTranslation();
 
     const user = useAppSelector(selectUser);
     const { currentData: favorite } = useGetOneFavoriteQuery(filmId, { skip: !user });
@@ -39,12 +41,12 @@ export const PageActions = ({ filmId, updateFavorite, disabled }: Props) => {
     const options = [
         {
             action: handleCopy,
-            title: "Скопировать ссылку",
+            title: t("details.copy"),
             Icon: <Copy />,
         },
         {
             action: () => onTogglProperty("hidden"),
-            title: hidden ? "Показать" : "Скрыть",
+            title: hidden ? t("details.show") : t("details.hide"),
             Icon: hidden ? <Show /> : <Hide />,
         },
     ];
@@ -58,7 +60,7 @@ export const PageActions = ({ filmId, updateFavorite, disabled }: Props) => {
                 className="rounded-full gap-2 sm:gap-4 px-4"
             >
                 {bookmarked ? <Bookmarked className="text-blue-500" /> : <AddBookmark />}
-                <span className="">Буду смотреть</span>
+                <span>{t("details.will-watch")}</span>
             </Button>
 
             <OutsideClickWrapper onClose={onClose}>

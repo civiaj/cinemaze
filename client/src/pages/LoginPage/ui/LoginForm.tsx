@@ -34,14 +34,14 @@ export const LoginForm = (props: Props) => {
     return (
         <form onSubmit={onSubmitHandler}>
             <Box className="w-80 px-6 gap-4">
-                <Heading headinglevel={1}>{t("t_Login")}</Heading>
+                <Heading headinglevel={1}>{t("login-t")}</Heading>
                 <UserBoxSeparator />
                 <div className="w-full flex flex-col gap-2">
                     <Input
                         type="text"
                         autoComplete="username"
                         name="email"
-                        placeholder={t("e_p_address")}
+                        placeholder={t("login.email")}
                         className="placeholder:text-sm"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -50,7 +50,7 @@ export const LoginForm = (props: Props) => {
                     <Input
                         type="password"
                         autoComplete="current-password"
-                        placeholder={t("e_p_password")}
+                        placeholder={t("login.password")}
                         className="placeholder:text-sm"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -62,11 +62,11 @@ export const LoginForm = (props: Props) => {
                     className="bg-my-red-300"
                 />
 
-                <Button onClick={() => onSectionChange("forgot")}>{t("q_Forgot")}?</Button>
+                <Button onClick={() => onSectionChange("forgot")}>{t("login.forget-p")}?</Button>
 
                 <div className="flex justify-center flex-col gap-2">
                     <Button theme="blue" type="submit" isLoading={isLoading}>
-                        <Text>{t("Login")}</Text>
+                        <Text>{t("btn.log-in")}</Text>
                     </Button>
                     <Button
                         theme="clean"
@@ -74,7 +74,7 @@ export const LoginForm = (props: Props) => {
                         type="button"
                         onClick={() => onSectionChange("registrate")}
                     >
-                        <Text>{t("Reg")}</Text>
+                        <Text>{t("btn.register")}</Text>
                     </Button>
                 </div>
                 <UserBoxSeparator />

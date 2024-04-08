@@ -41,7 +41,7 @@ export const UserSectionPhoto = (props: Props) => {
             onClose={onClose}
             header={
                 !withBtn ? (
-                    t("Photo")
+                    t("user.photo")
                 ) : (
                     <UserBox className="flex-row gap-4 items-center">
                         <Button
@@ -51,7 +51,7 @@ export const UserSectionPhoto = (props: Props) => {
                         >
                             <Left />
                         </Button>
-                        <Heading headinglevel={1}>{t("Photo")}</Heading>
+                        <Heading headinglevel={1}>{t("user.photo")}</Heading>
                     </UserBox>
                 )
             }

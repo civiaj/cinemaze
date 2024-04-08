@@ -1,17 +1,21 @@
 import { Box } from "shared/ui/Boxes/Box";
+import { Text } from "shared/ui/Text/Text";
+import { useTranslation } from "react-i18next";
+
 import { ReviewT } from "../model/types";
 import { ReviewsItem } from "./ReviewsItem";
-import { Text } from "shared/ui/Text/Text";
 
 interface ReviewsList {
     items: ReviewT[];
 }
 
 export const ReviewsList = ({ items }: ReviewsList) => {
+    const { t } = useTranslation();
+
     if (!items.length) {
         return (
             <Box>
-                <Text className="self-center">Ничего не найдено</Text>
+                <Text className="self-center">{t("details.reviews-empty")}</Text>
             </Box>
         );
     }

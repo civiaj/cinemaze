@@ -1,5 +1,7 @@
 import { routePath } from "app/router/router";
 import { FavoriteListVariantT } from "pages/FavoritePage/model/types";
+import { Trans } from "react-i18next";
+import i18n from "shared/i18n/config";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 
 const getRemoveToastMsg = (payload: {
@@ -7,23 +9,30 @@ const getRemoveToastMsg = (payload: {
     filmTitle?: string;
     listVariant: FavoriteListVariantT;
 }) => {
-    const { filmId, filmTitle = "Фильм", listVariant } = payload;
+    const { filmId, filmTitle = i18n.t("film", { count: 1 }), listVariant } = payload;
     const link = `${routePath.details}/${filmId}`;
 
-    const toasterTitle = (
-        <AppLink to={link} className="font-bold hover:underline">
-            {filmTitle}
-        </AppLink>
-    );
-
-    const toasterMessage: Record<FavoriteListVariantT | "all", JSX.Element> = {
-        bookmarked: <span>{toasterTitle} удален из закладок</span>,
-        hidden: <span>{toasterTitle} снова отображается в общей ленте</span>,
-        userScore: <span>Оценка у {toasterTitle} успешно удалена</span>,
-        all: <span>{toasterTitle} удален из всех категорий</span>,
+    const toasterMessage: Record<FavoriteListVariantT | "all", string> = {
+        bookmarked: "toast.remove-book",
+        hidden: "toast.remove-hidden",
+        userScore: "toast.remove-rating",
+        all: "toast.remove-all",
     };
 
-    return toasterMessage[listVariant];
+    return (
+        <Trans
+            t={i18n.t}
+            i18nKey={toasterMessage[listVariant]}
+            values={{ title: filmTitle }}
+            components={{
+                movieLink: (
+                    <AppLink to={link} className="text-blue-500">
+                        {filmTitle}
+                    </AppLink>
+                ),
+            }}
+        />
+    );
 };
 
 export default getRemoveToastMsg;

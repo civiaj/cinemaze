@@ -14,6 +14,7 @@ import { classNames } from "shared/lib/classNames";
 import { Box } from "shared/ui/Boxes/Box";
 import { getPreviewCanvas } from "../../helpers/getPreviewCanvas";
 import { UserModalAnimationHoc } from "pages/UserPage/ui/UserSectionPhoto/UserModalAnimationHoc";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     image: HTMLImageElement | null;
@@ -63,6 +64,8 @@ const Modal = ({ image, crop, onCloseModal, isModal }: Props) => {
             .then(() => navigate(routePath.user));
     };
 
+    const { t } = useTranslation();
+
     useEffect(() => {
         if (image && canvasRef.current && crop && isModal) {
             const pixelCrop = convertToPixelCrop(crop, image.width, image.height);
@@ -73,7 +76,7 @@ const Modal = ({ image, crop, onCloseModal, isModal }: Props) => {
     return (
         <Box className={classNames("gap-0 sm:gap-0 p-0 sm:p-0 shadow-0")}>
             <UserBox>
-                <Heading headinglevel={1}>Новое фото профиля</Heading>
+                <Heading headinglevel={1}>{t("user.photo-preview")}</Heading>
             </UserBox>
             <UserBox className="gap-2 sm:gap-4">
                 <div className="flex items-center justify-center">
@@ -88,10 +91,10 @@ const Modal = ({ image, crop, onCloseModal, isModal }: Props) => {
                 <UserBoxSeparator />
                 <div className="border-0 flex self-center gap-2">
                     <Button isLoading={isLoading} onClick={onSave} theme="blue">
-                        <Text>Сохранить</Text>
+                        <Text>{t("btn.save")}</Text>
                     </Button>
                     <Button theme="regular" onClick={onCloseModal}>
-                        <Text>Отмена</Text>
+                        <Text>{t("btn.cancel")}</Text>
                     </Button>
                 </div>
             </UserBox>

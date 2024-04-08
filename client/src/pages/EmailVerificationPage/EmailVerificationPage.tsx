@@ -1,5 +1,6 @@
 import { routePath } from "app/router/router";
 import { Page } from "entities/Ui";
+import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { StatusBox } from "shared/ui/Boxes/StatusBox";
 
@@ -7,14 +8,16 @@ export const EmailVerificationPage = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
 
+    const { t } = useTranslation();
+
     const isSuccess = searchParams.get("status") === "success";
     const isError = searchParams.get("status") === "error";
 
     if (!isError && !isSuccess) return <Navigate to={routePath.main} replace />;
 
     let msg;
-    if (isError) msg = "Невозможно верифицировать адрес электронной почты.";
-    if (isSuccess) msg = "Электронный адрес почты подтвержден.";
+    if (isError) msg = t("verify.error-msg");
+    if (isSuccess) msg = t("verify.success-msg");
 
     return (
         <Page>

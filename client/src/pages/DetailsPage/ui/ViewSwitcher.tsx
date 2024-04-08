@@ -10,15 +10,17 @@ import { FilmImages } from "widgets/FilmImages";
 
 import { useSearchParams } from "react-router-dom";
 import { ViewSwitcherTypes } from "../model/types";
+import { useTranslation } from "react-i18next";
+import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
 
 interface ViewSwitcherProps {
     filmId: number;
 }
 
 const categories: { title: string; value: ViewSwitcherTypes }[] = [
-    { title: "Обзор", value: "description" },
-    { title: "Изображения", value: "images" },
-    { title: "Награды", value: "awards" },
+    { title: "details.descr", value: "description" },
+    { title: "details.images", value: "images" },
+    { title: "details.awards", value: "awards" },
 ];
 
 export const ViewSwitcher = (props: ViewSwitcherProps) => {
@@ -26,6 +28,8 @@ export const ViewSwitcher = (props: ViewSwitcherProps) => {
     const listRef = useRef<HTMLUListElement>(null);
     const markerRef = useRef<HTMLDivElement>(null);
     const itemRef = useRef<Map<string, HTMLLIElement> | null>(null);
+
+    const { t } = useTranslation();
 
     const getMap = () => {
         if (!itemRef.current) itemRef.current = new Map<string, HTMLLIElement>();
@@ -74,7 +78,7 @@ export const ViewSwitcher = (props: ViewSwitcherProps) => {
     const component = renderedView[nowIsShown] || renderedView.description;
 
     return (
-        <Box id={ID_VIEW_SWITCHER} className="onPageNavigation">
+        <Box id={ID_VIEW_SWITCHER} className="onPageNavigation overflow-hidden">
             <ul className="flex gap-2 relative self-start" ref={listRef}>
                 {categories.map((category) => (
                     <li
@@ -96,7 +100,7 @@ export const ViewSwitcher = (props: ViewSwitcherProps) => {
                             theme="category"
                             onClick={() => handleChangeCategory(category.value)}
                         >
-                            <Heading headinglevel={3}>{category.title}</Heading>
+                            <Heading headinglevel={3}>{t(category.title)}</Heading>
                         </Button>
                     </li>
                 ))}
@@ -105,7 +109,7 @@ export const ViewSwitcher = (props: ViewSwitcherProps) => {
                     className="absolute h-[2px] w-0 bg-blue-500 bottom-0 transition-all"
                 />
             </ul>
-
+            <UserBoxSeparator />
             {component}
         </Box>
     );

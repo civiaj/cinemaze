@@ -5,6 +5,6 @@ export const LANGUAGES = {
 export type TLngs = ObjectValues<typeof LANGUAGES>;
 export type TLngsRecord = Record<TLngs, OptionType<TLngs>>;
 export const lngs: TLngsRecord = {
-    ru: { label: "Russian", value: "ru" },
-    en: { label: "English", value: "en" },
+    ru: { label: "nav.language-ru", value: "ru" },
+    en: { label: "nav.language-en", value: "en" },
 };

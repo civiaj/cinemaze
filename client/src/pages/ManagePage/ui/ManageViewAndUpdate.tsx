@@ -49,7 +49,7 @@ export const ManageViewAndUpdate = ({
     const [isUnban, setIsUnban] = useState(false);
     const defaultChange: ChangeUserData = { displayName, role, deletePhoto: false };
     const [changeData, setChangeData] = useState(defaultChange);
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
     const isDefaultPhoto = photo === "default-user.jpeg";
     const areSame =
         trimInput(changeData.displayName, "name") === displayName && changeData.role === role;
@@ -93,7 +93,7 @@ export const ManageViewAndUpdate = ({
     return (
         <>
             <div className="grid gap-x-4 grid-cols-[max-content,_1fr] gap-y-1">
-                <p>DisplayName:</p>
+                <p>{t("manage.displayName")}:</p>
                 {manageView === "info" && <p className="truncate">{displayName}</p>}
                 {manageView === "update" && (
                     <Input
@@ -108,10 +108,10 @@ export const ManageViewAndUpdate = ({
                     />
                 )}
 
-                <p>Email:</p>
+                <p>{t("manage.email")}:</p>
                 <p className="truncate">{email}</p>
 
-                <p>Verified:</p>
+                <p>{t("manage.verified")}:</p>
                 <div className="place-self-start">
                     {verified ? (
                         <div className="rounded-full p-[1px] text-my-green-500 border-2 border-my-green-500">
@@ -124,7 +124,7 @@ export const ManageViewAndUpdate = ({
                     )}
                 </div>
 
-                <p>Role:</p>
+                <p>{t("manage.role")}:</p>
                 {manageView === "info" && <p>{role}</p>}
                 {manageView === "update" && (
                     <AppSelect
@@ -136,16 +136,16 @@ export const ManageViewAndUpdate = ({
                     />
                 )}
 
-                <p>Provider:</p>
+                <p>{t("manage.provider")}:</p>
                 <p className="truncate">{provider}</p>
 
-                <p>UpdatedAt:</p>
+                <p>{t("manage.updatedAt")}:</p>
                 <p>{formatDate(new Date(updatedAt), i18n.language, "long")}</p>
 
-                <p>CreatedAt:</p>
+                <p>{t("manage.createdAt")}:</p>
                 <p>{formatDate(new Date(createdAt), i18n.language, "long")}</p>
 
-                <p>Banned:</p>
+                <p>{t("manage.isBanned")}:</p>
                 <div className="place-self-start">
                     {isBanned ? (
                         <div className="rounded-full p-[1px] text-my-red-500 border-2 border-my-red-500">
@@ -159,10 +159,14 @@ export const ManageViewAndUpdate = ({
                 </div>
                 {isBanned && banExpiration && (
                     <>
-                        <p>Ban until:</p>
+                        <p>{t("manage.banExpiration")}:</p>
                         <p>{formatDate(new Date(banExpiration), i18n.language, "long")}</p>
-                        <p>Ban message:</p>
-                        <p>{banMessage || "Сообщение не было указано"}</p>
+                        {banMessage && (
+                            <>
+                                <p>{t("manage.banMessage")}:</p>
+                                <p>{banMessage || "Сообщение не было указано"}</p>
+                            </>
+                        )}
                     </>
                 )}
 
@@ -181,7 +185,7 @@ export const ManageViewAndUpdate = ({
                                     }))
                                 }
                             />
-                            <p>Удалить фото профиля</p>
+                            <p>{t("manage.delete-photo")}</p>
                             <Checked className="text-my-neutral-50 absolute left-0 top-1/2 -translate-y-1/2 hidden peer-checked:block" />
                         </label>
                     </>
@@ -208,7 +212,7 @@ export const ManageViewAndUpdate = ({
                             theme="blue"
                             isLoading={isLoading}
                         >
-                            Сохранить
+                            {t("btn.save")}
                         </Button>
                         <Button
                             onClick={handleCancel}
@@ -216,7 +220,7 @@ export const ManageViewAndUpdate = ({
                             theme="regular"
                             className="py-1 h-auto text-sm font-medium"
                         >
-                            Отмена
+                            {t("btn.cancel")}
                         </Button>
                     </>
                 )}
@@ -228,7 +232,7 @@ export const ManageViewAndUpdate = ({
                                 className="py-1 h-auto text-sm font-medium"
                                 onClick={onOpenUnban}
                             >
-                                Разблокировать
+                                {t("btn.unblock")}
                             </Button>
                         )}
                         <Button
@@ -236,34 +240,34 @@ export const ManageViewAndUpdate = ({
                             onClick={() => onSetManageView("update")}
                             theme="regular"
                         >
-                            Изменить
+                            {t("btn.change")}
                         </Button>
                         <Button
                             theme="danger"
                             className="py-1 h-auto text-sm font-medium"
                             onClick={() => onSetManageView("ban")}
                         >
-                            Заблокировать
+                            {t("btn.block")}
                         </Button>
                     </>
                 )}
             </div>
             {isUnban && (
-                <Modal
-                    theme="success"
-                    header={`Разблокировать пользователя`}
-                    onClose={onCloseUnban}
-                >
-                    <Text>Вы действильно хотите разблокировать пользователя {displayName}?</Text>
+                <Modal theme="success" header={t(`manage.t`)} onClose={onCloseUnban}>
+                    <Text>
+                        {t("manage.unban-message")} {displayName}?
+                    </Text>
                     {banExpiration && (
                         <UserBox className="border rounded-xl">
                             <Text className="sm:text-sm">
-                                Ban until:{" "}
+                                {t("manage.banExpiration")}:{" "}
                                 {formatDate(new Date(banExpiration), i18n.language, "long")}
                             </Text>
-                            <Text className="sm:text-sm">
-                                Ban message: {banMessage || "Сообщение не было указано"}
-                            </Text>
+                            {Boolean(banMessage) && (
+                                <Text className="sm:text-sm">
+                                    {t("manage.banMessage")}: {banMessage}
+                                </Text>
+                            )}
                         </UserBox>
                     )}
                     {unban.isError && (
@@ -280,10 +284,10 @@ export const ManageViewAndUpdate = ({
                             onClick={onUnbanUser}
                             isLoading={unban.isLoading}
                         >
-                            <Text>Разблокировать</Text>
+                            <Text>{t("btn.unblock")}</Text>
                         </Button>
                         <Button onClick={handleCancelUnban} theme="regular" className="font-medium">
-                            <Text>Отмена</Text>
+                            <Text>{t("btn.cancel")}</Text>
                         </Button>
                     </div>
                 </Modal>

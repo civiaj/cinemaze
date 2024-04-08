@@ -39,7 +39,7 @@ export const ResetForm = () => {
                     <>
                         <Text>{data?.message}</Text>
                         <AppLink theme="button" to={routePath.login}>
-                            {t("Login")}
+                            {t("btn.log-in")}
                         </AppLink>
                     </>
                 }
@@ -49,13 +49,13 @@ export const ResetForm = () => {
     return (
         <form onSubmit={onResetPasswrod}>
             <Box className="w-80 px-6">
-                <Heading headinglevel={1}>{t("t_Recovery")}</Heading>
+                <Heading headinglevel={1}>{t("login.forget-t")}</Heading>
 
                 <div className="w-full flex flex-col gap-2">
                     <Input
                         type="password"
                         autoComplete="new-password"
-                        placeholder={t("e_p_password")}
+                        placeholder={t("login.password")}
                         className="placeholder:text-sm"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -63,7 +63,7 @@ export const ResetForm = () => {
                     <Input
                         type="password"
                         autoComplete="new-password"
-                        placeholder={t("e_p_conf_p")}
+                        placeholder={t("login.confirm")}
                         className="placeholder:text-sm"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
@@ -77,7 +77,7 @@ export const ResetForm = () => {
 
                 <div className="flex justify-center flex-col gap-2">
                     <Button theme="blue" type="submit" isLoading={isLoading}>
-                        <Text>{t("Recovery")}</Text>
+                        <Text>{t("btn.recover")}</Text>
                     </Button>
                 </div>
             </Box>

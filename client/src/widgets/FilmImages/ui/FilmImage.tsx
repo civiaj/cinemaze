@@ -2,6 +2,7 @@ import { ReactEventHandler, memo, useState } from "react";
 import { classNames } from "shared/lib/classNames";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { AppImage } from "shared/ui/AppImage/AppImage";
+import { useTranslation } from "react-i18next";
 
 interface FilmImageProps {
     index: number;
@@ -16,6 +17,8 @@ const smallImages = [3, 6];
 
 export const FilmImage = memo((props: FilmImageProps) => {
     const { index, previewUrl, imageUrl, handlePreviewOpen } = props;
+
+    const { t } = useTranslation();
 
     const [dimension, setDimension] = useState<"vertical" | "horizontal" | null>(null);
 
@@ -77,7 +80,7 @@ export const FilmImage = memo((props: FilmImageProps) => {
                             theme="sourceSmall"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            Открыть источник
+                            {t("details.images-source")}
                         </AppLink>
                     </span>
                     <div className="absolute inset-0 pointer-events-none select-none bg-neutral-900 opacity-0 group-hover:opacity-50 group-focus:opacity-50" />

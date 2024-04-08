@@ -3,20 +3,22 @@ import { memo, useCallback } from "react";
 import { Close } from "shared/assets/icons";
 import { EMPTY_LINE } from "shared/const/const";
 import { classNames } from "shared/lib/classNames";
+import { AppImage } from "shared/ui/AppImage/AppImage";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Box } from "shared/ui/Boxes/Box";
-import { AppImage } from "shared/ui/AppImage/AppImage";
 import { Heading } from "shared/ui/Text/Heading";
 
-import { FilmCardPropsT } from "../model/types";
 import { useTranslation } from "react-i18next";
+import { TLngs } from "shared/i18n/types";
+import { getFilmTitle } from "shared/lib/getFilmTitle";
+import { FilmCardPropsT } from "../model/types";
 
 export const FilmCard = memo((props: FilmCardPropsT) => {
     const {
         film,
         userScore,
         isHidden,
-        label = "Watch",
+        label = "card.t-watch",
         cardStyles,
         onDelete,
         onClick,
@@ -24,21 +26,10 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
         hideStats,
     } = props;
 
-    const {
-        filmId,
-        nameRu,
-        posterUrlPreview,
-        rating,
-        nameEn,
-        nameOriginal,
-        genres,
-        year,
-        countries,
-        filmLength,
-    } = film;
+    const { filmId, posterUrlPreview, rating, genres, year, countries, filmLength } = film;
 
-    const { t } = useTranslation();
-    const filmTitle = nameRu ?? nameEn ?? nameOriginal ?? EMPTY_LINE;
+    const { t, i18n } = useTranslation();
+    const filmTitle = getFilmTitle(film, i18n.language as TLngs);
     const handleClick = useCallback(() => onClick?.(), [onClick]);
     const stats = hideStats
         ? []
@@ -199,7 +190,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                                     to={`${routePath.details}/${String(filmId)}`}
                                     onClick={handleClick}
                                 >
-                                    {t("Watch")}
+                                    {t("card.l-watch")}
                                 </AppLink>
                             </div>
                         </div>
@@ -210,7 +201,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                         to={`${routePath.details}/${String(filmId)}`}
                         onClick={handleClick}
                     >
-                        {t("Watch")}
+                        {t("card.l-watch")}
                     </AppLink>
                 </Box>
             </li>

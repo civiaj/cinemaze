@@ -7,11 +7,12 @@ import { Box } from "shared/ui/Boxes/Box";
 import { getBreadcrumbs } from "../../model/selectors";
 import { Branches } from "../../ui/Breadcrumbs/Branches";
 import { ExtraBreadcrumbs } from "../../ui/Breadcrumbs/ExtraBreadcrumbs";
+import { useTranslation } from "react-i18next";
 
 export const BreadcrumbsBody = () => {
     const { details: branches, main } = useAppSelector(getBreadcrumbs);
     const [displayedIndex, setDisplayedIndex] = useState(0);
-
+    const { t } = useTranslation();
     const containerRef = useRef<HTMLDivElement>(null);
     const collectionRef = useRef<Map<string, number> | null>(null);
     const initial = useRef(true);
@@ -82,7 +83,7 @@ export const BreadcrumbsBody = () => {
                         to={main.pathname}
                         className="hover:underline hover:text-blue-500 whitespace-nowrap font-medium shrink-0 text-lg"
                     >
-                        {main.label}
+                        {t(main.label)}
                     </AppLink>
                 </>
             )}

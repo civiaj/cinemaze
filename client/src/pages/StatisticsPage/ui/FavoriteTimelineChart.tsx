@@ -26,6 +26,7 @@ import { statisticsActions } from "../model/slice";
 import { TLIntervals, TLStat } from "../model/types";
 import { Elipsis } from "shared/ui/Text/Elipsis";
 import { classNames } from "shared/lib/classNames";
+import { Text } from "shared/ui/Text/Text";
 
 /* eslint-disable @typescript-eslint/no-explicit-any*/
 
@@ -48,7 +49,7 @@ const CustomTooltip = ({ payload, active }: TooltipProps<TLStat["userScore"], TL
                     </Elipsis>
                     <div className="flex gap-2 items-center text-base font-normal self-end">
                         <p>
-                            {item.userScore} <span>{t("stars", { count: item.userScore })}</span>
+                            {item.userScore} <span>{t("star", { count: item.userScore })}</span>
                         </p>
                     </div>
                     <div className="font-normal self-end">{item.fullDate}</div>
@@ -94,7 +95,7 @@ export const FavoriteTimelineChart = () => {
     return (
         <Box>
             <div className="flex items-center gap-2 justify-between">
-                <Heading headinglevel={1}>{t("Last ratings")}</Heading>
+                <Heading headinglevel={1}>{t("stat.last")}</Heading>
                 <AppSelect
                     options={tlIntervals}
                     actionChange={onIntervalChange}
@@ -104,7 +105,7 @@ export const FavoriteTimelineChart = () => {
             </div>
 
             <div
-                className={classNames("font-medium text-sm h-72", {
+                className={classNames("font-medium text-sm h-72 relative", {
                     ["pointer-events-none"]: data.length === 0,
                 })}
             >
@@ -148,6 +149,11 @@ export const FavoriteTimelineChart = () => {
                         />
                     </LineChart>
                 </ResponsiveContainer>
+                {Boolean(!data.length) && (
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-normal">
+                        <Text>{t("stat.empty-msg")}</Text>
+                    </div>
+                )}
             </div>
         </Box>
     );

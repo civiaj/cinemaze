@@ -80,21 +80,21 @@ export const SearchExtended = (props: SearchExtendedProps) => {
     return (
         <>
             <div className="flex flex-col gap-1">
-                <span>{t("Keyword")}</span>
+                <span>{t("search.keyword")}</span>
                 <Input
                     className="text-sm"
-                    placeholder={t("title_enter")}
+                    placeholder={t("search.keyword-place")}
                     value={keyword}
                     onChange={(e) => onUpdateFilters("keyword", e.target.value)}
                 />
             </div>
             <div className="flex flex-col gap-1">
-                <span>{t("Сountry")}</span>
+                <span>{t("search.country")}</span>
                 {data?.countries && (
                     <div className="flex items-center gap-2 w-full">
                         <AppSelect
                             theme="search"
-                            placeholder={t("country_enter")}
+                            placeholder={t("search.country-place")}
                             options={data.countries}
                             value={country}
                             actionChange={(newValue) => onUpdateFilters("country", newValue)}
@@ -113,12 +113,12 @@ export const SearchExtended = (props: SearchExtendedProps) => {
             </div>
 
             <div className="flex flex-col gap-1">
-                <span>{t("Genre")}</span>
+                <span>{t("search.genre")}</span>
                 {data?.genres && (
                     <div className="flex items-center gap-2 flex-1">
                         <AppSelect
                             theme="search"
-                            placeholder={t("genre_enter")}
+                            placeholder={t("search.genre-place")}
                             options={data.genres}
                             value={genre}
                             actionChange={(newValue) => onUpdateFilters("genre", newValue)}
@@ -137,10 +137,10 @@ export const SearchExtended = (props: SearchExtendedProps) => {
             </div>
 
             <div className="flex flex-col gap-1">
-                <span>{t("Rating")}</span>
+                <span>{t("search.rating")}</span>
                 <div className="flex gap-4">
                     <div className="flex items-center gap-2 flex-1">
-                        <span className="text-sm">{t("min-from")}:</span>
+                        <span className="text-sm">{t("search.from")}:</span>
                         <AppSelect
                             theme="search"
                             value={ratingFrom}
@@ -151,7 +151,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
 
                     {ratingFrom !== RATING_TO_MAX && (
                         <div className="flex items-center gap-2 flex-1">
-                            <span className="text-sm">{t("max-to")}:</span>
+                            <span className="text-sm">{t("search.to")}:</span>
                             <AppSelect
                                 theme="search"
                                 value={ratingTo}
@@ -166,7 +166,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
                 <span>{t("Year")}</span>
                 <div className="flex gap-4">
                     <div className="flex items-center gap-2 flex-1">
-                        <span className="text-sm">{t("min-from")}:</span>
+                        <span className="text-sm">{t("search.from")}:</span>
                         <AppSelect
                             theme="search"
                             value={yearFrom}
@@ -177,7 +177,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
 
                     {yearFrom !== YEAR_TO_MAX && (
                         <div className="flex items-center gap-2 flex-1">
-                            <span className="text-sm">{t("max-to")}:</span>
+                            <span className="text-sm">{t("search.to")}:</span>
                             <AppSelect
                                 value={yearTo}
                                 options={yearToOptions}
@@ -196,7 +196,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
                     onClick={handleStartSearch}
                     className="flex-1"
                 >
-                    {t("Apply")}
+                    {t("btn.apply")}
                 </Button>
                 <Button onClick={handleReset} theme="regularIcon">
                     <Refresh />

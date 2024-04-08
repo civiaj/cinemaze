@@ -1,55 +1,55 @@
 import { ScoreFilters, TLIntervals, VBFilters, VBSortBy } from "./types";
 
 export const scoreTitles: Record<ScoreFilters, { title: string }> = {
-    rating: { title: "rating" },
-    userScore: { title: "userScore" },
+    rating: { title: "stat.ratings-film" },
+    userScore: { title: "stat.ratings-my" },
 };
 
 export const vbSortOptions: OptionType<VBSortBy, string>[] = [
     {
-        label: "Count",
+        label: "stat.cag-sort-count",
         value: "count",
     },
     {
-        label: "AvgUserScore",
+        label: "stat.cag-sort-userscore",
         value: "avgUserScore",
     },
     {
-        label: "AvgRating",
+        label: "stat.cag-sort-rating",
         value: "avgRating",
     },
 ];
 
 export const vbFilters: OptionType<VBFilters, string>[] = [
     {
-        label: "Countries",
+        label: "stat.cag-data-country",
         value: "countries",
     },
     {
-        label: "Genres",
+        label: "stat.cag-data-genre",
         value: "genres",
     },
 ];
 
 export const tlIntervals: OptionType<TLIntervals, string>[] = [
     {
-        label: "24 hours",
+        label: "stat.last-24",
         value: "1",
     },
     {
-        label: "Week",
+        label: "stat.last-7",
         value: "7",
     },
     {
-        label: "Month",
+        label: "stat.last-m",
         value: "30",
     },
     {
-        label: "Year",
+        label: "stat.last-y",
         value: "year",
     },
     {
-        label: "All time",
+        label: "stat.last-all",
         value: "all",
     },
 ];

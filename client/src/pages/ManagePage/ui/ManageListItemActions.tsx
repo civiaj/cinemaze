@@ -7,6 +7,7 @@ import { ManageViewAndUpdate } from "pages/ManagePage/ui/ManageViewAndUpdate";
 import { ManageListItemActionsHeader } from "pages/ManagePage/ui/ManageListItemActionsHead";
 import { GridMsg } from "shared/ui/GridMsg/GridMsg";
 import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     user: TUser;
@@ -16,16 +17,17 @@ type Props = {
 
 export const ManageListItemActions = ({ user, onSetActive, onPreventClose }: Props) => {
     const { displayName } = user;
+    const { t } = useTranslation();
     const [manageView, setManageView] = useState<ManageActionViews>("info");
     const onSetManageView = (newView: ManageActionViews) => setManageView(newView);
 
     const manageActionHeader: Record<ManageActionViews, string> = useMemo(
         () => ({
-            ban: `Запрет доступа ${displayName}`,
-            update: `Изменение ${displayName}`,
-            info: ` Информация о ${displayName}`,
+            ban: t("manage.ban-t", { displayName }),
+            update: t("manage.change-t", { displayName }),
+            info: t("manage-info-t", { displayName }),
         }),
-        [displayName]
+        [displayName, t]
     );
 
     return (

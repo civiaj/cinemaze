@@ -2,19 +2,19 @@ import { FavoriteListVariantT } from "./types";
 
 export const listVariants: OptionType<FavoriteListVariantT, string>[] = [
     {
-        label: "q-all",
+        label: "favorite.all",
         value: "all",
     },
     {
-        label: "q-user",
+        label: "favorite.userscore",
         value: "userScore",
     },
     {
-        label: "q-will",
+        label: "favoirite.will",
         value: "bookmarked",
     },
     {
-        label: "q-hidden",
+        label: "favorite.hidden",
         value: "hidden",
     },
 ];

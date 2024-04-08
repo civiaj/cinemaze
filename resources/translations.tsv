@@ -1,0 +1,256 @@
+key	en	ru
+main.popular	Popular	Популярные
+main.popular-t	Watching now	Смотрят сейчас
+main.best	Best	Лучшее
+main.best-t	Best of all time	Лучшее за все время
+main.antisipated	Antisipated	Ожидаемые
+main.antisipated-t	Coming soon	Скоро в кино
+nav.profile	My Profile	Мой Профиль
+nav.moovies	My Movies	Мои Фильмы
+nav.language-t	Language	Язык
+nav.language-en	English	Английский
+nav.language-ru	Russian	Русский
+nav.theme-t	Theme	Тема
+nav.theme-light	Light	Светлая
+nav.theme-dark	Dark	Темная
+nav.theme-sys	Device	Устройство
+nav.appearance-t	Appearance	Вид
+nav.appearance-tile	Tile	Плитка
+nav.appearance-list	List	Список
+main-t	Main	Главная
+favorite-t	My Movies	Мои Фильмы
+stat-t	Statistics	Статистика
+search-t	Search	Поиск
+manage-t	Manage	Управление
+user-t	User	Профиль
+login-t	Login	Авторизоваться
+ban-t	Account Banned	Аккаунт Заблокирован
+search.extended	Extended Search	Расширенный Поиск
+search.keyword	Keyword	Ключевое слово
+search.keyword-place	Enter the title	Введите название
+search.country	Country	Страна
+search.country-place	Choose the country	Выберите страну
+search.genre	Genre	Жанр
+search.genre-place	Choose the genre	Выберите жанр
+search.rating	Rating	Рейтинг
+search.from	from	от
+search.to	to	до
+search.initial-msg	Adjust the settings for a better search experience	Настройте параметры для лучшего поиска.
+search.empty-msg	Nothing found, try changing your search parameters	Ничего не найдено, попробуйте изменить параметры поиска
+search.found	Found	Найдено
+searc.input-p	Search by title	Поиск по названию
+search.input-recent	Recent queries	Недавние запросы
+search.input-results	Results	Результаты
+search.by-count	By Ratings Number	По Количеству Оценок
+search.by-rating	By Rating	По Рейтингу
+search.by-date	By Date	По Дате Выхода
+favorite.all	All	Все
+favorite.userscore	With My Rating	С Моей Оценкой
+favoirite.will	Will Watch	Буду Смотреть
+favorite.hidden	Hidden	Скрытые
+favoirite.empty-msg	Before continuing, please add a movie to your 'Will Watch' list or give it a rating	Прежде чем продолжить, добавьте какой-нибудь фильм в список 'Буду Cмотреть' или поставьте оценку
+favorite.remove-t	Removal	Удаление
+favorite.remove-all	Remove from all lists	Удалить из всех списков
+favorite.remove-from-list	from	из списка
+favortie.remove-b	Are you sure you want to delete	Вы действительно хотите удалить
+stat.ratings	Ratings	Оценки
+stat.ratings-my	My Movie Ratings	Мои Оценки
+stat.ratings-film	Film Ratings	Рейтинг Фильма
+stat.cag	Countries and Genres	Страны и Жанры
+stat.cag-data	Data	Данные
+stat.cag-data-genre	Genres	Жанры
+stat.cag-data-country	Countries	Страны
+stat.cag-sort	Sort By	Сортировать по
+stat.cag-sort-count	Count	Количеству
+stat.cag-sort-userscore	My Rating	Моей Оценке
+stat.cag-sort-rating	Movie Raing	Рейтингу Фильма
+stat.cat-show-all	Show All	Показать Все
+stat.cat-change-order	Change Order	Изменить Порядок
+stat.cat-userscore	My Rating	Моя Оценка
+stat.cat-rating	Movie Rating	Рейтинг Фильма
+stat.last	Last	Последние
+stat.last-24	24 Hours	24 Часа
+stat.last-7	Week	Неделя
+stat.last-m	Month	Месяц
+stat.last-y	Year	Год
+stat.last-all	All Time	Все Время
+stat.empty-msg	To view statistics rate several films	Для просмотра статистики оцените несколько фильмов
+stat.pie-empty-msg	There is no statistics on the selected parameters	Статистика по выбранным параметрам отсутствует
+manage.search-name	Search by name	Поиск по имени
+manage.displayName	Name	Имя
+manage.verified	Verified	Подтвержден
+manage.isBanned	Banned	Заблокирован
+manage.email	Email	Почта
+manage.role	Role	Роль
+manage.updatedAt	Last Update	Обновлен
+manage.createdAt	Created At	Создан
+manage.banMessage	Block message	Сообщение о блокировке
+manage.banExpiration	Blocked until	Заблокирован до
+manage.provider	Provider	Провайдер
+manage.delete-photo	Delete profile photo	Удалить фото профиля
+manage.info-t	Information about	Информация о
+manage.ban-t	Block user {displayName}	Запрет доступа {displayName}
+manage.change-t	Update {displayName}	Изменение {displayName}
+manage.unban-t	Unban {displayName}	Разблокировать {displayName}
+manage.unban-message	Do you really want to unblock	Вы действильно хотите разблокировать
+manage.t	Unblock	Разблокировать
+login.login	Login	Авторизация
+login.email	E-mail address	Адрес электронной почты
+login.password	Password	Пароль
+login.name	Name	Имя
+login.confirm	Confirm password	Подтверждение пароля
+login.register	Registration	Регистрация
+login.forget-p	Forget password?	Забыли пароль?
+login.forget-t	Recovery	Восстановление
+login.forget-msg	A link to change your password has been sent to your email.	Ссылка для изменения пароля была отправлена на вашу почту.
+login.with	Login with	Вход с помощью
+details.will-watch	Will Watch	Буду Смотреть
+details.copy	Copy link	Скопировать ссылку
+details.show	Show	Показать
+details.hide	Hide	Скрыть
+details.change	Change	Изменить
+details.delete	Delete	Удалить
+details.your-score	Your Score	Ваша Оценка
+details.set-rating	Set Rating	Оценить Фильм
+details.year	Production year	Год производства
+details.country	Country	Страна
+details.genre	Genre	Жанр
+details.slogan	Tagline	Слоган
+details.age-limit	Age	Возраст
+details.mpaa	MPAA rating	Рейтинг MPAA
+details.length	Time	Время
+details.rate-kp	Kinopoisk rating	Рейтинг Кинопоиск
+details.count-kp	Estimates	Оценок
+details.reviews-count	Reviews	Рецензий
+details.about-movie	About the film	О фильме
+details.min	min.	мин.
+details.descr	Review	Обзор
+details.images	Images	Изображения
+details.awards	Awards	Награды
+details.descr-empty	Review not available	Обзор недоступен
+details.tag-still	Stills	Кадры
+details.tag-shooting	Shootings	Съёмки
+details.tag-poster	Posters	Постеры
+details.tag-fan-art	Fan art	Фан-арт
+details.tag-promo	Promo	Промо
+details.tag-concept	Concepts	Концепты
+details.tag-wallpaper	Wallpapers	Обои
+details.tag-cover	Covers	Обложки
+details.tag-screenshot	Screenshots	Скриншоты
+details.images-not-found	No images found in <span>{{tag}}</span> category	В категории <span>{{tag}}</span> изображений не найдено
+details.images-source	Open the source	Открыть источник
+details.awards-empty	No awards	Нет наград
+details.reviews-empty	Nothing found, try changing parameters	Ничего не найдено, попробуйте изменить параметры
+details.awards-winner	Winner	Победитель
+details.awards-nomination	Nominations	Номинации
+details.rating-t	Movie Rating	Рейтинг фильма
+details.rating-kp	KP	KP
+details.rating-imdb	IMDb	IMDb
+details.similar-t	If you liked this movie	Если вам понравился этот фильм
+details.reviews-new-first	New First	Сначала Новые
+details.reviews-old-first	Old First	Сначала Старые
+details.reviews-t	Viewer reviews	Рецензии зрителей
+film_one	film	фильм
+film_few		фильма
+film_many		фильмов
+film_other	films	
+star_one	star	звезда
+star_few		звезды
+star_many		звёзд
+star_other	stars	
+results_one	result	результат
+results_few		результата
+results_many		результатов
+results_other	results	
+vote_one	vote	оценка
+vote_few		оценки
+vote_many		оценок
+vote_other	votes	
+review_one	revirew	рецензия
+review_few		рецензии
+review_many		рецензий
+review_other	revirews	
+verify.error-msg	Unable to verify email address.	Невозможно верифицировать адрес электронной почты.
+verify.success-msg	Email address verified.	Электронный адрес почты подтвержден.
+unauthorized-msg	"The user does not have the required rights to view this page."	"Пользователь не обладает требуемыми правами для просмотра данной страницы."
+ban.msg	restrictions have been placed on your account	на ваш аккаунт были наложены ограничения
+ban.one	1. You cannot add, delete or change movies in your collection.	1. Вы не можете добавлять, удалять или изменять фильмы в вашей коллекции.
+ban.two	2. Viewing the statistics page is not available.	2. Недоступен просмотр страницы со статистикой.
+ban.three	3. Viewing the page with a list of users is not available.	3. Недоступен просмотр страницы со списком пользователей.
+ban.msg-small	Your Account is Banned	Ваш Аккаунт Заблокирован
+boundary.t	An error has occurred	Произошла ошибка
+boundary.b	Please refresh the page or return to the home page to try again.	Пожалуйста, обновите страницу или вернитесь на главную, чтобы повторить попытку.
+toast.error-default	Unknown error	Неизвестная ошибка
+toast.error-server-default	Server error	Ошибка сервера
+toast.error-fetch	Unable to connect to server	Невозможно подключиться к серверу
+toast.book-add	Added to "Will Watch"	Добавлено в "Буду Смотреть
+toast.book-remove	Removed from bookmarks	Убрано из закладок
+toast.hidden-add	The film will not be displayed in the general feed and will not be taken into account in statistics	Фильм не будет отображаться в общей ленте и учитываться в статистике
+toast.hidden-remove	The film is again displayed in the general feed and taken into account in statistics	Фильм снова отображается в общей ленте и учитывается в статистике
+toast.user-score-add	You have given a {{score}}	Вы поставили оценку {{score}}
+toast.user-score-remove	Rating removed	Оценка удалена
+toast.remove-book	<movieLink>{{title}}</movieLink> removed from bookmarks	<movieLink>{{title}}</movieLink> удален из закладок
+toast.remove-hidden	<movieLink>{{title}}</movieLink> is displayed again in the general feed	<movieLink>{{title}}</movieLink> снова отображается в общей ленте
+toast.remove-rating	<movieLink>{{title}}</movieLink> rating successfully removed	Оценка у <movieLink>{{title}}</movieLink> успешно удалена
+toast.remove-all	<movieLink>{{title}}</movieLink> removed from all categories	<movieLink>{{title}}</movieLink> удален из всех категорий
+toast.copy	Link copied	Ссылка скопирована
+no-film-msg	There are no items to display	Нет элементов для отображения
+error-film-msg	An error occurred while loading	При загрузке возникла ошибка
+end-box-msg	You have reached the end of the list	Вы достигли конца списка
+btn.save	Save	Сохранить
+btn.back	Back	Назад
+btn.choose	Choose	Выбрать
+btn.log-in	Log in	Войти
+btn.log-out	Log out	Выйти
+btn.delete	Delete	Удалить
+btn.cancel	Cancel	Отмена
+btn.apply	Apply	Применить
+btn.search	Search	Поиск
+btn.search-ext	Extended search	Расиширенный поиск
+btn.block	Ban	Заблокировать
+btn.unblock	Unban	Разблокировать
+btn.change	Change	Изменить
+btn.confirm	Confirm	Подтвердить
+btn.end-all-sessions	End all sessions	Завершить все сеансы
+btn.end	End	Заверишть
+btn.register	Create new account	Зарегистрироваться
+btn.recover	Recover password	Восстановить пароль
+btn.main	Go to Main	Перейти на главную
+btn.reload	Reload page	Перезагрузить страницу
+btn.to-kp	To Kinopoisk	На Кинопоиск
+btn.view-whole-review	Show full review	Показать всю рецензию
+user.email	E-mail address	Адрес электронной почты
+user.photo	User photo	Фото профиля
+user.name	User name	Имя пользователя
+user.devices	Devices	Устройства
+user.role	Role	Роль
+user.password	Password	Пароль
+user.devices-all	Show all	Показать все
+user.password-change	Change the passwrod	Измените пароль
+user.created	Created	Создан
+user.updated	Last update	Последнее обновление
+user.email-y	Email address is verified	Адрес электронной почты подтвержден
+user.email-n	Email addres is not verified	Адрес электронной почты не подтвержден
+user.photo-drag	Drag  the file	Перенесите файл
+user.photo-preview	Preview	Предпросмотр
+user.photo-delete	Removal	Удаление
+user.photo-delete-msg	Are you sure you want to delete your profile photo?	Вы действительно хотите удалить фото профиля?
+user.name-change-t	User Name	Имя Профиля
+user.name-change-l	Name	Имя
+user.name-change-p	Enter a new name	Введите новое имя пользователя
+user.devices-current	Current device	Текущее устройство
+user.devices-active	Active sessions	Активные сеансы
+user.devices-active-empty	No active sessions found	Активных сеансов не найдено
+user.devices-end-all-msg	Are you sure you want to end all sessions except the current one?	Вы действительно хотите завершить все сеансы, кроме текущего?
+user.devices-end-msg	Do you really want to end the session	Вы действительно хотите завершить сеанс
+user.password-check	Confirm the password	Подтвердите пароль
+user.password-check-msg	For security reasons, please enter your password to continue.	Исходя из соображений безопасности, для продолжения введите свой пароль.
+user.password-change-next	Change password	Изменить пароль
+user.password-change-next-new	New password	Новый пароль
+user.role-change	Role change	Изменение роли
+user.role-change-current	Current role	Текущая роль
+user.role-change-new	Select a new role	Выберите новую роль
+user.photo-drop	Drop the file	Отпустите файл
+card.l-watch	Watch	Смотреть
+card.t-watch	Watch	Смотреть
+card.t-go	View	Перейти

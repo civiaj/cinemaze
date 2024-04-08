@@ -1,6 +1,7 @@
 import { useCheckPasswordMutation } from "entities/Authorization";
 import { useUpdatePasswordMutation } from "entities/User/model/userApi";
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import formatServerError from "shared/api/helpers/formatServerError";
 import { AppImage } from "shared/ui/AppImage/AppImage";
 import { Modal } from "shared/ui/Boxes/Modal";
@@ -21,6 +22,7 @@ type Props = {
 export const UserSectionPassword = (props: Props) => {
     const { onClose } = props;
 
+    const { t } = useTranslation();
     const [isChecked, setIsChecked] = useState(false);
     const onSetChecked = () => setIsChecked(true);
 
@@ -28,7 +30,7 @@ export const UserSectionPassword = (props: Props) => {
         <Modal
             onClose={onClose}
             preventClose={isChecked}
-            header={isChecked ? "Изменить пароль" : "Подтвердите пароль"}
+            header={isChecked ? t("user.password-change") : t("user.password-check")}
         >
             {!isChecked ? (
                 <CheckPasswordSection onSetChecked={onSetChecked} {...props} />
@@ -42,7 +44,7 @@ export const UserSectionPassword = (props: Props) => {
 const CheckPasswordSection = (props: Props & { onSetChecked: () => void }) => {
     const { photo, name, onSetChecked, onClose } = props;
     const inputRef = useRef<HTMLInputElement>(null);
-
+    const { t } = useTranslation();
     const [checkPassword, { isLoading, error, isError }] = useCheckPasswordMutation();
 
     useEffect(() => {
@@ -69,13 +71,11 @@ const CheckPasswordSection = (props: Props & { onSetChecked: () => void }) => {
                 />
                 <Elipsis className="font-medium">{name}</Elipsis>
             </UserBox>
-            <Text as="p">
-                Исходя из соображений безопасности, для продолжения введите свой пароль.
-            </Text>
+            <Text as="p">{t("user.password-check-msg")}</Text>
             <form className="flex gap-4 flex-col" onSubmit={onPasswordCheck}>
                 <div className="flex flex-col gap-1">
                     <label className="font-medium">
-                        <Text>Пароль</Text>
+                        <Text>{t("user.password")}</Text>
                     </label>
                     <Input name="password" type="password" autoComplete="password" ref={inputRef} />
                 </div>
@@ -88,10 +88,10 @@ const CheckPasswordSection = (props: Props & { onSetChecked: () => void }) => {
 
                 <div className="flex self-end gap-2">
                     <Button type="submit" isLoading={isLoading} theme="blue">
-                        <Text>Подтвердить</Text>
+                        <Text>{t("btn.confirm")}</Text>
                     </Button>
                     <Button onClick={onClose} theme="regular">
-                        <Text>Отмена</Text>
+                        <Text>{t("btn.cancel")}</Text>
                     </Button>
                 </div>
             </form>
@@ -102,7 +102,7 @@ const CheckPasswordSection = (props: Props & { onSetChecked: () => void }) => {
 const NewPasswordSection = (props: Props) => {
     const { onClose } = props;
     const inputRef = useRef<HTMLInputElement>(null);
-
+    const { t } = useTranslation();
     const [updatePassword, { isLoading, error, isError }] = useUpdatePasswordMutation();
 
     useEffect(() => {
@@ -125,7 +125,7 @@ const NewPasswordSection = (props: Props) => {
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-col gap-1">
                         <label className="font-medium">
-                            <Text>Новый пароль</Text>
+                            <Text>{t("user.password-change-next-new")}</Text>
                         </label>
                         <Input
                             name="password"
@@ -136,7 +136,7 @@ const NewPasswordSection = (props: Props) => {
                     </div>
                     <div className="flex flex-col gap-1">
                         <label className="font-medium">
-                            <Text>Подтвердите пароль</Text>
+                            <Text>{t("user.password-check")}</Text>
                         </label>
                         <input
                             autoComplete="username"
@@ -155,10 +155,10 @@ const NewPasswordSection = (props: Props) => {
 
                 <div className="flex self-end gap-2">
                     <Button type="submit" isLoading={isLoading} theme="blue">
-                        <Text>Изменить</Text>
+                        <Text>{t("btn.change")}</Text>
                     </Button>
                     <Button onClick={onClose} theme="regular">
-                        <Text>Отмена</Text>
+                        <Text>{t("btn.cancel")}</Text>
                     </Button>
                 </div>
             </form>

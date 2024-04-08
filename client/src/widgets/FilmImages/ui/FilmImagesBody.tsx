@@ -1,14 +1,15 @@
-import { Pagination } from "widgets/Pagination/Pagination";
 import { useCallback, useState } from "react";
 import { Spinner } from "shared/ui/Spinner/Spinner";
+import { Pagination } from "widgets/Pagination/Pagination";
 
-import { GetFilmImagesType } from "../model/types";
+import formatFilmError from "shared/api/helpers/formatFilmError";
+import { ID_VIEW_SWITCHER } from "shared/const/const";
+import { StatusBox } from "shared/ui/Boxes/StatusBox";
+import { ImagePreview } from "widgets/ImagePreview";
 import { useGetFilmImagesQuery } from "../model/filmImagesApi";
+import { GetFilmImagesType } from "../model/types";
 import { FilmImage } from "./FilmImage";
 import { FilmImagesEmpty } from "./FilmImagesEmpty";
-import { ID_VIEW_SWITCHER } from "shared/const/const";
-import { Text } from "shared/ui/Text/Text";
-import { ImagePreview } from "widgets/ImagePreview";
 
 interface FilmImagesBodyProps {
     id: number;
@@ -19,7 +20,11 @@ interface FilmImagesBodyProps {
 
 export const FilmImagesBody = (props: FilmImagesBodyProps) => {
     const { id, type, page, changePage } = props;
-    const { data, isLoading, isFetching, isError } = useGetFilmImagesQuery({ id, page, type });
+    const { data, isLoading, isFetching, isError, error } = useGetFilmImagesQuery({
+        id,
+        page,
+        type,
+    });
 
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const handlePreviewClose = useCallback(() => setActiveIndex(null), []);
@@ -27,8 +32,8 @@ export const FilmImagesBody = (props: FilmImagesBodyProps) => {
 
     if (isError)
         return (
-            <div className="h-20 flex items-center justify-center">
-                <Text>При загрузке возникла ошибка.</Text>
+            <div className="flex items-center flex-col gap-2">
+                <StatusBox isError={isError} msgOrChildren={formatFilmError(error)} withoutBox />
             </div>
         );
 

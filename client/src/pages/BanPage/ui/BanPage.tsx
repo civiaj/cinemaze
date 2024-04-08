@@ -13,7 +13,7 @@ import { Text } from "shared/ui/Text/Text";
 
 const BanPage = () => {
     const user = useAppSelector(selectUser);
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     if (!user || (user && !user.isBanned)) return <Navigate to={routePath.main} replace />;
 
@@ -26,14 +26,14 @@ const BanPage = () => {
                 <UserBoxSeparator />
                 <UserBox className="border rounded-xl bg-my-red-200 text-neutral-50">
                     <Text>
-                        {displayName}, на ваш аккаунт были наложены ограничения: <br />
-                        1. Вы не можете добавлять, удалять или изменять фильмы в вашей коллекции.
+                        {displayName}, {t("ban.msg")}: <br />
+                        {t("ban.one")}
                         <br />
-                        2. Недоступен просмотр страницы со статистикой.
+                        {t("ban.two")}
                         <br />
                         {(role === "admin" || role === "admin-test") && (
                             <>
-                                3. Недоступен просмотр страницы со списком пользователей.
+                                {t("ban.three")}
                                 <br />
                             </>
                         )}
@@ -43,7 +43,7 @@ const BanPage = () => {
                 <div className="grid grid-cols-[max-content,_1fr] gap-x-4 gap-y-1 break-words">
                     {banExpiration && (
                         <>
-                            <Text>Блокировка до:</Text>
+                            <Text>{t("manage.banExpiration")}:</Text>
                             <Text>
                                 {formatDate(new Date(banExpiration), i18n.language, "long")}
                             </Text>
@@ -51,7 +51,7 @@ const BanPage = () => {
                     )}
                     {banMessage && (
                         <>
-                            <Text>Причина: </Text>
+                            <Text>{t("manage.banMessage")}: </Text>
                             <Text>{banMessage}</Text>
                         </>
                     )}
@@ -59,7 +59,7 @@ const BanPage = () => {
 
                 <UserBoxSeparator />
                 <AppLink to={routePath.main} className="self-center" theme="button">
-                    Перейти на главную
+                    {t("btn.main")}
                 </AppLink>
             </Box>
         </Page>

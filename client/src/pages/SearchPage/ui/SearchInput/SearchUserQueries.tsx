@@ -28,7 +28,7 @@ export const SearchUserQueries = ({ inputValue = "", startSearch }: Props) => {
         !!userQueries.length && (
             <>
                 <div className="flex flex-col gap-1">
-                    <p className="px-2 text-sm font-medium">{t("Search-recent")}</p>
+                    <p className="px-2 text-sm font-medium">{t("search.input-recent")}</p>
                     <ul className="flex flex-col">
                         {userQueries.map((query) => (
                             <li
@@ -48,7 +48,7 @@ export const SearchUserQueries = ({ inputValue = "", startSearch }: Props) => {
                                     onClick={() => handleDeleteUserQuery(query)}
                                     className="text-xs hover:underline shrink-0 pr-2 text-blue-500 z-50"
                                 >
-                                    {t("Delete")}
+                                    {t("btn.delete")}
                                 </button>
                             </li>
                         ))}

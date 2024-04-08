@@ -5,8 +5,8 @@ export const APPEARANCES = {
 export type TAppearances = ObjectValues<typeof APPEARANCES>;
 export type TAppearancesRecord = Record<TAppearances, OptionType<TAppearances>>;
 export const appearances: TAppearancesRecord = {
-    list: { label: "List", value: "list" },
-    tile: { label: "Tile", value: "tile" },
+    list: { label: "nav.appearance-list", value: "list" },
+    tile: { label: "nav.appearance-tile", value: "tile" },
 };
 
 export type BreadcrumbsT = { pathname: string; label: string };

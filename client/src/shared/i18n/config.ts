@@ -12,11 +12,10 @@ i18n.use(HttpApi)
         interpolation: {
             escapeValue: false, // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
         },
-        // debug: import.meta.env.VITE_ENV === "development",
+        debug: import.meta.env.VITE_ENV === "development",
         keySeparator: ".",
-
         backend: {
-            loadPath: "/locales/{{lng}}/{{ns}}.json",
+            loadPath: "/locales/{{lng}}.json",
         },
     });
 

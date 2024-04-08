@@ -1,6 +1,7 @@
 import { tags } from "../model/data";
 import { GetFilmImagesType } from "../model/types";
 import { Button } from "shared/ui/Button/Button";
+import { useTranslation } from "react-i18next";
 
 interface FilmImagesHeaderProps {
     setNewType: (newType: GetFilmImagesType) => void;
@@ -9,6 +10,7 @@ interface FilmImagesHeaderProps {
 
 export const FilmImagesHeader = (props: FilmImagesHeaderProps) => {
     const { setNewType, value } = props;
+    const { t } = useTranslation();
 
     return (
         <ul className="flex gap-2 flex-wrap">
@@ -19,7 +21,7 @@ export const FilmImagesHeader = (props: FilmImagesHeaderProps) => {
                         active={value === tag.type}
                         onClick={() => setNewType(tag.type)}
                     >
-                        {tag.title}
+                        {t(tag.title)}
                     </Button>
                 </li>
             ))}

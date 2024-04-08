@@ -10,6 +10,8 @@ import { Heading } from "shared/ui/Text/Heading";
 import { Text } from "shared/ui/Text/Text";
 
 import { LoginSections } from "../model/types";
+import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
+import { OAuthOptions } from "pages/LoginPage/ui/OAuthOptions";
 
 type Props = {
     onSectionChange: (newValue?: LoginSections) => void;
@@ -38,20 +40,21 @@ export const RegistrateForm = (props: Props) => {
 
     return (
         <form onSubmit={onSubmitHandler}>
-            <Box className="w-80 px-6">
-                <Heading headinglevel={1}>{t("t_Reg")}</Heading>
+            <Box className="w-80 px-6 overflow-hidden">
+                <Heading headinglevel={1}>{t("login.register")}</Heading>
+                <UserBoxSeparator />
                 <div className="w-full flex flex-col gap-2">
                     <Input
                         autoComplete="username"
                         name="email"
-                        placeholder={t("e_p_address")}
+                        placeholder={t("login.email")}
                         className="placeholder:text-sm"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <Input
                         autoComplete="name"
-                        placeholder={t("e_p_name")}
+                        placeholder={t("login.name")}
                         className="placeholder:text-sm"
                         value={displayName}
                         onChange={(e) => setDisplayName(e.target.value)}
@@ -59,7 +62,7 @@ export const RegistrateForm = (props: Props) => {
                     <Input
                         type="password"
                         autoComplete="new-password"
-                        placeholder={t("e_p_password")}
+                        placeholder={t("login.password")}
                         className="placeholder:text-sm"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -67,7 +70,7 @@ export const RegistrateForm = (props: Props) => {
                     <Input
                         type="password"
                         autoComplete="new-password"
-                        placeholder={t("e_p_conf_p")}
+                        placeholder={t("login.confirm")}
                         className="placeholder:text-sm"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
@@ -80,16 +83,18 @@ export const RegistrateForm = (props: Props) => {
                 </div>
                 <div className="flex justify-center flex-col gap-2">
                     <Button isLoading={isLoading} theme="blue" type="submit">
-                        <Text>{t("Reg")}</Text>
+                        <Text>{t("btn.register")}</Text>
                     </Button>
                     <Button
                         theme="clean"
                         onClick={() => onSectionChange("login")}
                         className="justify-center"
                     >
-                        <Text>{t("Login")}</Text>
+                        <Text>{t("btn.log-in")}</Text>
                     </Button>
                 </div>
+                <UserBoxSeparator />
+                <OAuthOptions />
             </Box>
         </form>
     );

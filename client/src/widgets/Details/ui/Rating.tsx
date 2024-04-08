@@ -2,6 +2,7 @@ import { Heading } from "shared/ui/Text/Heading";
 import { addZerosToNumber } from "shared/lib/addZerosToNumber";
 import { Box } from "shared/ui/Boxes/Box";
 import { RatingStars, RatingUserScore, TFavorite } from "entities/Favorite";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     ratingImdb?: number;
@@ -13,17 +14,18 @@ type Props = {
 
 export const Rating = (props: Props) => {
     const { ratingImdb, rating, filmId, updateFavorite, disabled } = props;
+    const { t } = useTranslation();
 
     return (
         <Box>
             <div className="flex gap-4 items-center">
                 <Heading headinglevel={3} className="inline">
-                    Рейтинг фильма
+                    {t("details.rating-t")}
                 </Heading>
                 {rating && (
                     <div className="bg-my-neutral-100 rounded-md px-2 py-1">
                         <span className="text-sm">
-                            KP:{" "}
+                            {t("details.rating-kp")}:{" "}
                             <span className="font-medium">
                                 {addZerosToNumber(Number(rating), 1)}{" "}
                             </span>
@@ -33,7 +35,7 @@ export const Rating = (props: Props) => {
                 {ratingImdb && (
                     <div className="bg-my-neutral-100 rounded-md px-2 py-1">
                         <span className="text-sm">
-                            IMDb:{" "}
+                            {t("details.rating-imdb")}:{" "}
                             <span className="font-medium">{addZerosToNumber(ratingImdb, 1)}</span>
                         </span>
                     </div>

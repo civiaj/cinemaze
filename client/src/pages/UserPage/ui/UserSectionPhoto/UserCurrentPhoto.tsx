@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { AppImage } from "shared/ui/AppImage/AppImage";
 import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
 import { Button } from "shared/ui/Button/Button";
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export const UserCurrentPhoto = ({ photo, onSetIs, noPhoto }: Props) => {
+    const { t } = useTranslation();
     return (
         <div className="flex flex-col h-full justify-center gap-4">
             <div className="flex items-center justify-center">
@@ -29,11 +31,11 @@ export const UserCurrentPhoto = ({ photo, onSetIs, noPhoto }: Props) => {
 
             <div className="flex gap-2 self-center">
                 <Button onClick={() => onSetIs("1")} theme="regular">
-                    <Text>Изменить</Text>
+                    <Text>{t("btn.change")}</Text>
                 </Button>
                 {!noPhoto && (
                     <Button theme="danger" onClick={() => onSetIs("2")}>
-                        <Text>Удалить</Text>
+                        <Text>{t("btn.delete")}</Text>
                     </Button>
                 )}
             </div>

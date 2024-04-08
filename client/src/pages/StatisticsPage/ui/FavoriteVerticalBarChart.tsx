@@ -60,12 +60,12 @@ const CustomTooltip = ({
             <div className="bg-my-neutral-50 bg-opacity-10 px-6 py-4 flex items-end flex-col">
                 <p className="text-2xl font-medium">{item.name}</p>
                 <span className="text-sm font-normal mb-2">
-                    {item.count} {t("films", { count: item.count })} {percantage}%
+                    {item.count} {t("film", { count: item.count })} {percantage}%
                 </span>
                 <div className="grid grid-cols-[repeat(2,max-content)] justify-items-end font-normal gap-x-4 text-sm">
-                    <p>{t("rating")}</p>
+                    <p>{t("stat.cat-rating")}</p>
                     <p>{addZerosToNumber(item.avgRating, 1)}</p>
-                    <p>{t("userScore")}</p>
+                    <p>{t("stat.cat-userscore")}</p>
                     <p>{addZerosToNumber(item.avgUserScore, 1)}</p>
                 </div>
             </div>
@@ -171,7 +171,7 @@ export const FavoriteVerticalBarChart = () => {
                 className="flex flex-col gap-2 sm:gap-4"
             >
                 <div className="flex items-center gap-2 justify-between">
-                    <Heading headinglevel={1}>{t("Countries and genres")}</Heading>
+                    <Heading headinglevel={1}>{t("stat.cag")}</Heading>
                     <Button theme="regularIcon" onClick={handleToggle}>
                         <Settings />
                     </Button>
@@ -179,7 +179,7 @@ export const FavoriteVerticalBarChart = () => {
 
                 <SettingsBox condition={isOpen}>
                     <Text as="span" className="font-medium">
-                        {t("Data")}
+                        {t("stat.cag-data")}
                     </Text>
                     <div className="flex gap-2">
                         <AppSelect
@@ -192,14 +192,14 @@ export const FavoriteVerticalBarChart = () => {
                             theme="regularIcon"
                             className="bg-my-white"
                             onClick={onShowAllChange}
-                            title={t("Show all")}
+                            title={t("stat.cat-show-all")}
                             disabled={displayed.length < MAX_DISPLAYED}
                         >
                             {showAll ? <EyeOpen /> : <EyeClose />}
                         </Button>
                     </div>
                     <Text as="span" className="font-medium">
-                        {t("Sort by")}:
+                        {t("stat.cag-sort")}:
                     </Text>
                     <div className="flex gap-2">
                         <AppSelect
@@ -211,7 +211,7 @@ export const FavoriteVerticalBarChart = () => {
                         <Button
                             theme="regularIcon"
                             className="bg-my-white"
-                            title={t("Change order")}
+                            title={t("stat.cat-change-order")}
                             onClick={() => onOrderChange(order === "asc" ? "desc" : "asc")}
                         >
                             {order === "asc" ? <Ascending /> : <Descending />}

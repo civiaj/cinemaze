@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Button } from "shared/ui/Button/Button";
 import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
 import { RatingChangeNumbers } from "./RatingChangeNumbers";
+import { useTranslation } from "react-i18next";
 
 interface RatingSetgSet {
     filmId: number;
@@ -14,7 +15,7 @@ interface RatingSetgSet {
 
 export const RatingSet = (props: RatingSetgSet) => {
     const { filmId, updateFavorite, disabled } = props;
-
+    const { t } = useTranslation();
     const user = useAppSelector(selectUser);
     const { currentData: favorite } = useGetOneFavoriteQuery(filmId, { skip: !user });
 
@@ -38,7 +39,7 @@ export const RatingSet = (props: RatingSetgSet) => {
                     theme="regular"
                     className="sm:text-sm w-full rounded-full justify-center"
                 >
-                    Оценить фильм
+                    {t("details.set-rating")}
                 </Button>
             ) : (
                 <OutsideClickWrapper onClose={onClose}>

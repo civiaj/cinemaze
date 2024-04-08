@@ -24,7 +24,7 @@ import { Pagination } from "widgets/Pagination/Pagination";
 
 export const ManageList = () => {
     const { filter, order } = useAppSelector(getManageState);
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
     const dispatch = useAppDispatch();
     const [page, setPage] = useState(1);
     const [activeUser, setActiveUser] = useState<string | null>(null);
@@ -59,11 +59,11 @@ export const ManageList = () => {
     return (
         <Box>
             <div className="flex justify-between items-center">
-                <Heading headinglevel={1}>Manage</Heading>
+                <Heading headinglevel={1}>{t("manage-t")}</Heading>
                 <Input
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Поиск по имени"
+                    placeholder={t("manage.search-name")}
                 />
             </div>
             <OutsideClickWrapper
@@ -85,7 +85,7 @@ export const ManageList = () => {
                                                 filter === option.value,
                                         })}
                                     >
-                                        <Text className="font-medium">{option.label}</Text>
+                                        <Text className="font-medium">{t(option.label)}</Text>
                                         {filter === option.value && (
                                             <>{order === 1 ? <Ascending /> : <Descending />}</>
                                         )}
@@ -116,8 +116,7 @@ export const ManageList = () => {
                                         <td scope="row" colSpan={8}>
                                             <div className="h-56 flex items-center justify-center">
                                                 <Text className="font-normal">
-                                                    Ничего не найдено. Попробуйте изменить параметры
-                                                    поиска.
+                                                    {t("search.empty-msg")}
                                                 </Text>
                                             </div>
                                         </td>

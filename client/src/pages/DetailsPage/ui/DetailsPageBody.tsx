@@ -1,27 +1,29 @@
-import { useParams } from "react-router-dom";
+import { useAppSelector } from "app/store";
+import { TFavorite, useAddFavoriteMutation, useGetOneFavoriteQuery } from "entities/Favorite";
+import { Breadcrumbs } from "entities/Ui";
+import { selectUser } from "entities/User";
 import { useCallback } from "react";
 import toast from "react-hot-toast";
-import { useAppSelector } from "app/store";
-import { Breadcrumbs } from "entities/Ui";
-import { TFavorite, useAddFavoriteMutation, useGetOneFavoriteQuery } from "entities/Favorite";
-import { selectUser } from "entities/User";
-import { Reviews } from "widgets/Reviews";
-import { Similars } from "widgets/Similars";
-import { AboutMain, Rating } from "widgets/Details";
-import { EMPTY_LINE } from "shared/const/const";
+import { useParams } from "react-router-dom";
 import remapDetailsToFilm from "shared/lib/remapDetailsToFilm";
 import { StatusBox } from "shared/ui/Boxes/StatusBox";
+import { AboutMain, Rating } from "widgets/Details";
+import { Reviews } from "widgets/Reviews";
+import { Similars } from "widgets/Similars";
 
+import { useTranslation } from "react-i18next";
+import formatFilmError from "shared/api/helpers/formatFilmError";
+import { TLngs } from "shared/i18n/types";
+import { getFilmTitle } from "shared/lib/getFilmTitle";
 import { useDetailsQuery } from "../model/detailsApi";
 import { ViewSwitcher } from "../ui/ViewSwitcher";
 import { DetailsPageSkeleton } from "./DetailsPageSkeleton";
-import formatFilmError from "shared/api/helpers/formatFilmError";
 
 export const DetailsPageBody = () => {
     const { id } = useParams();
     const filmId = Number(id);
     const user = useAppSelector(selectUser);
-
+    const { i18n } = useTranslation();
     const details = useDetailsQuery(filmId);
     const favorite = useGetOneFavoriteQuery(filmId, {
         skip: !user,
@@ -53,8 +55,8 @@ export const DetailsPageBody = () => {
             />
         );
 
-    const { nameRu, nameEn, nameOriginal, ratingImdb, rating } = details.data;
-    const label = nameRu ?? nameEn ?? nameOriginal ?? EMPTY_LINE;
+    const { ratingImdb, rating } = details.data;
+    const label = getFilmTitle(details.data, i18n.language as TLngs);
     const disabled = isLoading || favorite.isFetching || favorite.isLoading;
 
     return (

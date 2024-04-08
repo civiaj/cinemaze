@@ -1,4 +1,5 @@
 import toast from "react-hot-toast";
+import i18n from "shared/i18n/config";
 
 function fallbackCopyTextToClipboard(text: string) {
     const textArea = document.createElement("textarea");
@@ -23,7 +24,7 @@ export const copyClipboard = async (text: string) => {
         } else {
             await navigator.clipboard.writeText(text);
         }
-        toast.success("Ссылка скопирована", {
+        toast.success(i18n.t("toast.copy"), {
             id: text,
         });
     } catch (error) {

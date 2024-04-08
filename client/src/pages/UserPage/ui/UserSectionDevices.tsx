@@ -3,6 +3,7 @@ import { SessionIdentifier, useGetSessionsQuery, useRemoveSessionMutation } from
 
 import { t } from "i18next";
 import { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import formatServerError from "shared/api/helpers/formatServerError";
 import { Close, Left, Stop } from "shared/assets/icons";
 import { AppLink } from "shared/ui/AppLink/AppLink";
@@ -34,14 +35,14 @@ export const UserSectionDevices = () => {
                             <Left />
                         </AppLink>
                         <Heading headinglevel={1} className="font-medium">
-                            {t("Devices")}
+                            {t("user.devices")}
                         </Heading>
                     </div>
                 </UserBox>
 
                 <UserBox>
                     <div className="grid grid-cols-[2fr,3fr] items-start gap-x-4">
-                        <Elipsis>Текущее устройство</Elipsis>
+                        <Elipsis>{t("user.devices-current")}</Elipsis>
                         {loading ? (
                             <Skeleton className="h-9 sm:h-11 w-1/3" />
                         ) : (
@@ -56,7 +57,7 @@ export const UserSectionDevices = () => {
                 </UserBox>
                 <UserBox>
                     <div className="grid grid-cols-[2fr,3fr] items-start gap-x-4">
-                        <Elipsis>Активные сеансы</Elipsis>
+                        <Elipsis>{t("user.devices-active")}</Elipsis>
                         <div className="flex flex-col gap-2">
                             {loading
                                 ? Array.from({ length: 2 }, (_, i) => i).map((_, index) => (
@@ -83,7 +84,9 @@ export const UserSectionDevices = () => {
                                       </div>
                                   ))}
 
-                            {data && !data.other.length && <Text>Активных сеансов не найдено</Text>}
+                            {data && !data.other.length && (
+                                <Text>{t("user.devices-active-empty")}</Text>
+                            )}
                         </div>
                     </div>
                 </UserBox>
@@ -98,7 +101,7 @@ export const UserSectionDevices = () => {
                             disabled={!data?.other.length}
                         >
                             <Stop className="text-xl" />
-                            <Text>Завершить все сеансы</Text>
+                            <Text>{t("btn.end-all-sessions")}</Text>
                         </Button>
                     )}
                 </UserBox>
@@ -118,15 +121,17 @@ const DevicesModal = ({ modalData, onClose }: { modalData: ModalData; onClose: (
             .then(() => onClose());
     };
 
+    const { t } = useTranslation();
+
     if (!modalData) return null;
 
     return (
         <Modal onClose={onClose} header={t("Devices")} theme="danger">
             {modalData === "all" ? (
-                <p>Вы действительно хотите завершить все сеансы, кроме текущего?</p>
+                <p>{t("user.devices-end-all-msg")}</p>
             ) : (
                 <>
-                    <p>Вы действительно хотите завершить сеанс:</p>
+                    <p>{t("user.devices-end-msg")}:</p>
                     <UserBox className="border rounded-xl">
                         <Elipsis className="font-medium">
                             {modalData.os} {modalData.browser} {modalData.version}
@@ -137,10 +142,10 @@ const DevicesModal = ({ modalData, onClose }: { modalData: ModalData; onClose: (
             {<GridMsg isOpen={isError} msg={formatServerError(error)} className="bg-my-red-300" />}
             <div className="flex gap-2 self-end">
                 <Button isLoading={isLoading} onClick={onRemoveSession} theme="danger">
-                    <Text>Завершить</Text>
+                    <Text>{t("btn.end")}</Text>
                 </Button>
                 <Button onClick={onClose} theme="regular">
-                    <Text>Отмена</Text>
+                    <Text>{t("btn.cancel")}</Text>
                 </Button>
             </div>
         </Modal>

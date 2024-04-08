@@ -32,13 +32,13 @@ export const UserSectionHome = ({ user }: Props) => {
     return (
         <Box className="sm:p-0 p-0 gap-0 sm:gap-0">
             <UserBox className="gap-0">
-                <Heading headinglevel={1}>{t("Profile")}</Heading>
+                <Heading headinglevel={1}>{t("user-t")}</Heading>
                 <div className="grid grid-cols-[1fr_max-content] place-items-end gap-x-2">
-                    <Text className="text-xs sm:text-xs">Создан:</Text>
+                    <Text className="text-xs sm:text-xs">{t("user.created")}:</Text>
                     <Text className="text-xs sm:text-xs place-self-start">
                         {formatDate(i18n.language, user.createdAt)}
                     </Text>
-                    <Text className="text-xs sm:text-xs">Последнее обновление:</Text>
+                    <Text className="text-xs sm:text-xs">{t("user.updated")}:</Text>
                     <Text className="text-xs sm:text-xs place-self-start">
                         {formatDate(i18n.language, user.updatedAt)}
                     </Text>
@@ -46,7 +46,7 @@ export const UserSectionHome = ({ user }: Props) => {
             </UserBox>
             <UserBox>
                 <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
-                    <div className="font-medium min-w-0">Адрес электронной почты</div>
+                    <div className="font-medium min-w-0">{t("user.email")}</div>
                     <div className="flex flex-col gap-1 min-w-0">
                         <div>{user.email}</div>
                         {user.verified ? (
@@ -55,7 +55,7 @@ export const UserSectionHome = ({ user }: Props) => {
                                     <Checked />
                                 </div>
                                 <Elipsis className="text-my-green-500 sm:text-sm">
-                                    Адрес электронной почты подтвержден
+                                    {t("user.email-y")}
                                 </Elipsis>
                             </div>
                         ) : (
@@ -64,7 +64,7 @@ export const UserSectionHome = ({ user }: Props) => {
                                     <Close />
                                 </div>
                                 <span className="text-my-neutral-500 sm:text-sm">
-                                    Адрес электронной почты не подтвержден
+                                    {t("user.email-n")}
                                 </span>
                             </div>
                         )}
@@ -74,7 +74,7 @@ export const UserSectionHome = ({ user }: Props) => {
             <AppLink to={`${routePath.user}?section=${SECTIONS_USER.PHOTO}`} theme="user-menu">
                 <UserBox>
                     <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
-                        <div className="font-medium">Фото профиля</div>
+                        <div className="font-medium">{t("user.photo")}</div>
                         <div className="flex justify-between items-center">
                             <AppImage
                                 containerClassName="rounded-full w-20 h-20 "
@@ -91,7 +91,7 @@ export const UserSectionHome = ({ user }: Props) => {
             <AppLink to={`${routePath.user}?section=${SECTIONS_USER.NAME}`} theme="user-menu">
                 <UserBox>
                     <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
-                        <div className="font-medium">Имя пользователя</div>
+                        <div className="font-medium">{t("user.name")}</div>
                         <div className="flex justify-between items-center">
                             <div>{user.displayName}</div>
                             <Right className="text-xl" />
@@ -102,9 +102,9 @@ export const UserSectionHome = ({ user }: Props) => {
             <AppLink to={`${routePath.user}?section=${SECTIONS_USER.DEVICES}`} theme="user-menu">
                 <UserBox>
                     <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
-                        <div className="font-medium">Устройства</div>
+                        <div className="font-medium">{t("user.devices")}</div>
                         <div className="flex justify-between items-center">
-                            <div>Показать все</div>
+                            <div>{t("user.devices-all")}</div>
                             <Right className="text-xl" />
                         </div>
                     </div>
@@ -117,9 +117,9 @@ export const UserSectionHome = ({ user }: Props) => {
                 >
                     <UserBox>
                         <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
-                            <div className="font-medium">Пароль</div>
+                            <div className="font-medium">{t("user.password")}</div>
                             <div className="flex justify-between items-center">
-                                <div>Изменить пароль</div>
+                                <div>{t("user.password-change")}</div>
                                 <Right className="text-xl" />
                             </div>
                         </div>
@@ -129,7 +129,7 @@ export const UserSectionHome = ({ user }: Props) => {
             <AppLink to={`${routePath.user}?section=${SECTIONS_USER.ROLE}`} theme="user-menu">
                 <UserBox>
                     <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
-                        <div className="font-medium">Роль</div>
+                        <div className="font-medium">{t("user.role")}</div>
                         <div className="flex justify-between items-center">
                             <div>{user.role}</div>
                             <Right className="text-xl" />
@@ -142,7 +142,7 @@ export const UserSectionHome = ({ user }: Props) => {
                     to={routePath.ban}
                     className="text-sm rounded-b-xl hover:bg-my-red-300 bg-my-red-200 font-medium text-center text-neutral-50"
                 >
-                    <UserBox className="py-1 rounded-b-xl">Your Account is Banned</UserBox>
+                    <UserBox className="py-1 rounded-b-xl">{t("ban.msg-small")}</UserBox>
                 </AppLink>
             )}
         </Box>

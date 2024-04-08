@@ -8,6 +8,7 @@ import formatServerError from "shared/api/helpers/formatServerError";
 import { GridMsg } from "shared/ui/GridMsg/GridMsg";
 import { AppDatePicker } from "widgets/AppDatePicker/AppDatePicker";
 import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     user: TUser;
@@ -22,6 +23,8 @@ export const ManageBan = ({ user, onSetManageView, onSetActive }: Props) => {
     const areSame =
         blockData.banExpiration?.setHours(0, 0, 0, 0) ===
         defaultBlock.banExpiration?.setHours(0, 0, 0, 0);
+
+    const { t } = useTranslation();
 
     const [banOne, { isLoading, isError, error, reset }] = useBanOneMutation();
 
@@ -48,7 +51,7 @@ export const ManageBan = ({ user, onSetManageView, onSetActive }: Props) => {
     return (
         <>
             <div className="grid  grid-cols-[max-content,_1fr] gap-x-4 gap-y-1 rounded-xl">
-                <p>Заблокировать до:</p>
+                <p>{t("manage.banExpiration")}</p>
                 <div>
                     <AppDatePicker
                         selected={blockData.banExpiration}
@@ -59,7 +62,7 @@ export const ManageBan = ({ user, onSetManageView, onSetActive }: Props) => {
                         }
                     />
                 </div>
-                <p>Текст сообщения:</p>
+                <p>{t("manage.banMessage")}</p>
                 <div className="overflow-hidden rounded-xl">
                     <textarea
                         value={blockData.banMessage}
@@ -96,7 +99,7 @@ export const ManageBan = ({ user, onSetManageView, onSetActive }: Props) => {
                     theme="danger"
                     isLoading={isLoading}
                 >
-                    Заблокировать
+                    {t("btn.block")}
                 </Button>
                 <Button
                     onClick={handleCancel}
@@ -104,7 +107,7 @@ export const ManageBan = ({ user, onSetManageView, onSetActive }: Props) => {
                     className="py-1 h-auto text-sm font-medium"
                     disabled={isLoading}
                 >
-                    Отмена
+                    {t("btn.cancel")}
                 </Button>
             </div>
         </>
