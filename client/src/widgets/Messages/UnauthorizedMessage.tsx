@@ -1,19 +1,19 @@
 import { routePath } from "app/router/router";
 import { Page } from "entities/Ui";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { StatusBox } from "shared/ui/Boxes/StatusBox";
 
 export const UnauthorizedMessage = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     return (
         <Page>
             <StatusBox
                 isError={true}
-                msgOrChildren={
-                    "Пользователь не обладает требуемыми правами для просмотра данной страницы."
-                }
+                msgOrChildren={t("unauth.default-msg")}
                 onReload={() => navigate(routePath.main, { replace: true })}
-                label="Перейти на главную"
+                label="btn.main"
             />
         </Page>
     );

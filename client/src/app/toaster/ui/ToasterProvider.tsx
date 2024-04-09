@@ -5,7 +5,7 @@ export const ToasterProvider = () => {
     return (
         <Toaster
             containerStyle={{ bottom: 8, left: 8 }}
-            toastOptions={{ duration: 500000, position: "bottom-left" }}
+            toastOptions={{ duration: 5000, position: "bottom-left" }}
         >
             {(t) => (
                 <div

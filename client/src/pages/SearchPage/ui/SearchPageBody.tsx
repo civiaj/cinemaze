@@ -137,7 +137,7 @@ export const SearchPageBody = () => {
                         <Text as="p" className="font-medium">
                             {t("search.found")}:{" "}
                             <span className="text-blue-500 font-bold">{total}</span>{" "}
-                            {t("results", { count: total })}
+                            {t("plural.results", { count: total })}
                         </Text>
                     )}
                 </div>

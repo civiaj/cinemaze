@@ -38,7 +38,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
                 if (refreshResult.data) {
                     result = await baseQuery(args, api, extraOptions);
                 } else {
-                    api.dispatch(userActions.setIsLogged(false));
+                    api.dispatch(userActions.removeUser());
                 }
             } finally {
                 release();

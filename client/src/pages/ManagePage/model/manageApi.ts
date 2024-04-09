@@ -9,6 +9,7 @@ import {
 import toast from "react-hot-toast";
 import { serverApi } from "shared/api/serverApi";
 import { ServerMessageResponse } from "shared/api/types";
+import i18n from "shared/i18n/config";
 
 const manageApi = serverApi.injectEndpoints({
     overrideExisting: false,
@@ -33,9 +34,9 @@ const manageApi = serverApi.injectEndpoints({
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     await toast.promise(queryFulfilled, {
-                        loading: "Обновление пользователя...",
-                        success: `Пользователь ${arg.displayName} успешно обновлен`,
-                        error: `Ошибка во время выполнения запроса`,
+                        loading: i18n.t("toast.update-user-loading"),
+                        success: i18n.t("toast.update-user-success", { name: arg.displayName }),
+                        error: i18n.t("toast.update-user-error"),
                     });
                     dispatch(manageApi.util.invalidateTags(["Manage"]));
                 } catch (e) {
@@ -53,7 +54,7 @@ const manageApi = serverApi.injectEndpoints({
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     await queryFulfilled;
-                    toast.success(`Пользователь ${arg.displayName} успешно заблокирован`);
+                    toast.success(i18n.t("toast.ban-user-success", { name: arg.displayName }));
 
                     dispatch(manageApi.util.invalidateTags(["Manage"]));
                 } catch (e) {
@@ -69,7 +70,7 @@ const manageApi = serverApi.injectEndpoints({
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     await queryFulfilled;
-                    toast.success(`Пользователь ${arg.displayName} успешно разблокирован`);
+                    toast.success(i18n.t("toast.unban-user-success", { name: arg.displayName }));
 
                     dispatch(manageApi.util.invalidateTags(["Manage"]));
                 } catch (e) {

@@ -37,13 +37,13 @@ export const AboutRating = (props: AboutRatingProps) => {
                         <span className="font-medium">
                             {numberWithSpaces(ratingKinopoiskVoteCount)}{" "}
                         </span>
-                        {t("vote", { count: ratingKinopoiskVoteCount })}
+                        {t("plural.vote", { count: ratingKinopoiskVoteCount })}
                     </p>
                 )}
                 {Boolean(reviewsCount) && (
                     <p>
                         <span className="font-medium">{numberWithSpaces(reviewsCount)} </span>
-                        {t("review", { count: reviewsCount })}
+                        {t("plural.review", { count: reviewsCount })}
                     </p>
                 )}
             </div>

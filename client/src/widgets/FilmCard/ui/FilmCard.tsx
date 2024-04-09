@@ -156,12 +156,12 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                             <div className="flex-1 flex flex-col gap-1 font-normal text-sm">
                                 {filmLength && (
                                     <p>
-                                        {t("Film length")}: {filmLength}
+                                        {t("details.length")}: {filmLength}
                                     </p>
                                 )}
                                 {!!countries?.length && (
                                     <p>
-                                        {t("Countries")}:{" "}
+                                        {t("details.country")}:{" "}
                                         {countries.map((country) => country.country).join(", ")}
                                     </p>
                                 )}

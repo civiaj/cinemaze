@@ -49,7 +49,8 @@ const CustomTooltip = ({ payload, active }: TooltipProps<TLStat["userScore"], TL
                     </Elipsis>
                     <div className="flex gap-2 items-center text-base font-normal self-end">
                         <p>
-                            {item.userScore} <span>{t("star", { count: item.userScore })}</span>
+                            {item.userScore}{" "}
+                            <span>{t("plural.star", { count: item.userScore })}</span>
                         </p>
                     </div>
                     <div className="font-normal self-end">{item.fullDate}</div>

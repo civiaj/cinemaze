@@ -14,6 +14,7 @@ import { StatusBox } from "shared/ui/Boxes/StatusBox";
 import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
 import { ColoredNumber } from "shared/ui/ColoredNumber/ColoredNumber";
 import { Spinner } from "shared/ui/Spinner/Spinner";
+import { Text } from "shared/ui/Text/Text";
 
 type Props = {
     inputValue?: string;
@@ -65,7 +66,7 @@ export const SearchQueryResults = (props: Props) => {
         return (
             <>
                 <div className="flex items-center justify-center py-2">
-                    <p className="font-medium">{t("search.empty-msg")}</p>
+                    <Text className="text-center">{t("search.empty-msg")}</Text>
                 </div>
                 <UserBoxSeparator />
             </>

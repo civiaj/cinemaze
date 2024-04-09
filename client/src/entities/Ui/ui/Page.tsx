@@ -64,7 +64,7 @@ export const Page = forwardRef<HTMLDivElement, PageProps>((props, ref) => {
                     <main
                         ref={rootRef}
                         className={classNames(
-                            "py-4 px-2 flex flex-col gap-4 h-full min-w-[400px]",
+                            "py-4 px-2 flex flex-col gap-4 h-full min-w-[300px]",
                             {},
                             [className]
                         )}

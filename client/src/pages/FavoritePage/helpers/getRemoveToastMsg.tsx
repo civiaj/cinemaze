@@ -9,7 +9,7 @@ const getRemoveToastMsg = (payload: {
     filmTitle?: string;
     listVariant: FavoriteListVariantT;
 }) => {
-    const { filmId, filmTitle = i18n.t("film", { count: 1 }), listVariant } = payload;
+    const { filmId, filmTitle = i18n.t("plural.film", { count: 1 }), listVariant } = payload;
     const link = `${routePath.details}/${filmId}`;
 
     const toasterMessage: Record<FavoriteListVariantT | "all", string> = {

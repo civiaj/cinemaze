@@ -13,6 +13,9 @@
     "language-t": "Language",
     "language-en": "English",
     "language-ru": "Russian",
+    "language-fr": "French",
+    "language-ko": "Korean",
+    "language-ar": "Arabic",
     "theme-t": "Theme",
     "theme-light": "Light",
     "theme-dark": "Dark",
@@ -38,33 +41,29 @@
     "genre": "Genre",
     "genre-place": "Choose the genre",
     "rating": "Rating",
+    "year": "Year",
     "from": "from",
     "to": "to",
     "initial-msg": "Adjust the settings for a better search experience",
     "empty-msg": "Nothing found, try changing your search parameters",
     "found": "Found",
+    "input-p": "Search by title",
     "input-recent": "Recent queries",
     "input-results": "Results",
     "by-count": "By Ratings Number",
     "by-rating": "By Rating",
     "by-date": "By Date"
   },
-  "searc": {
-    "input-p": "Search by title"
-  },
   "favorite": {
     "all": "All",
     "userscore": "With My Rating",
-    "hidden": "Hidden",
-    "remove-t": "Removal",
-    "remove-all": "Remove from all lists",
-    "remove-from-list": "from"
-  },
-  "favoirite": {
     "will": "Will Watch",
-    "empty-msg": "Before continuing, please add a movie to your 'Will Watch' list or give it a rating"
-  },
-  "favortie": {
+    "hidden": "Hidden",
+    "empty-msg": "Before continuing, please add a movie to your 'Will Watch' list or give it a rating",
+    "remove-t": "Removal",
+    "unauth-msg": "You must log in",
+    "remove-all": "Remove from all lists",
+    "remove-from-list": "from",
     "remove-b": "Are you sure you want to delete"
   },
   "stat": {
@@ -106,11 +105,12 @@
     "provider": "Provider",
     "delete-photo": "Delete profile photo",
     "info-t": "Information about",
-    "ban-t": "Block user {displayName}",
-    "change-t": "Update {displayName}",
-    "unban-t": "Unban {displayName}",
+    "ban-t": "Block user {{displayName}}",
+    "change-t": "Update {{displayName}}",
+    "unban-t": "Unban {{displayName}}",
     "unban-message": "Do you really want to unblock",
-    "t": "Unblock"
+    "t": "Unblock",
+    "ban-date-default": "Select date.."
   },
   "login": {
     "login": "Login",
@@ -172,31 +172,11 @@
     "reviews-old-first": "Old First",
     "reviews-t": "Viewer reviews"
   },
-  "film_one": "film",
-  "film_few": "",
-  "film_many": "",
-  "film_other": "films",
-  "star_one": "star",
-  "star_few": "",
-  "star_many": "",
-  "star_other": "stars",
-  "results_one": "result",
-  "results_few": "",
-  "results_many": "",
-  "results_other": "results",
-  "vote_one": "vote",
-  "vote_few": "",
-  "vote_many": "",
-  "vote_other": "votes",
-  "review_one": "revirew",
-  "review_few": "",
-  "review_many": "",
-  "review_other": "revirews",
   "verify": {
     "error-msg": "Unable to verify email address.",
     "success-msg": "Email address verified."
   },
-  "unauthorized-msg": "\"The user does not have the required rights to view this page.\"",
+  "unauthorized-msg": "The user does not have the required rights to view this page.",
   "ban": {
     "msg": "restrictions have been placed on your account",
     "one": "1. You cannot add, delete or change movies in your collection.",
@@ -222,7 +202,18 @@
     "remove-hidden": "<movieLink>{{title}}</movieLink> is displayed again in the general feed",
     "remove-rating": "<movieLink>{{title}}</movieLink> rating successfully removed",
     "remove-all": "<movieLink>{{title}}</movieLink> removed from all categories",
-    "copy": "Link copied"
+    "copy": "Link copied",
+    "update-name": "Name updated",
+    "update-password": "Password updated",
+    "update-session": "Session deleted",
+    "update-photo": "Profile photo updated",
+    "update-photo-delete": "Profile photo removed",
+    "update-role": "Role changed to {{role}}",
+    "update-user-loading": "User update...",
+    "update-user-success": "User {{name}} updated successfully",
+    "update-user-error": "Error during query execution",
+    "ban-user-success": "User {{name}} has been successfully blocked",
+    "unban-user-success": "User {{name}} successfully unblocked"
   },
   "no-film-msg": "There are no items to display",
   "error-film-msg": "An error occurred while loading",
@@ -268,6 +259,8 @@
     "photo-preview": "Preview",
     "photo-delete": "Removal",
     "photo-delete-msg": "Are you sure you want to delete your profile photo?",
+    "photo-format-msg": "Supported formats: JPG, PNG, JPEG, WEBP",
+    "photo-size-msg": "Minimum image size 250 x 250 pixels",
     "name-change-t": "User Name",
     "name-change-l": "Name",
     "name-change-p": "Enter a new name",
@@ -289,5 +282,43 @@
     "l-watch": "Watch",
     "t-watch": "Watch",
     "t-go": "View"
+  },
+  "api": {
+    "default-error": "Film API error"
+  },
+  "unauth": {
+    "default-msg": "The user does not have the required rights to view this page."
+  },
+  "plural": {
+    "film_zero": "",
+    "film_one": "film",
+    "film_two": "",
+    "film_few": "",
+    "film_many": "",
+    "film_other": "films",
+    "star_zero": "",
+    "star_one": "star",
+    "star_two": "",
+    "star_few": "",
+    "star_many": "",
+    "star_other": "stars",
+    "results_zero": "",
+    "results_one": "result",
+    "results_two": "",
+    "results_few": "",
+    "results_many": "",
+    "results_other": "results",
+    "vote_zero": "",
+    "vote_one": "vote",
+    "vote_two": "",
+    "vote_few": "",
+    "vote_many": "",
+    "vote_other": "votes",
+    "review_zero": "",
+    "review_one": "revirew",
+    "review_two": "",
+    "review_few": "",
+    "review_many": "",
+    "review_other": "revirews"
   }
 }

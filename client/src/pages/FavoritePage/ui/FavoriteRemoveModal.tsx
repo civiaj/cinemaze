@@ -49,7 +49,7 @@ export const FavoriteRemoveModal = (props: Props) => {
         <Modal onClose={onClose} header={t("favorite.remove-t")} theme="danger">
             <div>
                 <Text as="span" className="text-start">
-                    {t("favortie.remove-b")}{" "}
+                    {t("favorite.remove-b")}{" "}
                 </Text>
                 {title ? (
                     <AppLink
@@ -59,7 +59,7 @@ export const FavoriteRemoveModal = (props: Props) => {
                         {title}
                     </AppLink>
                 ) : (
-                    <Text as="span">{t("Film")}</Text>
+                    <Text as="span">{t("plural.film", { count: 1 })}</Text>
                 )}
                 <Text as="span"> {t("favorite.remove-from-list")} </Text>
                 <Text as="span" className="font-medium">

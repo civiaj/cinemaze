@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { Checked, Close } from "shared/assets/icons";
 import { classNames } from "shared/lib/classNames";
 import { AppLink } from "shared/ui/AppLink/AppLink";
@@ -23,13 +24,15 @@ export const StatusBox = (props: Props) => {
         msgOrChildren,
         isError,
         isSuccess,
-        label = "Перезагрузить",
+        label = "btn.reload",
         className,
         to,
         reload,
         onReload,
         withoutBox,
     } = props;
+
+    const { t } = useTranslation();
 
     if (!isSuccess && !isError) return null;
 
@@ -52,12 +55,12 @@ export const StatusBox = (props: Props) => {
 
             {to && (
                 <AppLink theme="button" to={to}>
-                    {label}
+                    {t(label)}
                 </AppLink>
             )}
             {(reload || onReload) && (
                 <Button theme="regular" onClick={handleReload}>
-                    {label}
+                    {t(label)}
                 </Button>
             )}
         </>

@@ -10,6 +10,7 @@ import { PopupList } from "shared/ui/PopupList/PopupList";
 import { TFavorite } from "entities/Favorite";
 import { useGetOneFavoriteQuery } from "../model/userFilmsApi";
 import { useTranslation } from "react-i18next";
+import { Text } from "shared/ui/Text/Text";
 
 type Props = {
     filmId: number;
@@ -60,7 +61,7 @@ export const PageActions = ({ filmId, updateFavorite, disabled }: Props) => {
                 className="rounded-full gap-2 sm:gap-4 px-4"
             >
                 {bookmarked ? <Bookmarked className="text-blue-500" /> : <AddBookmark />}
-                <span>{t("details.will-watch")}</span>
+                <Text>{t("details.will-watch")}</Text>
             </Button>
 
             <OutsideClickWrapper onClose={onClose}>
@@ -79,8 +80,8 @@ export const PageActions = ({ filmId, updateFavorite, disabled }: Props) => {
                         itemCount={options.length}
                         render={({ index, style }) => (
                             <Button onClick={options[index].action} theme="popup" style={style}>
-                                <span>{options[index].title}</span>
-                                <span>{options[index].Icon}</span>
+                                {options[index].title}
+                                {options[index].Icon}
                             </Button>
                         )}
                     />

@@ -102,7 +102,7 @@ const CustomTooltip = ({
             <div className="bg-my-neutral-50 bg-opacity-10 px-6 py-4 flex items-end flex-col">
                 <p className="text-2xl font-medium">{item.score}</p>
                 <p>
-                    {item.count} {t("film", { count: item.count })}{" "}
+                    {item.count} {t("plural.film", { count: item.count })}{" "}
                     {percantage && <span>({percantage}%)</span>}
                 </p>
             </div>

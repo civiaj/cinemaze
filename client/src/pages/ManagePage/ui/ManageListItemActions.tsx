@@ -25,7 +25,7 @@ export const ManageListItemActions = ({ user, onSetActive, onPreventClose }: Pro
         () => ({
             ban: t("manage.ban-t", { displayName }),
             update: t("manage.change-t", { displayName }),
-            info: t("manage-info-t", { displayName }),
+            info: t("manage.info-t", { displayName }),
         }),
         [displayName, t]
     );

@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { serverApi } from "shared/api/serverApi";
 import { ServerMessageResponse } from "shared/api/types";
 import { SessionsResponse, TRoles, TUser } from "../model/types";
+import i18n from "shared/i18n/config";
 
 export const userApi = serverApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -20,7 +21,7 @@ export const userApi = serverApi.injectEndpoints({
                     const { data } = await queryFulfilled;
                     dispatch(userActions.setUser(data));
                 } catch (e) {
-                    dispatch(userActions.setIsLogged(false));
+                    dispatch(userActions.removeUser());
                     // error middleware
                 } finally {
                     dispatch(authAndUserSliceActions.endLoading());
@@ -45,7 +46,7 @@ export const userApi = serverApi.injectEndpoints({
             async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
                 try {
                     await queryFulfilled;
-                    toast.success(`Имя обновлено`);
+                    toast.success(i18n.t("toast.update-name"));
                     const { refetch } = dispatch(userApi.endpoints.getMe.initiate());
                     refetch();
                 } catch (e) {
@@ -67,7 +68,7 @@ export const userApi = serverApi.injectEndpoints({
             async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
                 try {
                     await queryFulfilled;
-                    toast.success(`Пароль обновлен`);
+                    toast.success(i18n.t("toast.update-password"));
                     const { refetch } = dispatch(userApi.endpoints.getMe.initiate());
                     refetch();
                 } catch (e) {
@@ -85,7 +86,7 @@ export const userApi = serverApi.injectEndpoints({
             async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
                 try {
                     await queryFulfilled;
-                    toast.success(`Фото профиля обновлено`);
+                    toast.success(i18n.t("toast.update-photo"));
                     const { refetch } = dispatch(userApi.endpoints.getMe.initiate());
                     refetch();
                 } catch (e) {
@@ -104,7 +105,7 @@ export const userApi = serverApi.injectEndpoints({
             async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
                 try {
                     await queryFulfilled;
-                    toast.success(`Фото профиля удалено`);
+                    toast.success(i18n.t("toast.update-photo-delete"));
                     const { refetch } = dispatch(userApi.endpoints.getMe.initiate());
                     refetch();
                 } catch (e) {
@@ -124,7 +125,7 @@ export const userApi = serverApi.injectEndpoints({
             async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
                 try {
                     await queryFulfilled;
-                    toast.success(`Сессия удалена`);
+                    toast.success(i18n.t("toast.update-session"));
                     const { refetch } = dispatch(userApi.endpoints.getMe.initiate());
                     refetch();
                 } catch (e) {
@@ -144,7 +145,7 @@ export const userApi = serverApi.injectEndpoints({
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     await queryFulfilled;
-                    toast.success(`Роль изменена на ${arg}`);
+                    toast.success(i18n.t("toast.update-role", { role: arg }));
                     const { refetch } = dispatch(userApi.endpoints.getMe.initiate());
                     refetch();
                 } catch (e) {

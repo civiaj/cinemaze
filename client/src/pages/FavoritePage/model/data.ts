@@ -10,7 +10,7 @@ export const listVariants: OptionType<FavoriteListVariantT, string>[] = [
         value: "userScore",
     },
     {
-        label: "favoirite.will",
+        label: "favorite.will",
         value: "bookmarked",
     },
     {

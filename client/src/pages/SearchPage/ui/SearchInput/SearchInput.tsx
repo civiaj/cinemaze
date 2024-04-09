@@ -111,7 +111,7 @@ export const SearchInput = (props: Props) => {
 
                         <Input
                             className="w-full md:w-96 pr-10"
-                            placeholder={t("searc.input-p")}
+                            placeholder={t("search.input-p")}
                             theme="regularNav"
                             value={inputValue}
                             onMouseDown={onSetActive}

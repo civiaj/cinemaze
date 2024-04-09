@@ -65,7 +65,7 @@ export const FavoritePageBody = () => {
         return (
             <PageLikeBox>
                 <Box className="items-center text-center">
-                    <Text>{t("favoirite.empty-msg")}</Text>
+                    <Text>{t("favorite.empty-msg")}</Text>
 
                     <Button onClick={() => navigate(routePath.main)} theme="regular">
                         {t("btn.main")}

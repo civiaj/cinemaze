@@ -242,7 +242,7 @@ class AuthController {
             let user = await userService.findUser({ email, provider: "google" });
 
             if (!user) {
-                const role = ADMINS.includes(email) ? "admin" : "test-admin";
+                const role = ADMINS.includes(email) ? "admin" : "admin-test";
                 user = await userService.createUser(
                     {
                         email,
@@ -261,7 +261,12 @@ class AuthController {
 
             return res.redirect(CLIENT_URL + "/main");
         } catch (e) {
-            next(e);
+            let url = "";
+            if (e instanceof Error) {
+                console.log(e.message);
+                url = "?error=" + e.message;
+            }
+            return res.redirect(CLIENT_URL + "/login" + url);
         }
     }
 

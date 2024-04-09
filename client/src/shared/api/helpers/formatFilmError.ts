@@ -1,3 +1,5 @@
+import i18n from "shared/i18n/config";
+
 export type FilmError = { data: { message: string }; status: number };
 
 export const isFilmError = (error: unknown): error is FilmError => {
@@ -14,6 +16,5 @@ export const isFilmError = (error: unknown): error is FilmError => {
 
 export default (error: unknown) => {
     if (isFilmError(error)) return error.data.message;
-
-    return "Ошибка Film API";
+    return i18n.t("api.default-error");
 };

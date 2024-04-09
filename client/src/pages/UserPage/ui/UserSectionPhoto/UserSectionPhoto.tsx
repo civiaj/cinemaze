@@ -55,7 +55,7 @@ export const UserSectionPhoto = (props: Props) => {
                     </UserBox>
                 )
             }
-            preventClose={isChanging || isDeleting}
+            preventClose={(isChanging || isDeleting) && !noPhoto}
         >
             {isChanging ? (
                 <UserChangePhoto />

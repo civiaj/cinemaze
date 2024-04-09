@@ -60,7 +60,7 @@ const CustomTooltip = ({
             <div className="bg-my-neutral-50 bg-opacity-10 px-6 py-4 flex items-end flex-col">
                 <p className="text-2xl font-medium">{item.name}</p>
                 <span className="text-sm font-normal mb-2">
-                    {item.count} {t("film", { count: item.count })} {percantage}%
+                    {item.count} {t("plural.film", { count: item.count })} {percantage}%
                 </span>
                 <div className="grid grid-cols-[repeat(2,max-content)] justify-items-end font-normal gap-x-4 text-sm">
                     <p>{t("stat.cat-rating")}</p>

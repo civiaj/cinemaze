@@ -7,16 +7,17 @@ type Props = {
 
 type State = {
     hasError: boolean;
+    msg: string;
 };
 
 export class ErrorBoundary extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
-        this.state = { hasError: false };
+        this.state = { hasError: false, msg: "" };
     }
 
-    static getDerivedStateFromError() {
-        return { hasError: true };
+    static getDerivedStateFromError(error: Error) {
+        return { hasError: true, msg: error.message };
     }
 
     componentDidCatch(error: Error, info: ErrorInfo) {
@@ -24,6 +25,6 @@ export class ErrorBoundary extends Component<Props, State> {
     }
 
     render() {
-        return this.state.hasError ? <ErrorFallback /> : this.props.children;
+        return this.state.hasError ? <ErrorFallback msg={this.state.msg} /> : this.props.children;
     }
 }

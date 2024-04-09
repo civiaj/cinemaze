@@ -13,6 +13,9 @@
     "language-t": "Язык",
     "language-en": "Английский",
     "language-ru": "Русский",
+    "language-fr": "Французский",
+    "language-ko": "Корейский",
+    "language-ar": "Арабский",
     "theme-t": "Тема",
     "theme-light": "Светлая",
     "theme-dark": "Темная",
@@ -38,33 +41,29 @@
     "genre": "Жанр",
     "genre-place": "Выберите жанр",
     "rating": "Рейтинг",
+    "year": "Год",
     "from": "от",
     "to": "до",
     "initial-msg": "Настройте параметры для лучшего поиска.",
     "empty-msg": "Ничего не найдено, попробуйте изменить параметры поиска",
     "found": "Найдено",
+    "input-p": "Поиск по названию",
     "input-recent": "Недавние запросы",
     "input-results": "Результаты",
     "by-count": "По Количеству Оценок",
     "by-rating": "По Рейтингу",
     "by-date": "По Дате Выхода"
   },
-  "searc": {
-    "input-p": "Поиск по названию"
-  },
   "favorite": {
     "all": "Все",
     "userscore": "С Моей Оценкой",
-    "hidden": "Скрытые",
-    "remove-t": "Удаление",
-    "remove-all": "Удалить из всех списков",
-    "remove-from-list": "из списка"
-  },
-  "favoirite": {
     "will": "Буду Смотреть",
-    "empty-msg": "Прежде чем продолжить, добавьте какой-нибудь фильм в список 'Буду Cмотреть' или поставьте оценку"
-  },
-  "favortie": {
+    "hidden": "Скрытые",
+    "empty-msg": "Прежде чем продолжить, добавьте какой-нибудь фильм в список 'Буду Cмотреть' или поставьте оценку",
+    "remove-t": "Удаление",
+    "unauth-msg": "Необходимо авторизоваться",
+    "remove-all": "Удалить из всех списков",
+    "remove-from-list": "из списка",
     "remove-b": "Вы действительно хотите удалить"
   },
   "stat": {
@@ -106,11 +105,12 @@
     "provider": "Провайдер",
     "delete-photo": "Удалить фото профиля",
     "info-t": "Информация о",
-    "ban-t": "Запрет доступа {displayName}",
-    "change-t": "Изменение {displayName}",
-    "unban-t": "Разблокировать {displayName}",
+    "ban-t": "Запрет доступа {{displayName}}",
+    "change-t": "Изменение {{displayName}}",
+    "unban-t": "Разблокировать {{displayName}}",
     "unban-message": "Вы действильно хотите разблокировать",
-    "t": "Разблокировать"
+    "t": "Разблокировать",
+    "ban-date-default": "Выберите дату.."
   },
   "login": {
     "login": "Авторизация",
@@ -172,31 +172,11 @@
     "reviews-old-first": "Сначала Старые",
     "reviews-t": "Рецензии зрителей"
   },
-  "film_one": "фильм",
-  "film_few": "фильма",
-  "film_many": "фильмов",
-  "film_other": "",
-  "star_one": "звезда",
-  "star_few": "звезды",
-  "star_many": "звёзд",
-  "star_other": "",
-  "results_one": "результат",
-  "results_few": "результата",
-  "results_many": "результатов",
-  "results_other": "",
-  "vote_one": "оценка",
-  "vote_few": "оценки",
-  "vote_many": "оценок",
-  "vote_other": "",
-  "review_one": "рецензия",
-  "review_few": "рецензии",
-  "review_many": "рецензий",
-  "review_other": "",
   "verify": {
     "error-msg": "Невозможно верифицировать адрес электронной почты.",
     "success-msg": "Электронный адрес почты подтвержден."
   },
-  "unauthorized-msg": "\"Пользователь не обладает требуемыми правами для просмотра данной страницы.\"",
+  "unauthorized-msg": "Пользователь не обладает требуемыми правами для просмотра данной страницы.",
   "ban": {
     "msg": "на ваш аккаунт были наложены ограничения",
     "one": "1. Вы не можете добавлять, удалять или изменять фильмы в вашей коллекции.",
@@ -222,7 +202,18 @@
     "remove-hidden": "<movieLink>{{title}}</movieLink> снова отображается в общей ленте",
     "remove-rating": "Оценка у <movieLink>{{title}}</movieLink> успешно удалена",
     "remove-all": "<movieLink>{{title}}</movieLink> удален из всех категорий",
-    "copy": "Ссылка скопирована"
+    "copy": "Ссылка скопирована",
+    "update-name": "Имя обновлено",
+    "update-password": "Пароль обновлен",
+    "update-session": "Сессия удалена",
+    "update-photo": "Фото профиля обновлено",
+    "update-photo-delete": "Фото профиля удалено",
+    "update-role": "Роль изменена на {{role}}",
+    "update-user-loading": "Обновление пользователя...",
+    "update-user-success": "Пользователь {{name}} успешно обновлен",
+    "update-user-error": "Ошибка во время выполнения запроса",
+    "ban-user-success": "Пользователь {{name}} успешно заблокирован",
+    "unban-user-success": "Пользователь {{name}} успешно разблокирован"
   },
   "no-film-msg": "Нет элементов для отображения",
   "error-film-msg": "При загрузке возникла ошибка",
@@ -268,6 +259,8 @@
     "photo-preview": "Предпросмотр",
     "photo-delete": "Удаление",
     "photo-delete-msg": "Вы действительно хотите удалить фото профиля?",
+    "photo-format-msg": "Поддерживаемые форматы: JPG, PNG, JPEG, WEBP",
+    "photo-size-msg": "Минимальный размер изображения 250 x 250 пикселей",
     "name-change-t": "Имя Профиля",
     "name-change-l": "Имя",
     "name-change-p": "Введите новое имя пользователя",
@@ -289,5 +282,43 @@
     "l-watch": "Смотреть",
     "t-watch": "Смотреть",
     "t-go": "Перейти"
+  },
+  "api": {
+    "default-error": "Ошибка Film API"
+  },
+  "unauth": {
+    "default-msg": "Пользователь не обладает требуемыми правами для просмотра данной страницы."
+  },
+  "plural": {
+    "film_zero": "",
+    "film_one": "фильм",
+    "film_two": "",
+    "film_few": "фильма",
+    "film_many": "фильмов",
+    "film_other": "",
+    "star_zero": "",
+    "star_one": "звезда",
+    "star_two": "",
+    "star_few": "звезды",
+    "star_many": "звёзд",
+    "star_other": "",
+    "results_zero": "",
+    "results_one": "результат",
+    "results_two": "",
+    "results_few": "результата",
+    "results_many": "результатов",
+    "results_other": "",
+    "vote_zero": "",
+    "vote_one": "оценка",
+    "vote_two": "",
+    "vote_few": "оценки",
+    "vote_many": "оценок",
+    "vote_other": "",
+    "review_zero": "",
+    "review_one": "рецензия",
+    "review_two": "",
+    "review_few": "рецензии",
+    "review_many": "рецензий",
+    "review_other": ""
   }
 }

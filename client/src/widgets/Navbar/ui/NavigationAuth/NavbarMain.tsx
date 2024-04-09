@@ -1,17 +1,16 @@
 import { routePath } from "app/router/router";
 import { useAppSelector } from "app/store";
-import { themes, useTheme } from "app/theme";
+import { TThemes, themes, useTheme } from "app/theme";
 import { useLogoutMutation } from "entities/Authorization";
+import { TAppearances, appearances, getUiAppearance } from "entities/Ui";
 import { selectUser } from "entities/User";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
+import { TLngs, lngs } from "shared/i18n/types";
 import { AppLink } from "shared/ui/AppLink/AppLink";
 import { Button } from "shared/ui/Button/Button";
-import { useTranslation } from "react-i18next";
-import { TLngs, lngs } from "shared/i18n/types";
-import { TThemes } from "app/theme";
-import { TAppearances, appearances, getUiAppearance } from "entities/Ui";
-import { Elipsis } from "shared/ui/Text/Elipsis";
 
+import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
 import { options } from "../../model/options";
 import { NavbarOptions, NavbarViews } from "../../model/types";
 
@@ -77,25 +76,26 @@ export const NavbarMain = ({ onSetOpenView, onClose }: Props) => {
                                 {
                                     <item.Icon className="w-8 flex items-center justify-center text-xl shrink-0" />
                                 }
-                                <Elipsis>
-                                    {t(item.label)}: {t(state as string)}
-                                </Elipsis>
+                                {t(item.label)}: {t(state as string)}
                             </Button>
                         </li>
                     );
                 })}
             </ul>
             {user && (
-                <div className="py-2 px-4 flex justify-end">
-                    <Button
-                        isLoading={isLoading}
-                        theme="blue"
-                        className="self-end"
-                        onClick={onLogout}
-                    >
-                        {t("btn.log-out")}
-                    </Button>
-                </div>
+                <>
+                    <UserBoxSeparator />
+                    <div className="py-2 px-4 flex justify-end">
+                        <Button
+                            isLoading={isLoading}
+                            theme="blue"
+                            className="self-end"
+                            onClick={onLogout}
+                        >
+                            {t("btn.log-out")}
+                        </Button>
+                    </div>
+                </>
             )}
         </div>
     );

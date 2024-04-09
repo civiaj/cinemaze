@@ -54,7 +54,7 @@ export const AboutDetails = memo((props: AboutProps) => {
         {
             title: "details.count-kp",
             data: ratingKinopoiskVoteCount
-                ? `${numberWithSpaces(ratingKinopoiskVoteCount)} ${t("vote", {
+                ? `${numberWithSpaces(ratingKinopoiskVoteCount)} ${t("plural.vote", {
                       count: ratingKinopoiskVoteCount,
                   })}`
                 : ratingKinopoiskVoteCount,
@@ -63,7 +63,7 @@ export const AboutDetails = memo((props: AboutProps) => {
         {
             title: "details.reviews-count",
             data: reviewsCount
-                ? `${numberWithSpaces(reviewsCount)} ${t("review", { count: reviewsCount })}`
+                ? `${numberWithSpaces(reviewsCount)} ${t("plural.review", { count: reviewsCount })}`
                 : reviewsCount,
             special: true,
         },

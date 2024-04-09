@@ -20,9 +20,9 @@ import { NavbarMain } from "./NavbarMain";
 import { NavbarTheme } from "./NavbarTheme";
 
 const titles: Record<NavbarOptions, string> = {
-    language: "Language",
-    theme: "Theme",
-    appearance: "Appearance",
+    language: "nav.language-t",
+    theme: "nav.theme-t",
+    appearance: "nav.appearance-t",
 };
 
 export const NavigationAuth = () => {
@@ -68,7 +68,7 @@ const NavigationAuthBody = ({ onClose }: { onClose: () => void }) => {
     return (
         <Box className="absolute right-0 top-full mt-6 p-0 sm:p-0 gap-0 sm:gap-0 overflow-hidden w-72">
             {user && (
-                <div className="flex gap-4 py-2 px-4 border-b border-border items-center">
+                <div className="flex gap-4 py-6 px-4 border-b border-border items-center">
                     <AppImage
                         src={user.photo}
                         containerClassName="w-12 h-12 rounded-xl shrink-0"

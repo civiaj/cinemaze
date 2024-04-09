@@ -1,4 +1,5 @@
-import { useDetailsQuery } from "../../../pages/DetailsPage/model/detailsApi";
+import { useTranslation } from "react-i18next";
+import { useDetailsQuery } from "pages/DetailsPage";
 import { Text } from "shared/ui/Text/Text";
 
 interface DescriptionProps {
@@ -7,11 +8,12 @@ interface DescriptionProps {
 
 export const Description = ({ filmId }: DescriptionProps) => {
     const { currentData } = useDetailsQuery(filmId);
+    const { t } = useTranslation();
 
     if (!currentData?.description)
         return (
             <div className="h-7 flex items-center justify-center">
-                <Text>Обзор недоступен</Text>
+                <Text>{t("details.descr-empty")}</Text>
             </div>
         );
 

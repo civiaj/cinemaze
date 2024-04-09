@@ -9,7 +9,7 @@ import { UserSectionName } from "pages/UserPage/ui/UserSectionName";
 import { UserSectionPassword } from "pages/UserPage/ui/UserSectionPassword";
 import { UserSectionPhoto } from "pages/UserPage/ui/UserSectionPhoto/UserSectionPhoto";
 import { UserSectionRole } from "pages/UserPage/ui/UserSectionRole";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 
 const UserPage = () => {
     const [searchParams] = useSearchParams();
@@ -18,7 +18,7 @@ const UserPage = () => {
     const navigate = useNavigate();
     const onClose = () => navigate(routePath.user);
 
-    if (!user) return "нет пользователя";
+    if (!user) return <Navigate to={routePath.login} replace />;
 
     return (
         <Page>

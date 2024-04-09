@@ -62,7 +62,7 @@ export const LoginForm = (props: Props) => {
                     className="bg-my-red-300"
                 />
 
-                <Button onClick={() => onSectionChange("forgot")}>{t("login.forget-p")}?</Button>
+                <Button onClick={() => onSectionChange("forgot")}>{t("login.forget-p")}</Button>
 
                 <div className="flex justify-center flex-col gap-2">
                     <Button theme="blue" type="submit" isLoading={isLoading}>

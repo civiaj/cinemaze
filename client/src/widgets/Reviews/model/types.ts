@@ -21,10 +21,11 @@ export interface ReviewQueryT {
 const ReviewSort = {
     DATE_ASC: "DATE_ASC",
     DATE_DESC: "DATE_DESC",
-    // USER_POSITIVE_RATING_ASC: "USER_POSITIVE_RATING_ASC", // некорректо отдает инф-у сервер
-    // USER_POSITIVE_RATING_DESC: "USER_POSITIVE_RATING_DESC", // некорректо отдает инф-у сервер
-    // USER_NEGATIVE_RATING_ASC: "USER_NEGATIVE_RATING_ASC", // некорректо отдает инф-у сервер
-    // USER_NEGATIVE_RATING_DESC: "USER_NEGATIVE_RATING_DESC", // некорректо отдает инф-у сервер
+    // некорректо отдает инф-у сервер
+    // USER_POSITIVE_RATING_ASC: "USER_POSITIVE_RATING_ASC",
+    // USER_POSITIVE_RATING_DESC: "USER_POSITIVE_RATING_DESC",
+    // USER_NEGATIVE_RATING_ASC: "USER_NEGATIVE_RATING_ASC",
+    // USER_NEGATIVE_RATING_DESC: "USER_NEGATIVE_RATING_DESC"
 } as const;
 
 export type ReviewSortT = ObjectValues<typeof ReviewSort>;

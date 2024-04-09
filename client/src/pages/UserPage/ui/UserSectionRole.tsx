@@ -28,7 +28,7 @@ export const UserSectionRole = ({ onClose, role }: Props) => {
     };
 
     return (
-        <Modal onClose={onClose} header={"Изменение роли"}>
+        <Modal onClose={onClose} header={t("user.role-change")}>
             <div className="flex flex-col gap-2">
                 <div className="flex gap-4 items-center">
                     <Text className="font-medium">{t("user.role-change-current")}:</Text>

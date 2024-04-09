@@ -164,7 +164,7 @@ export const ManageViewAndUpdate = ({
                         {banMessage && (
                             <>
                                 <p>{t("manage.banMessage")}:</p>
-                                <p>{banMessage || "Сообщение не было указано"}</p>
+                                <p>{banMessage}</p>
                             </>
                         )}
                     </>

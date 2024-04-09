@@ -23,7 +23,7 @@ export const DetailsPageBody = () => {
     const { id } = useParams();
     const filmId = Number(id);
     const user = useAppSelector(selectUser);
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
     const details = useDetailsQuery(filmId);
     const favorite = useGetOneFavoriteQuery(filmId, {
         skip: !user,
@@ -34,12 +34,12 @@ export const DetailsPageBody = () => {
     const updateFavorite = useCallback(
         async (favorite: Partial<TFavorite>) => {
             if (!user || !details.data) {
-                toast.error("Необходимо авторизоваться");
+                toast.error(t("favorite.unauth-msg"));
                 return;
             }
             addFavorite({ film: remapDetailsToFilm(details.data), favorite });
         },
-        [addFavorite, details, user]
+        [addFavorite, details, user, t]
     );
 
     const loading = details.isLoading || details.isFetching || favorite.isLoading;
