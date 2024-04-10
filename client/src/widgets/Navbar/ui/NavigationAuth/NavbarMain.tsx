@@ -1,16 +1,15 @@
-import { routePath } from "app/router/router";
-import { useAppSelector } from "app/store";
-import { TThemes, themes, useTheme } from "app/theme";
-import { useLogoutMutation } from "entities/Authorization";
-import { TAppearances, appearances, getUiAppearance } from "entities/Ui";
-import { selectUser } from "entities/User";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { TLngs, lngs } from "shared/i18n/types";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { Button } from "shared/ui/Button/Button";
-
-import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
+import { routePath } from "@/app/router/router";
+import { useAppSelector } from "@/app/store";
+import { TThemes, themes, useTheme } from "@/app/theme";
+import { useLogoutMutation } from "@/entities/Authorization";
+import { TAppearances, appearances, getUiAppearance } from "@/entities/Ui";
+import { selectUser } from "@/entities/User";
+import { TLngs, lngs } from "@/shared/i18n/types";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
+import { Button } from "@/shared/ui/Button/Button";
 import { options } from "../../model/options";
 import { NavbarOptions, NavbarViews } from "../../model/types";
 

@@ -1,5 +1,5 @@
+import { filmApi } from "@/shared/api/filmApi";
 import { SimilarsQueryT } from "./types";
-import { filmApi } from "shared/api/filmApi";
 
 const similarsApi = filmApi.injectEndpoints({
     endpoints: (builder) => ({

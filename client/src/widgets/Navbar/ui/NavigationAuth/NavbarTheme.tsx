@@ -1,11 +1,10 @@
-import { TThemes, useTheme } from "app/theme";
-import { TThemesRecord } from "app/theme";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { Checked } from "shared/assets/icons";
-import { Button } from "shared/ui/Button/Button";
-import { Elipsis } from "shared/ui/Text/Elipsis";
-
+import { TThemes, useTheme } from "@/app/theme";
+import { TThemesRecord } from "@/app/theme";
+import { Checked } from "@/shared/assets/icons";
+import { Button } from "@/shared/ui/Button/Button";
+import { Elipsis } from "@/shared/ui/Text/Elipsis";
 import { options } from "../../model/options";
 
 const themes = options.theme.variants as TThemesRecord;

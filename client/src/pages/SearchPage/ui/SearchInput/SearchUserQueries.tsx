@@ -1,9 +1,9 @@
-import { useAppDispatch, useAppSelector } from "app/store";
-import { getSearchUserQueriesByInput } from "pages/SearchPage/model/selectors";
-import { searchPageActions } from "pages/SearchPage/model/slice";
 import { useTranslation } from "react-i18next";
-import { Search } from "shared/assets/icons";
-import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
+import { useAppDispatch, useAppSelector } from "@/app/store";
+import { getSearchUserQueriesByInput } from "@/pages/SearchPage/model/selectors";
+import { searchPageActions } from "@/pages/SearchPage/model/slice";
+import { Search } from "@/shared/assets/icons";
+import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
 
 type Props = {
     inputValue?: string;

@@ -1,11 +1,11 @@
-import { useDetailsQuery } from "pages/DetailsPage";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
-import { EMPTY_LINE } from "shared/const/const";
-import { classNames } from "shared/lib/classNames";
-import { numberWithSpaces } from "shared/lib/numberWithSpaces";
-import { ColoredNumber } from "shared/ui/ColoredNumber/ColoredNumber";
-import { Heading } from "shared/ui/Text/Heading";
+import { useDetailsQuery } from "@/pages/DetailsPage";
+import { EMPTY_LINE } from "@/shared/const/const";
+import { classNames } from "@/shared/lib/classNames";
+import { numberWithSpaces } from "@/shared/lib/numberWithSpaces";
+import { ColoredNumber } from "@/shared/ui/ColoredNumber/ColoredNumber";
+import { Heading } from "@/shared/ui/Text/Heading";
 
 interface AboutProps {
     filmId: number;

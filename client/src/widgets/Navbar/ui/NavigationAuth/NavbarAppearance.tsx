@@ -1,10 +1,9 @@
-import { TAppearances, TAppearancesRecord, getUiAppearance, uiActions } from "entities/Ui";
-import { Button } from "shared/ui/Button/Button";
-import { useAppDispatch, useAppSelector } from "app/store";
-import { Checked } from "shared/assets/icons";
 import { useTranslation } from "react-i18next";
-import { Elipsis } from "shared/ui/Text/Elipsis";
-
+import { useAppDispatch, useAppSelector } from "@/app/store";
+import { TAppearances, TAppearancesRecord, getUiAppearance, uiActions } from "@/entities/Ui";
+import { Checked } from "@/shared/assets/icons";
+import { Button } from "@/shared/ui/Button/Button";
+import { Elipsis } from "@/shared/ui/Text/Elipsis";
 import { options } from "../../model/options";
 
 const appearances = options.appearance.variants as TAppearancesRecord;

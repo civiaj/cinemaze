@@ -1,8 +1,8 @@
-import { Right } from "shared/assets/icons";
-import { classNames } from "shared/lib/classNames";
-import { Button } from "shared/ui/Button/Button";
-
 import { useSwiper } from "swiper/react";
+import { Right } from "@/shared/assets/icons";
+import { classNames } from "@/shared/lib/classNames";
+import { Button } from "@/shared/ui/Button/Button";
+
 
 interface SlideNextBtnProps {
     forceUpdate: () => void;

@@ -1,16 +1,15 @@
-import { routePath } from "app/router/router";
 import { memo, useCallback } from "react";
-import { Close } from "shared/assets/icons";
-import { EMPTY_LINE } from "shared/const/const";
-import { classNames } from "shared/lib/classNames";
-import { AppImage } from "shared/ui/AppImage/AppImage";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { Box } from "shared/ui/Boxes/Box";
-import { Heading } from "shared/ui/Text/Heading";
-
 import { useTranslation } from "react-i18next";
-import { TLngs } from "shared/i18n/types";
-import { getFilmTitle } from "shared/lib/getFilmTitle";
+import { routePath } from "@/app/router/router";
+import { Close } from "@/shared/assets/icons";
+import { EMPTY_LINE } from "@/shared/const/const";
+import { TLngs } from "@/shared/i18n/types";
+import { classNames } from "@/shared/lib/classNames";
+import { getFilmTitle } from "@/shared/lib/getFilmTitle";
+import { AppImage } from "@/shared/ui/AppImage/AppImage";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Heading } from "@/shared/ui/Text/Heading";
 import { FilmCardPropsT } from "../model/types";
 
 export const FilmCard = memo((props: FilmCardPropsT) => {

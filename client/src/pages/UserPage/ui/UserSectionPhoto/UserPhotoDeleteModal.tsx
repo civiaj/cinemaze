@@ -1,16 +1,16 @@
-import { routePath } from "app/router/router";
-import { useDeletePhotoMutation } from "entities/User";
-import { UserModalAnimationHoc } from "pages/UserPage/ui/UserSectionPhoto/UserModalAnimationHoc";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import formatServerError from "shared/api/helpers/formatServerError";
-import { classNames } from "shared/lib/classNames";
-import { Box } from "shared/ui/Boxes/Box";
-import { UserBox, UserBoxSeparator } from "shared/ui/Boxes/UserBox";
-import { Button } from "shared/ui/Button/Button";
-import { GridMsg } from "shared/ui/GridMsg/GridMsg";
-import { Heading } from "shared/ui/Text/Heading";
-import { Text } from "shared/ui/Text/Text";
+import { routePath } from "@/app/router/router";
+import { useDeletePhotoMutation } from "@/entities/User";
+import { UserModalAnimationHoc } from "@/pages/UserPage/ui/UserSectionPhoto/UserModalAnimationHoc";
+import formatServerError from "@/shared/api/helpers/formatServerError";
+import { classNames } from "@/shared/lib/classNames";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { UserBox, UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { Text } from "@/shared/ui/Text/Text";
 
 type Props = {
     onClose: () => void;

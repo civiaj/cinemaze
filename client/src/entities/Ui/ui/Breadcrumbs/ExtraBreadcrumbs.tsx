@@ -1,11 +1,10 @@
-import { useAppSelector } from "app/store";
 import { memo, useCallback, useState } from "react";
-import { Dots } from "shared/assets/icons";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { Button } from "shared/ui/Button/Button";
-import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
-import { PopupList } from "shared/ui/PopupList/PopupList";
-
+import { useAppSelector } from "@/app/store";
+import { Dots } from "@/shared/assets/icons";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { Button } from "@/shared/ui/Button/Button";
+import { PopupList } from "@/shared/ui/PopupList/PopupList";
+import { OutsideClickWrapper } from "@/widgets/OutsideClickWrapper/OutsideClickWrapper";
 import { getBreadcrumbs } from "../../model/selectors";
 
 type Props = {

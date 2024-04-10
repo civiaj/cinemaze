@@ -1,21 +1,21 @@
-import { TUser } from "entities/User";
-import { useUnbanOneMutation, useUpdateOneMutation } from "pages/ManagePage/model/manageApi";
-import { ChangeUserData, ManageActionViews } from "pages/ManagePage/model/types";
-import { roleOptions } from "pages/UserPage/model/data";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import formatServerError from "shared/api/helpers/formatServerError";
-import { Block, Checked, Close, Minus } from "shared/assets/icons";
-import { classNames } from "shared/lib/classNames";
-import { formatDate } from "shared/lib/formatDate";
-import { trimInput } from "shared/lib/trimInput";
-import { AppSelect } from "shared/ui/AppSelect/AppSelect";
-import { Modal } from "shared/ui/Boxes/Modal";
-import { UserBox, UserBoxSeparator } from "shared/ui/Boxes/UserBox";
-import { Button } from "shared/ui/Button/Button";
-import { GridMsg } from "shared/ui/GridMsg/GridMsg";
-import { Input } from "shared/ui/Input/Input";
-import { Text } from "shared/ui/Text/Text";
+import { TUser } from "@/entities/User";
+import { useUnbanOneMutation, useUpdateOneMutation } from "@/pages/ManagePage/model/manageApi";
+import { ChangeUserData, ManageActionViews } from "@/pages/ManagePage/model/types";
+import { roleOptions } from "@/pages/UserPage/model/data";
+import formatServerError from "@/shared/api/helpers/formatServerError";
+import { Block, Checked, Close, Minus } from "@/shared/assets/icons";
+import { classNames } from "@/shared/lib/classNames";
+import { formatDate } from "@/shared/lib/formatDate";
+import { trimInput } from "@/shared/lib/trimInput";
+import { AppSelect } from "@/shared/ui/AppSelect/AppSelect";
+import { Modal } from "@/shared/ui/Boxes/Modal";
+import { UserBox, UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
+import { Input } from "@/shared/ui/Input/Input";
+import { Text } from "@/shared/ui/Text/Text";
 
 type Props = {
     user: TUser;

@@ -1,6 +1,6 @@
-import { FilledStar } from "shared/assets/icons";
-import { classNames } from "shared/lib/classNames";
-import { Button } from "shared/ui/Button/Button";
+import { FilledStar } from "@/shared/assets/icons";
+import { classNames } from "@/shared/lib/classNames";
+import { Button } from "@/shared/ui/Button/Button";
 
 interface RatingChangeNumbersProps {
     onSetScore: (newValue: number) => void;

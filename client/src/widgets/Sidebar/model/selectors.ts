@@ -1,9 +1,9 @@
-import { routeConfig, routePath } from "app/router/router";
-import { SideBarItem } from "./types";
-import { Home, Favorite, Search, Statistics, UserGroup } from "shared/assets/icons";
 import { createSelector } from "@reduxjs/toolkit";
-import { getIsLogged } from "entities/User";
-import { getIsAdmin } from "entities/User/model/selectors";
+import { routeConfig, routePath } from "@/app/router/router";
+import { getIsLogged } from "@/entities/User";
+import { getIsAdmin } from "@/entities/User/model/selectors";
+import { Home, Favorite, Search, Statistics, UserGroup } from "@/shared/assets/icons";
+import { SideBarItem } from "./types";
 
 export const getSidebarItems = createSelector([getIsLogged, getIsAdmin], (isLogged, isAdmin) => {
     const sidebarItems: SideBarItem[] = [

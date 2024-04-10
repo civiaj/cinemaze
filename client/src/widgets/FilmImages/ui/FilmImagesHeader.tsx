@@ -1,7 +1,7 @@
+import { useTranslation } from "react-i18next";
+import { Button } from "@/shared/ui/Button/Button";
 import { tags } from "../model/data";
 import { GetFilmImagesType } from "../model/types";
-import { Button } from "shared/ui/Button/Button";
-import { useTranslation } from "react-i18next";
 
 interface FilmImagesHeaderProps {
     setNewType: (newType: GetFilmImagesType) => void;

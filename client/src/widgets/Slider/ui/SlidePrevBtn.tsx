@@ -1,8 +1,8 @@
-import { Left } from "shared/assets/icons";
-import { classNames } from "shared/lib/classNames";
-import { Button } from "shared/ui/Button/Button";
-
 import { useSwiper } from "swiper/react";
+import { Left } from "@/shared/assets/icons";
+import { classNames } from "@/shared/lib/classNames";
+import { Button } from "@/shared/ui/Button/Button";
+
 
 interface SlidePrevBtnProps {
     forceUpdate: () => void;

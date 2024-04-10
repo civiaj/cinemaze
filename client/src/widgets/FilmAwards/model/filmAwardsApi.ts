@@ -1,5 +1,4 @@
-import { filmApi } from "shared/api/filmApi";
-
+import { filmApi } from "@/shared/api/filmApi";
 import { FilmAwardsItemListT, FilmAwardsQueryT, FilmAwardsT } from "./types";
 
 const filmAwardsApi = filmApi.injectEndpoints({

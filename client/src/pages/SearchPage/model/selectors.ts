@@ -1,6 +1,5 @@
-import { RootState } from "app/store";
 import { createSelector } from "@reduxjs/toolkit";
-
+import { RootState } from "@/app/store";
 import { searchPageAdapter } from "./slice";
 
 export const getSearchPageState = (state: RootState) => state.searchPage;

@@ -1,8 +1,8 @@
-import { classNames } from "shared/lib/classNames";
-import { AppImage } from "shared/ui/AppImage/AppImage";
 import { SwiperOptions } from "swiper/types";
-import { FilmImages } from "widgets/FilmImages/model/types";
-import { Slider } from "widgets/Slider";
+import { classNames } from "@/shared/lib/classNames";
+import { AppImage } from "@/shared/ui/AppImage/AppImage";
+import { FilmImages } from "@/widgets/FilmImages/model/types";
+import { Slider } from "@/widgets/Slider";
 
 const sliderSettings: SwiperOptions = {
     centeredSlides: true,

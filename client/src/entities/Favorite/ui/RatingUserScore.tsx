@@ -1,11 +1,11 @@
-import { useAppSelector } from "app/store";
-import { TFavorite, useGetOneFavoriteQuery } from "entities/Favorite";
-import { selectUser } from "entities/User";
 import { useTranslation } from "react-i18next";
-import { User } from "shared/assets/icons";
-import { RatingBox } from "shared/ui/Boxes/RatingBox";
-import { Button } from "shared/ui/Button/Button";
-import { ColoredNumber } from "shared/ui/ColoredNumber/ColoredNumber";
+import { useAppSelector } from "@/app/store";
+import { TFavorite, useGetOneFavoriteQuery } from "@/entities/Favorite";
+import { selectUser } from "@/entities/User";
+import { User } from "@/shared/assets/icons";
+import { RatingBox } from "@/shared/ui/Boxes/RatingBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { ColoredNumber } from "@/shared/ui/ColoredNumber/ColoredNumber";
 
 interface RatingUserScoreProps {
     filmId: number;

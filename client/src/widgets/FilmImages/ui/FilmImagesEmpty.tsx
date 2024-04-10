@@ -1,7 +1,8 @@
-import { GetFilmImagesType } from "../model/types";
-import { tags } from "../model/data";
-import { Text } from "shared/ui/Text/Text";
 import { Trans, useTranslation } from "react-i18next";
+import { Text } from "@/shared/ui/Text/Text";
+import { tags } from "../model/data";
+import { GetFilmImagesType } from "../model/types";
+
 
 interface FilmImagesEmptyProps {
     type: GetFilmImagesType;

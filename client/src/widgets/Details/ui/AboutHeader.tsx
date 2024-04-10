@@ -1,5 +1,5 @@
-import { Heading } from "shared/ui/Text/Heading";
-import { PageActions, TFavorite } from "entities/Favorite";
+import { PageActions, TFavorite } from "@/entities/Favorite";
+import { Heading } from "@/shared/ui/Text/Heading";
 
 interface HeaderProps {
     data: {

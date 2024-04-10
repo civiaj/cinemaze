@@ -1,4 +1,4 @@
-import i18n from "shared/i18n/config";
+import i18n from "@/shared/i18n/config";
 
 export const formats = ["jpg", "png", "jpeg", "webp"];
 export const acceptInput = formats.map((format) => `image/${format}`).join(", ");

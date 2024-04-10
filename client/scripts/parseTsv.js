@@ -1,6 +1,6 @@
 import fs from "fs";
 
-const rawdata = fs.readFileSync("../resources/translations.tsv");
+const rawdata = fs.readFileSync("resources/translations.tsv");
 const content = rawdata.toString();
 let lines = content.split("\r\n");
 const columns = lines[0].split("\t");

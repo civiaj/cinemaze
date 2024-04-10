@@ -104,7 +104,7 @@
     "banExpiration": "차단 기간:",
     "provider": "공급자",
     "delete-photo": "프로필 사진 삭제",
-    "info-t": "에 관한 정보",
+    "info-t": "{{displayName}}에 대한 정보",
     "ban-t": "사용자 {{displayName}} 차단",
     "change-t": "{{displayName}} 업데이트",
     "unban-t": "{{displayName}} 차단 해제",
@@ -291,7 +291,7 @@
   },
   "plural": {
     "film_zero": "",
-    "film_one": "",
+    "film_one": "영화",
     "film_two": "",
     "film_few": "",
     "film_many": "",

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { classNames } from "shared/lib/classNames";
+import { classNames } from "@/shared/lib/classNames";
 
 type Props = {
     className?: string;

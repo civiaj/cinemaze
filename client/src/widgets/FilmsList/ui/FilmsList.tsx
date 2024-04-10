@@ -1,18 +1,18 @@
-import { routePath } from "app/router/router";
-import { useAppSelector } from "app/store";
-import { useGetSyncDataQuery } from "entities/Favorite";
-import { TAppearances, getUiAppearance } from "entities/Ui";
-import { selectUser } from "entities/User";
 import { memo, useCallback } from "react";
-import { useLocation } from "react-router-dom";
-import { Box } from "shared/ui/Boxes/Box";
-import { Spinner } from "shared/ui/Spinner/Spinner";
-import { Text } from "shared/ui/Text/Text";
-import { FilmCard, FilmCardPropsT } from "widgets/FilmCard";
-
-import { classNames } from "shared/lib/classNames";
-import { FilmListSkeleton } from "./FilmListSkeleton";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
+import { routePath } from "@/app/router/router";
+import { useAppSelector } from "@/app/store";
+import { useGetSyncDataQuery } from "@/entities/Favorite";
+import { TAppearances, getUiAppearance } from "@/entities/Ui";
+import { selectUser } from "@/entities/User";
+import { classNames } from "@/shared/lib/classNames";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Spinner } from "@/shared/ui/Spinner/Spinner";
+import { Text } from "@/shared/ui/Text/Text";
+import { FilmCard, FilmCardPropsT } from "@/widgets/FilmCard";
+import { FilmListSkeleton } from "./FilmListSkeleton";
+
 
 type FilmsListPropsT = {
     films: FilmT[];

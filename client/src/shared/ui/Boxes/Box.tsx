@@ -1,5 +1,5 @@
 import { CSSProperties, HTMLAttributes, ReactNode, forwardRef } from "react";
-import { classNames } from "shared/lib/classNames";
+import { classNames } from "@/shared/lib/classNames";
 
 interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
     children: ReactNode;

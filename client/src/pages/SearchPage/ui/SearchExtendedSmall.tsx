@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Settings } from "shared/assets/icons";
-import { Button } from "shared/ui/Button/Button";
-import { Heading } from "shared/ui/Text/Heading";
-
+import { useTranslation } from "react-i18next";
+import { Settings } from "@/shared/assets/icons";
+import { Button } from "@/shared/ui/Button/Button";
+import { Heading } from "@/shared/ui/Text/Heading";
 import { SearchFiltersT, SearchQuery } from "../model/types";
 import { SearchExtended } from "../ui/SearchExtended";
-import { useTranslation } from "react-i18next";
 
 type Props = {
     disabled: boolean;

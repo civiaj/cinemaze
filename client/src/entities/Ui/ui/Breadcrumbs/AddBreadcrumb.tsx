@@ -1,7 +1,7 @@
-import { useAppDispatch } from "app/store";
-import { uiActions } from "entities/Ui";
 import { ReactNode, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useAppDispatch } from "@/app/store";
+import { uiActions } from "@/entities/Ui";
 
 type Props = {
     children: ReactNode;

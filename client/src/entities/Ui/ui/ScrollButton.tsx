@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Down, Up } from "shared/assets/icons";
-import { classNames } from "shared/lib/classNames";
-import { Button } from "shared/ui/Button/Button";
+import { Down, Up } from "@/shared/assets/icons";
+import { classNames } from "@/shared/lib/classNames";
+import { Button } from "@/shared/ui/Button/Button";
 
 interface ScrollButtonProps {
     scrollRestoration: number;

@@ -1,11 +1,10 @@
-import { useAppSelector } from "app/store";
-import { selectUser } from "entities/User";
-import { useDetailsQuery } from "pages/DetailsPage";
 import { useEffect, useState } from "react";
-import { FilledStar, Star } from "shared/assets/icons";
-import { classNames } from "shared/lib/classNames";
-
-import { TFavorite } from "entities/Favorite";
+import { useAppSelector } from "@/app/store";
+import { TFavorite } from "@/entities/Favorite";
+import { selectUser } from "@/entities/User";
+import { useDetailsQuery } from "@/pages/DetailsPage";
+import { FilledStar, Star } from "@/shared/assets/icons";
+import { classNames } from "@/shared/lib/classNames";
 import { useGetOneFavoriteQuery } from "../model/userFilmsApi";
 
 interface RatingStarsProps {

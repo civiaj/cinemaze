@@ -1,10 +1,10 @@
-import { Box } from "shared/ui/Boxes/Box";
-import { Heading } from "shared/ui/Text/Heading";
-import { FilmCard } from "widgets/FilmCard";
-import { Slider } from "widgets/Slider";
+import { useTranslation } from "react-i18next";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { FilmCard } from "@/widgets/FilmCard";
+import { Slider } from "@/widgets/Slider";
 import { similarsSliderSettings } from "../model/data";
 import { useSimilarsQuery } from "../model/similarsApi";
-import { useTranslation } from "react-i18next";
 
 interface SimilarsProps {
     filmId: number;

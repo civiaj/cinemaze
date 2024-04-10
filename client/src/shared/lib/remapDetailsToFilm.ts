@@ -1,5 +1,5 @@
-import { DetailsT } from "pages/DetailsPage/model/types";
-import { getHoursAndMinutess } from "shared/lib/getHoursAndMinutess";
+import { DetailsT } from "@/pages/DetailsPage/model/types";
+import { getHoursAndMinutess } from "@/shared/lib/getHoursAndMinutess";
 
 export default (dataItem: DetailsT): FilmT => {
     const {

@@ -1,10 +1,10 @@
-import { authAndUserSliceActions } from "entities/AuthAndUser";
-import { userActions } from "entities/User";
 import toast from "react-hot-toast";
-import { serverApi } from "shared/api/serverApi";
-import { ServerMessageResponse } from "shared/api/types";
+import { authAndUserSliceActions } from "@/entities/AuthAndUser";
+import { userActions } from "@/entities/User";
+import { serverApi } from "@/shared/api/serverApi";
+import { ServerMessageResponse } from "@/shared/api/types";
+import i18n from "@/shared/i18n/config";
 import { SessionsResponse, TRoles, TUser } from "../model/types";
-import i18n from "shared/i18n/config";
 
 export const userApi = serverApi.injectEndpoints({
     endpoints: (builder) => ({

@@ -1,4 +1,4 @@
-import { filmApi } from "shared/api/filmApi";
+import { filmApi } from "@/shared/api/filmApi";
 import { FilmDataT, FilmsQueryT, MainQueryT } from "./types";
 
 type FilmsProps = { mainQuery: MainQueryT; page: number };

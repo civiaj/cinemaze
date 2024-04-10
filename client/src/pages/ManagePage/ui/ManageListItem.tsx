@@ -1,12 +1,13 @@
-import { Block, Checked, Close, Minus } from "shared/assets/icons";
-import { classNames } from "shared/lib/classNames";
-import { formatDate } from "shared/lib/formatDate";
-import { AppImage } from "shared/ui/AppImage/AppImage";
-import { Elipsis } from "shared/ui/Text/Elipsis";
-
-import { ManageListItemActions } from "pages/ManagePage/ui/ManageListItemActions";
 import { useTranslation } from "react-i18next";
-import { TUser } from "entities/User";
+import { TUser } from "@/entities/User";
+import { ManageListItemActions } from "@/pages/ManagePage/ui/ManageListItemActions";
+import { Block, Checked, Close, Minus } from "@/shared/assets/icons";
+import { classNames } from "@/shared/lib/classNames";
+import { formatDate } from "@/shared/lib/formatDate";
+import { AppImage } from "@/shared/ui/AppImage/AppImage";
+import { Elipsis } from "@/shared/ui/Text/Elipsis";
+
+
 
 type Props = {
     user: TUser;

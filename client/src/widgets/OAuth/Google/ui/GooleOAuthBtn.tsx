@@ -1,6 +1,6 @@
-import { Google } from "shared/assets/icons";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { Text } from "shared/ui/Text/Text";
+import { Google } from "@/shared/assets/icons";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { Text } from "@/shared/ui/Text/Text";
 import { getGoogleOAuthUrl } from "../helper/getGoogleOAuthUrl";
 
 const url = getGoogleOAuthUrl();

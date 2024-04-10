@@ -1,5 +1,8 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { TStatistics } from "entities/Favorite";
+import { RootState } from "@/app/store";
+import { TStatistics } from "@/entities/Favorite";
+import { EMPTY_LINE } from "@/shared/const/const";
+import { formatDate } from "@/shared/lib/formatDate";
 import {
     ScoreFilters,
     TLIntervals,
@@ -10,9 +13,6 @@ import {
     VBSortBy,
     VBStat,
 } from "./types";
-import { RootState } from "app/store";
-import { EMPTY_LINE } from "shared/const/const";
-import { formatDate } from "shared/lib/formatDate";
 
 export const getSelectByScore = createSelector(
     [(res: { data?: TStatistics[] }) => res.data, (_, filter: ScoreFilters) => filter],

@@ -1,4 +1,4 @@
-import { TAppearances } from "entities/Ui";
+import { TAppearances } from "@/entities/Ui";
 
 export type FilmCardPropsT = {
     film: FilmT;

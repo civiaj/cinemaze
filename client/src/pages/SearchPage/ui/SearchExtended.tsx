@@ -1,13 +1,12 @@
-import { useAppDispatch } from "app/store";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
-import { Close, Refresh } from "shared/assets/icons";
-import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "shared/const/const";
-import { AppSelect } from "shared/ui/AppSelect/AppSelect";
-import { Button } from "shared/ui/Button/Button";
-import { Input } from "shared/ui/Input/Input";
-
+import { useAppDispatch } from "@/app/store";
+import { Close, Refresh } from "@/shared/assets/icons";
+import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "@/shared/const/const";
+import { AppSelect } from "@/shared/ui/AppSelect/AppSelect";
+import { Button } from "@/shared/ui/Button/Button";
+import { Input } from "@/shared/ui/Input/Input";
 import { generateNumberOptions } from "../lib/helpers";
 import { searchPageActions } from "../model/slice";
 import { SearchFiltersT, SearchQuery, SearchQueryKeys } from "../model/types";
@@ -94,7 +93,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
                     <div className="flex items-center gap-2 w-full">
                         <AppSelect
                             theme="search"
-                            placeholder={t("search.country-place")}
+                            placeholder={"search.country-place"}
                             options={data.countries}
                             value={country}
                             actionChange={(newValue) => onUpdateFilters("country", newValue)}
@@ -118,7 +117,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
                     <div className="flex items-center gap-2 flex-1">
                         <AppSelect
                             theme="search"
-                            placeholder={t("search.genre-place")}
+                            placeholder={"search.genre-place"}
                             options={data.genres}
                             value={genre}
                             actionChange={(newValue) => onUpdateFilters("genre", newValue)}

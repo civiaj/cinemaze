@@ -1,7 +1,7 @@
-import { classNames } from "shared/lib/classNames";
-import { Button } from "shared/ui/Button/Button";
-import { AppImage } from "shared/ui/AppImage/AppImage";
 import { useTranslation } from "react-i18next";
+import { classNames } from "@/shared/lib/classNames";
+import { AppImage } from "@/shared/ui/AppImage/AppImage";
+import { Button } from "@/shared/ui/Button/Button";
 
 interface PosterProps {
     posterUrl?: string;

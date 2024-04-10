@@ -1,9 +1,8 @@
-import { RatingChange, RatingSet, TFavorite } from "entities/Favorite";
 import { useTranslation } from "react-i18next";
-import { classNames } from "shared/lib/classNames";
-
-import { numberWithSpaces } from "shared/lib/numberWithSpaces";
-import { ColoredNumber } from "shared/ui/ColoredNumber/ColoredNumber";
+import { RatingChange, RatingSet, TFavorite } from "@/entities/Favorite";
+import { classNames } from "@/shared/lib/classNames";
+import { numberWithSpaces } from "@/shared/lib/numberWithSpaces";
+import { ColoredNumber } from "@/shared/ui/ColoredNumber/ColoredNumber";
 
 interface AboutRatingProps {
     className?: string;

@@ -1,4 +1,4 @@
-import i18n from "shared/i18n/config";
+import i18n from "@/shared/i18n/config";
 
 export type FilmError = { data: { message: string }; status: number };
 

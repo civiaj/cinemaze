@@ -1,5 +1,4 @@
-import { RootState } from "app/store";
-
+import { RootState } from "@/app/store";
 import { favoritePageAdapter } from "./slice";
 
 export const getListVariant = (state: RootState) => state.favoritePage.listVariant;

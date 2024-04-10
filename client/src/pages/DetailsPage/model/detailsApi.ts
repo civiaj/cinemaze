@@ -1,6 +1,6 @@
-import { filmApi } from "shared/api/filmApi";
-import { getHoursAndMinutess } from "shared/lib/getHoursAndMinutess";
-import { DetailsQueryT, DetailsT } from "pages/DetailsPage/model/types";
+import { DetailsQueryT, DetailsT } from "@/pages/DetailsPage/model/types";
+import { filmApi } from "@/shared/api/filmApi";
+import { getHoursAndMinutess } from "@/shared/lib/getHoursAndMinutess";
 
 const detailsApi = filmApi.injectEndpoints({
     endpoints: (builder) => ({

@@ -1,10 +1,9 @@
-import { useAppDispatch, useAppSelector } from "app/store";
 import { useTranslation } from "react-i18next";
-import { AppSelect } from "shared/ui/AppSelect/AppSelect";
-import { Heading } from "shared/ui/Text/Heading";
-import { HeaderWithControlls } from "shared/ui/Boxes/HeaderWithControlls";
-import { ControllsBox } from "shared/ui/Boxes/ControllsBox";
-
+import { useAppDispatch, useAppSelector } from "@/app/store";
+import { AppSelect } from "@/shared/ui/AppSelect/AppSelect";
+import { ControllsBox } from "@/shared/ui/Boxes/ControllsBox";
+import { HeaderWithControlls } from "@/shared/ui/Boxes/HeaderWithControlls";
+import { Heading } from "@/shared/ui/Text/Heading";
 import { headerTitles, mainQueryOptions } from "../model/data";
 import { getMainQuery } from "../model/selectors";
 import { mainPageActions } from "../model/slice";

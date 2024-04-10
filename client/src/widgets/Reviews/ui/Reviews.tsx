@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ID_REVIEWS } from "shared/const/const";
-import { classNames } from "shared/lib/classNames";
-import { Box } from "shared/ui/Boxes/Box";
-import { Spinner } from "shared/ui/Spinner/Spinner";
-import { Pagination } from "widgets/Pagination/Pagination";
+import { ID_REVIEWS } from "@/shared/const/const";
+import { classNames } from "@/shared/lib/classNames";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Spinner } from "@/shared/ui/Spinner/Spinner";
+import { Pagination } from "@/widgets/Pagination/Pagination";
 import { reviewApi } from "../model/reviewsApi";
 import { ReviewSortT } from "../model/types";
 import { ReviewsHeader } from "./ReviewsHeader";

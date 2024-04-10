@@ -1,5 +1,5 @@
-import { classNames } from "shared/lib/classNames";
 import React, { HTMLAttributes, ReactNode } from "react";
+import { classNames } from "@/shared/lib/classNames";
 
 interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
     children: ReactNode;

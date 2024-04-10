@@ -1,16 +1,16 @@
-import { useAppSelector } from "app/store";
 import { useState } from "react";
-import { Change, Trashcan } from "shared/assets/icons";
-import { classNames } from "shared/lib/classNames";
-import { Button } from "shared/ui/Button/Button";
-import { ColoredNumber } from "shared/ui/ColoredNumber/ColoredNumber";
-import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
-import { PopupList } from "shared/ui/PopupList/PopupList";
-
-import { TFavorite, useGetOneFavoriteQuery } from "entities/Favorite";
-import { selectUser } from "entities/User";
-import { RatingChangeNumbers } from "./RatingChangeNumbers";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "@/app/store";
+import { TFavorite, useGetOneFavoriteQuery } from "@/entities/Favorite";
+import { selectUser } from "@/entities/User";
+import { Change, Trashcan } from "@/shared/assets/icons";
+import { classNames } from "@/shared/lib/classNames";
+import { Button } from "@/shared/ui/Button/Button";
+import { ColoredNumber } from "@/shared/ui/ColoredNumber/ColoredNumber";
+import { PopupList } from "@/shared/ui/PopupList/PopupList";
+import { OutsideClickWrapper } from "@/widgets/OutsideClickWrapper/OutsideClickWrapper";
+import { RatingChangeNumbers } from "./RatingChangeNumbers";
+
 
 interface RatingChangeProps {
     filmId: number;

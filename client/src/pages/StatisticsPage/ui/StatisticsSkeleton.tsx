@@ -1,7 +1,7 @@
-import { MARGIN } from "pages/StatisticsPage/model/config";
 import { Fragment } from "react";
-import { Box } from "shared/ui/Boxes/Box";
-import { Skeleton } from "shared/ui/Skeleton/Skeleton";
+import { MARGIN } from "@/pages/StatisticsPage/model/config";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Skeleton } from "@/shared/ui/Skeleton/Skeleton";
 
 export const StatisticsSkeleton = () => {
     const style = {

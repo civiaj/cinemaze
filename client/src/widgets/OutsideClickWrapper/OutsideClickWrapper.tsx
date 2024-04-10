@@ -1,5 +1,5 @@
 import { ReactNode, useEffect } from "react";
-import { useOutsideClick } from "shared/hooks/useOutsideClick";
+import { useOutsideClick } from "@/shared/hooks/useOutsideClick";
 
 interface OutsideClickWrapperProps {
     onClose: (e: MouseEvent | globalThis.KeyboardEvent) => void;

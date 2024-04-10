@@ -1,12 +1,11 @@
-import { useAppDispatch, useAppSelector } from "app/store";
 import { MutableRefObject, ReactNode, forwardRef, useCallback, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { THROTTLE_SCROLL } from "shared/const/const";
-import { useInitialEffect } from "shared/hooks/useInitialEffect";
-import { useIntersectionObserver } from "shared/hooks/useIntersectionObserver";
-import { classNames } from "shared/lib/classNames";
-
-import { useThrottle } from "shared/hooks/useThrottle";
+import { useAppDispatch, useAppSelector } from "@/app/store";
+import { THROTTLE_SCROLL } from "@/shared/const/const";
+import { useInitialEffect } from "@/shared/hooks/useInitialEffect";
+import { useIntersectionObserver } from "@/shared/hooks/useIntersectionObserver";
+import { useThrottle } from "@/shared/hooks/useThrottle";
+import { classNames } from "@/shared/lib/classNames";
 import { getScrollByPath } from "../model/selectors";
 import { uiActions } from "../model/slice";
 import { ScrollButton } from "./ScrollButton";

@@ -1,14 +1,13 @@
 import { DragEvent, SyntheticEvent, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import ReactCrop, { Crop, centerCrop, makeAspectCrop } from "react-image-crop";
-import { File } from "shared/assets/icons";
-import { classNames } from "shared/lib/classNames";
-import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
-import { Button } from "shared/ui/Button/Button";
-import { Text } from "shared/ui/Text/Text";
-
+import { File } from "@/shared/assets/icons";
+import { classNames } from "@/shared/lib/classNames";
+import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { Text } from "@/shared/ui/Text/Text";
 import { CROP_ASPECT, CROP_MIN_WIDTH, acceptInput, formatError, formats } from "../../model/config";
 import { UserPhotoModal } from "./UserPhotoModal";
-import { useTranslation } from "react-i18next";
 
 export const UserChangePhoto = () => {
     const [isDrag, setIsDrag] = useState(false);

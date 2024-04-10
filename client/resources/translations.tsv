@@ -93,7 +93,7 @@ manage.banMessage	Block message	Сообщение о блокировке	Bloqu
 manage.banExpiration	Blocked until	Заблокирован до	Bloqué jusqu'à	차단 기간:	محظور حتى
 manage.provider	Provider	Провайдер	Fournisseur	공급자	مزود
 manage.delete-photo	Delete profile photo	Удалить фото профиля	Supprimer la photo de profil	프로필 사진 삭제	حذف الصورة الشخصية
-manage.info-t	Information about	Информация о	Des informations sur	에 관한 정보	معلومات حول
+manage.info-t	Information about {{displayName}}	Информация о {{displayName}}	Informations sur {{displayName}}	{{displayName}}에 대한 정보	معلومات حول {{displayName}}
 manage.ban-t	Block user {{displayName}}	Запрет доступа {{displayName}}	Bloquer l'utilisateur {{displayName}}	사용자 {{displayName}} 차단	حظر المستخدم {{displayName}}
 manage.change-t	Update {{displayName}}	Изменение {{displayName}}	Mettre à jour {{displayName}}	{{displayName}} 업데이트	تحديث {{displayName}}
 manage.unban-t	Unban {{displayName}}	Разблокировать {{displayName}}	Annuler le bannissement de {{displayName}}	{{displayName}} 차단 해제	إلغاء الحظر {{displayName}}
@@ -256,7 +256,7 @@ card.t-go	View	Перейти	Voir	보다	منظر
 api.default-error	Film API error	Ошибка Film API	Erreur de l'API du film	영화 API 오류	خطأ في واجهة برمجة تطبيقات الفيلم
 unauth.default-msg	The user does not have the required rights to view this page.	Пользователь не обладает требуемыми правами для просмотра данной страницы.	L'utilisateur ne dispose pas des droits requis pour visualiser cette page.	사용자에게 이 페이지를 보는 데 필요한 권한이 없습니다.	ليس لدى المستخدم الحقوق المطلوبة لعرض هذه الصفحة.
 plural.film_zero					أفلام
-plural.film_one	film	фильм	film		فيلم
+plural.film_one	film	фильм	film	영화	فيلم
 plural.film_two					أفلام
 plural.film_few		фильма			أفلام
 plural.film_many		фильмов			أفلام

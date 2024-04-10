@@ -1,9 +1,9 @@
-import { FetchErrorWithToast } from "app/store/types";
-import { authAndUserSliceActions } from "entities/AuthAndUser";
-import { GenericResponse, LoginRequest, RegisterRequest } from "entities/Authorization/model/types";
-import { userActions, userApi } from "entities/User";
-import { serverApi } from "shared/api/serverApi";
-import { ServerMessageResponse } from "shared/api/types";
+import { FetchErrorWithToast } from "@/app/store/types";
+import { authAndUserSliceActions } from "@/entities/AuthAndUser";
+import { userActions, userApi } from "@/entities/User";
+import { serverApi } from "@/shared/api/serverApi";
+import { ServerMessageResponse } from "@/shared/api/types";
+import { GenericResponse, LoginRequest, RegisterRequest } from "../model/types";
 
 const authApi = serverApi.injectEndpoints({
     endpoints: (builder) => ({

@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { useHideScroll } from "shared/hooks/useHideScroll";
-import { classNames } from "shared/lib/classNames";
+import { useHideScroll } from "@/shared/hooks/useHideScroll";
+import { classNames } from "@/shared/lib/classNames";
 
 type Props = {
     className?: string;

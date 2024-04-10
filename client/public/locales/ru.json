@@ -104,7 +104,7 @@
     "banExpiration": "Заблокирован до",
     "provider": "Провайдер",
     "delete-photo": "Удалить фото профиля",
-    "info-t": "Информация о",
+    "info-t": "Информация о {{displayName}}",
     "ban-t": "Запрет доступа {{displayName}}",
     "change-t": "Изменение {{displayName}}",
     "unban-t": "Разблокировать {{displayName}}",

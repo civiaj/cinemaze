@@ -1,14 +1,15 @@
-import { classNames } from "shared/lib/classNames";
-import { Button } from "shared/ui/Button/Button";
-import { TUser } from "entities/User";
-import { useBanOneMutation } from "pages/ManagePage/model/manageApi";
-import { BlockUserData, ManageActionViews } from "pages/ManagePage/model/types";
 import { useState } from "react";
-import formatServerError from "shared/api/helpers/formatServerError";
-import { GridMsg } from "shared/ui/GridMsg/GridMsg";
-import { AppDatePicker } from "widgets/AppDatePicker/AppDatePicker";
-import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
 import { useTranslation } from "react-i18next";
+import { TUser } from "@/entities/User";
+import { useBanOneMutation } from "@/pages/ManagePage/model/manageApi";
+import { BlockUserData, ManageActionViews } from "@/pages/ManagePage/model/types";
+import formatServerError from "@/shared/api/helpers/formatServerError";
+import { classNames } from "@/shared/lib/classNames";
+import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
+import { AppDatePicker } from "@/widgets/AppDatePicker/AppDatePicker";
+
 
 type Props = {
     user: TUser;

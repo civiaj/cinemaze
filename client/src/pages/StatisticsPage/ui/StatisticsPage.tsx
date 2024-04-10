@@ -1,5 +1,5 @@
-import { Page } from "entities/Ui";
-import { StatisticsPageBody } from "pages/StatisticsPage/ui/StatisticsPageBody";
+import { Page } from "@/entities/Ui";
+import { StatisticsPageBody } from "@/pages/StatisticsPage/ui/StatisticsPageBody";
 
 const StatisticsPage = () => {
     return (

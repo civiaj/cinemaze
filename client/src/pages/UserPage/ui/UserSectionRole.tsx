@@ -1,15 +1,16 @@
-import { Modal } from "shared/ui/Boxes/Modal";
-import { Button } from "shared/ui/Button/Button";
-import { GridMsg } from "shared/ui/GridMsg/GridMsg";
-import { Text } from "shared/ui/Text/Text";
-
 import { useState } from "react";
-import { classNames } from "shared/lib/classNames";
-import { roleOptions } from "../model/data";
-import { TRoles } from "entities/User";
-import { useUpdateRoleMutation } from "entities/User/model/userApi";
-import formatServerError from "shared/api/helpers/formatServerError";
 import { useTranslation } from "react-i18next";
+import { TRoles } from "@/entities/User";
+import { useUpdateRoleMutation } from "@/entities/User/model/userApi";
+import formatServerError from "@/shared/api/helpers/formatServerError";
+import { classNames } from "@/shared/lib/classNames";
+import { Modal } from "@/shared/ui/Boxes/Modal";
+import { Button } from "@/shared/ui/Button/Button";
+import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
+import { Text } from "@/shared/ui/Text/Text";
+import { roleOptions } from "../model/data";
+
+
 
 type Props = {
     onClose: () => void;

@@ -1,15 +1,16 @@
-import { AppImage } from "shared/ui/AppImage/AppImage";
-import { Spinner } from "shared/ui/Spinner/Spinner";
-
-import formatFilmError from "shared/api/helpers/formatFilmError";
-import { StatusBox } from "shared/ui/Boxes/StatusBox";
-import { Heading } from "shared/ui/Text/Heading";
-import { Text } from "shared/ui/Text/Text";
+import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
+import formatFilmError from "@/shared/api/helpers/formatFilmError";
+import { AppImage } from "@/shared/ui/AppImage/AppImage";
+import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
+import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
+import { Spinner } from "@/shared/ui/Spinner/Spinner";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { Text } from "@/shared/ui/Text/Text";
 import { useGetFilmAwardsQuery } from "../model/filmAwardsApi";
 import { FilmAwardsList } from "./FilmAwardsList";
-import { useTranslation } from "react-i18next";
-import { Fragment } from "react";
-import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
+
+
 
 interface FilmAwardsProps {
     filmId: number;

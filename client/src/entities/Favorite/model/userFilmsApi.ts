@@ -1,10 +1,10 @@
 import toast from "react-hot-toast";
-import { serverApi } from "shared/api/serverApi";
-
-import getAddFavoriteToastMsg from "pages/FavoritePage/helpers/getAddFavoriteToastMsg";
-import getRemoveToastMsg from "pages/FavoritePage/helpers/getRemoveToastMsg";
-import { favoritePageActions } from "pages/FavoritePage/model/slice";
-import { FavoriteListVariantT } from "pages/FavoritePage/model/types";
+import { FavoriteListVariantT, favoritePageActions } from "@/pages/FavoritePage";
+import getAddFavoriteToastMsg from "@/pages/FavoritePage/helpers/getAddFavoriteToastMsg";
+import getRemoveToastMsg from "@/pages/FavoritePage/helpers/getRemoveToastMsg";
+import formatServerError from "@/shared/api/helpers/formatServerError";
+import { serverApi } from "@/shared/api/serverApi";
+import { ServerMessageResponse } from "@/shared/api/types";
 import {
     AddFavoriteRequest,
     FavoriteItemT,
@@ -13,8 +13,6 @@ import {
     TFavorite,
     TStatistics,
 } from "../model/types";
-import { ServerMessageResponse } from "shared/api/types";
-import formatServerError from "shared/api/helpers/formatServerError";
 
 const userFilmsApi = serverApi.injectEndpoints({
     endpoints: (builder) => ({

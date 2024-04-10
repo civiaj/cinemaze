@@ -1,5 +1,5 @@
-import { Page } from "entities/Ui";
-import { ManageList } from "pages/ManagePage/ui/ManageList";
+import { Page } from "@/entities/Ui";
+import { ManageList } from "@/pages/ManagePage/ui/ManageList";
 
 const ManagePage = () => {
     return (

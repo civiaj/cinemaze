@@ -1,6 +1,6 @@
-import { Overlay } from "shared/ui/Boxes/Overlay";
+import { classNames } from "@/shared/lib/classNames";
+import { Overlay } from "@/shared/ui/Boxes/Overlay";
 import { Spinner } from "./Spinner";
-import { classNames } from "shared/lib/classNames";
 
 type Props = {
     hideScroll?: boolean;

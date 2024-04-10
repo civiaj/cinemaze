@@ -1,4 +1,4 @@
-import { FavoriteListVariantT } from "pages/FavoritePage/model/types";
+import { FavoriteListVariantT } from "@/pages/FavoritePage";
 
 export type TFavorite = {
     bookmarked: boolean;

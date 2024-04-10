@@ -1,19 +1,18 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { routePath } from "app/router/router";
-import { TFavorite, useRemoveOneFavoriteMutation } from "entities/Favorite";
-import { Checked } from "shared/assets/icons";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { Modal } from "shared/ui/Boxes/Modal";
-import { Button } from "shared/ui/Button/Button";
-import { Text } from "shared/ui/Text/Text";
-
+import { routePath } from "@/app/router/router";
+import { TFavorite, useRemoveOneFavoriteMutation } from "@/entities/Favorite";
+import formatServerError from "@/shared/api/helpers/formatServerError";
+import { Checked } from "@/shared/assets/icons";
+import { TLngs } from "@/shared/i18n/types";
+import { getFilmTitle } from "@/shared/lib/getFilmTitle";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { Modal } from "@/shared/ui/Boxes/Modal";
+import { Button } from "@/shared/ui/Button/Button";
+import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
+import { Text } from "@/shared/ui/Text/Text";
 import { listVariants } from "../model/data";
 import { FavoriteListVariantT } from "../model/types";
-import { GridMsg } from "shared/ui/GridMsg/GridMsg";
-import formatServerError from "shared/api/helpers/formatServerError";
-import { getFilmTitle } from "shared/lib/getFilmTitle";
-import { TLngs } from "shared/i18n/types";
 
 type Props = {
     onClose: () => void;

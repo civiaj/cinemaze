@@ -1,4 +1,4 @@
-import { GetAllUsersFilter } from "pages/ManagePage/model/types";
+import { GetAllUsersFilter } from "@/pages/ManagePage/model/types";
 
 export const getAllUsersFilterOptions: (OptionType<GetAllUsersFilter, string> & {
     className: string;

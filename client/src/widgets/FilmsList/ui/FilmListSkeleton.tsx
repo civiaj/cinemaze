@@ -1,6 +1,6 @@
-import { TAppearances } from "entities/Ui";
-import { SKELETON_FILMS_LENGTH } from "shared/const/const";
-import { FilmCardSkeleton } from "widgets/FilmCard";
+import { TAppearances } from "@/entities/Ui";
+import { SKELETON_FILMS_LENGTH } from "@/shared/const/const";
+import { FilmCardSkeleton } from "@/widgets/FilmCard";
 
 type Props = {
     containerStyle: string;

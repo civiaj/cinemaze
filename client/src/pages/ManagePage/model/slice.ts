@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { GetAllUsersFilter, ManageSchema } from "pages/ManagePage/model/types";
+import { GetAllUsersFilter, ManageSchema } from "@/pages/ManagePage/model/types";
 
 const initialState: ManageSchema = {
     filter: "displayName",

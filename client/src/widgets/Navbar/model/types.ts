@@ -1,7 +1,7 @@
-import { TThemesRecord } from "app/theme";
-import { TAppearancesRecord } from "entities/Ui";
 import { IconType } from "react-icons";
-import { TLngsRecord } from "shared/i18n/types";
+import { TThemesRecord } from "@/app/theme";
+import { TAppearancesRecord } from "@/entities/Ui";
+import { TLngsRecord } from "@/shared/i18n/types";
 
 export type NavbarViews = "main" | "language" | "theme" | "appearance";
 export type NavbarOptions = Exclude<NavbarViews, "main">;

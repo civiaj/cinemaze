@@ -1,4 +1,4 @@
-import { filmApi } from "shared/api/filmApi";
+import { filmApi } from "@/shared/api/filmApi";
 import { GetFilmImagesProps, GetFilmImagesResult } from "./types";
 
 const filmImagesApi = filmApi.injectEndpoints({

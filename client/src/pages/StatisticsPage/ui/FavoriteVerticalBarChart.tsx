@@ -1,6 +1,3 @@
-import { useAppDispatch, useAppSelector } from "app/store";
-import { useTheme } from "app/theme";
-import { useGetStatisticsQuery } from "entities/Favorite";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -14,16 +11,18 @@ import {
     XAxis,
     YAxis,
 } from "recharts";
-import { Ascending, Descending, EyeClose, EyeOpen, Settings } from "shared/assets/icons";
-import { addZerosToNumber } from "shared/lib/addZerosToNumber";
-import { AppSelect } from "shared/ui/AppSelect/AppSelect";
-import { Box } from "shared/ui/Boxes/Box";
-import { SettingsBox } from "shared/ui/Boxes/SettingsBox";
-import { Button } from "shared/ui/Button/Button";
-import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
-import { Heading } from "shared/ui/Text/Heading";
-import { Text } from "shared/ui/Text/Text";
-
+import { useAppDispatch, useAppSelector } from "@/app/store";
+import { useTheme } from "@/app/theme";
+import { useGetStatisticsQuery } from "@/entities/Favorite";
+import { Ascending, Descending, EyeClose, EyeOpen, Settings } from "@/shared/assets/icons";
+import { addZerosToNumber } from "@/shared/lib/addZerosToNumber";
+import { AppSelect } from "@/shared/ui/AppSelect/AppSelect";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { SettingsBox } from "@/shared/ui/Boxes/SettingsBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { Text } from "@/shared/ui/Text/Text";
+import { OutsideClickWrapper } from "@/widgets/OutsideClickWrapper/OutsideClickWrapper";
 import {
     ANIMATION_BEGIN,
     ANIMATION_DURATION,

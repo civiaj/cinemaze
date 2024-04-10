@@ -1,15 +1,15 @@
-import { routePath } from "app/router/router";
-import { useAppSelector } from "app/store";
-import { Page } from "entities/Ui";
-import { selectUser } from "entities/User";
 import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
-import { formatDate } from "shared/lib/formatDate";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { Box } from "shared/ui/Boxes/Box";
-import { UserBox, UserBoxSeparator } from "shared/ui/Boxes/UserBox";
-import { Heading } from "shared/ui/Text/Heading";
-import { Text } from "shared/ui/Text/Text";
+import { routePath } from "@/app/router/router";
+import { useAppSelector } from "@/app/store";
+import { Page } from "@/entities/Ui";
+import { selectUser } from "@/entities/User";
+import { formatDate } from "@/shared/lib/formatDate";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { UserBox, UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { Text } from "@/shared/ui/Text/Text";
 
 const BanPage = () => {
     const user = useAppSelector(selectUser);

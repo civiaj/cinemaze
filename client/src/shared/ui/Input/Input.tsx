@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, forwardRef, memo } from "react";
-import { classNames } from "shared/lib/classNames";
+import { classNames } from "@/shared/lib/classNames";
 
 const themes = {
     regular: "regular",

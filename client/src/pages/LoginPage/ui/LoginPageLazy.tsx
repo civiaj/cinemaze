@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { FullscreenSpinner } from "shared/ui/Spinner/FullscreenSpinner";
+import { FullscreenSpinner } from "@/shared/ui/Spinner/FullscreenSpinner";
 
 export const LoginPageLazy = () => {
     const Component = lazy(() => import("./LoginPage"));

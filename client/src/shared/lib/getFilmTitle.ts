@@ -1,6 +1,6 @@
-import { DetailsT } from "pages/DetailsPage/model/types";
-import { EMPTY_LINE } from "shared/const/const";
-import { TLngs } from "shared/i18n/types";
+import { DetailsT } from "@/pages/DetailsPage/model/types";
+import { EMPTY_LINE } from "@/shared/const/const";
+import { TLngs } from "@/shared/i18n/types";
 
 export const getFilmTitle = (film: FilmT | DetailsT | null | undefined, locale: TLngs): string => {
     if (!film) return EMPTY_LINE;

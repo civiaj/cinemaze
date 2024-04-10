@@ -1,5 +1,5 @@
+import { filmApi } from "@/shared/api/filmApi";
 import { GetReviewProps, ReviewQueryT } from "./types";
-import { filmApi } from "shared/api/filmApi";
 
 export const reviewApi = filmApi.injectEndpoints({
     endpoints: (builder) => ({

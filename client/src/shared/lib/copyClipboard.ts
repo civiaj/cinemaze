@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import i18n from "shared/i18n/config";
+import i18n from "@/shared/i18n/config";
 
 function fallbackCopyTextToClipboard(text: string) {
     const textArea = document.createElement("textarea");

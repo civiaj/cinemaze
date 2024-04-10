@@ -1,6 +1,5 @@
 import { PayloadAction, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { TFavorite } from "entities/Favorite";
-
+import { TFavorite } from "@/entities/Favorite";
 import { FavoriteListVariantT, FavoritePageSchema } from "./types";
 
 export const favoritePageAdapter = createEntityAdapter<FilmT & TFavorite>({

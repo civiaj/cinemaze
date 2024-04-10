@@ -1,5 +1,5 @@
-import { ProgressContext } from "app/progress/model/context";
 import { ReactNode, useMemo, useState } from "react";
+import { ProgressContext } from "../model/context";
 
 type Props = {
     children: ReactNode;

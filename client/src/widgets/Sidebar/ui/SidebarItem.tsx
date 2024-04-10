@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { NavLink, NavLinkProps } from "react-router-dom";
-import { SideBarItem } from "widgets/Sidebar/model/types";
+import { SideBarItem } from "@/widgets/Sidebar/model/types";
 
 type Props = SideBarItem & NavLinkProps;
 

@@ -104,7 +104,7 @@
     "banExpiration": "Bloqué jusqu'à",
     "provider": "Fournisseur",
     "delete-photo": "Supprimer la photo de profil",
-    "info-t": "Des informations sur",
+    "info-t": "Informations sur {{displayName}}",
     "ban-t": "Bloquer l'utilisateur {{displayName}}",
     "change-t": "Mettre à jour {{displayName}}",
     "unban-t": "Annuler le bannissement de {{displayName}}",

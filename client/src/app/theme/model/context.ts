@@ -1,5 +1,5 @@
-import { TThemes } from "./types";
 import { createContext } from "react";
+import { TThemes } from "./types";
 
 type Props = {
     theme: TThemes;

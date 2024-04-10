@@ -1,7 +1,6 @@
-import { Box } from "shared/ui/Boxes/Box";
-import { Text } from "shared/ui/Text/Text";
 import { useTranslation } from "react-i18next";
-
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Text } from "@/shared/ui/Text/Text";
 import { ReviewT } from "../model/types";
 import { ReviewsItem } from "./ReviewsItem";
 

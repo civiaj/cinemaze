@@ -1,5 +1,5 @@
-import { ProgressContext } from "app/progress/model/context";
 import { useContext } from "react";
+import { ProgressContext } from "../model/context";
 
 export const useProgress = () => {
     const { active, setActive, progress, setProgress } = useContext(ProgressContext);

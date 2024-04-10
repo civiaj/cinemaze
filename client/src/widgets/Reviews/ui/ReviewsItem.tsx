@@ -1,12 +1,11 @@
 import { memo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { classNames } from "shared/lib/classNames";
-import { formatDate } from "shared/lib/formatDate";
-import { Button } from "shared/ui/Button/Button";
-import { Heading } from "shared/ui/Text/Heading";
-import { Box } from "shared/ui/Boxes/Box";
-import { ArrowDown, ArrowUp } from "shared/assets/icons";
-
+import { ArrowDown, ArrowUp } from "@/shared/assets/icons";
+import { classNames } from "@/shared/lib/classNames";
+import { formatDate } from "@/shared/lib/formatDate";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Button } from "@/shared/ui/Button/Button";
+import { Heading } from "@/shared/ui/Text/Heading";
 import { ReviewT } from "../model/types";
 
 interface ReviewsItemProps {

@@ -1,6 +1,6 @@
-import { DoubleLeft, DoubleRight, Left, Right } from "shared/assets/icons";
-import { classNames } from "shared/lib/classNames";
-import { Button } from "shared/ui/Button/Button";
+import { DoubleLeft, DoubleRight, Left, Right } from "@/shared/assets/icons";
+import { classNames } from "@/shared/lib/classNames";
+import { Button } from "@/shared/ui/Button/Button";
 
 interface PaginationProps {
     numOfPages?: number;

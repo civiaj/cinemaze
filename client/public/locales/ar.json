@@ -104,7 +104,7 @@
     "banExpiration": "محظور حتى",
     "provider": "مزود",
     "delete-photo": "حذف الصورة الشخصية",
-    "info-t": "معلومات حول",
+    "info-t": "معلومات حول {{displayName}}",
     "ban-t": "حظر المستخدم {{displayName}}",
     "change-t": "تحديث {{displayName}}",
     "unban-t": "إلغاء الحظر {{displayName}}",

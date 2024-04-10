@@ -1,29 +1,28 @@
 import { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "app/store";
-import { routePath } from "app/router/router";
-import { TFavorite, useGetAllFavoriteQuery, useGetSyncDataQuery } from "entities/Favorite";
-import { Page } from "entities/Ui";
-import { FilmsList } from "widgets/FilmsList";
-import { useInfiniteScroll } from "shared/hooks/useInfiniteScroll";
-import { Box } from "shared/ui/Boxes/Box";
-import { EndBox } from "shared/ui/Boxes/EndBox";
-import { Button } from "shared/ui/Button/Button";
-import { Text } from "shared/ui/Text/Text";
-import { StatusBox } from "shared/ui/Boxes/StatusBox";
-import { PageLikeBox } from "shared/ui/Boxes/PageLikeBox";
-import formatServerError from "shared/api/helpers/formatServerError";
-
-import { favoritePageActions } from "../model/slice";
-import { FavoritePageHeader } from "./FavoritePageHeader";
+import { routePath } from "@/app/router/router";
+import { useAppDispatch, useAppSelector } from "@/app/store";
+import { TFavorite, useGetAllFavoriteQuery, useGetSyncDataQuery } from "@/entities/Favorite";
+import { Page } from "@/entities/Ui";
+import formatServerError from "@/shared/api/helpers/formatServerError";
+import { useInfiniteScroll } from "@/shared/hooks/useInfiniteScroll";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { EndBox } from "@/shared/ui/Boxes/EndBox";
+import { PageLikeBox } from "@/shared/ui/Boxes/PageLikeBox";
+import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { Text } from "@/shared/ui/Text/Text";
+import { FilmsList } from "@/widgets/FilmsList";
 import {
     getFavoritePage,
     getListVariant,
     getUserPageInfiniteFilms,
     getUserPageInfiniteFilmsById,
 } from "../model/selectors";
+import { favoritePageActions } from "../model/slice";
 import { FavoriteRemoveModal } from "../ui/FavoriteRemoveModal";
-import { useTranslation } from "react-i18next";
+import { FavoritePageHeader } from "./FavoritePageHeader";
 
 const cardStyles: TCardStyles = {
     label: "text-xl",

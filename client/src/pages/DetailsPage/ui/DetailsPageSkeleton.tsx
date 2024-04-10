@@ -1,5 +1,5 @@
-import { Box } from "shared/ui/Boxes/Box";
-import { Skeleton } from "shared/ui/Skeleton/Skeleton";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Skeleton } from "@/shared/ui/Skeleton/Skeleton";
 
 export const DetailsPageSkeleton = () => {
     return (

@@ -1,11 +1,10 @@
-import { useDetailsQuery } from "pages/DetailsPage";
-import { Box } from "shared/ui/Boxes/Box";
-
+import { TFavorite } from "@/entities/Favorite";
+import { useDetailsQuery } from "@/pages/DetailsPage";
+import { Box } from "@/shared/ui/Boxes/Box";
 import { AboutDetails } from "./AboutDetails";
-import { AboutRating } from "./AboutRating";
 import { AboutHeader } from "./AboutHeader";
 import { AboutPoster } from "./AboutPoster";
-import { TFavorite } from "entities/Favorite";
+import { AboutRating } from "./AboutRating";
 
 type Props = {
     filmId: number;

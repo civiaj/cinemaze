@@ -1,21 +1,21 @@
-import { routePath } from "app/router/router";
-import { SessionIdentifier, useGetSessionsQuery, useRemoveSessionMutation } from "entities/User";
 
 import { t } from "i18next";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import formatServerError from "shared/api/helpers/formatServerError";
-import { Close, Left, Stop } from "shared/assets/icons";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { Box } from "shared/ui/Boxes/Box";
-import { Modal } from "shared/ui/Boxes/Modal";
-import { UserBox } from "shared/ui/Boxes/UserBox";
-import { Button } from "shared/ui/Button/Button";
-import { GridMsg } from "shared/ui/GridMsg/GridMsg";
-import { Skeleton } from "shared/ui/Skeleton/Skeleton";
-import { Elipsis } from "shared/ui/Text/Elipsis";
-import { Heading } from "shared/ui/Text/Heading";
-import { Text } from "shared/ui/Text/Text";
+import { routePath } from "@/app/router/router";
+import { SessionIdentifier, useGetSessionsQuery, useRemoveSessionMutation } from "@/entities/User";
+import formatServerError from "@/shared/api/helpers/formatServerError";
+import { Close, Left, Stop } from "@/shared/assets/icons";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Modal } from "@/shared/ui/Boxes/Modal";
+import { UserBox } from "@/shared/ui/Boxes/UserBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
+import { Skeleton } from "@/shared/ui/Skeleton/Skeleton";
+import { Elipsis } from "@/shared/ui/Text/Elipsis";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { Text } from "@/shared/ui/Text/Text";
 
 type ModalData = SessionIdentifier | "all" | null;
 

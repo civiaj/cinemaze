@@ -1,8 +1,8 @@
 import { ReactEventHandler, memo, useState } from "react";
-import { classNames } from "shared/lib/classNames";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { AppImage } from "shared/ui/AppImage/AppImage";
 import { useTranslation } from "react-i18next";
+import { classNames } from "@/shared/lib/classNames";
+import { AppImage } from "@/shared/ui/AppImage/AppImage";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
 
 interface FilmImageProps {
     index: number;

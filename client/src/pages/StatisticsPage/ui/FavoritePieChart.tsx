@@ -1,4 +1,3 @@
-import { useGetStatisticsQuery } from "entities/Favorite";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -12,16 +11,16 @@ import {
     Tooltip,
     TooltipProps,
 } from "recharts";
-import { classNames } from "shared/lib/classNames";
-import { Box } from "shared/ui/Boxes/Box";
-import { Button } from "shared/ui/Button/Button";
-import { Heading } from "shared/ui/Text/Heading";
-
+import { useGetStatisticsQuery } from "@/entities/Favorite";
+import { classNames } from "@/shared/lib/classNames";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Button } from "@/shared/ui/Button/Button";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { Text } from "@/shared/ui/Text/Text";
 import { ANIMATION_BEGIN, ANIMATION_DURATION, MARGIN, PIE_COLORS, RADIAN } from "../model/config";
 import { scoreTitles } from "../model/data";
 import { getSelectByScore } from "../model/selectors";
 import { ScoreFilters, TScore } from "../model/types";
-import { Text } from "shared/ui/Text/Text";
 
 /* eslint-disable @typescript-eslint/no-explicit-any*/
 

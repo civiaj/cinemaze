@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-
 import { GetFilmImagesType } from "../model/types";
 import { FilmImagesBody } from "./FilmImagesBody";
 import { FilmImagesHeader } from "./FilmImagesHeader";

@@ -1,6 +1,6 @@
-import { EMPTY_LINE } from "shared/const/const";
-import { addZerosToNumber } from "shared/lib/addZerosToNumber";
-import { classNames } from "shared/lib/classNames";
+import { EMPTY_LINE } from "@/shared/const/const";
+import { addZerosToNumber } from "@/shared/lib/addZerosToNumber";
+import { classNames } from "@/shared/lib/classNames";
 
 interface ColoredNumberProps {
     className?: string;

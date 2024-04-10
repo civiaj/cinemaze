@@ -1,4 +1,4 @@
-import { Heading } from "shared/ui/Text/Heading";
+import { Heading } from "@/shared/ui/Text/Heading";
 
 type Props = {
     headerText: string;

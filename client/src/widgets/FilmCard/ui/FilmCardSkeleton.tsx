@@ -1,7 +1,7 @@
-import { TAppearances } from "entities/Ui";
-import { classNames } from "shared/lib/classNames";
-import { Box } from "shared/ui/Boxes/Box";
-import { Skeleton } from "shared/ui/Skeleton/Skeleton";
+import { TAppearances } from "@/entities/Ui";
+import { classNames } from "@/shared/lib/classNames";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Skeleton } from "@/shared/ui/Skeleton/Skeleton";
 
 type Props = {
     appearance: TAppearances;

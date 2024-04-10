@@ -1,20 +1,20 @@
-import { routePath } from "app/router/router";
-import { useAppDispatch } from "app/store";
-import { useSearchQuery } from "pages/SearchPage/model/searchPageApi";
-import { searchPageActions } from "pages/SearchPage/model/slice";
 import { useTranslation } from "react-i18next";
-import formatFilmError from "shared/api/helpers/formatFilmError";
-import { DEBOUNCE_SEARCH } from "shared/const/const";
-import { useDebouncedValue } from "shared/hooks/useDebouncedValue";
-import { TLngs } from "shared/i18n/types";
-import { getFilmTitle } from "shared/lib/getFilmTitle";
-import { AppImage } from "shared/ui/AppImage/AppImage";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { StatusBox } from "shared/ui/Boxes/StatusBox";
-import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
-import { ColoredNumber } from "shared/ui/ColoredNumber/ColoredNumber";
-import { Spinner } from "shared/ui/Spinner/Spinner";
-import { Text } from "shared/ui/Text/Text";
+import { routePath } from "@/app/router/router";
+import { useAppDispatch } from "@/app/store";
+import { useSearchQuery } from "@/pages/SearchPage/model/searchPageApi";
+import { searchPageActions } from "@/pages/SearchPage/model/slice";
+import formatFilmError from "@/shared/api/helpers/formatFilmError";
+import { DEBOUNCE_SEARCH } from "@/shared/const/const";
+import { useDebouncedValue } from "@/shared/hooks/useDebouncedValue";
+import { TLngs } from "@/shared/i18n/types";
+import { getFilmTitle } from "@/shared/lib/getFilmTitle";
+import { AppImage } from "@/shared/ui/AppImage/AppImage";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
+import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
+import { ColoredNumber } from "@/shared/ui/ColoredNumber/ColoredNumber";
+import { Spinner } from "@/shared/ui/Spinner/Spinner";
+import { Text } from "@/shared/ui/Text/Text";
 
 type Props = {
     inputValue?: string;

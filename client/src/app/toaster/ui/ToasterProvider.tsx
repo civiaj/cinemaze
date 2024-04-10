@@ -1,5 +1,5 @@
 import toast, { ToastIcon, Toaster, resolveValue } from "react-hot-toast";
-import { Close } from "shared/assets/icons";
+import { Close } from "@/shared/assets/icons";
 
 export const ToasterProvider = () => {
     return (

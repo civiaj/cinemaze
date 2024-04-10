@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { Box } from "shared/ui/Boxes/Box";
-import { Text } from "shared/ui/Text/Text";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Text } from "@/shared/ui/Text/Text";
 
 type Props = {
     text?: string;

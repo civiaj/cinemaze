@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
-import withPopup from "shared/hoc/withPopup";
+import withPopup from "@/shared/hoc/withPopup";
 
 type ListProps = {
     render: (value: ListChildComponentProps) => ReactNode;

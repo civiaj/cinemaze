@@ -1,5 +1,5 @@
 import { useTransition, animated } from "@react-spring/web";
-import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
+import { OutsideClickWrapper } from "@/widgets/OutsideClickWrapper/OutsideClickWrapper";
 
 type Props = {
     transitionValue: string | number | boolean | null;

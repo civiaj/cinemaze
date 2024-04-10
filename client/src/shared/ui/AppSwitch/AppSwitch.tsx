@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { classNames } from "shared/lib/classNames";
-import { Text } from "shared/ui/Text/Text";
+import { classNames } from "@/shared/lib/classNames";
+import { Text } from "@/shared/ui/Text/Text";
 
 type Props = {
     checked: boolean;

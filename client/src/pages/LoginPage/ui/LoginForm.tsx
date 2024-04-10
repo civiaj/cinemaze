@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLoginMutation } from "entities/Authorization";
-import formatServerError from "shared/api/helpers/formatServerError";
-import { Box } from "shared/ui/Boxes/Box";
-import { Button } from "shared/ui/Button/Button";
-import { GridMsg } from "shared/ui/GridMsg/GridMsg";
-import { Input } from "shared/ui/Input/Input";
-import { Heading } from "shared/ui/Text/Heading";
-import { Text } from "shared/ui/Text/Text";
-
+import { useLoginMutation } from "@/entities/Authorization";
+import formatServerError from "@/shared/api/helpers/formatServerError";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
+import { Input } from "@/shared/ui/Input/Input";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { Text } from "@/shared/ui/Text/Text";
 import { LoginSections } from "../model/types";
 import { OAuthOptions } from "./OAuthOptions";
-import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
 
 type Props = {
     onSectionChange: (newValue?: LoginSections) => void;

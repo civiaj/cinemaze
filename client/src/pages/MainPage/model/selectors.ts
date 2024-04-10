@@ -1,5 +1,4 @@
-import { RootState } from "app/store";
-
+import { RootState } from "@/app/store";
 import { mainPageAdapter } from "./slice";
 
 export const getMainQuery = (state: RootState) => state.mainPage.mainQuery;

@@ -1,13 +1,13 @@
-import { useAppSelector } from "app/store";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
-import { ID_BREADCRUMBS } from "shared/const/const";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { Box } from "shared/ui/Boxes/Box";
-
+import { useTranslation } from "react-i18next";
+import { useAppSelector } from "@/app/store";
+import { ID_BREADCRUMBS } from "@/shared/const/const";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { Box } from "@/shared/ui/Boxes/Box";
 import { getBreadcrumbs } from "../../model/selectors";
 import { Branches } from "../../ui/Breadcrumbs/Branches";
 import { ExtraBreadcrumbs } from "../../ui/Breadcrumbs/ExtraBreadcrumbs";
-import { useTranslation } from "react-i18next";
+
 
 export const BreadcrumbsBody = () => {
     const { details: branches, main } = useAppSelector(getBreadcrumbs);

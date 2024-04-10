@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { RootState } from "app/store";
+import { RootState } from "@/app/store";
 
 export const getSidebarCollapsed = (state: RootState) => state.ui.sb;
 export const getNavbarAuthCollapsed = (state: RootState) => state.ui.na;

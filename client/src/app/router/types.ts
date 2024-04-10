@@ -1,4 +1,4 @@
-import { TRoles } from "entities/User";
+import { TRoles } from "@/entities/User";
 
 export interface IRoute {
     path: string;

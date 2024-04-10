@@ -104,7 +104,7 @@
     "banExpiration": "Blocked until",
     "provider": "Provider",
     "delete-photo": "Delete profile photo",
-    "info-t": "Information about",
+    "info-t": "Information about {{displayName}}",
     "ban-t": "Block user {{displayName}}",
     "change-t": "Update {{displayName}}",
     "unban-t": "Unban {{displayName}}",

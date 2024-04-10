@@ -1,5 +1,5 @@
-import { TUser } from "entities/User";
-import { TLngs } from "shared/i18n/types";
+import { TUser } from "@/entities/User";
+import { TLngs } from "@/shared/i18n/types";
 
 export type GetAllUsersFilter =
     | "displayName"

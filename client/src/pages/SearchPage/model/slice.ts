@@ -1,6 +1,5 @@
 import { PayloadAction, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { USER_QUERY_MAX } from "shared/const/const";
-
+import { USER_QUERY_MAX } from "@/shared/const/const";
 import { SearchOrderT, SearchPageSchema } from "../model/types";
 
 export const searchPageAdapter = createEntityAdapter<FilmT>({

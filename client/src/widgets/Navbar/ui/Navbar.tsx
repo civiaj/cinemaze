@@ -1,12 +1,12 @@
-import { routePath } from "app/router/router";
-import { useAppDispatch, useAppSelector } from "app/store";
-import { allowNavbarScroll, uiActions } from "entities/Ui";
-import { SearchInput } from "pages/SearchPage";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Menu } from "shared/assets/icons";
-import { classNames } from "shared/lib/classNames";
-import { Button } from "shared/ui/Button/Button";
+import { routePath } from "@/app/router/router";
+import { useAppDispatch, useAppSelector } from "@/app/store";
+import { allowNavbarScroll, uiActions } from "@/entities/Ui";
+import { SearchInput } from "@/pages/SearchPage";
+import { Menu } from "@/shared/assets/icons";
+import { classNames } from "@/shared/lib/classNames";
+import { Button } from "@/shared/ui/Button/Button";
 import { NavigationAuth } from "./NavigationAuth/NavigationAuth";
 
 const min = 0;

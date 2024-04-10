@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { useDetailsQuery } from "pages/DetailsPage";
-import { Text } from "shared/ui/Text/Text";
+import { useDetailsQuery } from "@/pages/DetailsPage";
+import { Text } from "@/shared/ui/Text/Text";
 
 interface DescriptionProps {
     filmId: number;

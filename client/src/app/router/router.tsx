@@ -1,16 +1,15 @@
 import { Navigate } from "react-router-dom";
-import { DetailsPage } from "pages/DetailsPage";
-import { FavoritePage } from "pages/FavoritePage";
-import { LoginPage } from "pages/LoginPage";
-import { MainPage } from "pages/MainPage/";
-import { SearchPage } from "pages/SearchPage";
-import { ManagePage } from "pages/ManagePage";
-import { StatisticsPage } from "pages/StatisticsPage";
-import { UserPage } from "pages/UserPage";
-import { EmailVerificationPage } from "pages/EmailVerificationPage";
-
+import { BanPage } from "@/pages/BanPage";
+import { DetailsPage } from "@/pages/DetailsPage";
+import { EmailVerificationPage } from "@/pages/EmailVerificationPage";
+import { FavoritePage } from "@/pages/FavoritePage";
+import { LoginPage } from "@/pages/LoginPage";
+import { MainPage } from "@/pages/MainPage/";
+import { ManagePage } from "@/pages/ManagePage";
+import { SearchPage } from "@/pages/SearchPage";
+import { StatisticsPage } from "@/pages/StatisticsPage";
+import { UserPage } from "@/pages/UserPage";
 import { IRoute } from "./types";
-import { BanPage } from "pages/BanPage";
 
 export enum AppRoutes {
     MAIN = "main",

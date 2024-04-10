@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { routeConfig } from "app/router/router";
+import { routeConfig } from "@/app/router/router";
 import { BreadcrumbsT, UiSchema, TAppearances } from "./types";
 
 const initialState: UiSchema = {

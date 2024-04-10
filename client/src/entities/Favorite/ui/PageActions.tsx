@@ -1,16 +1,17 @@
-import { useAppSelector } from "app/store";
-import { selectUser } from "entities/User";
 import { useState } from "react";
-import { AddBookmark, Bookmarked, Copy, Dots, Hide, Show } from "shared/assets/icons";
-import { copyClipboard } from "shared/lib/copyClipboard";
-import { Button } from "shared/ui/Button/Button";
-import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
-import { PopupList } from "shared/ui/PopupList/PopupList";
-
-import { TFavorite } from "entities/Favorite";
-import { useGetOneFavoriteQuery } from "../model/userFilmsApi";
 import { useTranslation } from "react-i18next";
-import { Text } from "shared/ui/Text/Text";
+import { useAppSelector } from "@/app/store";
+import { TFavorite } from "@/entities/Favorite";
+import { selectUser } from "@/entities/User";
+import { AddBookmark, Bookmarked, Copy, Dots, Hide, Show } from "@/shared/assets/icons";
+import { copyClipboard } from "@/shared/lib/copyClipboard";
+import { Button } from "@/shared/ui/Button/Button";
+import { PopupList } from "@/shared/ui/PopupList/PopupList";
+import { Text } from "@/shared/ui/Text/Text";
+import { OutsideClickWrapper } from "@/widgets/OutsideClickWrapper/OutsideClickWrapper";
+import { useGetOneFavoriteQuery } from "../model/userFilmsApi";
+
+
 
 type Props = {
     filmId: number;

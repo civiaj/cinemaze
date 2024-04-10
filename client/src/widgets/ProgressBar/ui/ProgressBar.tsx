@@ -1,9 +1,10 @@
-import { useProgress } from "app/progress";
-import { Bar } from "./Bar";
-import { Container } from "./Container";
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { routePath } from "app/router/router";
+import { useProgress } from "@/app/progress";
+import { routePath } from "@/app/router/router";
+import { Bar } from "./Bar";
+import { Container } from "./Container";
+
 
 const config = {
     0: {

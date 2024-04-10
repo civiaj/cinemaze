@@ -1,17 +1,17 @@
-import { routePath } from "app/router/router";
-import { useResetPasswordMutation } from "entities/Authorization";
 import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, useSearchParams } from "react-router-dom";
-import formatServerError from "shared/api/helpers/formatServerError";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { Box } from "shared/ui/Boxes/Box";
-import { StatusBox } from "shared/ui/Boxes/StatusBox";
-import { Button } from "shared/ui/Button/Button";
-import { GridMsg } from "shared/ui/GridMsg/GridMsg";
-import { Input } from "shared/ui/Input/Input";
-import { Heading } from "shared/ui/Text/Heading";
-import { Text } from "shared/ui/Text/Text";
+import { routePath } from "@/app/router/router";
+import { useResetPasswordMutation } from "@/entities/Authorization";
+import formatServerError from "@/shared/api/helpers/formatServerError";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
+import { Input } from "@/shared/ui/Input/Input";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { Text } from "@/shared/ui/Text/Text";
 
 export const ResetForm = () => {
     const [password, setPassword] = useState("");

@@ -1,16 +1,16 @@
-import { useCheckPasswordMutation } from "entities/Authorization";
-import { useUpdatePasswordMutation } from "entities/User/model/userApi";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import formatServerError from "shared/api/helpers/formatServerError";
-import { AppImage } from "shared/ui/AppImage/AppImage";
-import { Modal } from "shared/ui/Boxes/Modal";
-import { UserBox } from "shared/ui/Boxes/UserBox";
-import { Button } from "shared/ui/Button/Button";
-import { GridMsg } from "shared/ui/GridMsg/GridMsg";
-import { Input } from "shared/ui/Input/Input";
-import { Elipsis } from "shared/ui/Text/Elipsis";
-import { Text } from "shared/ui/Text/Text";
+import { useCheckPasswordMutation } from "@/entities/Authorization";
+import { useUpdatePasswordMutation } from "@/entities/User/model/userApi";
+import formatServerError from "@/shared/api/helpers/formatServerError";
+import { AppImage } from "@/shared/ui/AppImage/AppImage";
+import { Modal } from "@/shared/ui/Boxes/Modal";
+import { UserBox } from "@/shared/ui/Boxes/UserBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
+import { Input } from "@/shared/ui/Input/Input";
+import { Elipsis } from "@/shared/ui/Text/Elipsis";
+import { Text } from "@/shared/ui/Text/Text";
 
 type Props = {
     onClose: () => void;

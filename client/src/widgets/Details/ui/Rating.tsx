@@ -1,8 +1,9 @@
-import { Heading } from "shared/ui/Text/Heading";
-import { addZerosToNumber } from "shared/lib/addZerosToNumber";
-import { Box } from "shared/ui/Boxes/Box";
-import { RatingStars, RatingUserScore, TFavorite } from "entities/Favorite";
 import { useTranslation } from "react-i18next";
+import { RatingStars, RatingUserScore, TFavorite } from "@/entities/Favorite";
+import { addZerosToNumber } from "@/shared/lib/addZerosToNumber";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Heading } from "@/shared/ui/Text/Heading";
+
 
 type Props = {
     ratingImdb?: number;

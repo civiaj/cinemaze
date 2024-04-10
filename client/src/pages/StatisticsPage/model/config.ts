@@ -1,4 +1,4 @@
-import { TThemes, getPreferableTheme } from "app/theme";
+import { TThemes, getPreferableTheme } from "@/app/theme";
 
 export const MAX_DISPLAYED = 10;
 export const CATEGORY_HEIGHT = 30;

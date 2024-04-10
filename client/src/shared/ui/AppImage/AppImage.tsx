@@ -5,9 +5,9 @@ import {
     ReactEventHandler,
     useRef,
 } from "react";
-import defaultUser from "shared/assets/images/default-user.jpeg";
-import fallbackImage from "shared/assets/images/placeholder.jpg";
-import { classNames } from "shared/lib/classNames";
+import defaultUser from "@/shared/assets/images/default-user.jpeg";
+import fallbackImage from "@/shared/assets/images/placeholder.jpg";
+import { classNames } from "@/shared/lib/classNames";
 
 interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
     className?: string;

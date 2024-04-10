@@ -1,10 +1,9 @@
-import { routePath } from "app/router/router";
 import { useTranslation } from "react-i18next";
-import { Box } from "shared/ui/Boxes/Box";
-import { UserBox } from "shared/ui/Boxes/UserBox";
-
-import { Heading } from "shared/ui/Text/Heading";
-import { Text } from "shared/ui/Text/Text";
+import { routePath } from "@/app/router/router";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { UserBox } from "@/shared/ui/Boxes/UserBox";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { Text } from "@/shared/ui/Text/Text";
 
 type Props = {
     msg: string;

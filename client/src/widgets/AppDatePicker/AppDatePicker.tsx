@@ -4,11 +4,11 @@ import { ForwardedRef, forwardRef } from "react";
 import ReactDatePicker, { ReactDatePickerProps, registerLocale } from "react-datepicker";
 import "react-datepicker/src/stylesheets/datepicker.scss";
 import { useTranslation } from "react-i18next";
-import { formatDate } from "shared/lib/formatDate";
-import { Button } from "shared/ui/Button/Button";
+import { Left, Right } from "@/shared/assets/icons";
+import { TLngs } from "@/shared/i18n/types";
+import { formatDate } from "@/shared/lib/formatDate";
+import { Button } from "@/shared/ui/Button/Button";
 
-import { Left, Right } from "shared/assets/icons";
-import { TLngs } from "shared/i18n/types";
 import "./date-picker.css";
 
 const datePickerLocales: Record<TLngs, Locale> = {

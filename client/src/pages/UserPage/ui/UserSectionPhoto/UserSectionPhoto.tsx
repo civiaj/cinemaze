@@ -1,14 +1,15 @@
 import { t } from "i18next";
-import { UserChangePhoto } from "pages/UserPage/ui/UserSectionPhoto/UserChangePhoto";
-import { UserCurrentPhoto } from "pages/UserPage/ui/UserSectionPhoto/UserCurrentPhoto";
-import { UserPhotoDeleteModal } from "pages/UserPage/ui/UserSectionPhoto/UserPhotoDeleteModal";
-import "react-image-crop/dist/ReactCrop.css";
 import { useSearchParams } from "react-router-dom";
-import { Left } from "shared/assets/icons";
-import { Modal } from "shared/ui/Boxes/Modal";
-import { UserBox } from "shared/ui/Boxes/UserBox";
-import { Button } from "shared/ui/Button/Button";
-import { Heading } from "shared/ui/Text/Heading";
+import { UserChangePhoto } from "@/pages/UserPage/ui/UserSectionPhoto/UserChangePhoto";
+import { UserCurrentPhoto } from "@/pages/UserPage/ui/UserSectionPhoto/UserCurrentPhoto";
+import { UserPhotoDeleteModal } from "@/pages/UserPage/ui/UserSectionPhoto/UserPhotoDeleteModal";
+import { Left } from "@/shared/assets/icons";
+import { Modal } from "@/shared/ui/Boxes/Modal";
+import { UserBox } from "@/shared/ui/Boxes/UserBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { Heading } from "@/shared/ui/Text/Heading";
+
+import "react-image-crop/dist/ReactCrop.css";
 
 type Props = {
     photo: string;

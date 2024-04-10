@@ -1,6 +1,6 @@
 import { ReactNode, forwardRef } from "react";
 import { Link, LinkProps } from "react-router-dom";
-import { classNames } from "shared/lib/classNames";
+import { classNames } from "@/shared/lib/classNames";
 
 const themes = {
     clean: "clean",

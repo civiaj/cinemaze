@@ -1,11 +1,12 @@
-import { useAppSelector } from "app/store";
-import { TFavorite, useGetOneFavoriteQuery } from "entities/Favorite";
-import { selectUser } from "entities/User";
 import { useState } from "react";
-import { Button } from "shared/ui/Button/Button";
-import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
-import { RatingChangeNumbers } from "./RatingChangeNumbers";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "@/app/store";
+import { TFavorite, useGetOneFavoriteQuery } from "@/entities/Favorite";
+import { selectUser } from "@/entities/User";
+import { Button } from "@/shared/ui/Button/Button";
+import { OutsideClickWrapper } from "@/widgets/OutsideClickWrapper/OutsideClickWrapper";
+import { RatingChangeNumbers } from "./RatingChangeNumbers";
+
 
 interface RatingSetgSet {
     filmId: number;

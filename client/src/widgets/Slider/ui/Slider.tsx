@@ -1,11 +1,11 @@
 import { ReactNode, useCallback, useState } from "react";
-import { classNames } from "shared/lib/classNames";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { SwiperOptions } from "swiper/types";
+import { classNames } from "@/shared/lib/classNames";
 import "swiper/css";
-import { SliderEffect } from "./SliderEffect";
 import { SlideNextBtn } from "./SlideNextBtn";
 import { SlidePrevBtn } from "./SlidePrevBtn";
+import { SliderEffect } from "./SliderEffect";
 
 interface SliderProps<T> extends SwiperOptions {
     className?: string;

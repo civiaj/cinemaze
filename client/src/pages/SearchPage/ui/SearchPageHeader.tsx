@@ -1,7 +1,6 @@
-import { useAppDispatch, useAppSelector } from "app/store";
-import { AppSelect } from "shared/ui/AppSelect/AppSelect";
-import { Box } from "shared/ui/Boxes/Box";
-
+import { useAppDispatch, useAppSelector } from "@/app/store";
+import { AppSelect } from "@/shared/ui/AppSelect/AppSelect";
+import { Box } from "@/shared/ui/Boxes/Box";
 import { orderOptions } from "../config/data";
 import { getSearchOrder } from "../model/selectors";
 import { searchPageActions } from "../model/slice";

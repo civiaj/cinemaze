@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { Checked, Close } from "shared/assets/icons";
-import { classNames } from "shared/lib/classNames";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { Box } from "shared/ui/Boxes/Box";
-import { Button } from "shared/ui/Button/Button";
-import { Text } from "shared/ui/Text/Text";
+import { Checked, Close } from "@/shared/assets/icons";
+import { classNames } from "@/shared/lib/classNames";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Button } from "@/shared/ui/Button/Button";
+import { Text } from "@/shared/ui/Text/Text";
 
 type Props = {
     isSuccess?: boolean;

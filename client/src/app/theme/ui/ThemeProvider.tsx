@@ -1,9 +1,9 @@
-import { ThemeContext } from "app/theme/model/context";
-import { THEMES, TThemes } from "app/theme/model/types";
 import { ReactNode, useEffect, useMemo } from "react";
-import { LOCAL_STORAGE_THEME } from "shared/const/const";
-import { useLocalStorage } from "shared/hooks/useLocalStorage";
+import { LOCAL_STORAGE_THEME } from "@/shared/const/const";
+import { useLocalStorage } from "@/shared/hooks/useLocalStorage";
 import { getPreferableTheme } from "../helper/getPreferableTheme";
+import { ThemeContext } from "../model/context";
+import { THEMES, TThemes } from "../model/types";
 
 type Props = {
     children: ReactNode;

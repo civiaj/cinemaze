@@ -1,16 +1,16 @@
-import { routePath } from "app/router/router";
-import { TUser } from "entities/User";
 import { t } from "i18next";
-import { SECTIONS_USER } from "pages/UserPage/model/types";
 import { useTranslation } from "react-i18next";
-import { Checked, Close, Right } from "shared/assets/icons";
-import { AppImage } from "shared/ui/AppImage/AppImage";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { Box } from "shared/ui/Boxes/Box";
-import { UserBox } from "shared/ui/Boxes/UserBox";
-import { Elipsis } from "shared/ui/Text/Elipsis";
-import { Heading } from "shared/ui/Text/Heading";
-import { Text } from "shared/ui/Text/Text";
+import { routePath } from "@/app/router/router";
+import { TUser } from "@/entities/User";
+import { SECTIONS_USER } from "@/pages/UserPage/model/types";
+import { Checked, Close, Right } from "@/shared/assets/icons";
+import { AppImage } from "@/shared/ui/AppImage/AppImage";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { UserBox } from "@/shared/ui/Boxes/UserBox";
+import { Elipsis } from "@/shared/ui/Text/Elipsis";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { Text } from "@/shared/ui/Text/Text";
 
 type Props = {
     user: TUser;

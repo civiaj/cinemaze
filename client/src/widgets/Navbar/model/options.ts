@@ -1,8 +1,8 @@
-import { Grid, Language, Sun } from "shared/assets/icons";
+import { themes } from "@/app/theme";
+import { appearances } from "@/entities/Ui";
+import { Grid, Language, Sun } from "@/shared/assets/icons";
+import { lngs } from "@/shared/i18n/types";
 import { NavbarOptions, NavbarOptionsType } from "../model/types";
-import { lngs } from "shared/i18n/types";
-import { themes } from "app/theme";
-import { appearances } from "entities/Ui";
 
 export const options: Record<
     NavbarOptions,

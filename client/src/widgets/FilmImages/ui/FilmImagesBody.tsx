@@ -1,11 +1,10 @@
 import { useCallback, useState } from "react";
-import { Spinner } from "shared/ui/Spinner/Spinner";
-import { Pagination } from "widgets/Pagination/Pagination";
-
-import formatFilmError from "shared/api/helpers/formatFilmError";
-import { ID_VIEW_SWITCHER } from "shared/const/const";
-import { StatusBox } from "shared/ui/Boxes/StatusBox";
-import { ImagePreview } from "widgets/ImagePreview";
+import formatFilmError from "@/shared/api/helpers/formatFilmError";
+import { ID_VIEW_SWITCHER } from "@/shared/const/const";
+import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
+import { Spinner } from "@/shared/ui/Spinner/Spinner";
+import { ImagePreview } from "@/widgets/ImagePreview";
+import { Pagination } from "@/widgets/Pagination/Pagination";
 import { useGetFilmImagesQuery } from "../model/filmImagesApi";
 import { GetFilmImagesType } from "../model/types";
 import { FilmImage } from "./FilmImage";

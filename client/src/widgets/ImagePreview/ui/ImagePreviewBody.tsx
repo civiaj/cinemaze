@@ -1,6 +1,6 @@
-import { useUpdateHeight } from "shared/hooks/useUpdateHeight";
-import { classNames } from "shared/lib/classNames";
-import { AppImage } from "shared/ui/AppImage/AppImage";
+import { useUpdateHeight } from "@/shared/hooks/useUpdateHeight";
+import { classNames } from "@/shared/lib/classNames";
+import { AppImage } from "@/shared/ui/AppImage/AppImage";
 
 type Props = {
     src?: string;

@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
-import { classNames } from "shared/lib/classNames";
-import { Box } from "shared/ui/Boxes/Box";
-import { Overlay } from "shared/ui/Boxes/Overlay";
-import { UserBox } from "shared/ui/Boxes/UserBox";
-import { OutsideClickWrapper } from "widgets/OutsideClickWrapper/OutsideClickWrapper";
-import { Heading } from "shared/ui/Text/Heading";
+import { classNames } from "@/shared/lib/classNames";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Overlay } from "@/shared/ui/Boxes/Overlay";
+import { UserBox } from "@/shared/ui/Boxes/UserBox";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { OutsideClickWrapper } from "@/widgets/OutsideClickWrapper/OutsideClickWrapper";
 
 export const Modal = ({
     children,

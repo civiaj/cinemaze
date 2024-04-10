@@ -6,7 +6,7 @@ import {
     fetchBaseQuery,
 } from "@reduxjs/toolkit/dist/query/react";
 import { Mutex } from "async-mutex";
-import { userActions } from "entities/User";
+import { userActions } from "@/entities/User";
 
 const mutex = new Mutex();
 

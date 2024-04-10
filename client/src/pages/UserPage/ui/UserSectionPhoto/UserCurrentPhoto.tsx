@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { AppImage } from "shared/ui/AppImage/AppImage";
-import { UserBoxSeparator } from "shared/ui/Boxes/UserBox";
-import { Button } from "shared/ui/Button/Button";
-import { Text } from "shared/ui/Text/Text";
+import { AppImage } from "@/shared/ui/AppImage/AppImage";
+import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { Text } from "@/shared/ui/Text/Text";
 
 type Props = {
     photo: string;

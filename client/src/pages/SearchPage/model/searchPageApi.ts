@@ -1,5 +1,5 @@
-import { filmApi } from "shared/api/filmApi";
-
+import { filmApi } from "@/shared/api/filmApi";
+import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "@/shared/const/const";
 import {
     SearchFiltersQueryT,
     SearchFiltersT,
@@ -8,7 +8,6 @@ import {
     SearchQueryResultT,
     SearchQueryT,
 } from "../model/types";
-import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "shared/const/const";
 
 const searchPageApi = filmApi.injectEndpoints({
     endpoints: (builder) => ({

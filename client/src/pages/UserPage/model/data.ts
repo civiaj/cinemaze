@@ -1,4 +1,4 @@
-import { TRoles } from "entities/User";
+import { TRoles } from "@/entities/User";
 
 export const roleOptions: OptionType<TRoles, string>[] = [
     { label: "user", value: "user" },

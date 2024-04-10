@@ -1,19 +1,19 @@
 import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useForgotPasswordMutation } from "entities/Authorization";
-import { Box } from "shared/ui/Boxes/Box";
-import { GridMsg } from "shared/ui/GridMsg/GridMsg";
-import { Input } from "shared/ui/Input/Input";
-import { Heading } from "shared/ui/Text/Heading";
-import formatServerError from "shared/api/helpers/formatServerError";
-import { trimInput } from "shared/lib/trimInput";
-import { Button } from "shared/ui/Button/Button";
-import { Text } from "shared/ui/Text/Text";
-
+import { routePath } from "@/app/router/router";
+import { useForgotPasswordMutation } from "@/entities/Authorization";
+import formatServerError from "@/shared/api/helpers/formatServerError";
+import { trimInput } from "@/shared/lib/trimInput";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
+import { Input } from "@/shared/ui/Input/Input";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { Text } from "@/shared/ui/Text/Text";
 import { LoginSections } from "../model/types";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { routePath } from "app/router/router";
-import { StatusBox } from "shared/ui/Boxes/StatusBox";
+
 
 type Props = {
     onSectionChange: (newValue?: LoginSections) => void;

@@ -1,5 +1,5 @@
 import { EntityState } from "@reduxjs/toolkit";
-import { TFavorite } from "entities/Favorite";
+import { TFavorite } from "@/entities/Favorite";
 
 export const favoriteListVariant = {
     all: "all",

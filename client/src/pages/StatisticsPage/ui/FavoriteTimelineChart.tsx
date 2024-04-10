@@ -1,7 +1,3 @@
-import { routePath } from "app/router/router";
-import { useAppDispatch, useAppSelector } from "app/store";
-import { useTheme } from "app/theme";
-import { useGetStatisticsQuery } from "entities/Favorite";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -14,19 +10,22 @@ import {
     XAxis,
     YAxis,
 } from "recharts";
-import { AppLink } from "shared/ui/AppLink/AppLink";
-import { AppSelect } from "shared/ui/AppSelect/AppSelect";
-import { Box } from "shared/ui/Boxes/Box";
-import { Heading } from "shared/ui/Text/Heading";
-
+import { routePath } from "@/app/router/router";
+import { useAppDispatch, useAppSelector } from "@/app/store";
+import { useTheme } from "@/app/theme";
+import { useGetStatisticsQuery } from "@/entities/Favorite";
+import { classNames } from "@/shared/lib/classNames";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { AppSelect } from "@/shared/ui/AppSelect/AppSelect";
+import { Box } from "@/shared/ui/Boxes/Box";
+import { Elipsis } from "@/shared/ui/Text/Elipsis";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { Text } from "@/shared/ui/Text/Text";
 import { ANIMATION_BEGIN, ANIMATION_DURATION, BLUE, COLORS, MARGIN } from "../model/config";
 import { tlIntervals } from "../model/data";
 import { getSelectByDate, getTL } from "../model/selectors";
 import { statisticsActions } from "../model/slice";
 import { TLIntervals, TLStat } from "../model/types";
-import { Elipsis } from "shared/ui/Text/Elipsis";
-import { classNames } from "shared/lib/classNames";
-import { Text } from "shared/ui/Text/Text";
 
 /* eslint-disable @typescript-eslint/no-explicit-any*/
 

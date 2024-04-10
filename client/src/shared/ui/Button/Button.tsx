@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, ForwardedRef, forwardRef } from "react";
-import { classNames } from "shared/lib/classNames";
-import { Spinner } from "shared/ui/Spinner/Spinner";
+import { classNames } from "@/shared/lib/classNames";
+import { Spinner } from "@/shared/ui/Spinner/Spinner";
 
 const themes = {
     regular: "regular",

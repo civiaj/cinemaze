@@ -1,8 +1,8 @@
-import { routePath } from "app/router/router";
-import { FavoriteListVariantT } from "pages/FavoritePage/model/types";
 import { Trans } from "react-i18next";
-import i18n from "shared/i18n/config";
-import { AppLink } from "shared/ui/AppLink/AppLink";
+import { routePath } from "@/app/router/router";
+import { FavoriteListVariantT } from "@/pages/FavoritePage/model/types";
+import i18n from "@/shared/i18n/config";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
 
 const getRemoveToastMsg = (payload: {
     filmId: number;

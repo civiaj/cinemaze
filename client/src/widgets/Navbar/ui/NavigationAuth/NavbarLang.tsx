@@ -1,9 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { Checked } from "shared/assets/icons";
-import { TLngs, TLngsRecord } from "shared/i18n/types";
-import { Button } from "shared/ui/Button/Button";
-import { Elipsis } from "shared/ui/Text/Elipsis";
-
+import { Checked } from "@/shared/assets/icons";
+import { TLngs, TLngsRecord } from "@/shared/i18n/types";
+import { Button } from "@/shared/ui/Button/Button";
+import { Elipsis } from "@/shared/ui/Text/Elipsis";
 import { options } from "../../model/options";
 
 const languages = options.language.variants as TLngsRecord;
