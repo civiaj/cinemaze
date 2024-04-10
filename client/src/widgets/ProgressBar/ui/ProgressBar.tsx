@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { useProgress } from "@/app/progress";
 import { routePath } from "@/app/router/router";
+import { useProgress } from "@/shared/progress";
 import { Bar } from "./Bar";
 import { Container } from "./Container";
-
 
 const config = {
     0: {

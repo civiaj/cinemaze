@@ -1,26 +1,26 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { getAllUsersFilterOptions } from "@/pages/ManagePage/model/data";
-import { useGetUsersQuery } from "@/pages/ManagePage/model/manageApi";
-import { getManageState } from "@/pages/ManagePage/model/selectors";
-import { manageActions } from "@/pages/ManagePage/model/slice";
-import { GetAllUsersFilter } from "@/pages/ManagePage/model/types";
-import { ManageListItem } from "@/pages/ManagePage/ui/ManageListItem";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { Ascending, Descending } from "@/shared/assets/icons";
 import { useDebouncedValue } from "@/shared/hooks/useDebouncedValue";
 import { TLngs } from "@/shared/i18n/types";
 import { classNames } from "@/shared/lib/classNames";
 import { Box } from "@/shared/ui/Boxes/Box";
+import { OutsideClickWrapper } from "@/shared/ui/Boxes/OutsideClickWrapper";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
 import { Button } from "@/shared/ui/Button/Button";
 import { Input } from "@/shared/ui/Input/Input";
+import { Pagination } from "@/shared/ui/Pagination/Pagination";
 import { Spinner } from "@/shared/ui/Spinner/Spinner";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
-import { OutsideClickWrapper } from "@/widgets/OutsideClickWrapper/OutsideClickWrapper";
-import { Pagination } from "@/widgets/Pagination/Pagination";
+import { getAllUsersFilterOptions } from "../model/data";
+import { useGetUsersQuery } from "../model/manageApi";
+import { getManageState } from "../model/selectors";
+import { manageActions } from "../model/slice";
+import { GetAllUsersFilter } from "../model/types";
+import { ManageListItem } from "../ui/ManageListItem";
 
 export const ManageList = () => {
     const { filter, order } = useAppSelector(getManageState);

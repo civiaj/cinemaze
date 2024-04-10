@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useProgress } from "@/app/progress";
+import { useProgress } from "@/shared/progress";
 
 export const ProgressBarFallback = () => {
     const { setActive, setProgress } = useProgress();

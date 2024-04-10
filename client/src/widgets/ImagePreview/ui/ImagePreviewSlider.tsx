@@ -1,8 +1,8 @@
 import { SwiperOptions } from "swiper/types";
+import { FilmImagesT } from "@/entities/FilmDetails";
 import { classNames } from "@/shared/lib/classNames";
 import { AppImage } from "@/shared/ui/AppImage/AppImage";
-import { FilmImages } from "@/widgets/FilmImages/model/types";
-import { Slider } from "@/widgets/Slider";
+import { Slider } from "@/shared/ui/Slider";
 
 const sliderSettings: SwiperOptions = {
     centeredSlides: true,
@@ -32,7 +32,7 @@ const sliderSettings: SwiperOptions = {
 interface ImagePreviewSliderProps {
     initialSlide: number;
     activeSlide: number;
-    images: FilmImages[];
+    images: FilmImagesT[];
     onSetSlide: (newSlide: number) => void;
     className?: string;
 }

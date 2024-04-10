@@ -1,7 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { routeConfig, routePath } from "@/app/router/router";
-import { getIsLogged } from "@/entities/User";
-import { getIsAdmin } from "@/entities/User/model/selectors";
+import { getIsLogged, getIsAdmin } from "@/entities/User";
 import { Home, Favorite, Search, Statistics, UserGroup } from "@/shared/assets/icons";
 import { SideBarItem } from "./types";
 

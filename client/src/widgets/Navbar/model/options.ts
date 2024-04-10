@@ -1,7 +1,7 @@
-import { themes } from "@/app/theme";
 import { appearances } from "@/entities/Ui";
 import { Grid, Language, Sun } from "@/shared/assets/icons";
 import { lngs } from "@/shared/i18n/types";
+import { themes } from "@/shared/theme";
 import { NavbarOptions, NavbarOptionsType } from "../model/types";
 
 export const options: Record<

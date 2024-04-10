@@ -4,7 +4,6 @@ import { Crop, convertToPixelCrop } from "react-image-crop";
 import { useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useUpdatePhotoMutation } from "@/entities/User";
-import { UserModalAnimationHoc } from "@/pages/UserPage/ui/UserSectionPhoto/UserModalAnimationHoc";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { classNames } from "@/shared/lib/classNames";
 import { Box } from "@/shared/ui/Boxes/Box";
@@ -14,7 +13,7 @@ import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
 import { getPreviewCanvas } from "../../helpers/getPreviewCanvas";
-
+import { UserModalAnimationHoc } from "./UserModalAnimationHoc";
 
 type Props = {
     image: HTMLImageElement | null;

@@ -1,5 +1,3 @@
-import { FavoriteListVariantT } from "@/pages/FavoritePage";
-
 export type TFavorite = {
     bookmarked: boolean;
     userScore: number | null;
@@ -41,3 +39,12 @@ export type TStatistics = {
 };
 
 export type FavoriteItemT = { films: FilmT[]; totalPages: number };
+
+export const favoriteListVariant = {
+    all: "all",
+    bookmarked: "bookmarked",
+    hidden: "hidden",
+    userScore: "userScore",
+} as const;
+
+export type FavoriteListVariantT = ObjectValues<typeof favoriteListVariant>;

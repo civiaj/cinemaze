@@ -12,9 +12,9 @@ import {
 } from "recharts";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { useTheme } from "@/app/theme";
 import { useGetStatisticsQuery } from "@/entities/Favorite";
 import { classNames } from "@/shared/lib/classNames";
+import { useTheme } from "@/shared/theme";
 import { AppLink } from "@/shared/ui/AppLink/AppLink";
 import { AppSelect } from "@/shared/ui/AppSelect/AppSelect";
 import { Box } from "@/shared/ui/Boxes/Box";

@@ -1,4 +1,7 @@
 import toast from "react-hot-toast";
+import { serverApi } from "@/shared/api/serverApi";
+import { ServerMessageResponse } from "@/shared/api/types";
+import i18n from "@/shared/i18n/config";
 import {
     BlockUserRequest,
     GetAllUsersData,
@@ -6,10 +9,7 @@ import {
     GetAllUsersResponse,
     ManageUpdateOne,
     UnbanUserRequest,
-} from "@/pages/ManagePage/model/types";
-import { serverApi } from "@/shared/api/serverApi";
-import { ServerMessageResponse } from "@/shared/api/types";
-import i18n from "@/shared/i18n/config";
+} from "./types";
 
 const manageApi = serverApi.injectEndpoints({
     overrideExisting: false,

@@ -1,8 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch } from "@/app/store";
-import { useSearchQuery } from "@/pages/SearchPage/model/searchPageApi";
-import { searchPageActions } from "@/pages/SearchPage/model/slice";
 import formatFilmError from "@/shared/api/helpers/formatFilmError";
 import { DEBOUNCE_SEARCH } from "@/shared/const/const";
 import { useDebouncedValue } from "@/shared/hooks/useDebouncedValue";
@@ -15,6 +13,8 @@ import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
 import { ColoredNumber } from "@/shared/ui/ColoredNumber/ColoredNumber";
 import { Spinner } from "@/shared/ui/Spinner/Spinner";
 import { Text } from "@/shared/ui/Text/Text";
+import { useSearchQuery } from "../../model/searchPageApi";
+import { searchPageActions } from "../../model/slice";
 
 type Props = {
     inputValue?: string;

@@ -2,8 +2,8 @@ import { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppSelector } from "@/app/store";
-import { getIsLogged, selectUser, useGetMeQuery } from "@/entities/User";
 import { UnauthorizedMessage } from "@/widgets/Messages/UnauthorizedMessage";
+import { getIsLogged, selectUser, useGetMeQuery } from "@/entities/User";
 
 interface RequireAuthProps {
     children: ReactNode;

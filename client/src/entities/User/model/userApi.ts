@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import { authAndUserSliceActions } from "@/entities/AuthAndUser";
+import { authAndUserSliceActions } from "@/features/LoadingAuthorizationAndUser";
 import { userActions } from "@/entities/User";
 import { serverApi } from "@/shared/api/serverApi";
 import { ServerMessageResponse } from "@/shared/api/types";

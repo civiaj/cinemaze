@@ -14,7 +14,6 @@ import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
 import { LoginSections } from "../model/types";
 
-
 type Props = {
     onSectionChange: (newValue?: LoginSections) => void;
 };

@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { roleOptions } from "@/pages/UserPage";
 import { TUser } from "@/entities/User";
-import { useUnbanOneMutation, useUpdateOneMutation } from "@/pages/ManagePage/model/manageApi";
-import { ChangeUserData, ManageActionViews } from "@/pages/ManagePage/model/types";
-import { roleOptions } from "@/pages/UserPage/model/data";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { Block, Checked, Close, Minus } from "@/shared/assets/icons";
 import { classNames } from "@/shared/lib/classNames";
@@ -16,6 +14,8 @@ import { Button } from "@/shared/ui/Button/Button";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
 import { Input } from "@/shared/ui/Input/Input";
 import { Text } from "@/shared/ui/Text/Text";
+import { useUnbanOneMutation, useUpdateOneMutation } from "../model/manageApi";
+import { ChangeUserData, ManageActionViews } from "../model/types";
 
 type Props = {
     user: TUser;

@@ -29,7 +29,7 @@ export type GetAllUsersResponse = {
     data: GetAllUsersData;
 };
 
-export type ManageSchema = Omit<GetAllUsersQuery, "page" | "query">;
+export type ManageSchema = Omit<GetAllUsersQuery, "page" | "query" | "locale">;
 
 export type BlockUserData = { banExpiration: Date; banMessage: string };
 export type BlockUserRequest = {

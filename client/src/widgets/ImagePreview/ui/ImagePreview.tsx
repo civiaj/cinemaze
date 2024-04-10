@@ -1,19 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FilmImagesT } from "@/entities/FilmDetails";
 import { Close, Left, Right } from "@/shared/assets/icons";
 import { useHideScroll } from "@/shared/hooks/useHideScroll";
 import { classNames } from "@/shared/lib/classNames";
 import { AppLink } from "@/shared/ui/AppLink/AppLink";
 import { Button } from "@/shared/ui/Button/Button";
-import { FilmImages } from "@/widgets/FilmImages/model/types";
 import { ImagePreviewBody } from "./ImagePreviewBody";
 import { ImagePreviewSlider } from "./ImagePreviewSlider";
-
 
 interface ImagePreviewProps {
     onClose: () => void;
     activeIndex: number;
-    images: FilmImages[];
+    images: FilmImagesT[];
 }
 
 export const ImagePreview = (props: ImagePreviewProps) => {

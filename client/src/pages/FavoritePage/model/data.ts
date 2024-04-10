@@ -1,4 +1,4 @@
-import { FavoriteListVariantT } from "./types";
+import { FavoriteListVariantT } from "@/entities/Favorite";
 
 export const listVariants: OptionType<FavoriteListVariantT, string>[] = [
     {

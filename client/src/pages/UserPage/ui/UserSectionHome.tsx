@@ -2,7 +2,6 @@ import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 import { routePath } from "@/app/router/router";
 import { TUser } from "@/entities/User";
-import { SECTIONS_USER } from "@/pages/UserPage/model/types";
 import { Checked, Close, Right } from "@/shared/assets/icons";
 import { AppImage } from "@/shared/ui/AppImage/AppImage";
 import { AppLink } from "@/shared/ui/AppLink/AppLink";
@@ -11,6 +10,7 @@ import { UserBox } from "@/shared/ui/Boxes/UserBox";
 import { Elipsis } from "@/shared/ui/Text/Elipsis";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
+import { SECTIONS_USER } from "../model/types";
 
 type Props = {
     user: TUser;

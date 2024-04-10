@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
+import { GoogleOAuthBtn } from "@/widgets/OAuth/Google";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
 import { Heading } from "@/shared/ui/Text/Heading";
-import { GoogleOAuthBtn } from "@/widgets/OAuth/Google";
 
 export const OAuthOptions = () => {
     const { t } = useTranslation();

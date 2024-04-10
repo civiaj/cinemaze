@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import { ListChildComponentProps } from "react-window";
 import { Down } from "@/shared/assets/icons";
 import { classNames } from "@/shared/lib/classNames";
+import { OutsideClickWrapper } from "@/shared/ui/Boxes/OutsideClickWrapper";
 import { Button } from "@/shared/ui/Button/Button";
 import { PopupList } from "@/shared/ui/PopupList/PopupList";
-import { OutsideClickWrapper } from "@/widgets/OutsideClickWrapper/OutsideClickWrapper";
 
 const themes = {
     regular: "regular",
@@ -71,7 +71,9 @@ export const AppSelect = (props: Props) => {
             theme="popup"
             style={style}
         >
-            <span className="line-clamp-1 break-words text-start">{options[index].label}</span>
+            <span className="line-clamp-1 break-words text-start">
+                {t(String(options[index].label))}
+            </span>
         </Button>
     );
 

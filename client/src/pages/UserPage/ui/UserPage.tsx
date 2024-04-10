@@ -3,13 +3,13 @@ import { routePath } from "@/app/router/router";
 import { useAppSelector } from "@/app/store";
 import { Page } from "@/entities/Ui";
 import { selectUser } from "@/entities/User";
-import { TUserSection } from "@/pages/UserPage/model/types";
-import { UserSectionDevices } from "@/pages/UserPage/ui/UserSectionDevices";
-import { UserSectionHome } from "@/pages/UserPage/ui/UserSectionHome";
-import { UserSectionName } from "@/pages/UserPage/ui/UserSectionName";
-import { UserSectionPassword } from "@/pages/UserPage/ui/UserSectionPassword";
-import { UserSectionPhoto } from "@/pages/UserPage/ui/UserSectionPhoto/UserSectionPhoto";
-import { UserSectionRole } from "@/pages/UserPage/ui/UserSectionRole";
+import { TUserSection } from "../model/types";
+import { UserSectionDevices } from "../ui/UserSectionDevices";
+import { UserSectionHome } from "../ui/UserSectionHome";
+import { UserSectionName } from "../ui/UserSectionName";
+import { UserSectionPassword } from "../ui/UserSectionPassword";
+import { UserSectionPhoto } from "../ui/UserSectionPhoto/UserSectionPhoto";
+import { UserSectionRole } from "../ui/UserSectionRole";
 
 const UserPage = () => {
     const [searchParams] = useSearchParams();

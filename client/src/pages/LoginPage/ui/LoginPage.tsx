@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { Navigate, useSearchParams } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppSelector } from "@/app/store";
-import { getAuthAndUserIsLoading } from "@/entities/AuthAndUser";
+import { getAuthAndUserIsLoading } from "@/features/LoadingAuthorizationAndUser";
 import { Page } from "@/entities/Ui";
 import { selectUser } from "@/entities/User";
 import { LoginSections } from "../model/types";
@@ -10,7 +10,6 @@ import { ForgotForm } from "../ui/ForgotForm";
 import { LoginForm } from "../ui/LoginForm";
 import { RegistrateForm } from "../ui/RegistrateForm";
 import { ResetForm } from "../ui/ResetForm";
-
 
 const LoginPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();

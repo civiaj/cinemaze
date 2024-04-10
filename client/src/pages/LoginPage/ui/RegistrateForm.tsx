@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useRegisterMutation } from "@/entities/Authorization";
 import { OAuthOptions } from "@/pages/LoginPage/ui/OAuthOptions";
+import { useRegisterMutation } from "@/entities/Authorization";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { Box } from "@/shared/ui/Boxes/Box";
 import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";

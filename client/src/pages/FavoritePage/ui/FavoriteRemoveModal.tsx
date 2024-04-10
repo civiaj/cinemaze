@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { routePath } from "@/app/router/router";
-import { TFavorite, useRemoveOneFavoriteMutation } from "@/entities/Favorite";
+import { FavoriteListVariantT, TFavorite, useRemoveOneFavoriteMutation } from "@/entities/Favorite";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { Checked } from "@/shared/assets/icons";
 import { TLngs } from "@/shared/i18n/types";
@@ -12,7 +12,6 @@ import { Button } from "@/shared/ui/Button/Button";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
 import { Text } from "@/shared/ui/Text/Text";
 import { listVariants } from "../model/data";
-import { FavoriteListVariantT } from "../model/types";
 
 type Props = {
     onClose: () => void;

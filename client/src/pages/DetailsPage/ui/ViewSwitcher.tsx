@@ -1,18 +1,15 @@
 import { ReactNode, useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
+import { FilmAwards, FilmImages } from "@/entities/FilmDetails";
+import { Description } from "@/entities/FilmDetails";
 import { ID_VIEW_SWITCHER } from "@/shared/const/const";
 import { classNames } from "@/shared/lib/classNames";
 import { Box } from "@/shared/ui/Boxes/Box";
 import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
 import { Button } from "@/shared/ui/Button/Button";
 import { Heading } from "@/shared/ui/Text/Heading";
-import { Description } from "@/widgets/Details";
-import { FilmAwards } from "@/widgets/FilmAwards";
-import { FilmImages } from "@/widgets/FilmImages";
 import { ViewSwitcherTypes } from "../model/types";
-
-
 
 interface ViewSwitcherProps {
     filmId: number;

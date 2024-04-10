@@ -1,4 +1,4 @@
-import { DetailsT } from "@/pages/DetailsPage/model/types";
+import { DetailsT } from "@/entities/FilmDetails";
 import { EMPTY_LINE } from "@/shared/const/const";
 import { TLngs } from "@/shared/i18n/types";
 

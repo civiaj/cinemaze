@@ -4,11 +4,11 @@ import { BrowserRouter } from "react-router-dom";
 import { ErrorBoundary } from "@/app/error";
 import "@/app/index.css";
 import { PersistProvider } from "@/app/persist/PersistProvider.tsx";
-import { ProgressProvider } from "@/app/progress";
 import { StoreProvider } from "@/app/store/StoreProvider.tsx";
-import { ThemeProvider } from "@/app/theme/index.ts";
-import { ToasterProvider } from "@/app/toaster";
 import "@/shared/i18n/config.ts";
+import { ProgressProvider } from "@/shared/progress/index.ts";
+import { ThemeProvider } from "@/shared/theme";
+import { ToasterProvider } from "@/shared/toaster";
 import App from "./app/App.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

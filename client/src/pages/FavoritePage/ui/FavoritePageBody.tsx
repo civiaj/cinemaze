@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch, useAppSelector } from "@/app/store";
+import { FilmsList } from "@/features/FilmsList";
 import { TFavorite, useGetAllFavoriteQuery, useGetSyncDataQuery } from "@/entities/Favorite";
 import { Page } from "@/entities/Ui";
 import formatServerError from "@/shared/api/helpers/formatServerError";
@@ -13,7 +14,6 @@ import { PageLikeBox } from "@/shared/ui/Boxes/PageLikeBox";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
 import { Button } from "@/shared/ui/Button/Button";
 import { Text } from "@/shared/ui/Text/Text";
-import { FilmsList } from "@/widgets/FilmsList";
 import {
     getFavoritePage,
     getListVariant,

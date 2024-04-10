@@ -12,17 +12,17 @@ import {
     YAxis,
 } from "recharts";
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { useTheme } from "@/app/theme";
 import { useGetStatisticsQuery } from "@/entities/Favorite";
 import { Ascending, Descending, EyeClose, EyeOpen, Settings } from "@/shared/assets/icons";
 import { addZerosToNumber } from "@/shared/lib/addZerosToNumber";
+import { useTheme } from "@/shared/theme";
 import { AppSelect } from "@/shared/ui/AppSelect/AppSelect";
 import { Box } from "@/shared/ui/Boxes/Box";
+import { OutsideClickWrapper } from "@/shared/ui/Boxes/OutsideClickWrapper";
 import { SettingsBox } from "@/shared/ui/Boxes/SettingsBox";
 import { Button } from "@/shared/ui/Button/Button";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
-import { OutsideClickWrapper } from "@/widgets/OutsideClickWrapper/OutsideClickWrapper";
 import {
     ANIMATION_BEGIN,
     ANIMATION_DURATION,

@@ -1,13 +1,14 @@
 import toast from "react-hot-toast";
-import { FavoriteListVariantT, favoritePageActions } from "@/pages/FavoritePage";
-import getAddFavoriteToastMsg from "@/pages/FavoritePage/helpers/getAddFavoriteToastMsg";
-import getRemoveToastMsg from "@/pages/FavoritePage/helpers/getRemoveToastMsg";
+import { favoritePageActions } from "@/pages/FavoritePage";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { serverApi } from "@/shared/api/serverApi";
 import { ServerMessageResponse } from "@/shared/api/types";
+import getAddFavoriteToastMsg from "../helpers/getAddFavoriteToastMsg";
+import getRemoveToastMsg from "../helpers/getRemoveToastMsg";
 import {
     AddFavoriteRequest,
     FavoriteItemT,
+    FavoriteListVariantT,
     RemoveFavoriteRequest,
     SyncDataResponse,
     TFavorite,

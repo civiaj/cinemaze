@@ -3,7 +3,9 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "@/app/store";
+import { FilmDetailsActions, RatingStars } from "@/features/FilmDetailsActions";
 import { TFavorite, useAddFavoriteMutation, useGetOneFavoriteQuery } from "@/entities/Favorite";
+import { Reviews, Similars, useDetailsQuery } from "@/entities/FilmDetails";
 import { Breadcrumbs } from "@/entities/Ui";
 import { selectUser } from "@/entities/User";
 import formatFilmError from "@/shared/api/helpers/formatFilmError";
@@ -11,10 +13,6 @@ import { TLngs } from "@/shared/i18n/types";
 import { getFilmTitle } from "@/shared/lib/getFilmTitle";
 import remapDetailsToFilm from "@/shared/lib/remapDetailsToFilm";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
-import { AboutMain, Rating } from "@/widgets/Details";
-import { Reviews } from "@/widgets/Reviews";
-import { Similars } from "@/widgets/Similars";
-import { useDetailsQuery } from "../model/detailsApi";
 import { ViewSwitcher } from "../ui/ViewSwitcher";
 import { DetailsPageSkeleton } from "./DetailsPageSkeleton";
 
@@ -61,17 +59,15 @@ export const DetailsPageBody = () => {
     return (
         <>
             <Breadcrumbs label={label} />
-            <AboutMain
+            <FilmDetailsActions
                 filmId={filmId}
                 label={label}
                 updateFavorite={updateFavorite}
                 disabled={disabled}
             />
             <ViewSwitcher filmId={filmId} />
-            <Rating
-                filmId={filmId}
-                ratingImdb={ratingImdb}
-                rating={rating}
+            <RatingStars
+                details={{ filmId, ratingImdb, rating }}
                 updateFavorite={updateFavorite}
                 disabled={disabled}
             />

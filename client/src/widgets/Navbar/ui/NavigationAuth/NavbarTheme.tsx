@@ -1,8 +1,7 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { TThemes, useTheme } from "@/app/theme";
-import { TThemesRecord } from "@/app/theme";
 import { Checked } from "@/shared/assets/icons";
+import { TThemes, TThemesRecord, useTheme } from "@/shared/theme";
 import { Button } from "@/shared/ui/Button/Button";
 import { Elipsis } from "@/shared/ui/Text/Elipsis";
 import { options } from "../../model/options";

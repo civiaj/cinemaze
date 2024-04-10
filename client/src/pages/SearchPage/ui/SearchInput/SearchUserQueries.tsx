@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { getSearchUserQueriesByInput } from "@/pages/SearchPage/model/selectors";
-import { searchPageActions } from "@/pages/SearchPage/model/slice";
 import { Search } from "@/shared/assets/icons";
 import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
+import { getSearchUserQueriesByInput } from "../../model/selectors";
+import { searchPageActions } from "../../model/slice";
 
 type Props = {
     inputValue?: string;

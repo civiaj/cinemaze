@@ -1,14 +1,5 @@
 import { EntityState } from "@reduxjs/toolkit";
-import { TFavorite } from "@/entities/Favorite";
-
-export const favoriteListVariant = {
-    all: "all",
-    bookmarked: "bookmarked",
-    hidden: "hidden",
-    userScore: "userScore",
-} as const;
-
-export type FavoriteListVariantT = ObjectValues<typeof favoriteListVariant>;
+import { FavoriteListVariantT, TFavorite } from "@/entities/Favorite";
 
 export interface FavoritePageSchema {
     listVariant: FavoriteListVariantT;

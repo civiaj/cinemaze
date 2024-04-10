@@ -14,14 +14,14 @@ import {
     uiConfig,
 } from "@/app/persist/config";
 import { storeErrors } from "@/app/store/storeErrors";
-import { authAndUserSliceReducer } from "@/entities/AuthAndUser";
-import { uiReducer } from "@/entities/Ui";
-import { userReducer } from "@/entities/User";
 import { favoritePageReducer } from "@/pages/FavoritePage";
 import { mainPageReducer } from "@/pages/MainPage";
 import { manageReducer } from "@/pages/ManagePage";
 import { searchPageReducer } from "@/pages/SearchPage";
 import { statisticsReducer } from "@/pages/StatisticsPage";
+import { authAndUserSliceReducer } from "@/features/LoadingAuthorizationAndUser";
+import { uiReducer } from "@/entities/Ui";
+import { userReducer } from "@/entities/User";
 import { filmApi } from "@/shared/api/filmApi";
 import { serverApi } from "@/shared/api/serverApi";
 import { DispatchFunc, RootState } from "./types";

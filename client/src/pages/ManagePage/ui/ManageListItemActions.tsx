@@ -1,13 +1,12 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TUser } from "@/entities/User";
-import { ManageActionViews } from "@/pages/ManagePage/model/types";
-import { ManageBan } from "@/pages/ManagePage/ui/ManageBan";
-import { ManageListItemActionsHeader } from "@/pages/ManagePage/ui/ManageListItemActionsHead";
-import { ManageViewAndUpdate } from "@/pages/ManagePage/ui/ManageViewAndUpdate";
 import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
-
+import { ManageActionViews } from "../model/types";
+import { ManageBan } from "../ui/ManageBan";
+import { ManageListItemActionsHeader } from "../ui/ManageListItemActionsHead";
+import { ManageViewAndUpdate } from "../ui/ManageViewAndUpdate";
 
 type Props = {
     user: TUser;
