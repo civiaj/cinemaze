@@ -32,7 +32,7 @@ export const Input = memo(
                 ref={ref}
                 type={type}
                 className={classNames(
-                    "outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between h-10 text-base text-start shrink-0 placeholder-my-neutral-400",
+                    "outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between h-10 text-sm sm:text-base text-start shrink-0 placeholder-my-neutral-400",
                     {},
                     [theme ? cls[theme] : "", className]
                 )}

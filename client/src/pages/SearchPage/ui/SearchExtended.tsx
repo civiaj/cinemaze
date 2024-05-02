@@ -81,7 +81,6 @@ export const SearchExtended = (props: SearchExtendedProps) => {
             <div className="flex flex-col gap-1">
                 <span>{t("search.keyword")}</span>
                 <Input
-                    className="text-sm"
                     placeholder={t("search.keyword-place")}
                     value={keyword}
                     onChange={(e) => onUpdateFilters("keyword", e.target.value)}

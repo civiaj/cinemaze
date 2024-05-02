@@ -8,6 +8,10 @@ export default defineConfig({
     optimizeDeps: {
         exclude: ["react-window"],
     },
+    preview: {
+        port: 8080,
+        strictPort: true,
+    },
     resolve: {
         alias: {
             "@": fileURLToPath(new URL("./src", import.meta.url)),
@@ -15,12 +19,14 @@ export default defineConfig({
     },
     server: {
         host: true,
-        proxy: {
-            "/api/": {
-                target: "http://localhost:5001", //server url
-                changeOrigin: true,
-                secure: false,
-            },
-        },
+        strictPort: true,
+        port: 8080,
+        // proxy: {
+        //     "/api/": {
+        //         target: "http://localhost:5001", //server url
+        //         changeOrigin: true,
+        //         secure: false,
+        //     },
+        // },
     },
 });

@@ -72,7 +72,7 @@
     "ratings-film": "Classements des films",
     "cag": "Pays et genres",
     "cag-data": "Données",
-    "cag-data-genre": "Genre",
+    "cag-data-genre": "Genres",
     "cag-data-country": "Des pays",
     "cag-sort": "Trier par",
     "cag-sort-count": "Compter",
@@ -88,7 +88,7 @@
     "last-m": "Mois",
     "last-y": "Année",
     "last-all": "Tout le temps",
-    "empty-msg": "Pour consulter les statistiques, notez plusieurs films",
+    "empty-msg": "Pour consulter les statistiques, noter plusieurs films ou modifier les paramètres",
     "pie-empty-msg": "Il n'y a pas de statistiques sur les paramètres sélectionnés"
   },
   "manage": {
@@ -152,7 +152,7 @@
     "tag-still": "Images fixes",
     "tag-shooting": "Fusillades",
     "tag-poster": "Affiches",
-    "tag-fan-art": "Fan-arts",
+    "tag-fan-art": "Fanarts",
     "tag-promo": "Promotion",
     "tag-concept": "Concepts",
     "tag-wallpaper": "Fonds d'écran",
@@ -320,5 +320,10 @@
     "review_few": "",
     "review_many": "",
     "review_other": "reviens"
+  },
+  "role": {
+    "admin": "Administrateur",
+    "admin-test": "Essai d'administration",
+    "user": "Utilisateur"
   }
 }

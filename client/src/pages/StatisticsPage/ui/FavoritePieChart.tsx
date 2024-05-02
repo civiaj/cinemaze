@@ -17,7 +17,7 @@ import { Box } from "@/shared/ui/Boxes/Box";
 import { Button } from "@/shared/ui/Button/Button";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
-import { ANIMATION_BEGIN, ANIMATION_DURATION, MARGIN, PIE_COLORS, RADIAN } from "../model/config";
+import { ANIMATION_BEGIN, ANIMATION_DURATION, PIE_COLORS, RADIAN } from "../model/config";
 import { scoreTitles } from "../model/data";
 import { getSelectByScore } from "../model/selectors";
 import { ScoreFilters, TScore } from "../model/types";
@@ -98,9 +98,9 @@ const CustomTooltip = ({
                 : 0;
 
         return (
-            <div className="bg-my-neutral-50 bg-opacity-10 px-6 py-4 flex items-end flex-col">
-                <p className="text-2xl font-medium">{item.score}</p>
-                <p>
+            <div className="bg-my-neutral-50 bg-opacity-10 px-4 py-2 sm:px-6 sm:py-4 flex items-end flex-col">
+                <p className="text-base sm:text-2xl font-medium">{item.score}</p>
+                <p className="sm:text-base text-xs">
                     {item.count} {t("plural.film", { count: item.count })}{" "}
                     {percantage && <span>({percantage}%)</span>}
                 </p>
@@ -152,14 +152,14 @@ export const FavoritePieChart = () => {
             <div className="h-72">
                 <ResponsiveContainer width="100%" height="100%">
                     {scores.length ? (
-                        <PieChart margin={MARGIN}>
+                        <PieChart margin={{}}>
                             <Pie
                                 data={scores}
                                 cx="50%"
                                 cy="50%"
                                 labelLine={false}
                                 label={<CustomLabel />}
-                                outerRadius={135}
+                                outerRadius={125}
                                 dataKey="score"
                                 animationBegin={ANIMATION_BEGIN}
                                 animationDuration={ANIMATION_DURATION}
@@ -180,7 +180,7 @@ export const FavoritePieChart = () => {
                             <Legend
                                 layout="vertical"
                                 align="left"
-                                verticalAlign="middle"
+                                verticalAlign="top"
                                 content={<CustomLegend />}
                             />
                         </PieChart>

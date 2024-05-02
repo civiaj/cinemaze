@@ -12,7 +12,7 @@ export const PageLikeBox = ({ children, className }: Props) => {
             <div className="max-w-6xl w-full flex-1 mx-auto relative h-full">
                 <main
                     className={classNames(
-                        "py-4 px-2 flex flex-col gap-4 h-full min-w-[400px]",
+                        "py-4 px-2 flex flex-col gap-4 h-full min-w-[300px]",
                         {},
                         [className]
                     )}

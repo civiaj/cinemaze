@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(
     cors({
         credentials: true,
-        origin: [CLIENT_URL, "http://192.168.1.59:5173"],
+        origin: [CLIENT_URL, "http://192.168.1.59:8080"],
     })
 );
 app.options("*", cors());

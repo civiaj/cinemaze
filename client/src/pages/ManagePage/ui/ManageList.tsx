@@ -115,7 +115,7 @@ export const ManageList = () => {
                                     >
                                         <td scope="row" colSpan={8}>
                                             <div className="h-56 flex items-center justify-center">
-                                                <Text className="font-normal">
+                                                <Text className="font-normal text-center">
                                                     {t("search.empty-msg")}
                                                 </Text>
                                             </div>

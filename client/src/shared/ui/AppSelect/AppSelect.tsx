@@ -90,7 +90,8 @@ export const AppSelect = (props: Props) => {
                     className={classNames(
                         "gap-2 font-medium",
                         {
-                            ["font-normal text-my-neutral-400"]: !activeValue,
+                            ["font-normal text-my-neutral-400"]:
+                                activeValue === undefined || activeValue === null,
                         },
                         [cls[theme], className]
                     )}

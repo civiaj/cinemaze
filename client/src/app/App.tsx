@@ -18,7 +18,7 @@ function App() {
 
     return (
         <div
-            className="text-my-neutral-800 bg-my-neutral-50 font-normal font-custom antialiased h-full w-full min-h-[100svh]"
+            className="text-my-neutral-800 bg-my-neutral-50 font-normal font-custom antialiased h-full w-full min-h-[100dvh]"
             id={ID_MAIN}
         >
             <Navbar />
@@ -27,8 +27,9 @@ function App() {
                 <ProgressBar />
                 <Sidebar />
             </div>
-
-            <AppRouter />
+            <div className="overflow-x-hidden">
+                <AppRouter />
+            </div>
             <CleanInfinite />
         </div>
     );

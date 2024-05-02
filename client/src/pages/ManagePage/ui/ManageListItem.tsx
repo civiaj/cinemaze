@@ -81,7 +81,7 @@ export const ManageListItem = ({
                 </td>
                 <td className="px-1 whitespace-nowrap hidden mdb:table-cell">
                     <div className="max-w-[250px] flex justify-center">
-                        <Elipsis>{email}</Elipsis>
+                        <Elipsis className="sm:text-sm">{email}</Elipsis>
                     </div>
                 </td>
                 <td className="align-center text-center px-1 whitespace-nowrap rounded-r-xl appcontainer:rounded-r-none">

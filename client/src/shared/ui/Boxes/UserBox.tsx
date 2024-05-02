@@ -4,9 +4,11 @@ import { classNames } from "@/shared/lib/classNames";
 export const UserBox = ({ children, className }: { children: ReactNode; className?: string }) => {
     return (
         <div
-            className={classNames("flex flex-col gap-1 border-b border-border py-4 px-6", {}, [
-                className,
-            ])}
+            className={classNames(
+                "flex flex-col gap-1 border-b border-border py-4 px-2 sm:px-6",
+                {},
+                [className]
+            )}
         >
             {children}
         </div>

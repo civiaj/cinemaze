@@ -3,7 +3,7 @@ import { TThemes, getPreferableTheme } from "@/shared/theme";
 export const MAX_DISPLAYED = 10;
 export const CATEGORY_HEIGHT = 30;
 export const TICK_HEIGHT = 22;
-export const LETTER_WIDTH = 8.3;
+export const LETTER_WIDTH = 8.1;
 export const ANIMATION_DURATION = 300;
 export const DARK = "rgb(245 245 245)";
 export const LIGHT = "rgb(38 38 38)";
@@ -27,4 +27,3 @@ export const COLORS: Record<TThemes, string> = {
     light: LIGHT,
     system: getPreferableTheme() === "dark" ? DARK : LIGHT,
 };
-export const MARGIN = { top: 30, left: 30, right: 50, bottom: 30 };

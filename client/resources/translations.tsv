@@ -63,7 +63,7 @@ stat.ratings-my	My Movie Ratings	Мои Оценки	Mes classements de films	�
 stat.ratings-film	Film Ratings	Рейтинг Фильма	Classements des films	영화 등급	تقييمات الأفلام
 stat.cag	Countries and Genres	Страны и Жанры	Pays et genres	국가 및 장르	البلدان والأنواع
 stat.cag-data	Data	Данные	Données	데이터	بيانات
-stat.cag-data-genre	Genres	Жанры	Genre	장르	الأنواع
+stat.cag-data-genre	Genres	Жанры	Genres	장르	الأنواع
 stat.cag-data-country	Countries	Страны	Des pays	국가	بلدان
 stat.cag-sort	Sort By	Сортировать по	Trier par	정렬 기준	ترتيب حسب
 stat.cag-sort-count	Count	Количеству	Compter	세다	عدد
@@ -79,7 +79,7 @@ stat.last-7	Week	Неделя	Semaine	주	أسبوع
 stat.last-m	Month	Месяц	Mois	월	شهر
 stat.last-y	Year	Год	Année	년도	سنة
 stat.last-all	All Time	Все Время	Tout le temps	모든 시간	كل الوقت
-stat.empty-msg	To view statistics rate several films	Для просмотра статистики оцените несколько фильмов	Pour consulter les statistiques, notez plusieurs films	여러 영화의 통계 평가를 보려면	لعرض الإحصائيات معدل العديد من الأفلام
+stat.empty-msg	To view statistics rate several films or change parametrs	Для просмотра статистики оцените несколько фильмов или измените параметры	Pour consulter les statistiques, noter plusieurs films ou modifier les paramètres	여러 영화에 대한 통계 평가를 보거나 매개변수를 변경하려면	لعرض الإحصائيات، قم بتقييم العديد من الأفلام أو تغيير المعلمات
 stat.pie-empty-msg	There is no statistics on the selected parameters	Статистика по выбранным параметрам отсутствует	Il n'y a pas de statistiques sur les paramètres sélectionnés	선택한 매개변수에 대한 통계가 없습니다.	لا توجد إحصائيات حول المعلمات المحددة
 manage.search-name	Search by name	Поиск по имени	Rechercher par nom	이름으로 검색	البحث عن طريق الإسم
 manage.displayName	Name	Имя	Nom	이름	اسم
@@ -137,7 +137,7 @@ details.descr-empty	Review not available	Обзор недоступен	Avis no
 details.tag-still	Stills	Кадры	Images fixes	스틸	اللقطات
 details.tag-shooting	Shootings	Съёмки	Fusillades	총격 사건	إطلاق النار
 details.tag-poster	Posters	Постеры	Affiches	포스터	الملصقات
-details.tag-fan-art	Fan art	Фан-арт	Fan-arts	팬 아트	معجب بالفن
+details.tag-fan-art	Fan art	Фан-арт	Fanarts	팬 아트	معجب بالفن
 details.tag-promo	Promo	Промо	Promotion	프로모션	الترويجي
 details.tag-concept	Concepts	Концепты	Concepts	개념	المفاهيم
 details.tag-wallpaper	Wallpapers	Обои	Fonds d'écran	배경화면	خلفيات
@@ -165,14 +165,14 @@ ban.two	2. Viewing the statistics page is not available.	2. Недоступен
 ban.three	3. Viewing the page with a list of users is not available.	3. Недоступен просмотр страницы со списком пользователей.	3. L'affichage de la page avec une liste d'utilisateurs n'est pas disponible.	3. 사용자 목록이 포함된 페이지를 볼 수 없습니다.	3. عرض الصفحة مع قائمة المستخدمين غير متاح.
 ban.msg-small	Your Account is Banned	Ваш Аккаунт Заблокирован	Votre compte est banni	귀하의 계정이 금지되었습니다	حسابك محظور
 boundary.t	An error has occurred	Произошла ошибка	Une erreur est survenue	오류가 발생했습니다	حدث خطأ
-boundary.b	Please refresh the page or return to the home page to try again.	Пожалуйста, обновите страницу или вернитесь на главную, чтобы повторить попытку.	Veuillez actualiser la page ou revenir à la page d'accueil pour réessayer.	페이지를 새로 고치거나 홈 페이지로 돌아가서 다시 시도하세요.	يرجى تحديث الصفحة أو العودة إلى الصفحة الرئيسية للمحاولة مرة أخرى.
+boundary.b	Please refresh the page or return to the home page to try again.	Пожалуйста, обновите страницу или вернитесь на главную, чтобы повторить попытку.	Veuillez actualiser la page ou revenir à la page d'accueil pour réessayer.	페이지를 새로 고치거나 홈페이지로 돌아가서 다시 시도하세요.	يرجى تحديث الصفحة أو العودة إلى الصفحة الرئيسية للمحاولة مرة أخرى.
 toast.error-default	Unknown error	Неизвестная ошибка	Erreur inconnue	알수없는 오류	خطأ غير معروف
 toast.error-server-default	Server error	Ошибка сервера	Erreur du serveur	서버 오류	خطأ في الخادم
 toast.error-fetch	Unable to connect to server	Невозможно подключиться к серверу	Incapable de se connecter au serveur	서버에 연결할 수 없습니다	غير قادر على الإتصال بالسيرفر
-toast.book-add	Added to "Will Watch"	Добавлено в "Буду Смотреть	Ajouté à « Will Watch »	"관찰하겠습니다"에 추가되었습니다.	تمت الإضافة إلى "سوف أشاهد"
+toast.book-add	Added to "Will Watch"	Добавлено в "Буду Смотреть"	Ajouté à « Will Watch »	"관찰하겠습니다"에 추가되었습니다.	تمت الإضافة إلى "سوف أشاهد"
 toast.book-remove	Removed from bookmarks	Убрано из закладок	Supprimé des favoris	북마크에서 삭제됨	تمت إزالتها من الإشارات المرجعية
 toast.hidden-add	The film will not be displayed in the general feed and will not be taken into account in statistics	Фильм не будет отображаться в общей ленте и учитываться в статистике	Le film ne sera pas affiché dans le flux général et ne sera pas pris en compte dans les statistiques	영화는 일반 피드에 표시되지 않으며 통계에 반영되지 않습니다.	لن يتم عرض الفيلم في البث العام ولن يؤخذ في الاعتبار في الإحصائيات
-toast.hidden-remove	The film is again displayed in the general feed and taken into account in statistics	Фильм снова отображается в общей ленте и учитывается в статистике	Le film est à nouveau affiché dans le flux général et pris en compte dans les statistiques	영화는 다시 일반 피드에 표시되고 통계에 반영됩니다.	يتم عرض الفيلم مرة أخرى في الخلاصة العامة ويتم أخذه في الاعتبار في الإحصائيات
+toast.hidden-remove	The film is again displayed in the general feed and taken into account in statistics	Фильм снова отображается в общей ленте и учитывается в статистике	Le film est à nouveau affiché dans le flux général et pris en compte dans les statistiques	영화는 다시 일반 피드에 표시되고 통계에 반영됩니다.	يتم عرض الفيلم مرة أخرى في الخلاصة العامة ويؤخذ في الاعتبار في الإحصائيات
 toast.user-score-add	You have given a {{score}}	Вы поставили оценку {{score}}	Vous avez donné un {{score}}	귀하는 {{score}}점을 받았습니다	لقد أعطيت {{النتيجة}}
 toast.user-score-remove	Rating removed	Оценка удалена	Note supprimée	등급이 삭제됨	تمت إزالة التقييم
 toast.remove-book	<movieLink>{{title}}</movieLink> removed from bookmarks	<movieLink>{{title}}</movieLink> удален из закладок	<movieLink>{{title}}</movieLink> supprimé des favoris	<movieLink>{{title}}</movieLink>가 북마크에서 삭제되었습니다.	تمت إزالة <movieLink>{{title}}</movieLink> من الإشارات المرجعية
@@ -240,7 +240,7 @@ user.name-change-p	Enter a new name	Введите новое имя польз�
 user.devices-current	Current device	Текущее устройство	Appareil actuel	현재 장치	الجهاز الحالي
 user.devices-active	Active sessions	Активные сеансы	Sessions actives	활성 세션	جلسات نشطة
 user.devices-active-empty	No active sessions found	Активных сеансов не найдено	Aucune session active trouvée	활성 세션을 찾을 수 없습니다.	لم يتم العثور على جلسات نشطة
-user.devices-end-all-msg	Are you sure you want to end all sessions except the current one?	Вы действительно хотите завершить все сеансы, кроме текущего?	Êtes-vous sûr de vouloir mettre fin à toutes les sessions sauf celle en cours ?	현재 세션을 제외한 모든 세션을 종료하시겠습니까?	هل أنت متأكد أنك تريد إنهاء كافة الجلسات باستثناء الجلسة الحالية؟
+user.devices-end-all-msg	Are you sure you want to end all sessions except the current one?	Вы действительно хотите завершить все сеансы, кроме текущего?	Êtes-vous sûr de vouloir mettre fin à toutes les sessions sauf celle en cours ?	현재 세션을 제외한 모든 세션을 종료하시겠습니까?	هل أنت متأكد أنك تريد إنهاء جميع الجلسات باستثناء الجلسة الحالية؟
 user.devices-end-msg	Do you really want to end the session	Вы действительно хотите завершить сеанс	Voulez-vous vraiment terminer la session	정말로 세션을 종료하시겠습니까?	هل تريد حقاً إنهاء الجلسة؟
 user.password-check	Confirm the password	Подтвердите пароль	Confirmez le mot de passe	비밀번호를 확인하세요	تأكيد كلمة المرور
 user.password-check-msg	For security reasons, please enter your password to continue.	Исходя из соображений безопасности, для продолжения введите свой пароль.	Pour des raisons de sécurité, veuillez saisir votre mot de passe pour continuer.	보안상의 이유로 계속하려면 비밀번호를 입력하세요.	لأسباب أمنية، يرجى إدخال كلمة المرور الخاصة بك للمتابعة.
@@ -285,3 +285,6 @@ plural.review_two					تعليقات
 plural.review_few		рецензии			تعليقات
 plural.review_many		рецензий			تعليقات
 plural.review_other	revirews		reviens	재검토하다	مراجعة
+role.admin	Admin	Админ	Administrateur	관리자	مسؤل
+role.admin-test	Admin-Trial	Админ-Тест	Essai d'administration	행정심판	المحاكمة الإدارية
+role.user	User	Пользователь	Utilisateur	사용자	مستخدم

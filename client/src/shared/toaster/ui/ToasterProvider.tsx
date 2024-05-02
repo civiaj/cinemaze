@@ -11,7 +11,7 @@ export const ToasterProvider = () => {
                 <div
                     className={`min-h-10 rounded-xl px-4 py-2 flex items-center gap-2 bg-my-white shadow-md shadow-my-neutral-200 text-my-neutral-800 ${
                         t.visible ? "animate-enter" : "animate-leave"
-                    } `}
+                    } border border-border`}
                 >
                     <ToastIcon toast={t} />
                     <p className="text-sm font-medium mr-2">{resolveValue(t.message, t)}</p>

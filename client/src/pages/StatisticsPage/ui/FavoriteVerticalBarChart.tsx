@@ -31,7 +31,6 @@ import {
     DARK,
     LETTER_WIDTH,
     LIGHT,
-    MARGIN,
     MAX_DISPLAYED,
     TICK_HEIGHT,
 } from "../model/config";
@@ -56,12 +55,12 @@ const CustomTooltip = ({
                 : 0;
 
         return (
-            <div className="bg-my-neutral-50 bg-opacity-10 px-6 py-4 flex items-end flex-col">
-                <p className="text-2xl font-medium">{item.name}</p>
-                <span className="text-sm font-normal mb-2">
+            <div className="bg-my-neutral-50 bg-opacity-10 px-4 py-2 sm:px-6 sm:py-4 flex items-end flex-col">
+                <p className="text-base sm:text-2xl font-medium">{item.name}</p>
+                <span className="sm:text-base text-xs font-normal mb-1 sm:mb-2">
                     {item.count} {t("plural.film", { count: item.count })} {percantage}%
                 </span>
-                <div className="grid grid-cols-[repeat(2,max-content)] justify-items-end font-normal gap-x-4 text-sm">
+                <div className="grid grid-cols-[repeat(2,max-content)] justify-items-end font-normal gap-x-4 text-xs sm:text-sm">
                     <p>{t("stat.cat-rating")}</p>
                     <p>{addZerosToNumber(item.avgRating, 1)}</p>
                     <p>{t("stat.cat-userscore")}</p>
@@ -139,9 +138,7 @@ export const FavoriteVerticalBarChart = () => {
 
     const displayed = showAll ? data : data.slice(0, MAX_DISPLAYED);
 
-    const height = `${
-        displayed.length * CATEGORY_HEIGHT + TICK_HEIGHT + MARGIN.top + MARGIN.bottom
-    }px`;
+    const height = `${displayed.length * CATEGORY_HEIGHT + TICK_HEIGHT}px`;
 
     const width = longestWord * LETTER_WIDTH;
     const { theme } = useTheme();
@@ -185,7 +182,7 @@ export const FavoriteVerticalBarChart = () => {
                             options={vbFilters}
                             actionChange={onFilterChange}
                             value={filter}
-                            className="text-sm py-0 bg-my-white w-40 justify-self-start"
+                            className="bg-my-white w-32 sm:w-48 "
                         />
                         <Button
                             theme="regularIcon"
@@ -205,7 +202,7 @@ export const FavoriteVerticalBarChart = () => {
                             options={vbSortOptions}
                             actionChange={onSortChange}
                             value={sort}
-                            className="text-sm py-0 bg-my-white w-40"
+                            className="bg-my-white w-32 sm:w-48"
                         />
                         <Button
                             theme="regularIcon"
@@ -220,15 +217,22 @@ export const FavoriteVerticalBarChart = () => {
             </OutsideClickWrapper>
             <div style={{ height }}>
                 <ResponsiveContainer width="100%" height="100%" className="text-base font-medium">
-                    <BarChart data={displayed} layout="vertical" barSize={20} margin={MARGIN}>
-                        <CartesianGrid strokeDasharray="5 5" opacity={0.5} />
+                    <BarChart
+                        data={displayed}
+                        layout="vertical"
+                        barSize={20}
+                        margin={{ right: 10 }}
+                    >
+                        <CartesianGrid opacity={0.2} />
                         <XAxis
                             domain={[0, 10]}
+                            interval={0}
                             tickCount={20}
                             allowDecimals={false}
                             type="number"
-                            tick={{ fill: color }}
-                            className="text-sm"
+                            tick={{ fill: color, textAnchor: "middle" }}
+                            className="text-xs"
+                            textAnchor="end"
                         />
                         <YAxis
                             width={width}

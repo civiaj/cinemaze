@@ -88,7 +88,7 @@
     "last-m": "Month",
     "last-y": "Year",
     "last-all": "All Time",
-    "empty-msg": "To view statistics rate several films",
+    "empty-msg": "To view statistics rate several films or change parametrs",
     "pie-empty-msg": "There is no statistics on the selected parameters"
   },
   "manage": {
@@ -320,5 +320,10 @@
     "review_few": "",
     "review_many": "",
     "review_other": "revirews"
+  },
+  "role": {
+    "admin": "Admin",
+    "admin-test": "Admin-Trial",
+    "user": "User"
   }
 }

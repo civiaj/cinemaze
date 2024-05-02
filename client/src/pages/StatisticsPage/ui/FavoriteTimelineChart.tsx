@@ -21,7 +21,7 @@ import { Box } from "@/shared/ui/Boxes/Box";
 import { Elipsis } from "@/shared/ui/Text/Elipsis";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
-import { ANIMATION_BEGIN, ANIMATION_DURATION, BLUE, COLORS, MARGIN } from "../model/config";
+import { ANIMATION_BEGIN, ANIMATION_DURATION, BLUE, COLORS } from "../model/config";
 import { tlIntervals } from "../model/data";
 import { getSelectByDate, getTL } from "../model/selectors";
 import { statisticsActions } from "../model/slice";
@@ -35,11 +35,11 @@ const CustomTooltip = ({ payload, active }: TooltipProps<TLStat["userScore"], TL
         const item = payload[0].payload as TLStat;
         return (
             <div className="max-w-[300px] overflow-hidden">
-                <div className="bg-my-neutral-50 bg-opacity-10 px-6 py-4 flex flex-col">
+                <div className="bg-my-neutral-50 bg-opacity-10 px-4 py-2 sm:px-6 sm:py-4 flex flex-col">
                     <Elipsis>
                         <AppLink
                             to={`${routePath.details}/${item.filmId}`}
-                            className="font-medium text-xl pointer-events-auto text-my-neutral-800 hover:text-blue-500"
+                            className="font-medium text-base sm:text-2xl pointer-events-auto text-my-neutral-800 hover:text-blue-500"
                             title={item.name}
                         >
                             {item.name}
@@ -47,12 +47,12 @@ const CustomTooltip = ({ payload, active }: TooltipProps<TLStat["userScore"], TL
                         </AppLink>
                     </Elipsis>
                     <div className="flex gap-2 items-center text-base font-normal self-end">
-                        <p>
+                        <p className="sm:text-base text-xs">
                             {item.userScore}{" "}
                             <span>{t("plural.star", { count: item.userScore })}</span>
                         </p>
                     </div>
-                    <div className="font-normal self-end">{item.fullDate}</div>
+                    <div className="font-normal self-end sm:text-base text-xs">{item.fullDate}</div>
                 </div>
             </div>
         );
@@ -64,8 +64,8 @@ const CustomizedGroupTick = (props: any) => {
     const { x, y, payload, color } = props;
 
     return (
-        <g fill={color} textAnchor="end">
-            <text dy={15} x={x} y={y}>
+        <g fill={color}>
+            <text dy={15} x={x} y={y} text-anchor="start" className="text-xs">
                 {payload.value}
             </text>
         </g>
@@ -80,9 +80,9 @@ export const FavoriteTimelineChart = () => {
     const { interval } = useAppSelector(getTL);
     const dispatch = useAppDispatch();
     const selectByDate = useMemo(() => getSelectByDate, []);
-    const { data } = useGetStatisticsQuery(undefined, {
-        selectFromResult: (result) => {
-            return { data: selectByDate(result, interval, i18n.language) };
+    const { result } = useGetStatisticsQuery(undefined, {
+        selectFromResult: (data) => {
+            return { result: selectByDate(data, interval, i18n.language) };
         },
     });
 
@@ -106,7 +106,7 @@ export const FavoriteTimelineChart = () => {
 
             <div
                 className={classNames("font-medium text-sm h-72 relative", {
-                    ["pointer-events-none"]: data.length === 0,
+                    ["pointer-events-none"]: result.length === 0,
                 })}
             >
                 <ResponsiveContainer width="100%" height="100%">
@@ -114,23 +114,22 @@ export const FavoriteTimelineChart = () => {
                         onClick={onToggleTooltip}
                         width={500}
                         height={300}
-                        data={data}
-                        margin={MARGIN}
+                        data={result}
+                        margin={{ right: 15, top: 10, bottom: 10, left: 10 }}
                     >
-                        <CartesianGrid strokeDasharray="5 5" opacity={0.5} />
+                        <CartesianGrid opacity={0.2} />
                         <XAxis
-                            type="category"
                             dataKey="date"
                             tick={<CustomizedGroupTick color={color} />}
-                            tickLine={false}
+                            interval="equidistantPreserveStart"
                         />
                         <YAxis
                             domain={[0, 10]}
-                            tickCount={20}
                             allowDecimals={false}
+                            tickLine={false}
                             type="number"
                             tick={{ fill: color }}
-                            dx={0}
+                            width={15}
                         />
                         <Tooltip
                             trigger={tooltip}
@@ -149,8 +148,8 @@ export const FavoriteTimelineChart = () => {
                         />
                     </LineChart>
                 </ResponsiveContainer>
-                {Boolean(!data.length) && (
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-normal">
+                {Boolean(!result.length) && (
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-normal text-center">
                         <Text>{t("stat.empty-msg")}</Text>
                     </div>
                 )}

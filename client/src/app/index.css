@@ -99,10 +99,10 @@ BODY {
         font-family: "FavoritBookC";
         src: url("FavoritBookC.eot");
         src: local("FavoritBookC"),
-            url("/src/shared/assets/fonts/FavoritBookC.eot") format("embedded-opentype"),
-            url("/src/shared/assets/fonts/FavoritBookC.woff2") format("woff2"),
-            url("/src/shared/assets/fonts/FavoritBookC.woff") format("woff"),
-            url("/src/shared/assets/fonts/FavoritBookC.ttf") format("truetype");
+            url("/resources/fonts/FavoritBookC.eot") format("embedded-opentype"),
+            url("/resources/fonts/FavoritBookC.woff2") format("woff2"),
+            url("/resources/fonts/FavoritBookC.woff") format("woff"),
+            url("/resources/fonts/FavoritBookC.ttf") format("truetype");
         font-weight: 400;
         font-style: normal;
         font-display: swap;
@@ -110,12 +110,12 @@ BODY {
 
     @font-face {
         font-family: "FavoritBookC";
-        src: url("/src/shared/assets/fonts/FavoritHeavyC");
+        src: url("/resources/fonts/FavoritHeavyC");
         src: local("FavoritHeavyC"),
-            url("/src/shared/assets/fonts/FavoritHeavyC.eot") format("embedded-opentype"),
-            url("/src/shared/assets/fonts/FavoritHeavyC.woff2") format("woff2"),
-            url("/src/shared/assets/fonts/FavoritHeavyC.woff") format("woff"),
-            url("/src/shared/assets/fonts/FavoritHeavyC.ttf") format("truetype");
+            url("/resources/fonts/FavoritHeavyC.eot") format("embedded-opentype"),
+            url("/resources/fonts/FavoritHeavyC.woff2") format("woff2"),
+            url("/resources/fonts/FavoritHeavyC.woff") format("woff"),
+            url("/resources/fonts/FavoritHeavyC.ttf") format("truetype");
         font-weight: 500;
         font-style: normal;
         font-display: swap;
@@ -125,10 +125,10 @@ BODY {
         font-family: "FavoritBookC";
         src: url("FavoritC-Bold.eot");
         src: local("FavoritC Bold"), local("FavoritC-Bold"),
-            url("/src/shared/assets/fonts/FavoritC-Bold.eot") format("embedded-opentype"),
-            url("/src/shared/assets/fonts/FavoritC-Bold.woff2") format("woff2"),
-            url("/src/shared/assets/fonts/FavoritC-Bold.woff") format("woff"),
-            url("/src/shared/assets/fonts/FavoritC-Bold.ttf") format("truetype");
+            url("/resources/fonts/FavoritC-Bold.eot") format("embedded-opentype"),
+            url("/resources/fonts/FavoritC-Bold.woff2") format("woff2"),
+            url("/resources/fonts/FavoritC-Bold.woff") format("woff"),
+            url("/resources/fonts/FavoritC-Bold.ttf") format("truetype");
         font-weight: 800;
         font-style: normal;
         font-display: swap;
