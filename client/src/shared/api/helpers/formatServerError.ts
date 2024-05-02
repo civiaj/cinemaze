@@ -1,3 +1,5 @@
+import { t } from "i18next";
+
 export type ServerError = { data: { message: string; errors: string[] }; status: number };
 
 export const isServerError = (error: unknown): error is ServerError => {
@@ -22,5 +24,5 @@ export default (error: unknown) => {
     }
     if (isServerError(error) && error.data.message) return error.data.message;
 
-    return "toast.error-server-default";
+    return t("toast.error-server-default");
 };

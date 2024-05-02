@@ -1,4 +1,5 @@
 import { Middleware, MiddlewareAPI, isRejectedWithValue } from "@reduxjs/toolkit";
+import { t } from "i18next";
 import toast from "react-hot-toast";
 import formatFilmError, { isFilmError } from "@/shared/api/helpers/formatFilmError";
 import formatServerError, { isServerError } from "@/shared/api/helpers/formatServerError";
@@ -16,7 +17,7 @@ export const storeErrors: Middleware = (_api: MiddlewareAPI) => (next) => (actio
         }
 
         if (action.payload && action.payload.status && action.payload.status === "FETCH_ERROR") {
-            message = "toast.error-fetch";
+            message = t("toast.error-fetch");
         }
 
         if (action.payload?.toast === true) {
