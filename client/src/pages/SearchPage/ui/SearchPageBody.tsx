@@ -94,8 +94,6 @@ export const SearchPageBody = () => {
     const query: SearchQuery = { keyword, yearTo, yearFrom, ratingTo, genre, country, ratingFrom };
     const skip = searchParams.size === 0;
 
-    console.log(query);
-
     const { isEnd, isError, isFetching, isLoading, onScrollEnd, data, error } = useInfiniteScroll({
         queryHook: useSearchQuery,
         queryParams: { page, order, ...query },

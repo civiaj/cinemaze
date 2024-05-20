@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import fs from "fs";
 import path from "path";
-import { STATIC_PROFILE_DEFAULT, STATIC_PROFILE_NEW, STATIC_PROFILE_PATH } from "../../config";
+import { STATIC_PROFILE_DEFAULT, STATIC_PROFILE_NEW, STATIC_PROFILE_PATH } from "../config";
 import ApiError from "../exceptions/api.error";
 import userModel, { User } from "../model/user.model";
 import {
@@ -12,6 +12,7 @@ import {
 } from "../schema/user.schema";
 import tokenService from "../service/token.service";
 import userService from "../service/user.service";
+import logger from "../utils/logger";
 
 class UserController {
     async getMe(_req: Request, res: Response, next: NextFunction) {
@@ -54,8 +55,6 @@ class UserController {
 
             const { password } = req.body;
 
-            console.log(user);
-
             if (!user) throw ApiError.BadRequest("Нет пользователя с таким id");
 
             // throw error if same password was provided
@@ -83,7 +82,7 @@ class UserController {
                     fs.unlinkSync(path.join(__dirname, `../..${STATIC_PROFILE_PATH}`, user.photo));
                 } catch (e) {}
             }
-            user.photo = STATIC_PROFILE_NEW + req.body.photo;
+            user.photo = STATIC_PROFILE_NEW + req.body.newPhoto;
             await user.save({ validateBeforeSave: false });
 
             return res.status(200).json({ data: "success" });
@@ -108,7 +107,7 @@ class UserController {
                     user.photo = STATIC_PROFILE_DEFAULT;
                     await user.save({ validateBeforeSave: false });
                 } catch (e) {
-                    console.log(e);
+                    logger.error(e);
                 }
             }
 

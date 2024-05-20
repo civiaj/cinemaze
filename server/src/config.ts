@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const NODE_ENV = process.env.NODE_ENV as string;
-export const PORT = Number(process.env.PORT as string) || 3001;
+export const PORT = Number(process.env.PORT as string) || 3000;
 export const MONGO_PASSWORD = process.env.MONGO_PASSWORD as string;
 export const MONGO_URL = (process.env.MONGO_URL as string).replace("<password>", MONGO_PASSWORD);
 export const JWT_ACCESS_PUBLIC_KEY = (process.env.JWT_ACCESS_PUBLIC_KEY as string).replace(

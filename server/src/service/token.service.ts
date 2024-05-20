@@ -7,7 +7,7 @@ import {
     JWT_REFRESH_PRIVATE_KEY,
     JWT_REFRESH_PUBLIC_KEY,
     JWT_REFRESH_TTL,
-} from "../../config";
+} from "../config";
 import ApiError from "../exceptions/api.error";
 import tokenModel, { Token } from "../model/token.model";
 import { User } from "../model/user.model";

@@ -3,6 +3,8 @@ import multer, { FileFilterCallback } from "multer";
 import sharp from "sharp";
 import ApiError from "../exceptions/api.error";
 import * as uuid from "uuid";
+import path from "path";
+import fs from "fs";
 
 const storage = multer.memoryStorage();
 
@@ -26,12 +28,17 @@ export const resizeSingleImage = async (req: Request, res: Response, next: NextF
         if (!file) throw ApiError.BadRequest();
 
         const fileName = `profile_${uuid.v4()}_${res.locals.user.id}.jpeg`;
+        const filePath = path.join(__dirname, `/../../static/profiles/${fileName}`);
+        const directory = path.dirname(filePath);
+
+        if (!fs.existsSync(directory)) fs.mkdirSync(directory, { recursive: true });
+
         await sharp(req.file?.buffer)
             .resize(250, 250)
             .toFormat("jpeg")
             .jpeg({ quality: 90 })
-            .toFile(`${__dirname}/../../static/profiles/${fileName}`);
-        req.body.photo = fileName;
+            .toFile(path.join(__dirname, `/../../static/profiles/${fileName}`));
+        req.body.newPhoto = fileName;
         next();
     } catch (e) {
         next(e);

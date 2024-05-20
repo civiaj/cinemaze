@@ -1,13 +1,6 @@
 import crypto from "crypto";
 import { CookieOptions, NextFunction, Request, Response } from "express";
-import {
-    ADMINS,
-    API_URL,
-    CLIENT_URL,
-    JWT_ACCESS_TTL,
-    JWT_REFRESH_TTL,
-    NODE_ENV,
-} from "../../config";
+import { ADMINS, API_URL, CLIENT_URL, JWT_ACCESS_TTL, JWT_REFRESH_TTL, NODE_ENV } from "../config";
 import ApiError from "../exceptions/api.error";
 import { GoogleOAuthInput } from "../schema/oauth.schema";
 import {
@@ -263,7 +256,6 @@ class AuthController {
         } catch (e) {
             let url = "";
             if (e instanceof Error) {
-                console.log(e.message);
                 url = "?error=" + e.message;
             }
             return res.redirect(CLIENT_URL + "/login" + url);

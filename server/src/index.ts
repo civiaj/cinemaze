@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { CLIENT_URL, PORT, STATIC_PROFILE_PATH, STATIC_PROFILE_ROUTE } from "../config";
+import { CLIENT_URL, PORT, STATIC_PROFILE_PATH, STATIC_PROFILE_ROUTE } from "./config";
 import logger from "./utils/logger";
 import connect from "./utils/connect";
 import router from "./router/router";
@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(
     cors({
         credentials: true,
-        origin: [CLIENT_URL, "http://192.168.1.59:8080"],
+        origin: [CLIENT_URL, "http://192.168.1.59:8080", "http://localhost"],
     })
 );
 app.options("*", cors());

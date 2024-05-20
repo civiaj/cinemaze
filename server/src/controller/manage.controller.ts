@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { STATIC_PROFILE_DEFAULT } from "../../config";
+import { STATIC_PROFILE_DEFAULT } from "../config";
 import ApiError from "../exceptions/api.error";
 import {
     GetAllUsersInput,

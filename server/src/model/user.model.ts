@@ -1,7 +1,7 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import mongoose from "mongoose";
-import { BCRYPT_SALT_ROUNDS, STATIC_PROFILE_DEFAULT } from "../../config";
+import { BCRYPT_SALT_ROUNDS, STATIC_PROFILE_DEFAULT } from "../config";
 import { displayNameSchema, passwordSchema } from "../schema/user.schema";
 import { Providers } from "../types/types";
 

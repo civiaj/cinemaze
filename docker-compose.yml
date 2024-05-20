@@ -1,0 +1,17 @@
+services:
+    api:
+        build: "./server"
+        container_name: backend
+        env_file:
+            - server/.env
+        ports:
+            - 3000:3000
+        restart: unless-stopped
+
+    nginx:
+        build: "./client"
+        container_name: client
+        environment:
+            - VITE_ENV=production
+        ports:
+            - 80:80

@@ -27,9 +27,9 @@ function App() {
                 <ProgressBar />
                 <Sidebar />
             </div>
-            <div className="overflow-x-hidden">
-                <AppRouter />
-            </div>
+
+            <AppRouter />
+
             <CleanInfinite />
         </div>
     );

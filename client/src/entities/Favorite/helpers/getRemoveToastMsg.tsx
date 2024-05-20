@@ -1,6 +1,6 @@
 import { Trans } from "react-i18next";
 import { routePath } from "@/app/router/router";
-import { FavoriteListVariantT } from "@/pages/FavoritePage/model/types";
+import { FavoriteListVariantT } from "@/entities/Favorite/model/types";
 import i18n from "@/shared/i18n/config";
 import { AppLink } from "@/shared/ui/AppLink/AppLink";
 

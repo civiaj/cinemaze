@@ -10,7 +10,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         if (req.get("Authorization") && req.get("Authorization")?.startsWith("Bearer")) {
             accessToken = req.get("Authorization")?.split(" ")[1];
         } else if (req.cookies["access_token"]) accessToken = req.cookies["access_token"];
-        console.log(accessToken, req.cookies["logged"]);
+
         if (!accessToken || !req.cookies["logged"]) throw ApiError.Unauthorized();
 
         const decoded = tokenService.verifyJwt<{ id: string }>(accessToken, "access");
