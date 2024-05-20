@@ -22,12 +22,7 @@ app.use(cookieParser());
 app.use(
     cors({
         credentials: true,
-        origin: [
-            CLIENT_URL,
-            "http://192.168.1.59:8080",
-            "http://localhost",
-            "https://cinemaze.netlify.app",
-        ],
+        origin: [CLIENT_URL, "https://cinemaze.netlify.app"],
     })
 );
 app.options("*", cors());
