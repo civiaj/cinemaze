@@ -7,6 +7,7 @@ import { Sidebar } from "@/widgets/Sidebar";
 import { getIsLogged, useGetMeQuery } from "@/entities/User";
 import { ID_MAIN } from "@/shared/const/const";
 import { FullscreenSpinner } from "@/shared/ui/Spinner/FullscreenSpinner";
+import { LoginPopup } from "@/widgets/LoginPopup";
 
 function App() {
     const isLogged = useAppSelector(getIsLogged);
@@ -29,8 +30,8 @@ function App() {
             </div>
 
             <AppRouter />
-
             <CleanInfinite />
+            <LoginPopup />
         </div>
     );
 }

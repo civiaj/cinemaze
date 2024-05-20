@@ -18,7 +18,6 @@ export const Navbar = () => {
     const { pathname } = useLocation();
 
     const allowScroll = useAppSelector(allowNavbarScroll);
-
     const [wasClicked, setWasClicked] = useState(false);
 
     const [isActive, setActive] = useState(false);
@@ -28,7 +27,6 @@ export const Navbar = () => {
 
     useEffect(() => {
         if (!navRef.current || !allowScroll || isActive) return;
-
         const max = navRef.current.scrollHeight;
 
         let translate = 0;

@@ -72,7 +72,7 @@
     "ratings-film": "Classements des films",
     "cag": "Pays et genres",
     "cag-data": "Données",
-    "cag-data-genre": "Genres",
+    "cag-data-genre": "Genre",
     "cag-data-country": "Des pays",
     "cag-sort": "Trier par",
     "cag-sort-count": "Compter",
@@ -325,5 +325,9 @@
     "admin": "Administrateur",
     "admin-test": "Essai d'administration",
     "user": "Utilisateur"
+  },
+  "msg": {
+    "welcome": "Bienvenue au service !",
+    "login-or-auth": "Connectez-vous ou inscrivez-vous pour utiliser toutes les fonctionnalités du service."
   }
 }

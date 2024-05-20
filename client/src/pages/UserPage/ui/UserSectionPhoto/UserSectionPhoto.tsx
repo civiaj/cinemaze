@@ -24,7 +24,6 @@ export const UserSectionPhoto = (props: Props) => {
 
     const isChanging = noPhoto || searchParams.get("change") === "1";
     const isDeleting = !noPhoto && searchParams.get("change") === "2";
-    const withBtn = !noPhoto && isChanging;
 
     const onSetIs = (val: "1" | "2" | null) => {
         if (!val) {
@@ -40,22 +39,21 @@ export const UserSectionPhoto = (props: Props) => {
         <Modal
             onClose={onClose}
             header={
-                !withBtn ? (
-                    t("user.photo")
-                ) : (
-                    <UserBox className="flex-row gap-4 items-center">
-                        <Button
-                            onClick={() => onSetIs(null)}
-                            theme="regularIcon"
-                            className="rounded-full"
-                        >
-                            <Left />
-                        </Button>
-                        <Heading headinglevel={1}>{t("user.photo")}</Heading>
-                    </UserBox>
-                )
+                <UserBox className="flex-row gap-4 items-center">
+                    <Button
+                        onClick={() => {
+                            if (!noPhoto && isChanging) onSetIs(null);
+                            else onClose();
+                        }}
+                        theme="regularIcon"
+                        className="rounded-full"
+                    >
+                        <Left />
+                    </Button>
+                    <Heading headinglevel={1}>{t("user.photo")}</Heading>
+                </UserBox>
             }
-            preventClose={(isChanging || isDeleting) && !noPhoto}
+            preventClose={isDeleting || isChanging}
         >
             {isChanging ? (
                 <UserChangePhoto />
