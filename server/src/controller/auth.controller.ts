@@ -29,7 +29,11 @@ const refreshTokenCookieOptions: CookieOptions = {
     sameSite: "none",
 };
 
-if (NODE_ENV === "production") accessTokenCookieOptions.secure = true;
+if (NODE_ENV === "production") {
+    [accessTokenCookieOptions, refreshTokenCookieOptions].forEach(
+        (option) => (option.secure = true)
+    );
+}
 
 class AuthController {
     async register(req: Request<{}, {}, CreateUserInput>, res: Response, next: NextFunction) {
