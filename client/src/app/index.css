@@ -93,7 +93,6 @@ BODY {
     scroll-margin-top: var(--navbar-height);
 }
 
-/* local font */
 @layer base {
     @font-face {
         font-family: "FavoritBookC";

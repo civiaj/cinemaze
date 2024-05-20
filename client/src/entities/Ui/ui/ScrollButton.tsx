@@ -35,7 +35,7 @@ export const ScrollButton = (props: ScrollButtonProps) => {
             onClick={handleClick}
             theme="blue"
             className={classNames(
-                "fixed z-20 right-2 bottom-7 opacity-0 pointer-events-none hidden h-10 w-10 p-0 text-2xl",
+                "fixed z-20 right-2 bottom-20 opacity-0 pointer-events-none hidden h-10 w-10 p-0 text-2xl sm:text-2xl",
                 {
                     ["pointer-events-auto opacity-100 flex"]: isDisplayed,
                 }

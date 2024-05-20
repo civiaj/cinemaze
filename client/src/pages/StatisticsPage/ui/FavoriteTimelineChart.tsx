@@ -65,7 +65,7 @@ const CustomizedGroupTick = (props: any) => {
 
     return (
         <g fill={color}>
-            <text dy={15} x={x} y={y} text-anchor="start" className="text-xs">
+            <text dy={15} x={x} y={y} textAnchor="start" className="text-xs">
                 {payload.value}
             </text>
         </g>

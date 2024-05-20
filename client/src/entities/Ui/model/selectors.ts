@@ -15,6 +15,6 @@ export const getScrollByPath = createSelector(
 export const allowNavbarScroll = createSelector(
     [getSidebarCollapsed, getNavbarAuthCollapsed],
     (sidebarIsCollapsed, navbarAuthIsCollapsed) => {
-        return (sidebarIsCollapsed && navbarAuthIsCollapsed) === true;
+        return (sidebarIsCollapsed === true && navbarAuthIsCollapsed === true) === true;
     }
 );
