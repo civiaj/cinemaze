@@ -20,13 +20,13 @@ import userService from "../service/user.service";
 const accessTokenCookieOptions: CookieOptions = {
     maxAge: JWT_ACCESS_TTL,
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: "none",
 };
 
 const refreshTokenCookieOptions: CookieOptions = {
     maxAge: JWT_REFRESH_TTL,
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: "none",
 };
 
 if (NODE_ENV === "production") accessTokenCookieOptions.secure = true;
