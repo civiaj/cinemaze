@@ -6,7 +6,7 @@ import formatServerError, { isServerError } from "@/shared/api/helpers/formatSer
 
 export const storeErrors: Middleware = (_api: MiddlewareAPI) => (next) => (action) => {
     if (isRejectedWithValue(action)) {
-        let message = "toast.error-default";
+        let message = t("toast.error-default");
 
         if (isServerError(action.payload)) {
             message = formatServerError(action.payload);
