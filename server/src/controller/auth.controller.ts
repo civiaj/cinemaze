@@ -20,19 +20,20 @@ import userService from "../service/user.service";
 const accessTokenCookieOptions: CookieOptions = {
     maxAge: JWT_ACCESS_TTL,
     httpOnly: true,
-    sameSite: "none",
+    sameSite: "lax",
 };
 
 const refreshTokenCookieOptions: CookieOptions = {
     maxAge: JWT_REFRESH_TTL,
     httpOnly: true,
-    sameSite: "none",
+    sameSite: "lax",
 };
 
 if (NODE_ENV === "production") {
-    [accessTokenCookieOptions, refreshTokenCookieOptions].forEach(
-        (option) => (option.secure = true)
-    );
+    [accessTokenCookieOptions, refreshTokenCookieOptions].forEach((option) => {
+        option.secure = true;
+        option.sameSite = "none";
+    });
 }
 
 class AuthController {
