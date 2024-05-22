@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const NODE_ENV = process.env.NODE_ENV as string;
+export const NODE_ENV = process.env.NODE_ENV as "production" | "development";
 export const PORT = Number(process.env.PORT as string) || 3000;
 export const MONGO_PASSWORD = process.env.MONGO_PASSWORD as string;
 export const MONGO_URL = (process.env.MONGO_URL as string).replace("<password>", MONGO_PASSWORD);
@@ -28,11 +28,8 @@ export const SMTP_HOST = process.env.SMTP_HOST as string;
 export const SMTP_PORT = Number(process.env.SMTP_PORT as string);
 export const SMTP_USER = process.env.SMTP_USER as string;
 export const SMTP_PASSWORD = process.env.SMTP_PASSWORD as string;
-export const API_URL =
-    NODE_ENV === "production"
-        ? "https://films-production.up.railway.app"
-        : `http://localhost:${PORT}`;
-export const CLIENT_URL = `http://localhost:8080`;
+export const API_URL = `http://localhost:${PORT}`;
+export const CLIENT_URL = NODE_ENV === "production" ? "http://localhost" : "http://localhost:8080";
 export const BCRYPT_SALT_ROUNDS = 10;
 export const EMAIL_FROM = "Rest Api Test";
 

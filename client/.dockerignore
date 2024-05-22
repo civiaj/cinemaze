@@ -2,4 +2,3 @@ node_modules
 dockerfile
 .dockerignore
 dist
-.env.local
