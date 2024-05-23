@@ -29,7 +29,8 @@ export const SMTP_PORT = Number(process.env.SMTP_PORT as string);
 export const SMTP_USER = process.env.SMTP_USER as string;
 export const SMTP_PASSWORD = process.env.SMTP_PASSWORD as string;
 export const API_URL = `http://localhost:${PORT}`;
-export const CLIENT_URL = NODE_ENV === "production" ? "http://localhost" : "http://localhost:8080";
+export const CLIENT_URL =
+    NODE_ENV === "production" ? "http://localhost:80" : "http://localhost:8080";
 export const BCRYPT_SALT_ROUNDS = 10;
 export const EMAIL_FROM = "Rest Api Test";
 
