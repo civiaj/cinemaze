@@ -11,7 +11,7 @@ services:
         restart: unless-stopped
 
     nginx-react:
-        build: "./client"
+        image: civiaj/nginx-react
         container_name: nginx-react
         ports:
             - 80:80
