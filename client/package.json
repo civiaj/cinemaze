@@ -6,7 +6,6 @@
     "scripts": {
         "dev": "vite",
         "build": "tsc && vite build",
-        "build:onserver": "node --max_old_space_size=512 ./node_modules/typescript/bin/tsc && vite build",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
         "preview": "vite preview",
         "translate": "ts-node --esm ./scripts/parseTsv.js"
