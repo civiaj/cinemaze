@@ -2,17 +2,4 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 20px;
-}
-
-body {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: "Open Sans", sans-serif;
-    background-color: red;
-}
-
-.content {
-    background-color: blueviolet;
 }

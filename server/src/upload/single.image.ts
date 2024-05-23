@@ -31,7 +31,9 @@ export const resizeSingleImage = async (req: Request, res: Response, next: NextF
         const filePath = path.join(__dirname, `/../../static/profiles/${fileName}`);
         const directory = path.dirname(filePath);
 
-        if (!fs.existsSync(directory)) fs.mkdirSync(directory, { recursive: true });
+        if (!fs.existsSync(directory)) {
+            fs.mkdirSync(directory, { recursive: true });
+        }
 
         await sharp(req.file?.buffer)
             .resize(250, 250)

@@ -3,7 +3,7 @@ services:
         build: "./server"
         container_name: api
         env_file:
-            - /server/.env
+            - server/.env
         environment:
             - NODE_ENV=production
         ports:
