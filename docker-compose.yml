@@ -12,10 +12,10 @@ services:
 
     nginx-react:
         # build: "./client"
-        image: civiaj/nginx-react
+        image: ghcr.io/civiaj/nginx-client:latest
         container_name: nginx-react
         # env_file:
-        #     -client/.env.production
+        #     - client/.env.production.local
         ports:
             - 80:80
         restart: unless-stopped
