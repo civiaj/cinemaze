@@ -11,8 +11,11 @@ services:
         restart: unless-stopped
 
     nginx-react:
+        # build: "./client"
         image: civiaj/nginx-react
         container_name: nginx-react
+        # env_file:
+        #     -client/.env.production
         ports:
             - 80:80
         restart: unless-stopped

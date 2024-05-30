@@ -10,4 +10,5 @@ COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 CMD [ "nginx", "-g", "daemon off;" ]
 
-# Created Docker image and pushed to Docker Hub. Running container due to resource constraints on server (1GB RAM) with `npm run build`. JavaScript heap out of memory
+# Need to create Docker image and push it to Docker Hub. 
+# Can't run build with Docker Compose on VDS due to insufficient hardware (1GB RAM). Error: JavaScript heap out of memory.
