@@ -1,5 +1,3 @@
-export const API_KEY = "cb35187b-cc0d-4305-bdea-a2328b4a3bc4";
-
 export const LOCAL_STORAGE_UI_KEY = "ui_key_cb35187b";
 export const LOCAL_STORAGE_THEME = "theme";
 
