@@ -39,6 +39,8 @@ services:
         container_name: nginx-react
         # env_file:
         #     - client/.env.production.local
+        environment:
+            - BASE_DOMAIN=${BASE_DOMAIN}
         ports:
             - 80:80
             - 443:443
