@@ -28,6 +28,7 @@ class MailService {
             },
             logger: true,
             debug: true,
+            requireTLS: true,
         });
     }
 
