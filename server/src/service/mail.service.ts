@@ -21,7 +21,7 @@ class MailService {
         this.transporter = nodemailer.createTransport({
             host: SMTP_HOST,
             port: SMTP_PORT,
-            secure: NODE_ENV === "production" ? true : false,
+            secure: false,
             auth: {
                 user: SMTP_USER,
                 pass: SMTP_PASSWORD,
