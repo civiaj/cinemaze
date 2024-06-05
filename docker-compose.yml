@@ -1,4 +1,22 @@
 services:
+    init-dhparams:
+        image: certbot/certbot
+        restart: "no"
+        entrypoint: /bin/sh
+        command: -c 'test -f /etc/letsencrypt/ssl-dhparams.pem || openssl dhparam -out /etc/letsencrypt/ssl-dhparams.pem 4096'
+        volumes:
+            - cert_volume:/etc/letsencrypt:Z
+
+    certbot-oneshot:
+        image: certbot/certbot
+        restart: "no"
+        entrypoint: /bin/sh
+        command: -c 'test -d /etc/letsencrypt/live/${BASE_DOMAIN} || certbot certonly --standalone --register-unsafely-without-email -d ${BASE_DOMAIN} --rsa-key-size ${rsa_key_size:-2048} --agree-tos --force-renewal'
+        ports:
+            - 80:80
+        volumes:
+            - cert_volume:/etc/letsencrypt:Z
+
     api:
         build: "./server"
         container_name: api
@@ -39,32 +57,12 @@ services:
             - cert_volume:/etc/letsencrypt:Z
             - acme_challenge:/usr/share/nginx/html/.well-known:Z
 
-    init-dhparams:
-        image: certbot/certbot
-        restart: "no"
-        entrypoint: /bin/sh
-        command: -c 'test -f /etc/letsencrypt/ssl-dhparams.pem || openssl dhparam -out /etc/letsencrypt/ssl-dhparams.pem 4096'
-        volumes:
-            - cert_volume:/etc/letsencrypt:Z
-
-    certbot-oneshot:
-        image: certbot/certbot
-        restart: "no"
-        entrypoint: /bin/sh
-        environment:
-            - BASE_DOMAIN=cinemaze-app.ru
-        command: -c 'test -d /etc/letsencrypt/live/${BASE_DOMAIN} || certbot certonly --standalone --register-unsafely-without-email -d ${BASE_DOMAIN} --rsa-key-size ${rsa_key_size:-2048} --agree-tos --force-renewal'
-        ports:
-            - 80:80
-        volumes:
-            - cert_volume:/etc/letsencrypt:Z
-
     certbot:
         image: certbot/certbot
         container_name: certbot
         command: -c 'trap exit TERM; while :; do certbot renew; sleep 24h; done;'
         depends_on:
-            api:
+            nginx-react:
                 condition: service_started
                 required: true
         volumes:
