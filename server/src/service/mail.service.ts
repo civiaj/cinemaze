@@ -26,6 +26,8 @@ class MailService {
                 user: SMTP_USER,
                 pass: SMTP_PASSWORD,
             },
+            logger: true,
+            debug: true,
         });
     }
 
