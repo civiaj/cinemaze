@@ -47,7 +47,17 @@ class MailService {
             text: convert(html),
             html,
         };
-        return this.transporter.sendMail(mailOptions);
+
+        return await new Promise((resolve, reject) => {
+            this.transporter.sendMail(mailOptions, (err, info) => {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+                } else {
+                    resolve(info);
+                }
+            });
+        });
     }
 
     async sendVerification(user: User, url: string) {
