@@ -10,6 +10,6 @@ export const filmApi = createApi({
             return headers;
         },
     }),
-    keepUnusedDataFor: 666,
+    keepUnusedDataFor: 600,
     endpoints: () => ({}),
 });

@@ -1,8 +1,8 @@
 {
-    "name": "server",
+    "name": "api",
     "version": "1.0.0",
     "description": "",
-    "main": "./src/server.ts",
+    "main": "./src/index.ts",
     "scripts": {
         "dev": "chcp 65001 && nodemon ./src/index.ts",
         "dev:linux": "nodemon ./src/index.ts",

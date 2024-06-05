@@ -9,11 +9,7 @@ import { Mutex } from "async-mutex";
 import { userActions } from "@/entities/User";
 
 const mutex = new Mutex();
-
-// При запуске нетворк сервера vite нужно поменять baseUrl на '/api'.
-// const baseUrl = `/api`;
 const baseUrl = `${import.meta.env.VITE_SERVER_ENDPOINT as string}/api`;
-
 const baseQuery = fetchBaseQuery({ baseUrl });
 
 const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
