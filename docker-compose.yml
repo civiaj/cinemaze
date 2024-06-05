@@ -7,6 +7,13 @@ services:
         ports:
             - 3000:3000
         restart: unless-stopped
+        depends_on:
+            init-dhparams:
+                condition: service_completed_successfully
+                required: true
+            certbot-oneshot:
+                condition: service_completed_successfully
+                required: true
 
     nginx-react:
         # build: "./client"
@@ -16,6 +23,7 @@ services:
         #     - client/.env.production.local
         ports:
             - 80:80
+            - 443:443
         restart: unless-stopped
         depends_on:
             init-dhparams:
@@ -43,7 +51,9 @@ services:
         image: certbot/certbot
         restart: "no"
         entrypoint: /bin/sh
-        command: -c 'test -d /etc/letsencrypt/live/${BASE_DOMAIN} || certbot certonly --standalone --register-unsafely-without-email -d "${BASE_DOMAIN}" --rsa-key-size ${rsa_key_size:-2048} --agree-tos --force-renewal'
+        environment:
+            - BASE_DOMAIN=cinemaze-app.ru
+        command: -c 'test -d /etc/letsencrypt/live/${BASE_DOMAIN} || certbot certonly --standalone --register-unsafely-without-email -d ${BASE_DOMAIN} --rsa-key-size ${rsa_key_size:-2048} --agree-tos --force-renewal'
         ports:
             - 80:80
         volumes:
@@ -54,7 +64,7 @@ services:
         container_name: certbot
         command: -c 'trap exit TERM; while :; do certbot renew; sleep 24h; done;'
         depends_on:
-            nginx:
+            api:
                 condition: service_started
                 required: true
         volumes:
