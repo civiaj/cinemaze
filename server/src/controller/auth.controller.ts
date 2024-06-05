@@ -16,6 +16,7 @@ import googleService from "../service/google.service";
 import mailService from "../service/mail.service";
 import tokenService from "../service/token.service";
 import userService from "../service/user.service";
+import logger from "../utils/logger";
 
 const accessTokenCookieOptions: CookieOptions = {
     maxAge: JWT_ACCESS_TTL,
@@ -39,6 +40,7 @@ if (NODE_ENV === "production") {
 class AuthController {
     async register(req: Request<{}, {}, CreateUserInput>, res: Response, next: NextFunction) {
         try {
+            logger.info(`Регистрация. Создание пользователя ${req.body.email}`);
             const user = await userService.createUser(req.body);
             const verificationCode = user.createVerificationCode();
 
@@ -46,16 +48,22 @@ class AuthController {
 
             await user.save({ validateBeforeSave: false });
 
+            logger.info(`Регистрация. Создание токенов ${req.body.email}`);
             const tokens = await tokenService.signTokens(user.id, res.locals.ua);
             this.addAuthCookies(res, tokens);
 
             const activationUrl = `${API_URL}/api/activate/${verificationCode}`;
+
+            logger.info(`Регистрация. Отправка сообщения на ${req.body.email}`);
             await mailService.sendVerification(user, activationUrl);
 
+            logger.info(`Регистрация. Создание Favorite каталога ${req.body.email}`);
             await favoriteService.createFavoriteUser(user._id);
 
+            logger.info(`Регистрация. Отправка успешного сообщения ${req.body.email}`);
             return res.status(201).json({ message: "success" });
         } catch (e) {
+            logger.error(`Регистрация. Ошибка ${req.body.email}`);
             next(e);
         }
     }
