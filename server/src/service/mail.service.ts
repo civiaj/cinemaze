@@ -1,5 +1,13 @@
 import nodemailer from "nodemailer";
-import { API_URL, EMAIL_FROM, SMTP_HOST, SMTP_PASSWORD, SMTP_PORT, SMTP_USER } from "../config";
+import {
+    API_URL,
+    EMAIL_FROM,
+    NODE_ENV,
+    SMTP_HOST,
+    SMTP_PASSWORD,
+    SMTP_PORT,
+    SMTP_USER,
+} from "../config";
 import { User } from "../model/user.model";
 import Mail from "nodemailer/lib/mailer";
 import { convert } from "html-to-text";
@@ -13,7 +21,7 @@ class MailService {
         this.transporter = nodemailer.createTransport({
             host: SMTP_HOST,
             port: SMTP_PORT,
-            secure: false,
+            secure: NODE_ENV === "production" ? true : false,
             auth: {
                 user: SMTP_USER,
                 pass: SMTP_PASSWORD,
