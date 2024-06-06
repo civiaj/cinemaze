@@ -22,9 +22,6 @@ services:
         container_name: api
         env_file:
             - server/.env.production
-        ports:
-            - "3000:3000"
-            - "465:465"
         restart: unless-stopped
         depends_on:
             init-dhparams:
