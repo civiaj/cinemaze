@@ -23,6 +23,8 @@ services:
         env_file:
             - server/.env.production
         restart: unless-stopped
+        ports:
+            - "3000:3000"
         depends_on:
             init-dhparams:
                 condition: service_completed_successfully
