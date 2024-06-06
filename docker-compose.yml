@@ -13,7 +13,7 @@ services:
         entrypoint: /bin/sh
         command: -c 'test -d /etc/letsencrypt/live/${BASE_DOMAIN} || certbot certonly --standalone --register-unsafely-without-email -d ${BASE_DOMAIN} --rsa-key-size ${rsa_key_size:-2048} --agree-tos --force-renewal'
         ports:
-            - 80:80
+            - "80:80"
         volumes:
             - cert_volume:/etc/letsencrypt:Z
 
@@ -23,8 +23,8 @@ services:
         env_file:
             - server/.env.production
         ports:
-            - 3000:3000
-            - 465:465
+            - "3000:3000"
+            - "465:465"
         restart: unless-stopped
         depends_on:
             init-dhparams:
@@ -41,8 +41,8 @@ services:
         # env_file:
         #     - client/.env.production.local
         ports:
-            - 80:80
-            - 443:443
+            - "80:80"
+            - "443:443"
         restart: unless-stopped
         depends_on:
             init-dhparams:
