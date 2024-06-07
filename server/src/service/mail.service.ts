@@ -1,13 +1,5 @@
 import nodemailer from "nodemailer";
-import {
-    API_URL,
-    EMAIL_FROM,
-    NODE_ENV,
-    SMTP_HOST,
-    SMTP_PASSWORD,
-    SMTP_PORT,
-    SMTP_USER,
-} from "../config";
+import { API_URL, NODE_ENV, SMTP_HOST, SMTP_PASSWORD, SMTP_PORT, SMTP_USER } from "../config";
 import { User } from "../model/user.model";
 import Mail from "nodemailer/lib/mailer";
 import { convert } from "html-to-text";
@@ -42,7 +34,7 @@ class MailService {
             }
         );
         const mailOptions: Mail.Options = {
-            from: EMAIL_FROM,
+            from: SMTP_USER,
             to: user.email,
             subject,
             text: convert(html),

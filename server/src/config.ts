@@ -31,7 +31,6 @@ export const SMTP_PASSWORD = process.env.SMTP_PASSWORD as string;
 export const API_URL = `http://localhost:${PORT}`;
 export const CLIENT_URL = process.env.CLIENT_URL as string;
 export const BCRYPT_SALT_ROUNDS = 10;
-export const EMAIL_FROM = "Rest Api Test";
 
 export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID as string;
 export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET as string;
