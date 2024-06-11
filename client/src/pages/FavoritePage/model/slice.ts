@@ -7,7 +7,7 @@ export const favoritePageAdapter = createEntityAdapter<FilmT & TFavorite>({
 });
 
 const initialState: FavoritePageSchema = {
-    listVariant: "userScore",
+    listVariant: "all",
     favoritePageFilms: favoritePageAdapter.getInitialState(),
     page: 1,
 };
