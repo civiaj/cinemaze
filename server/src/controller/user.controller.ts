@@ -119,7 +119,10 @@ class UserController {
 
     async getUserSessions(_req: Request, res: Response, next: NextFunction) {
         try {
-            const data = await tokenService.getUserSessions(res.locals.user.id, res.locals.ua);
+            const data = await tokenService.getUserSessions(
+                res.locals.user.id,
+                res.locals.userAgent
+            );
             return res.status(200).json({ data });
         } catch (e) {
             next(e);
@@ -134,7 +137,7 @@ class UserController {
         try {
             const data = await tokenService.removeUserSessions(
                 res.locals.user.id,
-                res.locals.ua,
+                res.locals.userAgent,
                 req.body.session
             );
             return res.status(200).json({ data });

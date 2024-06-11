@@ -1,4 +1,4 @@
-import mongoose, { Types } from "mongoose";
+import mongoose, { QueryOptions, Types } from "mongoose";
 import ApiError from "../exceptions/api.error";
 import favoriteModel, { Favorite } from "../model/favorite.model";
 import {
@@ -13,8 +13,8 @@ const sortBy = "favorites.updatedAt";
 const order = -1;
 
 class FavoriteService {
-    async createFavoriteUser(userDocumentId: Types.ObjectId) {
-        return favoriteModel.create({ user: userDocumentId });
+    async createFavoriteUser(user: Types.ObjectId, options: QueryOptions = {}) {
+        return (await favoriteModel.create([{ user }], options))[0];
     }
 
     async modifyFavorite(

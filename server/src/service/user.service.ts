@@ -1,8 +1,9 @@
-import { FilterQuery, ProjectionType, QueryOptions, Types, UpdateQuery } from "mongoose";
-import userModel, { User } from "../model/user.model";
+import { FilterQuery, ProjectionType, QueryOptions, UpdateQuery } from "mongoose";
 import ApiError from "../exceptions/api.error";
+import userModel, { User } from "../model/user.model";
 import { GetAllUsersInput } from "../schema/manage.schema";
-import { Locale, Order, Providers, Roles } from "../types/types";
+import { Locale, Order, Roles } from "../types/types";
+import { hideEmail } from "../utils/hideEmail";
 
 type GetAllUsersProps = {
     pageNumber: number;
@@ -14,11 +15,15 @@ type GetAllUsersProps = {
 };
 
 class UserService {
-    async createUser(newUser: Partial<User>, provider: Providers = "local") {
-        const candidate = await userModel.findOne({ email: newUser.email, provider });
+    async createUser(user: Partial<User>, options: QueryOptions = {}) {
+        const { email, provider = "local" } = user;
+        const candidate = await userModel.findOne({ email, provider });
+
         if (candidate)
             throw ApiError.BadRequest("Пользователь с таким почтовым адресом существует.");
-        return userModel.create(newUser);
+
+        const createdUser = await userModel.create([user], options);
+        return createdUser[0];
     }
 
     async findUser(
@@ -103,9 +108,5 @@ class UserService {
         return userModel.findOneAndUpdate(filter, update, options);
     }
 }
-
-const hideEmail = (email: string) => {
-    return email.slice(0, 2) + "*".repeat(10) + email.slice(-1);
-};
 
 export default new UserService();

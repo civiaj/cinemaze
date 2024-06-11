@@ -2,7 +2,7 @@ import { NextFunction, Response, Request } from "express";
 
 export default (req: Request, res: Response, next: NextFunction) => {
     try {
-        res.locals.ua = JSON.stringify({
+        res.locals.userAgent = JSON.stringify({
             os: req.useragent?.os,
             browser: req.useragent?.browser,
             version: req.useragent?.version,

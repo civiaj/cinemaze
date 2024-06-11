@@ -40,4 +40,5 @@ export const STATIC_PROFILE_PATH = "/static/profiles/";
 export const STATIC_PROFILE_ROUTE = "/api/static/profiles/";
 export const STATIC_PROFILE_NEW = API_URL + STATIC_PROFILE_ROUTE;
 export const STATIC_PROFILE_DEFAULT = API_URL + STATIC_PROFILE_ROUTE + "default-user.jpeg";
-export const ADMINS = ["shlenskiyevgeniy@gmail.com"];
+export const ADMINS = ["shlenskiyevgeniy@gmail.com", "evgeniyrabotyaga@gmail.com"];
+export const BASE_DOMAIN = process.env.BASE_DOMAIN as string;

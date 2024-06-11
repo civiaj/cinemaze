@@ -20,7 +20,10 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         const user = await userService.findUser({ id: decoded.id }, {}, { lean: true });
         if (!user) throw ApiError.Unauthorized("Пользователь с указанным токеном не существует");
 
-        const token = await tokenService.findToken({ user: user.id, userAgent: res.locals.ua });
+        const token = await tokenService.findToken({
+            user: user.id,
+            userAgent: res.locals.userAgent,
+        });
         if (!token) throw ApiError.Unauthorized("Токен недействителен");
 
         res.locals.user = user;

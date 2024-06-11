@@ -1,6 +1,14 @@
 import crypto from "crypto";
 import { CookieOptions, NextFunction, Request, Response } from "express";
-import { ADMINS, API_URL, CLIENT_URL, JWT_ACCESS_TTL, JWT_REFRESH_TTL, NODE_ENV } from "../config";
+import {
+    ADMINS,
+    API_URL,
+    CLIENT_URL,
+    JWT_ACCESS_TTL,
+    JWT_REFRESH_TTL,
+    MONGO_URL,
+    NODE_ENV,
+} from "../config";
 import ApiError from "../exceptions/api.error";
 import { GoogleOAuthInput } from "../schema/oauth.schema";
 import {
@@ -16,7 +24,9 @@ import googleService from "../service/google.service";
 import mailService from "../service/mail.service";
 import tokenService from "../service/token.service";
 import userService from "../service/user.service";
-import logger from "../utils/logger";
+import mongoose from "mongoose";
+import connect from "../utils/connect";
+import userModel from "../model/user.model";
 
 const accessTokenCookieOptions: CookieOptions = {
     maxAge: JWT_ACCESS_TTL,
@@ -39,32 +49,37 @@ if (NODE_ENV === "production") {
 
 class AuthController {
     async register(req: Request<{}, {}, CreateUserInput>, res: Response, next: NextFunction) {
+        const session = await mongoose.startSession();
+        session.startTransaction();
+        const options = { session };
         try {
-            logger.info(`Регистрация. Создание пользователя ${req.body.email}`);
-            const user = await userService.createUser(req.body);
-            const verificationCode = user.createVerificationCode();
-
+            const user = await userService.createUser(req.body, options);
             if (ADMINS.includes(req.body.email)) user.role = "admin";
+            await user.save(options);
 
-            await user.save({ validateBeforeSave: false });
+            await favoriteService.createFavoriteUser(user._id, options);
 
-            logger.info(`Регистрация. Создание токенов ${req.body.email}`);
-            const tokens = await tokenService.signTokens(user.id, res.locals.ua);
-            this.addAuthCookies(res, tokens);
+            const tokens = await tokenService.signTokens(
+                {
+                    id: user.id,
+                    userAgent: res.locals.userAgent,
+                },
+                options
+            );
 
+            const verificationCode = user.createVerificationCode();
             const activationUrl = `${API_URL}/api/activate/${verificationCode}`;
-
-            logger.info(`Регистрация. Отправка сообщения на ${req.body.email}`);
             await mailService.sendVerification(user, activationUrl);
 
-            logger.info(`Регистрация. Создание Favorite каталога ${req.body.email}`);
-            await favoriteService.createFavoriteUser(user._id);
+            this.addAuthCookies(res, tokens);
 
-            logger.info(`Регистрация. Отправка успешного сообщения ${req.body.email}`);
+            await session.commitTransaction();
             return res.status(201).json({ message: "success" });
         } catch (e) {
-            logger.error(`Регистрация. Ошибка ${req.body.email}`);
+            await session.abortTransaction();
             next(e);
+        } finally {
+            session.endSession();
         }
     }
 
@@ -80,7 +95,10 @@ class AuthController {
                 throw ApiError.BadRequest("Неверный адрес электронной почты или пароль");
             }
 
-            const tokens = await tokenService.signTokens(user.id, res.locals.ua);
+            const tokens = await tokenService.signTokens({
+                id: user.id,
+                userAgent: res.locals.userAgent,
+            });
             this.addAuthCookies(res, tokens);
 
             return res.status(200).json({ message: "success" });
@@ -96,8 +114,8 @@ class AuthController {
     ) {
         try {
             const { password } = req.body;
-            const { id, provider } = res.locals.user;
-            const user = await userService.findUser({ id, provider }, { password: 1 });
+            const { id } = res.locals.user;
+            const user = await userService.findUser({ id, provider: "local" }, { password: 1 });
 
             if (!user || !user.comparePassword(password)) {
                 throw ApiError.BadRequest("Неверный пароль");
@@ -117,14 +135,20 @@ class AuthController {
             const decoded = tokenService.verifyJwt<{ id: string }>(refreshToken, "refresh");
             if (!decoded) throw new ApiError(message, 403);
 
-            const token = await tokenService.findToken({ refreshToken, userAgent: res.locals.ua });
+            const token = await tokenService.findToken({
+                refreshToken,
+                userAgent: res.locals.userAgent,
+            });
 
             if (!token) throw new ApiError(message, 403);
 
             const user = await userService.findUser({ id: decoded.id });
             if (!user) throw new ApiError(message, 403);
 
-            const tokens = await tokenService.signTokens(user.id, res.locals.ua);
+            const tokens = await tokenService.signTokens({
+                id: user.id,
+                userAgent: res.locals.userAgent,
+            });
             this.addAuthCookies(res, tokens);
 
             return res.status(200).json({ message: "success" });
@@ -136,7 +160,7 @@ class AuthController {
     async logout(req: Request, res: Response, next: NextFunction) {
         try {
             const refreshToken = req.cookies["refresh_token"];
-            await tokenService.deleteToken(refreshToken, res.locals.ua);
+            await tokenService.deleteToken(refreshToken, res.locals.userAgent);
             this.removeAuthCookies(res);
             return res.status(200).json({ message: "success" });
         } catch (e) {
@@ -258,11 +282,14 @@ class AuthController {
                         verified: true,
                         role,
                     },
-                    "google"
+                    { lean: true }
                 );
             }
 
-            const tokens = await tokenService.signTokens(user.id, res.locals.ua);
+            const tokens = await tokenService.signTokens({
+                id: user.id,
+                userAgent: res.locals.userAgent,
+            });
             this.addAuthCookies(res, tokens);
 
             return res.redirect(CLIENT_URL + "/main");
