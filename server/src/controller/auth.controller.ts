@@ -55,6 +55,7 @@ class AuthController {
         try {
             const user = await userService.createUser(req.body, options);
             if (ADMINS.includes(req.body.email)) user.role = "admin";
+            const verificationCode = user.createVerificationCode();
             await user.save(options);
 
             await favoriteService.createFavoriteUser(user._id, options);
@@ -67,7 +68,6 @@ class AuthController {
                 options
             );
 
-            const verificationCode = user.createVerificationCode();
             const activationUrl = `${API_URL}/api/activate/${verificationCode}`;
             await mailService.sendVerification(user, activationUrl);
 
@@ -176,7 +176,7 @@ class AuthController {
                 .digest("hex");
 
             const redirectUrl = CLIENT_URL + "/emailverificaiton?status=";
-
+            console.log({ verificationCode });
             const user = await userService.findUser({ verificationCode });
             if (!user) {
                 return res.redirect(redirectUrl + "error");

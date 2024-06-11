@@ -327,7 +327,7 @@
     "user": "User"
   },
   "msg": {
-    "welcome": "Welcome to the service!",
+    "welcome": "Welcome!",
     "login-or-auth": "Log in or register to use all the features of the service."
   }
 }

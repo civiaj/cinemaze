@@ -22,6 +22,7 @@ export const EmailVerificationPage = () => {
     return (
         <Page>
             <StatusBox
+                label="btn.main"
                 isError={isError}
                 isSuccess={isSuccess}
                 msgOrChildren={msg}

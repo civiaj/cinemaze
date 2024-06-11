@@ -267,7 +267,7 @@
     "devices-current": "Appareil actuel",
     "devices-active": "Sessions actives",
     "devices-active-empty": "Aucune session active trouvée",
-    "devices-end-all-msg": "Êtes-vous sûr de vouloir mettre fin à toutes les sessions sauf celle en cours ?",
+    "devices-end-all-msg": "Etes-vous sûr de vouloir mettre fin à toutes les sessions sauf celle en cours ?",
     "devices-end-msg": "Voulez-vous vraiment terminer la session",
     "password-check": "Confirmez le mot de passe",
     "password-check-msg": "Pour des raisons de sécurité, veuillez saisir votre mot de passe pour continuer.",
@@ -327,7 +327,7 @@
     "user": "Utilisateur"
   },
   "msg": {
-    "welcome": "Bienvenue au service !",
+    "welcome": "Accueillir!",
     "login-or-auth": "Connectez-vous ou inscrivez-vous pour utiliser toutes les fonctionnalités du service."
   }
 }

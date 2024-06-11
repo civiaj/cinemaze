@@ -48,10 +48,10 @@ export const UserSectionHome = ({ user }: Props) => {
                             </div>
                         ) : (
                             <div className="flex items-center gap-2">
-                                <div className="rounded-full text-my-neutral-500 flex items-center justify-center border-2 border-my-neutral-500 text-sm sm:text-base">
+                                <div className="rounded-full text-my-neutral-500 flex items-center justify-center border-2 border-my-red-500 text-sm sm:text-my-red-500">
                                     <Close />
                                 </div>
-                                <Elipsis className="text-my-green-500">{t("user.email-n")}</Elipsis>
+                                <Elipsis className="text-my-red-500">{t("user.email-n")}</Elipsis>
                             </div>
                         )}
                     </div>
