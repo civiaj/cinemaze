@@ -1,6 +1,7 @@
 import { routePath } from "@/app/router/router";
 import { useAppSelector } from "@/app/store";
 import { getIsLogged } from "@/entities/User";
+import { Close } from "@/shared/assets/icons";
 import { classNames } from "@/shared/lib/classNames";
 import { Button } from "@/shared/ui/Button/Button";
 import { Text } from "@/shared/ui/Text/Text";
@@ -24,31 +25,37 @@ export const LoginPopup = () => {
     return (
         <div
             className={classNames(
-                "fixed bottom-0 left-0 w-full bg-blue-500/90 z-40 flex items-center justify-center delay-[2000ms] transition-all duration-500 ease-in-out translate-y-full backdrop-blur-sm",
-                { ["translate-y-0"]: isShown },
+                "fixed bottom-0 left-1/2 -translate-x-1/2 z-40 delay-0 transition-all duration-500 ease-in-out translate-y-full backdrop-blur-sm",
+                { ["translate-y-0 delay-[2000ms]"]: isShown },
                 []
             )}
         >
-            <div className="max-w-6xl w-full mx-auto px-4 py-4">
-                <div className="flex items-center gap-4">
-                    <div className="flex flex-col flex-1">
-                        <Text className="text-neutral-50 line-clamp-1">{t("msg.welcome")}</Text>
-                        <Text className="text-neutral-200 text-sm sm:text-sm line-clamp-1">
-                            {t("msg.login-or-auth")}
-                        </Text>
-                    </div>
+            <div className="bg-blue-500 rounded-t-xl max-w-xl min-w-[20rem] px-4 py-4 flex flex-col gap-2">
+                <div className="flex justify-between gap-4 items-start">
+                    <Text className="text-neutral-50 text-lg sm:text-lg font-medium">
+                        {t("msg.welcome")}
+                    </Text>
+                    <Button
+                        onClick={() => setIsShown(false)}
+                        theme="regularNav"
+                        className="h-6 w-6 p-0 flex items-center justify-center"
+                    >
+                        <Close />
+                    </Button>
+                </div>
 
-                    <div className="flex gap-4">
-                        <Button onClick={() => navigate(routePath.login)} theme="regularNav">
-                            {t("btn.log-in")}
-                        </Button>
-                        <Button
-                            onClick={() => navigate(routePath.login + "?section=registrate")}
-                            theme="regularNav"
-                        >
-                            {t("btn.register")}
-                        </Button>
-                    </div>
+                <Text className="text-neutral-200">{t("msg.login-or-auth")}</Text>
+
+                <div className="flex gap-2 self-end">
+                    <Button onClick={() => navigate(routePath.login)} theme="regularNav">
+                        {t("btn.log-in")}
+                    </Button>
+                    <Button
+                        onClick={() => navigate(routePath.login + "?section=registrate")}
+                        theme="regularNav"
+                    >
+                        {t("btn.register")}
+                    </Button>
                 </div>
             </div>
         </div>
