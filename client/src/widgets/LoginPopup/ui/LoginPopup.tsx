@@ -25,12 +25,12 @@ export const LoginPopup = () => {
     return (
         <div
             className={classNames(
-                "fixed bottom-0 left-1/2 -translate-x-1/2 z-40 delay-0 transition-all duration-500 ease-in-out translate-y-full backdrop-blur-sm",
+                "fixed bottom-0 left-1/2 -translate-x-1/2 z-40 delay-0 transition-all duration-500 ease-in-out translate-y-full",
                 { ["translate-y-0 delay-[2000ms]"]: isShown },
                 []
             )}
         >
-            <div className="bg-blue-500 rounded-t-xl max-w-xl min-w-[20rem] px-4 py-4 flex flex-col gap-2">
+            <div className="bg-blue-500/90 rounded-t-xl max-w-xl min-w-[20rem] px-4 py-4 flex flex-col gap-2 backdrop-blur-sm">
                 <div className="flex justify-between gap-4 items-start">
                     <Text className="text-neutral-50 text-lg sm:text-lg font-medium">
                         {t("msg.welcome")}
@@ -38,7 +38,7 @@ export const LoginPopup = () => {
                     <Button
                         onClick={() => setIsShown(false)}
                         theme="regularNav"
-                        className="h-6 w-6 p-0 flex items-center justify-center"
+                        className="h-6 w-6 p-0 flex items-center justify-center bg-neutral-50 text-neutral-900 hover:bg-neutral-100 focus-visible:bg-neutral-100 focus-visible:ring-neutral-900"
                     >
                         <Close />
                     </Button>
@@ -47,12 +47,17 @@ export const LoginPopup = () => {
                 <Text className="text-neutral-200">{t("msg.login-or-auth")}</Text>
 
                 <div className="flex gap-2 self-end">
-                    <Button onClick={() => navigate(routePath.login)} theme="regularNav">
+                    <Button
+                        onClick={() => navigate(routePath.login)}
+                        className="bg-neutral-50 text-neutral-900 hover:bg-neutral-100 focus-visible:bg-neutral-100 focus-visible:ring-neutral-900"
+                        theme="regularNav"
+                    >
                         {t("btn.log-in")}
                     </Button>
                     <Button
                         onClick={() => navigate(routePath.login + "?section=registrate")}
                         theme="regularNav"
+                        className="bg-neutral-50 text-neutral-900 hover:bg-neutral-100 focus-visible:bg-neutral-100 focus-visible:ring-neutral-900"
                     >
                         {t("btn.register")}
                     </Button>
