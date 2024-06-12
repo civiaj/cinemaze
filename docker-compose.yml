@@ -44,12 +44,6 @@ services:
             - "443:443"
         restart: unless-stopped
         depends_on:
-            init-dhparams:
-                condition: service_completed_successfully
-                required: true
-            certbot-oneshot:
-                condition: service_completed_successfully
-                required: true
             api:
                 condition: service_started
                 required: true
@@ -60,6 +54,7 @@ services:
     certbot:
         image: certbot/certbot
         container_name: certbot
+        entrypoint: /bin/sh
         command: -c 'trap exit TERM; while :; do certbot renew; sleep 24h && wait $${!}; done;'
         depends_on:
             nginx-react:
