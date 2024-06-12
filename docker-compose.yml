@@ -60,7 +60,7 @@ services:
     certbot:
         image: certbot/certbot
         container_name: certbot
-        command: -c 'trap exit TERM; while :; do certbot renew; sleep 24h; done;'
+        command: -c 'trap exit TERM; while :; do certbot renew; sleep 24h && wait $${!}; done;'
         depends_on:
             nginx-react:
                 condition: service_started
