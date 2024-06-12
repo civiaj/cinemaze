@@ -27,7 +27,7 @@ export const Sidebar = () => {
         enter: { opacity: 1, transform: "translateX(0%)" },
         leave: { opacity: 0, transform: "translateX(-100%)" },
         config: {
-            duration: 200,
+            duration: 100,
         },
     });
 

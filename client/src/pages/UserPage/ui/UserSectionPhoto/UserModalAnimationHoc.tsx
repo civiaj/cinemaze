@@ -15,7 +15,7 @@ export const UserModalAnimationHoc = <T,>(Component: React.ComponentType<T>, pro
             from: { opacity: 0, transform: "translateY(100%)" },
             enter: { opacity: 1, transform: "translateY(0)" },
             config: {
-                duration: 200,
+                duration: 100,
             },
         });
 
