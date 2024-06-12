@@ -14,7 +14,7 @@ type WrappedOverlayProps = {
     className: string;
 };
 
-export const Sidebar = memo(() => {
+export const Sidebar = () => {
     const dispatch = useAppDispatch();
     const collapsed = useAppSelector(getSidebarCollapsed);
     const { pathname } = useLocation();
@@ -71,4 +71,4 @@ export const Sidebar = memo(() => {
                 </>
             )
     );
-});
+};

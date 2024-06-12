@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEventHandler, useRef, useState } from "react";
+import { ChangeEvent, KeyboardEventHandler, memo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
@@ -24,7 +24,7 @@ type Props = {
     setActive: (nevValue: boolean) => void;
 };
 
-export const SearchInput = (props: Props) => {
+export const SearchInput = memo((props: Props) => {
     const { isActive, setActive } = props;
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -140,7 +140,7 @@ export const SearchInput = (props: Props) => {
             {isActive && <Overlay />}
         </>
     );
-};
+});
 
 type SearchBodyProps = {
     inputValue: string;

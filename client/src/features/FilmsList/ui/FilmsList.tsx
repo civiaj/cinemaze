@@ -28,7 +28,7 @@ type FilmsListPropsT = {
     onFilmCardDelete?: (id: number) => void;
 };
 
-export const FilmsList = memo((props: FilmsListPropsT) => {
+export const FilmsList = (props: FilmsListPropsT) => {
     const appearance = useAppSelector(getUiAppearance);
     const {
         films,
@@ -127,4 +127,4 @@ export const FilmsList = memo((props: FilmsListPropsT) => {
             {films.length && isError && <Text>{t("error-film-msg")}</Text>}
         </>
     );
-});
+};

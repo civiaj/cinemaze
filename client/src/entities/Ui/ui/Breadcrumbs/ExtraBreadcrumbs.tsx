@@ -1,17 +1,17 @@
-import { memo, useCallback, useState } from "react";
 import { useAppSelector } from "@/app/store";
 import { Dots } from "@/shared/assets/icons";
 import { AppLink } from "@/shared/ui/AppLink/AppLink";
 import { OutsideClickWrapper } from "@/shared/ui/Boxes/OutsideClickWrapper";
 import { Button } from "@/shared/ui/Button/Button";
 import { PopupList } from "@/shared/ui/PopupList/PopupList";
+import { useCallback, useState } from "react";
 import { getBreadcrumbs } from "../../model/selectors";
 
 type Props = {
     displayedIndex: number;
 };
 
-export const ExtraBreadcrumbs = memo(({ displayedIndex }: Props) => {
+export const ExtraBreadcrumbs = ({ displayedIndex }: Props) => {
     const [isOpen, setIsOpen] = useState(false);
     const onToggle = () => setIsOpen((p) => !p);
     const onClose = useCallback(() => setIsOpen(false), []);
@@ -44,16 +44,4 @@ export const ExtraBreadcrumbs = memo(({ displayedIndex }: Props) => {
             />
         </OutsideClickWrapper>
     );
-});
-
-{
-    /* <AppLink
-style={style}
-theme="popup"
-to={options[index].pathname}
-onClick={handleChangeBranch}
-className="focus:ring-0 text-sm block overflow-ellipsis"
->
-{options[index].label}
-</AppLink> */
-}
+};
