@@ -1,13 +1,13 @@
-import { memo, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { FilmsList } from "@/features/FilmsList";
 import { Page } from "@/entities/Ui";
+import { FilmsList } from "@/features/FilmsList";
 import formatFilmError from "@/shared/api/helpers/formatFilmError";
 import { useInfiniteScroll } from "@/shared/hooks/useInfiniteScroll";
 import { Box } from "@/shared/ui/Boxes/Box";
 import { EndBox } from "@/shared/ui/Boxes/EndBox";
 import { PageLikeBox } from "@/shared/ui/Boxes/PageLikeBox";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
+import { useMemo } from "react";
 import { useFilmsQuery } from "../model/mainPageApi";
 import { getMainPage, getMainPageInfiniteFilms, getMainQuery } from "../model/selectors";
 import { mainPageActions } from "../model/slice";
