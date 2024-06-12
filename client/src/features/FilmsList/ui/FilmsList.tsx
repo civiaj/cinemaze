@@ -1,6 +1,3 @@
-import { memo, useCallback } from "react";
-import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppSelector } from "@/app/store";
 import { useGetSyncDataQuery } from "@/entities/Favorite";
@@ -11,6 +8,9 @@ import { Box } from "@/shared/ui/Boxes/Box";
 import { FilmCard, FilmCardPropsT } from "@/shared/ui/FilmCard";
 import { Spinner } from "@/shared/ui/Spinner/Spinner";
 import { Text } from "@/shared/ui/Text/Text";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 import { FilmListSkeleton } from "./FilmListSkeleton";
 
 type FilmsListPropsT = {
