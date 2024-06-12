@@ -28,7 +28,7 @@ export const SMTP_HOST = process.env.SMTP_HOST as string;
 export const SMTP_PORT = Number(process.env.SMTP_PORT as string);
 export const SMTP_USER = process.env.SMTP_USER as string;
 export const SMTP_PASSWORD = process.env.SMTP_PASSWORD as string;
-export const API_URL = `http://localhost:${PORT}`;
+export const API_URL = process.env.API_URL as string;
 export const CLIENT_URL = process.env.CLIENT_URL as string;
 export const BCRYPT_SALT_ROUNDS = 10;
 

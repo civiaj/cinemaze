@@ -92,9 +92,7 @@ export const SearchPageBody = () => {
     const keyword = searchParams.get("keyword") ?? "";
 
     const query: SearchQuery = { keyword, yearTo, yearFrom, ratingTo, genre, country, ratingFrom };
-    // const skip = searchParams.size === 0;
-
-    const skip = true;
+    const skip = searchParams.size === 0;
 
     const { isEnd, isError, isFetching, isLoading, onScrollEnd, data, error } = useInfiniteScroll({
         queryHook: useSearchQuery,
@@ -129,7 +127,6 @@ export const SearchPageBody = () => {
     return (
         <Page onScrollEnd={onScrollEnd}>
             <Box>
-                <div>search-params:{searchParams.size}</div>
                 <div className="gap-4 flex items-center justify-between flex-wrap">
                     <Heading className="max-w-[100%]" headinglevel={1}>
                         {searchParams.get("keyword") || t("search-t")}
