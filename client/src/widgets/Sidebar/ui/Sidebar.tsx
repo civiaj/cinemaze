@@ -1,10 +1,10 @@
+import { AnimatedComponent, animated, useTransition } from "@react-spring/web";
+import { CSSProperties, FC, useCallback, useMemo } from "react";
+import { useLocation } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { getSidebarCollapsed, uiActions } from "@/entities/Ui";
 import { Overlay } from "@/shared/ui/Boxes/Overlay";
-import { AnimatedComponent, animated, useTransition } from "@react-spring/web";
-import { CSSProperties, FC, useCallback, useMemo } from "react";
-import { useLocation } from "react-router-dom";
 import { getSidebarItems } from "../model/selectors";
 import { SidebarItem } from "./SidebarItem";
 

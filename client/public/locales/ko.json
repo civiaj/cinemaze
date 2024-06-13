@@ -37,9 +37,7 @@
     "keyword": "예어",
     "keyword-place": "제목을 입력하세요",
     "country": "국가",
-    "country-place": "국가를 선택하세요",
     "genre": "장르",
-    "genre-place": "장르를 선택하세요",
     "rating": "평가",
     "year": "년도",
     "from": "~에서",
@@ -181,12 +179,12 @@
     "msg": "귀하의 계정에 제한이 적용되었습니다",
     "one": "1. 컬렉션에 영화를 추가, 삭제, 변경할 수 없습니다.",
     "two": "2. 통계 페이지를 볼 수 없습니다.",
-    "three": "3. 사용자 목록이 포함된 페이지를 볼 수 없습니다.",
+    "three": "3. 사용자 목록이 포함된 페이지는 볼 수 없습니다.",
     "msg-small": "귀하의 계정이 금지되었습니다"
   },
   "boundary": {
     "t": "오류가 발생했습니다",
-    "b": "페이지를 새로 고치거나 홈 페이지로 돌아가서 다시 시도해 보세요."
+    "b": "페이지를 새로 고치거나 홈페이지로 돌아가서 다시 시도하세요."
   },
   "toast": {
     "error-default": "알수없는 오류",
@@ -329,5 +327,50 @@
   "msg": {
     "welcome": "환영!",
     "login-or-auth": "서비스의 모든 기능을 사용하려면 로그인하거나 등록하세요."
+  },
+  "privacy": {
+    "t": "은둔",
+    "tos-t": "서비스 약관",
+    "tos-introduction-title": "소개",
+    "tos-introduction-text": "본 서비스 약관(\\\"약관\\\")은 귀하의 Cinemaze 애플리케이션(\\\"앱\\\") 사용에 적용됩니다. 앱을 사용하기 전에 본 약관을 주의 깊게 읽어보시기 바랍니다.",
+    "tos-acceptable-use-title": "허용되는 사용",
+    "tos-acceptable-use-text": "귀하는 합법적인 목적으로만 앱을 사용하고 다른 사용자의 권리를 침해하지 않을 것에 동의합니다.",
+    "tos-prohibited-text": "금지된 행위:",
+    "tos-prohibited-item-1": "앱을 사용하여 악성 소프트웨어를 배포합니다.",
+    "tos-prohibited-item-2": "앱을 사용하여 저작권이나 기타 지적 재산권을 침해하는 행위.",
+    "tos-prohibited-item-3": "모욕적이거나 외설적이거나 불법적인 자료를 게시하거나 배포하는 행위.",
+    "tos-limitation-liability-title": "책임의 제한",
+    "tos-limitation-liability-text": "당사는 귀하가 앱을 사용하거나 사용할 수 없음으로 인해 발생하는 손실이나 피해에 대해 책임을 지지 않습니다. 앱은 어떠한 보증도 없이 \\\"있는 그대로\\\" 제공됩니다.",
+    "tos-intellectual-property-title": "지적 재산권",
+    "tos-intellectual-property-text": "앱의 콘텐츠 및 소프트웨어에 대한 모든 권리는 Cinemaze 또는 해당 라이센스 제공자가 소유합니다. 본 약관의 어떠한 조항도 귀하에게 앱 사용 외에 해당 자료를 사용할 수 있는 권리를 부여하지 않습니다.",
+    "tos-changes-title": "약관 변경",
+    "tos-changes-text": "당사는 언제든지 본 약관을 수정할 권리를 보유합니다. 업데이트된 약관은 이 페이지에 게시되며 게시 즉시 적용됩니다. 변경 후에도 앱을 계속 사용하면 새 약관에 동의하는 것으로 간주됩니다.",
+    "tos-contact-info-title": "연락처 정보",
+    "tos-contact-info-text": "당사 약관에 대해 질문이 있는 경우 다음 주소로 문의해 주십시오.",
+    "policy-t": "개인 정보 정책",
+    "policy-introduction-title": "소개",
+    "policy-introduction-text": "귀하의 개인정보는 우리에게 중요합니다. 본 개인정보 보호정책은 당사가 수집하는 데이터, 사용 방법 및 귀하의 정보를 보호하는 방법을 설명합니다.",
+    "policy-data-collection-title": "데이터 수집",
+    "policy-data-collection-text": "당사는 다음 유형의 데이터를 수집할 수 있습니다.",
+    "policy-data-collection-item-1": "개인정보(예: 이름, 이메일 주소)",
+    "policy-data-collection-item-2": "앱 사용 데이터(예: 앱 내 작업)",
+    "policy-data-usage-title": "데이터 사용량",
+    "policy-data-usage-text": "당사는 수집된 데이터를 다음 목적으로 사용합니다.",
+    "policy-data-usage-item-1": "서비스 제공 및 개선",
+    "policy-data-usage-item-2": "사용자 보안 보장",
+    "policy-data-usage-item-3": "앱 사용에 관해 사용자와 소통",
+    "policy-data-transfer-title": "데이터 전송",
+    "policy-data-transfer-text": "당사는 법률에서 요구하거나 서비스 제공에 필요한 경우를 제외하고 귀하의 데이터를 제3자와 공유하지 않습니다.",
+    "policy-data-security-title": "데이터 보안",
+    "policy-data-security-text": "당사는 귀하의 데이터를 무단 접근, 변경 또는 파기로부터 보호하기 위해 합리적인 조치를 취합니다.",
+    "policy-user-rights-title": "사용자 권리",
+    "policy-user-rights-text": "귀하는 귀하의 데이터에 접근, 수정, 삭제할 권리가 있습니다. 이러한 권리를 행사하려면 아래 주소로 문의하시기 바랍니다.",
+    "policy-contact-info-title": "연락처 정보",
+    "policy-contact-info-text": "당사의 개인 정보 보호 정책에 대해 질문이 있는 경우 다음 주소로 문의해 주십시오."
+  },
+  "select": {
+    "placeholder": "옵션을 선택하세요",
+    "country": "국가를 선택하세요",
+    "genre": "장르를 선택하세요"
   }
 }

@@ -92,7 +92,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
                     <div className="flex items-center gap-2 w-full">
                         <AppSelect
                             theme="search"
-                            placeholder={"search.country-place"}
+                            placeholder={"select.country"}
                             options={data.countries}
                             value={country}
                             actionChange={(newValue) => onUpdateFilters("country", newValue)}
@@ -116,7 +116,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
                     <div className="flex items-center gap-2 flex-1">
                         <AppSelect
                             theme="search"
-                            placeholder={"search.genre-place"}
+                            placeholder={"select.genre"}
                             options={data.genres}
                             value={genre}
                             actionChange={(newValue) => onUpdateFilters("genre", newValue)}

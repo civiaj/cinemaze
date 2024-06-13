@@ -9,7 +9,7 @@ import { Box } from "@/shared/ui/Boxes/Box";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
 import { Button } from "@/shared/ui/Button/Button";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
-import { Input } from "@/shared/ui/Input/Input";
+import { FancyInput } from "@/shared/ui/Input/FancyInput";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
 
@@ -52,21 +52,23 @@ export const ResetForm = () => {
                 <Heading headinglevel={1}>{t("login.forget-t")}</Heading>
 
                 <div className="w-full flex flex-col gap-2">
-                    <Input
+                    <FancyInput
                         type="password"
                         autoComplete="new-password"
                         placeholder={t("login.password")}
                         className="placeholder:text-sm"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        onCleanInput={() => setPassword("")}
                     />
-                    <Input
+                    <FancyInput
                         type="password"
                         autoComplete="new-password"
                         placeholder={t("login.confirm")}
                         className="placeholder:text-sm"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
+                        onCleanInput={() => setConfirmPassword("")}
                     />
                 </div>
                 <GridMsg

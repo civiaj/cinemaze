@@ -6,7 +6,7 @@ import { Box } from "@/shared/ui/Boxes/Box";
 import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
 import { Button } from "@/shared/ui/Button/Button";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
-import { Input } from "@/shared/ui/Input/Input";
+import { FancyInput } from "@/shared/ui/Input/FancyInput";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
 import { LoginSections } from "../model/types";
@@ -36,23 +36,22 @@ export const LoginForm = (props: Props) => {
                 <Heading headinglevel={1}>{t("login-t")}</Heading>
                 <UserBoxSeparator />
                 <div className="w-full flex flex-col gap-2">
-                    <Input
+                    <FancyInput
                         type="text"
                         autoComplete="username"
                         name="email"
                         placeholder={t("login.email")}
-                        className="placeholder:text-sm"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        onCleanInput={() => setEmail("")}
                     />
-
-                    <Input
+                    <FancyInput
                         type="password"
                         autoComplete="current-password"
                         placeholder={t("login.password")}
-                        className="placeholder:text-sm"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        onCleanInput={() => setPassword("")}
                     />
                 </div>
                 <GridMsg

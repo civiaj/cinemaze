@@ -6,6 +6,8 @@ module.exports = {
         "plugin:@typescript-eslint/recommended",
         "plugin:react-hooks/recommended",
         "@feature-sliced/eslint-config/rules/import-order",
+        // "@feature-sliced/eslint-config/rules/public-api",
+        // "@feature-sliced/eslint-config/rules/layers-slices",
     ],
     ignorePatterns: ["dist", ".eslintrc.cjs"],
     parser: "@typescript-eslint/parser",

@@ -12,7 +12,7 @@ export const Heading = (props: HeadingProps) => {
 
     const styles: Record<typeof headinglevel, string> = {
         "1": "font-bold text-xl sm:text-2xl ",
-        "2": "",
+        "2": "font-bold text-lg sm:text-xl",
         "3": "font-bold text-base text-inherit sm:text-lg",
         "4": "font-bold text-base",
         "5": "",

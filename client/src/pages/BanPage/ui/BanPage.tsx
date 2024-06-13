@@ -22,7 +22,7 @@ const BanPage = () => {
     return (
         <Page>
             <Box className="overflow-hidden">
-                <Heading headinglevel={1}>Account Banned</Heading>
+                <Heading headinglevel={1}>{t("ban-t")}</Heading>
                 <UserBoxSeparator />
                 <UserBox className="border rounded-xl bg-my-red-200 text-neutral-50">
                     <Text>

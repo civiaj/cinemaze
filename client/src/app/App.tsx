@@ -1,13 +1,13 @@
 import { AppRouter } from "@/app/router/AppRouter";
 import { useAppSelector } from "@/app/store";
 import { CleanInfinite } from "@/processes/CleanInfinite/CleanInfinite";
+import { LoginPopup } from "@/widgets/LoginPopup";
 import { Navbar } from "@/widgets/Navbar";
 import { ProgressBar } from "@/widgets/ProgressBar";
 import { Sidebar } from "@/widgets/Sidebar";
 import { getIsLogged, useGetMeQuery } from "@/entities/User";
 import { ID_MAIN } from "@/shared/const/const";
 import { FullscreenSpinner } from "@/shared/ui/Spinner/FullscreenSpinner";
-import { LoginPopup } from "@/widgets/LoginPopup";
 
 function App() {
     const isLogged = useAppSelector(getIsLogged);

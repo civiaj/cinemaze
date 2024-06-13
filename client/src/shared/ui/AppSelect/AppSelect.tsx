@@ -43,7 +43,7 @@ export const AppSelect = (props: Props) => {
         actionChange,
         value,
         className,
-        placeholder = "select-msg",
+        placeholder = "select.placeholder",
         wrapperClassName,
         disabled,
         render,

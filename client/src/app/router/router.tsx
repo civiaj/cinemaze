@@ -6,6 +6,7 @@ import { FavoritePage } from "@/pages/FavoritePage";
 import { LoginPage } from "@/pages/LoginPage";
 import { MainPage } from "@/pages/MainPage/";
 import { ManagePage } from "@/pages/ManagePage";
+import { PrivacyPage } from "@/pages/PrivacyAndTosPage";
 import { SearchPage } from "@/pages/SearchPage";
 import { StatisticsPage } from "@/pages/StatisticsPage";
 import { UserPage } from "@/pages/UserPage";
@@ -24,6 +25,7 @@ export enum AppRoutes {
     EMAILVERIFICATION = "emailverificaiton",
     MANAGE_USERS = "manage",
     BAN = "ban",
+    PRIVACY = "privacy",
 }
 
 export const routePath: Record<AppRoutes, string> = {
@@ -39,6 +41,7 @@ export const routePath: Record<AppRoutes, string> = {
     [AppRoutes.EMAILVERIFICATION]: "/emailverificaiton",
     [AppRoutes.MANAGE_USERS]: "/manage",
     [AppRoutes.BAN]: "/ban",
+    [AppRoutes.PRIVACY]: "/privacy",
 };
 
 export const routeConfig: Record<AppRoutes, IRoute> = {
@@ -130,6 +133,13 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
         path: routePath.ban,
         label: "ban-t",
         auth: true,
+        allowedRoles: ["user", "admin", "admin-test"],
+    },
+    [AppRoutes.PRIVACY]: {
+        element: <PrivacyPage />,
+        path: routePath.privacy,
+        label: "privacy-t",
+        auth: false,
         allowedRoles: ["user", "admin", "admin-test"],
     },
 };

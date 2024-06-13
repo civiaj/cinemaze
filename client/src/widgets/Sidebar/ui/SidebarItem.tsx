@@ -1,7 +1,7 @@
+import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink, NavLinkProps } from "react-router-dom";
 import { SideBarItem } from "../model/types";
-import { memo } from "react";
 
 type Props = SideBarItem & NavLinkProps;
 

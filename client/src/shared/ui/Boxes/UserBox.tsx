@@ -16,5 +16,5 @@ export const UserBox = ({ children, className }: { children: ReactNode; classNam
 };
 
 export const UserBoxSeparator = ({ className }: { className?: string }) => {
-    return <hr className={classNames("border-t border-border -mx-6", {}, [className])} />;
+    return <hr className={classNames("border-t border-border", {}, [className])} />;
 };

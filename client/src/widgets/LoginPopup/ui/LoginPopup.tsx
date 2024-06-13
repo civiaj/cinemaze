@@ -1,3 +1,6 @@
+import { memo, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppSelector } from "@/app/store";
 import { getIsLogged } from "@/entities/User";
@@ -5,9 +8,6 @@ import { Close } from "@/shared/assets/icons";
 import { classNames } from "@/shared/lib/classNames";
 import { Button } from "@/shared/ui/Button/Button";
 import { Text } from "@/shared/ui/Text/Text";
-import { memo, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
 
 export const LoginPopup = memo(() => {
     const [isShown, setIsShown] = useState(false);
