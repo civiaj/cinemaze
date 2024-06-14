@@ -73,8 +73,7 @@ class ManageController {
 
             user.isBanned = true;
             user.banMessage = banMessage;
-            user.banExpiration = new Date(new Date(banExpiration).setHours(0, 0, 0, 0));
-
+            user.banExpiration = new Date(banExpiration);
             await user.save();
 
             return res.status(200).json({ message: "success" });
