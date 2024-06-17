@@ -37,15 +37,10 @@ const UserPage = () => {
             )}
             {section?.startsWith("devices") && <UserSectionDevices />}
             {section?.startsWith("password") && user.provider === "local" && (
-                <UserSectionPassword
-                    name={user.displayName}
-                    photo={user.photo}
-                    email={user.email}
-                    onClose={onClose}
-                />
+                <UserSectionPassword email={user.email} onClose={onClose} />
             )}
             {section?.startsWith("role") && <UserSectionRole onClose={onClose} role={user.role} />}
-            {section?.startsWith("delete") && <UserSectionDelete />}
+            {section?.startsWith("delete") && <UserSectionDelete email={user.email} />}
         </Page>
     );
 };

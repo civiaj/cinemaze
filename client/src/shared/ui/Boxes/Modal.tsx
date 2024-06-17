@@ -22,10 +22,16 @@ type HeaderProps = {
     onClose?: () => void;
 };
 
-export const Modal = ({ children, onClose, preventClose }: Props) => {
+export const Modal = ({ children, onClose, preventClose, className }: Props) => {
     return (
         <Overlay withInert hideScroll theme="modal" className="z-50">
-            <Box className="gap-0 p-0 sm:p-0 shadow-0 min-w-[300px] w-[clamp(500px,90%,800px)] max-h-[90%] overflow-hidden mx-2 relative min-h-[300px]">
+            <Box
+                className={classNames(
+                    "gap-0 p-0 sm:p-0 shadow-0 min-w-[300px] w-[clamp(500px,90%,800px)] max-h-[90%] overflow-hidden mx-2 relative min-h-[300px]",
+                    {},
+                    [className]
+                )}
+            >
                 <OutsideClickWrapper
                     preventClose={preventClose}
                     onClose={onClose}
@@ -63,7 +69,11 @@ Modal.Header = (props: HeaderProps) => {
     );
 };
 
-Modal.Controls = ({ theme, children }: Pick<Props, "theme" | "children">) => {
+Modal.Controls = ({
+    theme,
+    children,
+    className,
+}: Pick<Props, "theme" | "children" | "className">) => {
     return (
         <>
             <UserBoxSeparator
@@ -75,12 +85,14 @@ Modal.Controls = ({ theme, children }: Pick<Props, "theme" | "children">) => {
                 })}
             />
             <UserBox className="border-0">
-                <div className="flex gap-2 justify-end">{children}</div>
+                <div className={classNames("flex gap-2 justify-end", {}, [className])}>
+                    {children}
+                </div>
             </UserBox>
         </>
     );
 };
 
 Modal.Body = ({ children }: Pick<Props, "children" | "className">) => {
-    return <UserBox className="flex-1 h-full w-full justify-center border-0">{children}</UserBox>;
+    return <UserBox className="flex-1 h-full w-full justify-center">{children}</UserBox>;
 };

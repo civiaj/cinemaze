@@ -51,7 +51,7 @@ router.get("/logout", deserializeUser, authController.logout.bind(authController
 router.get("/activate/:verificationCode", validate(verifyEmailSchema), authController.verifyEmail);
 router.post("/forgot", validate(emailSchema), authController.forgotPassword);
 router.post("/reset/:resetToken", validate(resetPasswordSchema), authController.resetPassword);
-//?? Добавить 2 эндпоинта: a) для сброса пороля б) для верификации сброса.
+router.delete("/user/delete", deserializeUser, authController.accountDelete.bind(authController));
 
 // Пользователь
 router.get("/user/me", deserializeUser, userController.getMe);
@@ -174,7 +174,7 @@ router.get(
 router.get("/oauth/google", authController.googleOAuthHandler.bind(authController));
 
 // Create and delete num of users for test
-router.delete("/deleteTestUsers", userController.deleteTestUsers);
-router.post("/addTestUsers", userController.addTestUsers);
+// router.delete("/deleteTestUsers", userController.deleteTestUsers);
+// router.post("/addTestUsers", userController.addTestUsers);
 
 export default router;

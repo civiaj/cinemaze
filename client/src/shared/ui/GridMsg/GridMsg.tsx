@@ -27,7 +27,7 @@ export const GridMsg = (props: Props) => {
                         className={classNames(
                             "rounded-xl overflow-hidden",
                             {
-                                ['className="bg-my-red-300"']: isError,
+                                ["bg-my-red-300"]: isError,
                             },
                             [className]
                         )}

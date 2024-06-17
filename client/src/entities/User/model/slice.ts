@@ -15,8 +15,9 @@ const userSlice = createSlice({
     name: "userSlice",
     initialState,
     reducers: {
-        logout: () => {
+        logout: (state) => {
             // action type 'userSlice/logout' resets all redux store state and removes persist storage. See store.ts.
+            state.isLogged = false;
         },
         setUser: (state, action: PayloadAction<TUser>) => {
             state.user = action.payload;

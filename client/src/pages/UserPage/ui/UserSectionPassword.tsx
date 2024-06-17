@@ -1,6 +1,5 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useCheckPasswordMutation } from "@/entities/Authorization";
 import { useUpdatePasswordMutation } from "@/entities/User/model/userApi";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { Modal } from "@/shared/ui/Boxes/Modal";
@@ -8,79 +7,26 @@ import { Button } from "@/shared/ui/Button/Button";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
 import { FancyInput } from "@/shared/ui/Input/FancyInput";
 import { Text } from "@/shared/ui/Text/Text";
+import { CheckPassword } from "./CheckPassword";
 
 type Props = {
     onClose: () => void;
-    name: string;
-    photo: string;
     email: string;
 };
 
 export const UserSectionPassword = (props: Props) => {
     const { onClose } = props;
-    const { t } = useTranslation();
     const [isChecked, setIsChecked] = useState(false);
     const onSetChecked = () => setIsChecked(true);
 
     return (
         <Modal onClose={onClose} preventClose={isChecked}>
-            <Modal.Header
-                header={isChecked ? t("user.password-change") : t("user.password-check")}
-                onClose={onClose}
-            />
             {!isChecked ? (
                 <CheckPassword onSetChecked={onSetChecked} {...props} />
             ) : (
                 <NewPassword {...props} />
             )}
         </Modal>
-    );
-};
-
-const CheckPassword = (props: Props & { onSetChecked: () => void }) => {
-    const { onSetChecked, onClose } = props;
-    const { t } = useTranslation();
-    const [checkPassword, { isLoading, error, isError }] = useCheckPasswordMutation();
-    const [password, setPassword] = useState("");
-    const inputRef = useRef<HTMLInputElement>(null);
-
-    const onPasswordCheck = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!password) return;
-        checkPassword({ password })
-            .unwrap()
-            .then(() => onSetChecked());
-    };
-
-    useEffect(() => {
-        if (inputRef.current) inputRef.current.focus();
-    }, []);
-
-    return (
-        <form onSubmit={onPasswordCheck} id="check-password-form">
-            <Modal.Body>
-                <Text as="p">{t("user.password-check-msg")}</Text>
-                <FancyInput
-                    placeholder={t("user.password")}
-                    name="password"
-                    type="password"
-                    autoComplete="password"
-                    value={password}
-                    onCleanInput={() => setPassword("")}
-                    onChange={(e) => setPassword(e.target.value)}
-                    ref={inputRef}
-                />
-                <GridMsg isError isOpen={isError} msg={formatServerError(error)} />
-            </Modal.Body>
-            <Modal.Controls theme="none">
-                <Button type="submit" isLoading={isLoading} theme="blue">
-                    <Text>{t("btn.confirm")}</Text>
-                </Button>
-                <Button onClick={onClose} theme="regular">
-                    <Text>{t("btn.cancel")}</Text>
-                </Button>
-            </Modal.Controls>
-        </form>
     );
 };
 
@@ -106,7 +52,12 @@ const NewPassword = (props: Props) => {
     }, []);
 
     return (
-        <form onSubmit={onPasswordUpdate} id="update-password-form">
+        <form
+            onSubmit={onPasswordUpdate}
+            id="update-password-form"
+            className="flex flex-col flex-1"
+        >
+            <Modal.Header header={t("user.password-change")} onClose={onClose} />
             <Modal.Body>
                 <FancyInput
                     name="password"

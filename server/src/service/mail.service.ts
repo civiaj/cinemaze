@@ -23,7 +23,7 @@ class MailService {
             requireTLS: false,
         });
     }
-    private async send(user: User, url: string, template: string, subject: string) {
+    private async send(user: User, url: string | null, template: string, subject: string) {
         const html = pug.renderFile(
             path.join(__dirname, "..", "email-templates", `${template}.pug`),
             {
@@ -58,6 +58,9 @@ class MailService {
     }
     async sendPasswordReset(user: User, url: string) {
         return this.send(user, url, "passwordReset", "Восстановление пароля");
+    }
+    async sendAccountDelete(user: User) {
+        return this.send(user, null, "accountDelete", "Удаление аккаунта");
     }
 }
 

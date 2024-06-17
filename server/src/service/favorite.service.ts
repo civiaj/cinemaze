@@ -16,6 +16,9 @@ class FavoriteService {
     async createFavoriteUser(user: Types.ObjectId, options: QueryOptions = {}) {
         return (await favoriteModel.create([{ user }], options))[0];
     }
+    async deleteFavorite(userId: number, session: mongoose.mongo.ClientSession) {
+        return await favoriteModel.deleteOne({ user: userId }, { session });
+    }
 
     async modifyFavorite(
         userId: number,

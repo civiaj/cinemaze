@@ -42,7 +42,6 @@ const appReducer = combineReducers({
 const rootReducer = (state: ReturnType<typeof appReducer> | undefined, action: AnyAction) => {
     if (action.type === "userSlice/logout") {
         persistConfigKeys.forEach((configKey) => storage.removeItem(`persist:${configKey}`));
-
         return appReducer(undefined, action);
     }
     return appReducer(state, action);

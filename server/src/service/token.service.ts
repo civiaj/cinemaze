@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { FilterQuery, QueryOptions, Types } from "mongoose";
+import mongoose, { FilterQuery, QueryOptions, Types } from "mongoose";
 import {
     JWT_ACCESS_PRIVATE_KEY,
     JWT_ACCESS_PUBLIC_KEY,
@@ -93,6 +93,10 @@ class TokenService {
         if (result.deletedCount === 0) throw ApiError.BadRequest("Сессия не была найдена");
 
         return result;
+    }
+
+    async removeAllSessions(userId: number, session: mongoose.mongo.ClientSession) {
+        return tokenModel.deleteMany({ user: userId }, { session });
     }
 }
 

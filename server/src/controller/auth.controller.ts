@@ -302,6 +302,32 @@ class AuthController {
         }
     }
 
+    async accountDelete(req: Request, res: Response, next: NextFunction) {
+        const session = await mongoose.startSession();
+        session.startTransaction();
+        try {
+            const user = await userService.findUser({ id: res.locals.user.id });
+            if (!user) throw ApiError.BadRequest("Нет пользователя с таким id");
+
+            await favoriteService.deleteFavorite(user.id, session);
+            await tokenService.removeAllSessions(user.id, session);
+
+            if (user.verified) await mailService.sendAccountDelete(user);
+
+            await user.deleteOne({ session });
+
+            this.removeAuthCookies(res);
+
+            await session.commitTransaction();
+            return res.status(201).json({ message: "success" });
+        } catch (e) {
+            await session.abortTransaction();
+            next(e);
+        } finally {
+            session.endSession();
+        }
+    }
+
     private addAuthCookies(res: Response, tokens: { accessToken: string; refreshToken: string }) {
         res.cookie("access_token", tokens.accessToken, accessTokenCookieOptions);
         res.cookie("refresh_token", tokens.refreshToken, refreshTokenCookieOptions);

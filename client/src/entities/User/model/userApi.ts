@@ -153,6 +153,23 @@ export const userApi = serverApi.injectEndpoints({
                 }
             },
         }),
+        deleteUser: builder.mutation<ServerMessageResponse, void>({
+            query: () => ({
+                url: "/user/delete",
+                method: "DELETE",
+                credentials: "include",
+            }),
+            async onQueryStarted(_, { queryFulfilled, dispatch }) {
+                try {
+                    await queryFulfilled;
+                    toast.success(i18n.t("toast.account-deleted"));
+                    dispatch(userActions.logout());
+                    dispatch(serverApi.util.resetApiState());
+                } catch (e) {
+                    //error middleware
+                }
+            },
+        }),
     }),
     overrideExisting: false,
 });
@@ -167,4 +184,5 @@ export const {
     useUpdatePhotoMutation,
     useDeletePhotoMutation,
     useUpdateRoleMutation,
+    useDeleteUserMutation,
 } = userApi;
