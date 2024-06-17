@@ -1,4 +1,4 @@
-key	en	ru	fr	ko	ar
+de	en	ru	fr	ko	ar
 main.popular	Popular	Популярные	Populaire	인기 있는	شائع
 main.popular-t	Watching now	Смотрят сейчас	Regarder maintenant	보고있다	أشاهد الآن
 main.best	Best	Лучшее	Meilleur	최상의	أفضل
@@ -8,11 +8,11 @@ main.antisipated-t	Coming soon	Скоро в кино	À venir	곧 출시 예정
 nav.profile	My Profile	Мой Профиль	Mon profil	내 프로필	ملفي
 nav.moovies	My Movies	Мои Фильмы	Mes films	내 영화	أفلامي
 nav.language-t	Language	Язык	Langue	언어	لغة
-nav.language-en	English	Английский	Anglais	영어	إنجليزي
-nav.language-ru	Russian	Русский	Russe	러시아인	الروسية
-nav.language-fr	French	Французский	Français	프랑스 국민	فرنسي
-nav.language-ko	Korean	Корейский	Coréen	한국인	الكورية
-nav.language-ar	Arabic	Арабский	Arabe	아라비아 말	عربي
+nav.language-en	English	English	English	English	English
+nav.language-ru	Русский	Русский	Русский	Русский	Русский
+nav.language-fr	Français	Français	Français	Français	Français
+nav.language-ko	한국인	한국인	한국인	한국인	한국인
+nav.language-ar	عربي	عربي	عربي	عربي	عربي
 nav.theme-t	Theme	Тема	Thème	주제	سمة
 nav.theme-light	Light	Светлая	Lumière	빛	ضوء
 nav.theme-dark	Dark	Темная	Sombre	어두운	مظلم
@@ -27,7 +27,7 @@ search-t	Search	Поиск	Recherche	찾다	يبحث
 manage-t	Manage	Управление	Gérer	관리하다	يدير
 user-t	User	Профиль	Utilisateur	사용자	مستخدم
 login-t	Login	Авторизация	Se connecter	로그인	تسجيل الدخول
-ban-t	Account Banned	Аккаунт Заблокирован	Compte banni	계정이 금지되었습니다	الحساب محظور
+ban-t	Ban	Блокировка	Interdire	반	المنع
 search.extended	Extended Search	Расширенный Поиск	Recherche étendue	확장검색	بحث موسع
 search.keyword	Keyword	Ключевое слово	Mot-clé	예어	الكلمة الرئيسية
 search.keyword-place	Enter the title	Введите название	Entrez le titre	제목을 입력하세요	أدخل العنوان
@@ -38,7 +38,8 @@ search.year	Year	Год	Année	년도	سنة
 search.from	from	от	depuis	~에서	من
 search.to	to	до	à	에게	ل
 search.initial-msg	Adjust the settings for a better search experience	Настройте параметры для лучшего поиска.	Ajustez les paramètres pour une meilleure expérience de recherche	더 나은 검색 환경을 위해 설정을 조정하세요.	اضبط الإعدادات للحصول على تجربة بحث أفضل
-search.empty-msg	Nothing found, try changing your search parameters	Ничего не найдено, попробуйте изменить параметры поиска	Rien trouvé, essayez de modifier vos paramètres de recherche	아무것도 찾지 못했습니다. 검색 매개변수를 변경해 보세요.	لم يتم العثور على أي شيء، حاول تغيير معلمات البحث الخاصة بك
+search.empty-msg	Nothing found	Ничего не найдено	Rien n'a été trouvé	아무것도 찾을 수 없음	لم يتم العثور على شيء
+search.empty-msg-add	, try changing your search parameters	, попробуйте изменить параметры поиска	, essayez de modifier vos paramètres de recherche	, 검색 매개변수를 변경해 보세요.	، حاول تغيير معلمات البحث الخاصة بك
 search.found	Found	Найдено	Trouvé	설립하다	وجد
 search.input-p	Search by title	Поиск по названию	Recherche par titre	제목으로 검색	البحث حسب العنوان
 search.input-recent	Recent queries	Недавние запросы	Requêtes récentes	최근 쿼리	الاستفسارات الأخيرة
@@ -157,11 +158,11 @@ details.reviews-t	Viewer reviews	Рецензии зрителей	Avis des tél
 verify.error-msg	Unable to verify email address.	Невозможно верифицировать адрес электронной почты.	Impossible de vérifier l'adresse e-mail.	이메일 주소를 확인할 수 없습니다.	غير قادر على التحقق من عنوان البريد الإلكتروني.
 verify.success-msg	Email address verified.	Электронный адрес почты подтвержден.	Adresse e-mail vérifiée.	이메일 주소가 확인되었습니다.	عنوان البريد الإلكتروني التحقق منها.
 unauthorized-msg	The user does not have the required rights to view this page.	Пользователь не обладает требуемыми правами для просмотра данной страницы.	L'utilisateur ne dispose pas des droits requis pour visualiser cette page.	사용자에게 이 페이지를 보는 데 필요한 권한이 없습니다.	ليس لدى المستخدم الحقوق المطلوبة لعرض هذه الصفحة.
-ban.msg	restrictions have been placed on your account	на ваш аккаунт были наложены ограничения	des restrictions ont été placées sur votre compte	귀하의 계정에 제한이 적용되었습니다	تم وضع قيود على حسابك
+ban.msg	restrictions have been placed on your account	на ваш профиль были наложены ограничения	des restrictions ont été placées sur votre compte	귀하의 계정에 제한이 적용되었습니다	تم وضع قيود على حسابك
 ban.one	1. You cannot add, delete or change movies in your collection.	1. Вы не можете добавлять, удалять или изменять фильмы в вашей коллекции.	1. Vous ne pouvez pas ajouter, supprimer ou modifier des films dans votre collection.	1. 컬렉션에 영화를 추가, 삭제, 변경할 수 없습니다.	1. لا يمكنك إضافة أو حذف أو تغيير الأفلام في مجموعتك.
 ban.two	2. Viewing the statistics page is not available.	2. Недоступен просмотр страницы со статистикой.	2. L'affichage de la page des statistiques n'est pas disponible.	2. 통계 페이지를 볼 수 없습니다.	2. عرض صفحة الإحصائيات غير متاح.
 ban.three	3. Viewing the page with a list of users is not available.	3. Недоступен просмотр страницы со списком пользователей.	3. L'affichage de la page avec une liste d'utilisateurs n'est pas disponible.	3. 사용자 목록이 포함된 페이지는 볼 수 없습니다.	3. عرض الصفحة مع قائمة المستخدمين غير متاح.
-ban.msg-small	Your Account is Banned	Ваш Аккаунт Заблокирован	Votre compte est banni	귀하의 계정이 금지되었습니다	حسابك محظور
+ban.msg-small	Your Account is Banned	Ваш Профиль Заблокирован	Votre compte est banni	귀하의 계정이 금지되었습니다	حسابك محظور
 boundary.t	An error has occurred	Произошла ошибка	Une erreur est survenue	오류가 발생했습니다	حدث خطأ
 boundary.b	Please refresh the page or return to the home page to try again.	Пожалуйста, обновите страницу или вернитесь на главную, чтобы повторить попытку.	Veuillez actualiser la page ou revenir à la page d'accueil pour réessayer.	페이지를 새로 고치거나 홈페이지로 돌아가서 다시 시도하세요.	يرجى تحديث الصفحة أو العودة إلى الصفحة الرئيسية للمحاولة مرة أخرى.
 toast.error-default	Unknown error	Неизвестная ошибка	Erreur inconnue	알수없는 오류	خطأ غير معروف
@@ -214,6 +215,7 @@ btn.main	Go to Main	Перейти на главную	Aller à la page principa
 btn.reload	Reload page	Перезагрузить страницу	Rafraîchir la page	페이지 새로고침	إعادة تحميل الصفحة
 btn.to-kp	To Kinopoisk	На Кинопоиск	À Kinopoisk	키노포이스크행	إلى كينوبويسك
 btn.view-whole-review	Show full review	Показать всю рецензию	Afficher l'avis complet	전체 리뷰 보기	عرض المراجعة الكاملة
+btn.delete-account	Yes, delete	Да, Удалить	Oui, supprimer	예, 삭제합니다	نعم، احذف
 user.email	E-mail address	Адрес электронной почты	Adresse e-mail	이메일 주소	عنوان البريد الإلكتروني
 user.photo	User photo	Фото профиля	Photo de l'utilisateur	사용자 사진	صورة المستخدم
 user.name	User name	Имя пользователя	Nom d'utilisateur	사용자 이름	اسم المستخدم
@@ -248,6 +250,12 @@ user.role-change	Role change	Изменение роли	Changement de rôle	역
 user.role-change-current	Current role	Текущая роль	Rôle actuel	현재 역할	الدور الحالي
 user.role-change-new	Select a new role	Выберите новую роль	Sélectionnez un nouveau rôle	새 역할 선택	حدد دورًا جديدًا
 user.photo-drop	Drop the file	Отпустите файл	Déposez le fichier	파일을 삭제하세요.	قم بإسقاط الملف
+user.delete-a	Delte your account	Удалить профиль	Supprimez votre compte	계정 삭제	احذف حسابك
+user.delete-t	Deleting a profile	Удаление профиля			
+user.delete-welcome	Dear user,	Уважаемый пользователь,			
+user-delete-ifno	Deleting your profile will result in complete loss of all your data. Please note that this process is irreversible.	Удаление вашего профиля приведет к полной утрате всех ваших данных. Обратите внимание, что этот процесс необратим.			
+user.delete-continue	If you want to continue, click the "Delete Profile" button.	Если вы хотите продолжить, нажмите кнопку "Удалить профиль".			
+user.delete-final	Are you sure you want to delete your profile?	Вы уверены, что хотите удалить свой профиль?			
 card.l-watch	Watch	Смотреть	Montre	보다	يشاهد
 card.t-watch	Watch	Смотреть	Montre	보다	يشاهد
 card.t-go	View	Перейти	Voir	보다	منظر
@@ -289,9 +297,10 @@ role.user	User	Пользователь	Utilisateur	사용자	مستخدم
 msg.welcome	Welcome!	Добро пожаловать!	Accueillir!	환영!	مرحباً!
 msg.login-or-auth	Log in or register to use all the features of the service.	Войдите или зарегистрируйтесь для использования всех возможностей сервиса.	Connectez-vous ou inscrivez-vous pour utiliser toutes les fonctionnalités du service.	서비스의 모든 기능을 사용하려면 로그인하거나 등록하세요.	قم بتسجيل الدخول أو التسجيل لاستخدام كافة ميزات الخدمة.
 privacy.t	Privacy	Конфиденциальность	Confidentialité	은둔	خصوصية
+privacy.tos-and-policy-t	Privacy Policy and Terms of Service	Политика конфиденциальности и условия использования	Politique de confidentialité et conditions d'utilisation	개인정보 보호정책 및 서비스 약관	سياسة الخصوصية وشروط الخدمة
 privacy.tos-t	Terms of Service	Условия использования	Conditions d'utilisation	서비스 약관	شروط الخدمة
 privacy.tos-introduction-title	Introduction	Введение	Introduction	소개	مقدمة
-privacy.tos-introduction-text	These terms of service (\"Terms\") govern your use of the Cinemaze application (\"App\"). Please read these Terms carefully before using the App.	Настоящие условия использования (\"Условия\") регулируют ваше использование приложения Cinemaze (\"Приложение\"). Пожалуйста, внимательно ознакомьтесь с этими Условиями перед использованием Приложения.	Ces conditions d'utilisation (« Conditions ») régissent votre utilisation de l'application Cinemaze (« Application »). Veuillez lire attentivement ces conditions avant d'utiliser l'application.	본 서비스 약관(\"약관\")은 귀하의 Cinemaze 애플리케이션(\"앱\") 사용에 적용됩니다. 앱을 사용하기 전에 본 약관을 주의 깊게 읽어보시기 바랍니다.	تحكم شروط الخدمة هذه (\"الشروط\") استخدامك لتطبيق Cinemaze (\"التطبيق\"). يرجى قراءة هذه الشروط بعناية قبل استخدام التطبيق.
+privacy.tos-introduction-text	These terms of service ("Terms") govern your use of the Cinemaze application ("App"). Please read these Terms carefully before using the App.	Настоящие условия использования ("Условия") регулируют ваше использование приложения Cinemaze ("Приложение"). Пожалуйста, внимательно ознакомьтесь с этими Условиями перед использованием Приложения.	Ces conditions de service (« Conditions ») régissent votre utilisation de l'application Cinemaze (« Application »). Veuillez lire attentivement ces conditions avant d'utiliser l'application.	본 서비스 약관("약관")은 귀하의 Cinemaze 애플리케이션("앱") 사용에 적용됩니다. 앱을 사용하기 전에 본 약관을 주의 깊게 읽어보시기 바랍니다.	تحكم شروط الخدمة هذه ("الشروط") استخدامك لتطبيق Cinemaze ("التطبيق"). يرجى قراءة هذه الشروط بعناية قبل استخدام التطبيق.
 privacy.tos-acceptable-use-title	Acceptable Use	Приемлемое использование	Utilisation acceptable	허용되는 사용	الاستخدام المقبول
 privacy.tos-acceptable-use-text	You agree to use the App only for lawful purposes and not to infringe the rights of other users.	Вы соглашаетесь использовать Приложение только в законных целях и не нарушать права других пользователей.	Vous acceptez d'utiliser l'Application uniquement à des fins licites et de ne pas porter atteinte aux droits des autres utilisateurs.	귀하는 합법적인 목적으로만 앱을 사용하고 다른 사용자의 권리를 침해하지 않을 것에 동의합니다.	أنت توافق على استخدام التطبيق فقط للأغراض القانونية وعدم انتهاك حقوق المستخدمين الآخرين.
 privacy.tos-prohibited-text	Prohibited actions:	Запрещено:	Actions interdites :	금지된 행위:	الإجراءات المحظورة:
@@ -299,13 +308,13 @@ privacy.tos-prohibited-item-1	Using the App to distribute malicious software.	И
 privacy.tos-prohibited-item-2	Using the App to violate copyrights or other intellectual property rights.	Использовать Приложение для нарушений авторских прав или других прав интеллектуальной собственности.	Utiliser l'application pour violer les droits d'auteur ou d'autres droits de propriété intellectuelle.	앱을 사용하여 저작권이나 기타 지적 재산권을 침해하는 행위.	استخدام التطبيق لانتهاك حقوق النشر أو حقوق الملكية الفكرية الأخرى.
 privacy.tos-prohibited-item-3	Posting or distributing offensive, obscene, or illegal material.	Публиковать или распространять оскорбительные, непристойные или незаконные материалы.	Publier ou distribuer du matériel offensant, obscène ou illégal.	모욕적이거나 외설적이거나 불법적인 자료를 게시하거나 배포하는 행위.	نشر أو توزيع مواد مسيئة أو فاحشة أو غير قانونية.
 privacy.tos-limitation-liability-title	Limitation of Liability	Ограничение ответственности	Limitation de responsabilité	책임의 제한	تحديد المسؤولية
-privacy.tos-limitation-liability-text	We are not liable for any loss or damage resulting from your use of or inability to use the App. The App is provided \"as is,\" without any warranties.	Мы не несем ответственности за любые убытки или ущерб, возникшие в результате использования или невозможности использования Приложения. Приложение предоставляется \"как есть\", без каких-либо гарантий.	Nous ne sommes pas responsables de toute perte ou dommage résultant de votre utilisation ou de votre incapacité à utiliser l'application. L'application est fournie « telle quelle », sans aucune garantie.	당사는 귀하가 앱을 사용하거나 사용할 수 없음으로 인해 발생하는 손실이나 피해에 대해 책임을 지지 않습니다. 앱은 어떠한 보증도 없이 \"있는 그대로\" 제공됩니다.	نحن لسنا مسؤولين عن أي خسارة أو ضرر ناتج عن استخدامك للتطبيق أو عدم قدرتك على استخدامه. يتم توفير التطبيق \"كما هو\" دون أي ضمانات.
+privacy.tos-limitation-liability-text	We are not liable for any loss or damage resulting from your use of or inability to use the App. The App is provided "as is," without any warranties.	Мы не несем ответственности за любые убытки или ущерб, возникшие в результате использования или невозможности использования Приложения. Приложение предоставляется "как есть", без каких-либо гарантий.	Nous ne sommes pas responsables de toute perte ou dommage résultant de votre utilisation ou de votre incapacité à utiliser l'application. L'application est fournie « telle quelle », sans aucune garantie.	당사는 귀하가 앱을 사용하거나 사용할 수 없음으로 인해 발생하는 손실이나 피해에 대해 책임을 지지 않습니다. 앱은 어떠한 보증도 없이 "있는 그대로" 제공됩니다.	نحن لسنا مسؤولين عن أي خسارة أو ضرر ناتج عن استخدامك للتطبيق أو عدم قدرتك على استخدامه. يتم توفير التطبيق "كما هو"، دون أي ضمانات.
 privacy.tos-intellectual-property-title	Intellectual Property	Интеллектуальная собственность	Propriété intellectuelle	지적 재산권	الملكية الفكرية
 privacy.tos-intellectual-property-text	All rights to the content and software of the App are owned by Cinemaze or its licensors. Nothing in these Terms grants you any rights to use such materials beyond the use of the App.	Все права на контент и программное обеспечение Приложения принадлежат Cinemaze или его лицензиарам. Ничто в данных Условиях не предоставляет вам каких-либо прав на использование таких материалов, кроме как в рамках использования Приложения.	Tous les droits sur le contenu et les logiciels de l'application appartiennent à Cinemaze ou à ses concédants de licence. Rien dans les présentes Conditions ne vous accorde le droit d'utiliser ces éléments au-delà de l'utilisation de l'Application.	앱의 콘텐츠 및 소프트웨어에 대한 모든 권리는 Cinemaze 또는 해당 라이센스 제공자가 소유합니다. 본 약관의 어떠한 조항도 귀하에게 앱 사용 외에 해당 자료를 사용할 수 있는 권리를 부여하지 않습니다.	جميع حقوق المحتوى والبرامج الخاصة بالتطبيق مملوكة لشركة Cinemaze أو الجهات المرخصة لها. لا يوجد في هذه الشروط ما يمنحك أي حقوق لاستخدام هذه المواد بما يتجاوز استخدام التطبيق.
 privacy.tos-changes-title	Changes to Terms	Изменения в условиях	Modifications des conditions	약관 변경	التغييرات في الشروط
 privacy.tos-changes-text	We reserve the right to modify these Terms at any time. Updated Terms will be posted on this page and will take effect upon posting. Continued use of the App after changes signifies your acceptance of the new Terms.	Мы оставляем за собой право изменять эти Условия в любое время. Обновленные Условия будут опубликованы на этой странице и вступят в силу с момента публикации. Продолжение использования Приложения после изменений означает ваше согласие с новыми Условиями.	Nous nous réservons le droit de modifier les présentes Conditions à tout moment. Les conditions mises à jour seront publiées sur cette page et entreront en vigueur dès leur publication. L'utilisation continue de l'application après les modifications signifie votre acceptation des nouvelles conditions.	당사는 언제든지 본 약관을 수정할 권리를 보유합니다. 업데이트된 약관은 이 페이지에 게시되며 게시 즉시 적용됩니다. 변경 후에도 앱을 계속 사용하면 새 약관에 동의하는 것으로 간주됩니다.	نحن نحتفظ بالحق في تعديل هذه الشروط في أي وقت. سيتم نشر الشروط المحدثة على هذه الصفحة وستدخل حيز التنفيذ عند النشر. إن استمرار استخدام التطبيق بعد التغييرات يعني موافقتك على الشروط الجديدة.
 privacy.tos-contact-info-title	Contact Information	Контактная информация	Coordonnées	연락처 정보	معلومات الاتصال
-privacy.tos-contact-info-text	If you have any questions about our Terms, please contact us at:	Если у вас есть вопросы по поводу наших Условий, пожалуйста, свяжитесь с нами по адресу:	Si vous avez des questions concernant nos conditions, veuillez nous contacter à :	당사 약관에 대해 질문이 있는 경우 다음 주소로 문의해 주십시오.	إذا كان لديك أي أسئلة حول شروطنا، يرجى الاتصال بنا على:
+privacy.tos-contact-info-text	If you have any questions about our Terms, please contact us at:	Если у вас есть вопросы по поводу наших Условий, пожалуйста, свяжитесь с нами по адресу:	Si vous avez des questions concernant nos Conditions, veuillez nous contacter à :	약관에 대해 질문이 있는 경우 다음 주소로 문의해 주세요.	إذا كان لديك أي أسئلة حول شروطنا، يرجى الاتصال بنا على:
 privacy.policy-t	Privacy Policy	Политика конфиденциальности	politique de confidentialité	개인 정보 정책	سياسة الخصوصية
 privacy.policy-introduction-title	Introduction	Введение	Introduction	소개	مقدمة
 privacy.policy-introduction-text	Your privacy is important to us. This privacy policy explains what data we collect, how we use it, and how we protect your information.	Ваше конфиденциальность важна для нас. В данной политике конфиденциальности объясняется, какие данные мы собираем, как мы их используем и как мы защищаем вашу информацию.	Votre vie privée est importante pour nous. Cette politique de confidentialité explique quelles données nous collectons, comment nous les utilisons et comment nous protégeons vos informations.	귀하의 개인정보는 우리에게 중요합니다. 본 개인정보 보호정책은 당사가 수집하는 데이터, 사용 방법 및 귀하의 정보를 보호하는 방법을 설명합니다.	خصوصيتك مهمة بالنسبة لنا. تشرح سياسة الخصوصية هذه البيانات التي نجمعها، وكيف نستخدمها، وكيف نحمي معلوماتك.
