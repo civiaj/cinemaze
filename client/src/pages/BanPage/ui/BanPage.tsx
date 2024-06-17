@@ -24,7 +24,7 @@ const BanPage = () => {
             <Box className="overflow-hidden">
                 <Heading headinglevel={1}>{t("ban-t")}</Heading>
                 <UserBoxSeparator />
-                <UserBox className="border rounded-xl bg-my-red-200 text-neutral-50">
+                <UserBox rounded className="bg-my-red-200 text-neutral-50">
                     <Text>
                         {displayName}, {t("ban.msg")}: <br />
                         {t("ban.one")}
@@ -39,25 +39,25 @@ const BanPage = () => {
                         )}
                     </Text>
                 </UserBox>
-                <UserBoxSeparator />
-                <div className="grid grid-cols-[max-content,_1fr] gap-x-4 gap-y-1 break-words">
-                    {banExpiration && (
-                        <>
-                            <Text>{t("manage.banExpiration")}:</Text>
-                            <Text>
-                                {formatDate(new Date(banExpiration), i18n.language, "long")}
-                            </Text>
-                        </>
-                    )}
-                    {banMessage && (
-                        <>
-                            <Text>{t("manage.banMessage")}: </Text>
-                            <Text>{banMessage}</Text>
-                        </>
-                    )}
-                </div>
+                <UserBox rounded>
+                    <div className="grid grid-cols-[max-content,_1fr] gap-x-4 gap-y-1 break-words">
+                        {banExpiration && (
+                            <>
+                                <Text>{t("manage.banExpiration")}:</Text>
+                                <Text>
+                                    {formatDate(new Date(banExpiration), i18n.language, "long")}
+                                </Text>
+                            </>
+                        )}
+                        {banMessage && (
+                            <>
+                                <Text>{t("manage.banMessage")}: </Text>
+                                <Text>{banMessage}</Text>
+                            </>
+                        )}
+                    </div>
+                </UserBox>
 
-                <UserBoxSeparator />
                 <AppLink to={routePath.main} className="self-center" theme="button">
                     {t("btn.main")}
                 </AppLink>

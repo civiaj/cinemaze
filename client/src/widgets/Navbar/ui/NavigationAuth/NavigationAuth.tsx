@@ -65,7 +65,7 @@ const NavigationAuthBody = ({ onClose }: { onClose: () => void }) => {
     const { t } = useTranslation();
 
     return (
-        <Box className="absolute right-0 top-full mt-6 p-0 sm:p-0 gap-0 sm:gap-0 overflow-hidden w-72">
+        <Box className="absolute right-0 top-full mt-4 p-0 sm:p-0 gap-0 sm:gap-0 overflow-y-scroll w-72 max-h-[calc(100vh-5rem)]">
             {user && (
                 <div className="flex gap-4 py-6 px-4 border-b border-border items-center">
                     <AppImage

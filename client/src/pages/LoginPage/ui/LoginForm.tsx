@@ -31,7 +31,7 @@ export const LoginForm = (props: Props) => {
     };
 
     return (
-        <form onSubmit={onSubmitHandler}>
+        <form onSubmit={onSubmitHandler} id="login-form">
             <Box className="w-80 px-6 gap-4">
                 <Heading headinglevel={1}>{t("login-t")}</Heading>
                 <UserBoxSeparator />
@@ -54,13 +54,7 @@ export const LoginForm = (props: Props) => {
                         onCleanInput={() => setPassword("")}
                     />
                 </div>
-                <GridMsg
-                    msg={formatServerError(error)}
-                    isOpen={isError}
-                    className="bg-my-red-300"
-                />
-
-                <Button onClick={() => onSectionChange("forgot")}>{t("login.forget-p")}</Button>
+                <GridMsg msg={formatServerError(error)} isOpen={isError} isError />
 
                 <div className="flex justify-center flex-col gap-2">
                     <Button theme="blue" type="submit" isLoading={isLoading}>
@@ -77,6 +71,10 @@ export const LoginForm = (props: Props) => {
                 </div>
                 <UserBoxSeparator />
                 <OAuthOptions />
+                <UserBoxSeparator />
+                <Button theme="clean" onClick={() => onSectionChange("forgot")}>
+                    {t("login.forget-p")}
+                </Button>
             </Box>
         </form>
     );

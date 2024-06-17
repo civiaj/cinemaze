@@ -65,8 +65,9 @@ export const SearchQueryResults = (props: Props) => {
     if (data && !data.films.length && inputValue)
         return (
             <>
-                <div className="flex items-center justify-center py-2">
-                    <Text className="text-center">{t("search.empty-msg")}</Text>
+                <div className="flex py-2 flex-col text-center">
+                    <Text>{t("search.empty-msg")},</Text>
+                    <Text>{t("search.empty-msg-add")}</Text>
                 </div>
                 <UserBoxSeparator />
             </>

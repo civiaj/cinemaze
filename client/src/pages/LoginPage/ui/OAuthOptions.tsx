@@ -17,7 +17,7 @@ export const OAuthOptions = () => {
             <div className="flex flex-col gap-2">
                 <GoogleOAuthBtn />
             </div>
-            <GridMsg isOpen={Boolean(error)} msg={error} className="bg-my-red-200" />
+            <GridMsg isOpen={Boolean(error)} msg={error} isError />
         </div>
     );
 };

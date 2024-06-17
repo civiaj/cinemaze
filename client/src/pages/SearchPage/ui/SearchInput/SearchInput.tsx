@@ -81,7 +81,11 @@ export const SearchInput = memo((props: Props) => {
                     onClose={onSetInactive}
                     className="flex gap-2 justify-center relative flex-1 md:flex-initial"
                 >
-                    <form className="relative flex-1 md:flex-initial" autoComplete="off">
+                    <form
+                        className="relative flex-1 md:flex-initial"
+                        autoComplete="off"
+                        id="fast-search-form"
+                    >
                         <span
                             className={classNames(
                                 "opacity-100 pointer-events-none absolute top-0 right-0 w-10 h-full flex items-center justify-center",
@@ -97,6 +101,7 @@ export const SearchInput = memo((props: Props) => {
                                 { ["opacity-100 pointer-events-auto"]: isActive && !!inputValue }
                             )}
                             onClick={cleanInput}
+                            type="button"
                         >
                             <Close />
                         </button>

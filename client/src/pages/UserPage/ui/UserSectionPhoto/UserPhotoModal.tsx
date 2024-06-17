@@ -74,19 +74,15 @@ const Modal = ({ image, crop, onCloseModal, isModal }: Props) => {
 
     return (
         <Box className={classNames("gap-0 sm:gap-0 p-0 sm:p-0 shadow-0")}>
-            <UserBox>
+            <UserBox bottom>
                 <Heading headinglevel={1}>{t("user.photo-preview")}</Heading>
             </UserBox>
-            <UserBox className="gap-2 sm:gap-4">
+            <UserBox>
                 <div className="flex items-center justify-center">
                     <canvas className="w-[250px] h-[250px] rounded-xl" ref={canvasRef} />
                 </div>
 
-                <GridMsg
-                    isOpen={isError}
-                    msg={formatServerError(error)}
-                    className="bg-my-red-300"
-                />
+                <GridMsg isError isOpen={isError} msg={formatServerError(error)} />
                 <UserBoxSeparator />
                 <div className="border-0 flex self-center gap-2">
                     <Button isLoading={isLoading} onClick={onSave} theme="blue">

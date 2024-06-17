@@ -48,7 +48,7 @@ export const NavbarMain = ({ onSetOpenView, onClose }: Props) => {
 
     return (
         <div>
-            <div className="py-2 px-4 border-b border-border">
+            <div className="py-2 px-4">
                 {user ? (
                     <AppLink to={routePath.user} theme="button" onClick={onClose}>
                         {t("nav.profile")}
@@ -60,6 +60,8 @@ export const NavbarMain = ({ onSetOpenView, onClose }: Props) => {
                 )}
             </div>
 
+            <UserBoxSeparator />
+
             <ul className="flex flex-col py-2">
                 {Object.keys(options).map((optionKey) => {
                     const item = options[optionKey as NavbarOptions];
@@ -70,7 +72,7 @@ export const NavbarMain = ({ onSetOpenView, onClose }: Props) => {
                             <Button
                                 onClick={() => onSetOpenView(item.value)}
                                 theme="popup"
-                                className="gap-4 py-2 text-base w-full justify-start"
+                                className="gap-4 py-2 w-full justify-start"
                             >
                                 {
                                     <item.Icon className="w-8 flex items-center justify-center text-xl shrink-0" />
@@ -84,11 +86,11 @@ export const NavbarMain = ({ onSetOpenView, onClose }: Props) => {
             {user && (
                 <>
                     <UserBoxSeparator />
-                    <div className="py-2 px-4 flex justify-end">
+                    <div className="py-2 px-4">
                         <Button
                             isLoading={isLoading}
                             theme="blue"
-                            className="self-end"
+                            className="w-full"
                             onClick={onLogout}
                         >
                             {t("btn.log-out")}

@@ -9,6 +9,7 @@ import { getFilmTitle } from "@/shared/lib/getFilmTitle";
 import { AppImage } from "@/shared/ui/AppImage/AppImage";
 import { AppLink } from "@/shared/ui/AppLink/AppLink";
 import { Box } from "@/shared/ui/Boxes/Box";
+import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { FilmCardPropsT } from "../model/types";
 
@@ -115,7 +116,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
             <li>
                 <Box className="gap-4 relative">
                     <div className="flex gap-4">
-                        <div className="relative w-36 h-52 rounded-xl overflow-hidden shrink-0 border border-my-neutral-200">
+                        <div className="relative w-36 h-52 rounded-xl overflow-hidden shrink-0">
                             <AppImage src={posterUrlPreview} alt={`${filmTitle} poster`} />
                             <div className="absolute top-2 left-2 flex items-center gap-2">
                                 {stats.map(
@@ -152,6 +153,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                                     </button>
                                 )}
                             </div>
+                            <UserBoxSeparator />
                             <div className="flex-1 flex flex-col gap-1 font-normal text-sm">
                                 {filmLength && (
                                     <p>

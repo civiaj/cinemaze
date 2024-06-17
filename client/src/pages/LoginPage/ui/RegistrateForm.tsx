@@ -38,7 +38,7 @@ export const RegistrateForm = (props: Props) => {
     };
 
     return (
-        <form onSubmit={onSubmitHandler}>
+        <form onSubmit={onSubmitHandler} id="registration-form">
             <Box className="w-80 px-6 overflow-hidden">
                 <Heading headinglevel={1}>{t("login.register")}</Heading>
                 <UserBoxSeparator />
@@ -75,11 +75,7 @@ export const RegistrateForm = (props: Props) => {
                         onCleanInput={() => setConfirmPassword("")}
                     />
 
-                    <GridMsg
-                        msg={formatServerError(error)}
-                        isOpen={isError}
-                        className="bg-my-red-300"
-                    />
+                    <GridMsg msg={formatServerError(error)} isOpen={isError} isError />
                 </div>
                 <div className="flex justify-center flex-col gap-2">
                     <Button isLoading={isLoading} theme="blue" type="submit">

@@ -52,6 +52,7 @@ export default {
             animation: {
                 enter: "enter .2s ease-out",
                 leave: "leave .15s ease-in forwards",
+                rotate: "rotate 6s linear infinite",
             },
             keyframes: {
                 enter: {
@@ -73,6 +74,10 @@ export default {
                         opacity: "0",
                         transform: "translateY(40px)",
                     },
+                },
+                rotate: {
+                    "0%": { transform: "rotate(0deg) scale(2)" },
+                    "100%": { transform: "rotate(-360deg) scale(2)" },
                 },
             },
             colors: {

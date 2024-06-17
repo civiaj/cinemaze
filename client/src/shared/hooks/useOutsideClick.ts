@@ -16,10 +16,10 @@ export const useOutsideClick = (
             }
         };
 
-        document.addEventListener("click", handleClick, { capture });
+        document.addEventListener("mouseup", handleClick, { capture });
 
         return () => {
-            document.removeEventListener("click", handleClick, { capture });
+            document.removeEventListener("mouseup", handleClick, { capture });
         };
     }, [ref, handleClose, capture, preventClose]);
 

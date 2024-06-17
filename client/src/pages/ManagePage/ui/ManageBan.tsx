@@ -80,11 +80,7 @@ export const ManageBan = ({ user, onSetManageView, onSetActive }: Props) => {
 
             {isError && (
                 <div className="w-full">
-                    <GridMsg
-                        className="bg-my-red-200"
-                        isOpen={isError}
-                        msg={formatServerError(error)}
-                    />
+                    <GridMsg isOpen={isError} msg={formatServerError(error)} isError />
                 </div>
             )}
 

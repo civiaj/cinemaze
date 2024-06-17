@@ -47,7 +47,7 @@ export const ResetForm = () => {
         );
 
     return (
-        <form onSubmit={onResetPasswrod}>
+        <form onSubmit={onResetPasswrod} id="reset-form">
             <Box className="w-80 px-6">
                 <Heading headinglevel={1}>{t("login.forget-t")}</Heading>
 
@@ -71,11 +71,7 @@ export const ResetForm = () => {
                         onCleanInput={() => setConfirmPassword("")}
                     />
                 </div>
-                <GridMsg
-                    msg={formatServerError(error)}
-                    isOpen={isError}
-                    className="bg-my-red-300"
-                />
+                <GridMsg msg={formatServerError(error)} isOpen={isError} isError />
 
                 <div className="flex justify-center flex-col gap-2">
                     <Button theme="blue" type="submit" isLoading={isLoading}>

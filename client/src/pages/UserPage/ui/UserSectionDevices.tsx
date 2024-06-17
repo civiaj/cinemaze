@@ -28,18 +28,16 @@ export const UserSectionDevices = () => {
     return (
         <>
             <Box className="sm:p-0 p-0 gap-0 sm:gap-0">
-                <UserBox>
+                <UserBox bottom>
                     <div className="flex items-center gap-4">
                         <AppLink to={routePath.user} theme="regular-icon" className="rounded-full">
                             <Left />
                         </AppLink>
-                        <Heading headinglevel={1} className="font-medium">
-                            {t("user.devices")}
-                        </Heading>
+                        <Heading headinglevel={1}>{t("user.devices")}</Heading>
                     </div>
                 </UserBox>
 
-                <UserBox>
+                <UserBox bottom>
                     <div className="grid grid-cols-[2fr,3fr] items-start gap-x-4">
                         <Elipsis>{t("user.devices-current")}</Elipsis>
                         {loading ? (
@@ -54,7 +52,7 @@ export const UserSectionDevices = () => {
                         )}
                     </div>
                 </UserBox>
-                <UserBox>
+                <UserBox bottom>
                     <div className="grid grid-cols-[2fr,3fr] items-start gap-x-4">
                         <Elipsis>{t("user.devices-active")}</Elipsis>
                         <div className="flex flex-col gap-2">
@@ -89,14 +87,14 @@ export const UserSectionDevices = () => {
                         </div>
                     </div>
                 </UserBox>
-                <UserBox className="border-0">
+                <UserBox>
                     {loading ? (
                         <Skeleton className="h-10 self-end w-52 sm:w-56" />
                     ) : (
                         <Button
                             onClick={() => setModalData("all")}
                             className="self-end gap-2"
-                            theme="danger"
+                            theme="blue"
                             disabled={!data?.other.length}
                         >
                             <Stop className="text-xl" />
@@ -125,28 +123,31 @@ const DevicesModal = ({ modalData, onClose }: { modalData: ModalData; onClose: (
     if (!modalData) return null;
 
     return (
-        <Modal onClose={onClose} header={t("Devices")} theme="danger">
-            {modalData === "all" ? (
-                <p>{t("user.devices-end-all-msg")}</p>
-            ) : (
-                <>
-                    <p>{t("user.devices-end-msg")}:</p>
-                    <UserBox className="border rounded-xl">
-                        <Elipsis className="font-medium">
-                            {modalData.os} {modalData.browser} {modalData.version}
-                        </Elipsis>
-                    </UserBox>
-                </>
-            )}
-            {<GridMsg isOpen={isError} msg={formatServerError(error)} className="bg-my-red-300" />}
-            <div className="flex gap-2 self-end">
-                <Button isLoading={isLoading} onClick={onRemoveSession} theme="danger">
+        <Modal onClose={onClose} theme="confirm">
+            <Modal.Header header={t("Devices")} onClose={onClose} />
+            <Modal.Body>
+                {modalData === "all" ? (
+                    <p>{t("user.devices-end-all-msg")}</p>
+                ) : (
+                    <>
+                        <p>{t("user.devices-end-msg")}:</p>
+                        <UserBox rounded className="px-2 py-2 sm:px-2">
+                            <Elipsis className="font-medium">
+                                {modalData.os} {modalData.browser} {modalData.version}
+                            </Elipsis>
+                        </UserBox>
+                    </>
+                )}
+                {<GridMsg isOpen={isError} msg={formatServerError(error)} isError />}
+            </Modal.Body>
+            <Modal.Controls theme="confirm">
+                <Button isLoading={isLoading} onClick={onRemoveSession} theme="blue">
                     <Text>{t("btn.end")}</Text>
                 </Button>
                 <Button onClick={onClose} theme="regular">
                     <Text>{t("btn.cancel")}</Text>
                 </Button>
-            </div>
+            </Modal.Controls>
         </Modal>
     );
 };

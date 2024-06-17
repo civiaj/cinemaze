@@ -4,6 +4,7 @@ export const SECTIONS_USER = {
     DEVICES: "devices",
     PASSWORD: "password",
     ROLE: "role",
+    DELETE: "delete",
 } as const;
 
 export type TUserSection = ObjectValues<typeof SECTIONS_USER>;

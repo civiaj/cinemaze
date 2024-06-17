@@ -1,10 +1,26 @@
+import { useEffect, useState } from "react";
 import toast, { ToastIcon, Toaster, resolveValue } from "react-hot-toast";
 import { Close } from "@/shared/assets/icons";
 
 export const ToasterProvider = () => {
+    const [bottom, setBottom] = useState(8);
+
+    useEffect(() => {
+        const updateBottom = () => {
+            if (document.body.clientWidth < 640) {
+                setBottom(60);
+            } else {
+                setBottom(8);
+            }
+        };
+        updateBottom();
+        window.addEventListener("resize", updateBottom);
+        return () => window.removeEventListener("resize", updateBottom);
+    }, []);
+
     return (
         <Toaster
-            containerStyle={{ bottom: 8, left: 8 }}
+            containerStyle={{ bottom, left: 8 }}
             toastOptions={{ duration: 5000, position: "bottom-left" }}
         >
             {(t) => (

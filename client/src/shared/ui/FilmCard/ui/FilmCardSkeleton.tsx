@@ -23,7 +23,7 @@ export const FilmCardSkeleton = (props: Props) => {
                     )}
                 />
 
-                <Skeleton className="w-8 h-6 absolute top-2 right-2 bg-my-neutral-200" />
+                <Skeleton className="w-10 h-6 absolute top-2 left-2 bg-my-neutral-200" />
             </li>
         );
 

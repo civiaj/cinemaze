@@ -14,7 +14,7 @@ export const Box = forwardRef<HTMLDivElement, ContainerProps>((props, ref) => {
             ref={ref}
             style={style}
             className={classNames(
-                "bg-my-white rounded-xl py-4 px-2 flex flex-col gap-2 sm:gap-4 sm:py-6 sm:px-6 shadow-md shadow-my-neutral-200",
+                "bg-my-white rounded-xl py-4 px-4 flex flex-col gap-2 sm:gap-4 sm:py-6 sm:px-6 shadow-md shadow-my-neutral-200",
                 {},
                 [className]
             )}

@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, Ref, useRef, useState } from "react";
+import { InputHTMLAttributes, forwardRef, useCallback, useRef, useState } from "react";
 import { Close } from "@/shared/assets/icons";
 import { classNames } from "@/shared/lib/classNames";
 import { Button } from "@/shared/ui/Button/Button";
@@ -9,12 +9,27 @@ type Props = {
     onCleanInput: () => void;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-export const FancyInput = (props: Props) => {
+export const FancyInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
     const { placeholder = "Введите значение", value, onCleanInput, ...other } = props;
-    const inputRef: Ref<HTMLInputElement> = useRef(null);
     const [isFocused, setIsFocused] = useState(false);
-
     const condition = isFocused || Boolean(value);
+    const innerRef = useRef<HTMLInputElement | null>(null);
+
+    const combineRef = useCallback(
+        (node: HTMLInputElement | null) => {
+            if (ref) {
+                if (typeof ref === "function") {
+                    ref(node);
+                } else {
+                    (ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
+                }
+            }
+            if (innerRef.current !== null) {
+                innerRef.current = node;
+            }
+        },
+        [ref]
+    );
 
     return (
         <div className="w-full text-inherit rounded-xl h-12 relative">
@@ -27,7 +42,7 @@ export const FancyInput = (props: Props) => {
                 {placeholder}
             </div>
             <Input
-                ref={inputRef}
+                ref={combineRef}
                 value={value}
                 className={classNames("pt-3 w-full h-full", { ["pr-14"]: condition })}
                 {...other}
@@ -44,7 +59,7 @@ export const FancyInput = (props: Props) => {
                     )}
                     onClick={() => {
                         onCleanInput();
-                        inputRef.current?.focus();
+                        innerRef.current?.focus();
                     }}
                 >
                     <Close className="text-lg" />
@@ -52,4 +67,4 @@ export const FancyInput = (props: Props) => {
             </div>
         </div>
     );
-};
+});

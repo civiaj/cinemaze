@@ -193,11 +193,7 @@ export const ManageViewAndUpdate = ({
             </div>
             {manageView === "update" && isError && (
                 <div className="w-full">
-                    <GridMsg
-                        className="bg-my-red-200"
-                        isOpen={isError}
-                        msg={formatServerError(error)}
-                    />
+                    <GridMsg isOpen={isError} msg={formatServerError(error)} isError />
                 </div>
             )}
             <UserBoxSeparator />
@@ -253,31 +249,41 @@ export const ManageViewAndUpdate = ({
                 )}
             </div>
             {isUnban && (
-                <Modal theme="success" header={t(`manage.t`)} onClose={onCloseUnban}>
-                    <Text>
-                        {t("manage.unban-message")} {displayName}?
-                    </Text>
-                    {banExpiration && (
-                        <UserBox className="border rounded-xl">
-                            <Text className="sm:text-sm">
-                                {t("manage.banExpiration")}:{" "}
-                                {formatDate(new Date(banExpiration), i18n.language, "long")}
-                            </Text>
-                            {Boolean(banMessage) && (
-                                <Text className="sm:text-sm">
-                                    {t("manage.banMessage")}: {banMessage}
-                                </Text>
-                            )}
-                        </UserBox>
-                    )}
-                    {unban.isError && (
-                        <GridMsg
-                            className="bg-my-red-200"
-                            isOpen={unban.isError}
-                            msg={formatServerError(unban.error)}
-                        />
-                    )}
-                    <div className="self-end flex items-center justify-center gap-2">
+                <Modal theme="success" onClose={onCloseUnban}>
+                    <Modal.Header header={t(`manage.t`)} onClose={onCloseUnban} />
+                    <Modal.Body>
+                        <Text>
+                            {t("manage.unban-message")} <strong>{displayName}</strong> ?
+                        </Text>
+                        {banExpiration && (
+                            <UserBox rounded>
+                                <div>
+                                    {Boolean(banMessage) && (
+                                        <Text className="font-medium">
+                                            {t("manage.banMessage")}:{" "}
+                                        </Text>
+                                    )}
+                                    <Text>{banMessage}</Text>
+                                </div>
+                                <div>
+                                    <Text className="font-medium">
+                                        {t("manage.banExpiration")}:{" "}
+                                    </Text>
+                                    <Text>
+                                        {formatDate(new Date(banExpiration), i18n.language, "long")}
+                                    </Text>
+                                </div>
+                            </UserBox>
+                        )}
+                        {unban.isError && (
+                            <GridMsg
+                                isOpen={unban.isError}
+                                msg={formatServerError(unban.error)}
+                                isError
+                            />
+                        )}
+                    </Modal.Body>
+                    <Modal.Controls theme="success">
                         <Button
                             className="font-medium"
                             theme="success"
@@ -289,7 +295,7 @@ export const ManageViewAndUpdate = ({
                         <Button onClick={handleCancelUnban} theme="regular" className="font-medium">
                             <Text>{t("btn.cancel")}</Text>
                         </Button>
-                    </div>
+                    </Modal.Controls>
                 </Modal>
             )}
         </>

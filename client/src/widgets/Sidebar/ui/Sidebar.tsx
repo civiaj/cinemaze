@@ -1,5 +1,5 @@
 import { AnimatedComponent, animated, useTransition } from "@react-spring/web";
-import { CSSProperties, FC, useCallback, useMemo } from "react";
+import { CSSProperties, FC, useCallback, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch, useAppSelector } from "@/app/store";
@@ -36,6 +36,21 @@ export const Sidebar = () => {
         []
     );
 
+    useEffect(() => {
+        const updateSidebar = () => {
+            const sm = 640;
+            if (document.body.clientWidth <= sm) {
+                handleClose();
+            }
+        };
+
+        window.addEventListener("resize", updateSidebar);
+
+        return () => {
+            window.removeEventListener("scroll", updateSidebar);
+        };
+    }, [handleClose]);
+
     if (pathname.includes(routePath.login)) return null;
 
     return transitions(
@@ -44,7 +59,7 @@ export const Sidebar = () => {
                 <>
                     <animated.aside
                         style={{ ...style }}
-                        className="bg-my-white shadow-sm shadow-my-neutral-200 z-30 py-2 flex flex-col justify-between fixed top-0 left-0 h-[100dvh] mt-14"
+                        className="bg-my-white shadow-sm shadow-my-neutral-200 z-30 py-2 hidden sm:flex flex-col justify-between fixed top-0 left-0 h-[100dvh] mt-14 overflow-y-scroll"
                     >
                         <ul className="p-2 hidden flex-col gap-1 w-64 3xl:flex">
                             {sidebarItems.map((sidebarItem) => (
@@ -66,7 +81,7 @@ export const Sidebar = () => {
                     <WrappedOverlay
                         onClick={handleClose}
                         style={{ ...style, transform: "translateX(0)" }}
-                        className="3xl:hidden block"
+                        className="hidden sm:block 3xl:hidden"
                     />
                 </>
             )

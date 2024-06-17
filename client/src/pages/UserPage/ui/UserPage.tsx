@@ -1,6 +1,7 @@
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppSelector } from "@/app/store";
+import { UserSectionDelete } from "@/pages/UserPage/ui/UserSectionDelete";
 import { Page } from "@/entities/Ui";
 import { selectUser } from "@/entities/User";
 import { TUserSection } from "../model/types";
@@ -44,6 +45,7 @@ const UserPage = () => {
                 />
             )}
             {section?.startsWith("role") && <UserSectionRole onClose={onClose} role={user.role} />}
+            {section?.startsWith("delete") && <UserSectionDelete />}
         </Page>
     );
 };

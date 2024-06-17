@@ -19,7 +19,7 @@ const ErrorFallback = ({ msg }: Props) => {
                     <Text>{t("boundary.b")}</Text>
                 </div>
                 {Boolean(msg) && (
-                    <UserBox className="border rounded-xl justify-start text-start">
+                    <UserBox rounded className="justify-start text-start">
                         <Text>{msg}</Text>
                     </UserBox>
                 )}

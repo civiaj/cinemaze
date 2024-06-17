@@ -5,12 +5,11 @@ import { useUpdateRoleMutation } from "@/entities/User/model/userApi";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { classNames } from "@/shared/lib/classNames";
 import { Modal } from "@/shared/ui/Boxes/Modal";
+import { UserBox } from "@/shared/ui/Boxes/UserBox";
 import { Button } from "@/shared/ui/Button/Button";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
 import { Text } from "@/shared/ui/Text/Text";
 import { roleOptions } from "../model/data";
-
-
 
 type Props = {
     onClose: () => void;
@@ -29,14 +28,15 @@ export const UserSectionRole = ({ onClose, role }: Props) => {
     };
 
     return (
-        <Modal onClose={onClose} header={t("user.role-change")}>
-            <div className="flex flex-col gap-2">
-                <div className="flex gap-4 items-center">
-                    <Text className="font-medium">{t("user.role-change-current")}:</Text>
-                    <Button theme="regularTag" className="pointer-events-none" disabled>
-                        <Text>{role}</Text>
-                    </Button>
-                </div>
+        <Modal onClose={onClose}>
+            <Modal.Header header={t("user.role-change")} withCloseBtn onClose={onClose} />
+            <Modal.Body>
+                <UserBox className="border rounded-xl px-2 py-2 sm:px-2">
+                    <div className="flex gap-4 items-center">
+                        <Text>{t("user.role-change-current")}:</Text>
+                        <Text className="font-medium">{role}</Text>
+                    </div>
+                </UserBox>
                 <div className="flex gap-2 items-center">
                     <Text className="font-medium">{t("user.role-change-new")}:</Text>
                     <div className="flex gap-2">
@@ -60,13 +60,10 @@ export const UserSectionRole = ({ onClose, role }: Props) => {
                         })}
                     </div>
                 </div>
-                <GridMsg
-                    className="self-start bg-my-red-300"
-                    msg={formatServerError(error)}
-                    isOpen={isError}
-                />
-            </div>
-            <div className="flex gap-2 justify-end">
+                <GridMsg isError msg={formatServerError(error)} isOpen={isError} />
+            </Modal.Body>
+
+            <Modal.Controls theme={!newRole ? "none" : "confirm"}>
                 <Button
                     disabled={!newRole}
                     isLoading={isLoading}
@@ -78,7 +75,7 @@ export const UserSectionRole = ({ onClose, role }: Props) => {
                 <Button theme="regular" onClick={onClose}>
                     {t("btn.cancel")}
                 </Button>
-            </div>
+            </Modal.Controls>
         </Modal>
     );
 };

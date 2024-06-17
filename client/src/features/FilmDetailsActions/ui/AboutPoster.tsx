@@ -25,7 +25,7 @@ export const AboutPoster = (props: PosterProps) => {
                 <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 to-transparent to-50% z-[1] rounded-b-xl vsm:hidden" />
             </div>
             {link && (
-                <form>
+                <form id="open-kp-form">
                     <Button
                         type="submit"
                         formTarget="_blank"

@@ -72,7 +72,7 @@ export const Navbar = () => {
             )}
             onMouseDown={() => setWasClicked(true)}
         >
-            <Button theme="regularNavIcon" onClick={handleToggle}>
+            <Button theme="regularNavIcon" onClick={handleToggle} className="hidden sm:flex">
                 <Menu />
             </Button>
 

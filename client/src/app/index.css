@@ -93,6 +93,11 @@ BODY {
     scroll-margin-top: var(--navbar-height);
 }
 
+.modal-wrapper::before {
+    background: conic-gradient(rgba(244, 144, 182, 0.4) 0deg, black);
+    @apply absolute h-[150%] w-[150%] -translate-x-[25%] -translate-y-[25%] animate-spin content-[''];
+}
+
 @layer base {
     @font-face {
         font-family: "FavoritBookC";

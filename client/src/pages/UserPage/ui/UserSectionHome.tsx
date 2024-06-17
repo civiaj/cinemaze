@@ -21,7 +21,7 @@ export const UserSectionHome = ({ user }: Props) => {
 
     return (
         <Box className="sm:p-0 p-0 gap-0 sm:gap-0 overflow-hidden">
-            <UserBox className="gap-0">
+            <UserBox bottom>
                 <Heading headinglevel={1}>{t("user-t")}</Heading>
                 <div className="hidden grid-cols-[1fr_max-content] place-items-end gap-x-2 sm:grid">
                     <Text className="text-xs sm:text-xs">{t("user.created")}:</Text>
@@ -34,7 +34,7 @@ export const UserSectionHome = ({ user }: Props) => {
                     </Text>
                 </div>
             </UserBox>
-            <UserBox>
+            <UserBox bottom>
                 <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
                     <Text className="font-medium">{t("user.email")}</Text>
                     <div className="flex flex-col gap-1 overflow-hidden">
@@ -58,7 +58,7 @@ export const UserSectionHome = ({ user }: Props) => {
                 </div>
             </UserBox>
             <AppLink to={`${routePath.user}?section=${SECTIONS_USER.PHOTO}`} theme="user-menu">
-                <UserBox>
+                <UserBox bottom>
                     <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
                         <Text className="font-medium">{t("user.photo")}</Text>
                         <div className="flex justify-between items-center overflow-hidden">
@@ -75,7 +75,7 @@ export const UserSectionHome = ({ user }: Props) => {
             </AppLink>
 
             <AppLink to={`${routePath.user}?section=${SECTIONS_USER.NAME}`} theme="user-menu">
-                <UserBox>
+                <UserBox bottom>
                     <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
                         <Text className="font-medium">{t("user.name")}</Text>
                         <div className="flex justify-between items-center overflow-hidden">
@@ -86,7 +86,7 @@ export const UserSectionHome = ({ user }: Props) => {
                 </UserBox>
             </AppLink>
             <AppLink to={`${routePath.user}?section=${SECTIONS_USER.DEVICES}`} theme="user-menu">
-                <UserBox>
+                <UserBox bottom>
                     <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
                         <Text className="font-medium">{t("user.devices")}</Text>
                         <div className="flex justify-between items-center overflow-hidden">
@@ -101,11 +101,13 @@ export const UserSectionHome = ({ user }: Props) => {
                     to={`${routePath.user}?section=${SECTIONS_USER.PASSWORD}`}
                     theme="user-menu"
                 >
-                    <UserBox>
+                    <UserBox bottom>
                         <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
                             <Text className="font-medium">{t("user.password")}</Text>
                             <div className="flex justify-between items-center overflow-hidden">
-                                <div>{t("user.password-change")}</div>
+                                <div>
+                                    <Text>{t("user.password-change")}</Text>
+                                </div>
                                 <Right className="text-xl shrink-0" />
                             </div>
                         </div>
@@ -113,7 +115,7 @@ export const UserSectionHome = ({ user }: Props) => {
                 </AppLink>
             )}
             <AppLink to={`${routePath.user}?section=${SECTIONS_USER.ROLE}`} theme="user-menu">
-                <UserBox className="border-b-0">
+                <UserBox bottom>
                     <div className="grid grid-cols-[2fr,3fr] items-center gap-x-4">
                         <Text className="font-medium">{t("user.role")}</Text>
                         <div className="flex justify-between items-center overflow-hidden">
@@ -123,12 +125,31 @@ export const UserSectionHome = ({ user }: Props) => {
                     </div>
                 </UserBox>
             </AppLink>
+
+            <AppLink
+                to={routePath.privacy}
+                className="text-center hover:underline hover:text-blue-500"
+            >
+                <UserBox bottom className="sm:py-2 py-2">
+                    {t("privacy.tos-and-policy-t")}
+                </UserBox>
+            </AppLink>
+            <AppLink
+                to={`${routePath.user}?section=${SECTIONS_USER.DELETE}`}
+                className="text-center hover:underline text-red-500 font-medium"
+            >
+                <UserBox bottom={user.isBanned} className="sm:py-2 py-2">
+                    {t("user.delete-a")}
+                </UserBox>
+            </AppLink>
             {user.isBanned && (
                 <AppLink
                     to={routePath.ban}
                     className="text-sm rounded-b-xl hover:bg-my-red-300 bg-my-red-200 font-medium text-center text-neutral-50"
                 >
-                    <UserBox className="py-1 rounded-b-xl">{t("ban.msg-small")}</UserBox>
+                    <UserBox bottom className="sm:py-4 py-2 rounded-b-xl">
+                        {t("ban.msg-small")}
+                    </UserBox>
                 </AppLink>
             )}
         </Box>

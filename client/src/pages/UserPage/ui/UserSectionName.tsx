@@ -4,14 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useUpdateDisplayNameMutation } from "@/entities/User";
 import formatServerError from "@/shared/api/helpers/formatServerError";
-import { Pencil } from "@/shared/assets/icons";
 import { trimInput } from "@/shared/lib/trimInput";
 import { Modal } from "@/shared/ui/Boxes/Modal";
 import { Button } from "@/shared/ui/Button/Button";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
-import { Input } from "@/shared/ui/Input/Input";
+import { FancyInput } from "@/shared/ui/Input/FancyInput";
 import { Elipsis } from "@/shared/ui/Text/Elipsis";
-import { Text } from "@/shared/ui/Text/Text";
 
 type Props = {
     name: string;
@@ -26,11 +24,12 @@ export const UserSectionName = (props: Props) => {
     const [newName, setNewName] = useState(name);
     const trimmedNewName = trimInput(newName, "name");
 
-    const [updateName, { isLoading, isError, error }] = useUpdateDisplayNameMutation();
+    const [updateName, { isLoading, isError, error, reset }] = useUpdateDisplayNameMutation();
 
     const onCancel = () => {
         setNewName(name);
         setIsChanging(false);
+        reset();
     };
 
     const onSave = async () => {
@@ -38,60 +37,44 @@ export const UserSectionName = (props: Props) => {
             .unwrap()
             .then(() => navigate(routePath.user));
     };
-
+    const same = name === trimmedNewName;
     let message: string | null = null;
     if (error) message = formatServerError(error);
 
     return (
-        <Modal header={t("user.name")} onClose={onClose} preventClose={isChanging}>
-            <div className="flex justify-between gap-1 flex-col">
-                <Text className="font-medium">{t("user.name-change-l")}</Text>
-                <div className="flex items-center gap-4">
-                    <div className="w-full flex flex-col gap-2">
-                        {isChanging ? (
-                            <Input
-                                value={newName}
-                                onChange={(e) => setNewName(e.target.value)}
-                                placeholder={t("user.name-change-p")}
-                            />
-                        ) : (
-                            <Elipsis className="sm:text-lg text-base">{name}</Elipsis>
-                        )}
-                        {isChanging && (
-                            <GridMsg
-                                className="self-start bg-my-red-300"
-                                msg={message}
-                                isOpen={isError}
-                            />
-                        )}
-                    </div>
-                    {!isChanging && (
-                        <Button
-                            onClick={() => setIsChanging(true)}
-                            theme="regularIcon"
-                            className="rounded-full"
-                        >
-                            <Pencil />
-                        </Button>
-                    )}
-                </div>
-            </div>
+        <Modal onClose={onClose} preventClose={isChanging}>
+            <Modal.Header header={t("user.name")} onClose={onClose} />
+            <Modal.Body>
+                {isChanging ? (
+                    <FancyInput
+                        onCleanInput={() => setNewName("")}
+                        value={newName}
+                        onChange={(e) => setNewName(e.target.value)}
+                        placeholder={t("user.name-change-p")}
+                    />
+                ) : (
+                    <Elipsis className="sm:text-lg text-base">{name}</Elipsis>
+                )}
 
-            {isChanging && (
-                <div className="flex gap-2 justify-end">
-                    <Button
-                        isLoading={isLoading}
-                        onClick={onSave}
-                        disabled={name === trimmedNewName}
-                        theme="blue"
-                    >
-                        {t("btn.save")}
+                <GridMsg msg={message} isOpen={isError} isError />
+            </Modal.Body>
+
+            <Modal.Controls theme={same ? "none" : "confirm"}>
+                {!isChanging ? (
+                    <Button onClick={() => setIsChanging(true)} theme="regular">
+                        {t("btn.change")}
                     </Button>
-                    <Button theme="regular" onClick={onCancel}>
-                        {t("btn.cancel")}
-                    </Button>
-                </div>
-            )}
+                ) : (
+                    <>
+                        <Button isLoading={isLoading} onClick={onSave} disabled={same} theme="blue">
+                            {t("btn.save")}
+                        </Button>
+                        <Button theme="regular" onClick={onCancel}>
+                            {t("btn.cancel")}
+                        </Button>
+                    </>
+                )}
+            </Modal.Controls>
         </Modal>
     );
 };

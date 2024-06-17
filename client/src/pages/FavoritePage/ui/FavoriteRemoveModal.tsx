@@ -44,47 +44,44 @@ export const FavoriteRemoveModal = (props: Props) => {
     const link = `${routePath.details}/${film?.filmId}`;
 
     return (
-        <Modal onClose={onClose} header={t("favorite.remove-t")} theme="danger">
-            <div>
-                <Text as="span" className="text-start">
-                    {t("favorite.remove-b")}{" "}
-                </Text>
-                {title ? (
-                    <AppLink
-                        className="hover:underline hover:text-my-neutral-700 text-blue-500 "
-                        to={link}
-                    >
-                        {title}
-                    </AppLink>
-                ) : (
-                    <Text as="span">{t("plural.film", { count: 1 })}</Text>
-                )}
-                <Text as="span"> {t("favorite.remove-from-list")} </Text>
-                <Text as="span" className="font-medium">
-                    {t(category)}?
-                </Text>
-            </div>
+        <Modal onClose={onClose} theme="danger">
+            <Modal.Header header={t("favorite.remove-t")} onClose={onClose} />
+            <Modal.Body>
+                <div>
+                    <Text as="span" className="text-start">
+                        {t("favorite.remove-b")}{" "}
+                    </Text>
+                    {title ? (
+                        <AppLink
+                            className="hover:underline hover:text-my-neutral-700 text-blue-500 "
+                            to={link}
+                        >
+                            {title}
+                        </AppLink>
+                    ) : (
+                        <Text as="span">{t("plural.film", { count: 1 })}</Text>
+                    )}
+                    <Text as="span"> {t("favorite.remove-from-list")} </Text>
+                    <Text as="span" className="font-medium">
+                        {t(category)}?
+                    </Text>
+                </div>
 
-            {listVariant !== "all" && (
-                <label className="flex items-center gap-4 cursor-pointer self-start hover:underline relative">
-                    <input
-                        className="appearance-none checked:bg-blue-500 cursor-pointer w-4 h-4 text-blue-500 bg-my-neutral-300 rounded focus:ring-blue-500 peer outline-none focus:ring-2 "
-                        type="checkbox"
-                        checked={all}
-                        onChange={toggleAll}
-                    />
-                    <Text>{t("favorite.remove-all")}</Text>
-                    <Checked className="text-my-neutral-50 absolute left-0 top-1/2 -translate-y-1/2 hidden peer-checked:block" />
-                </label>
-            )}
-            {isError && (
-                <GridMsg
-                    className="bg-my-red-200"
-                    isOpen={isError}
-                    msg={formatServerError(error)}
-                />
-            )}
-            <div className="self-end flex items-center justify-center gap-2">
+                {listVariant !== "all" && (
+                    <label className="flex items-center gap-4 cursor-pointer self-start hover:underline relative">
+                        <input
+                            className="appearance-none checked:bg-blue-500 cursor-pointer w-4 h-4 text-blue-500 bg-my-neutral-300 rounded focus:ring-blue-500 peer outline-none focus:ring-2 "
+                            type="checkbox"
+                            checked={all}
+                            onChange={toggleAll}
+                        />
+                        <Text>{t("favorite.remove-all")}</Text>
+                        <Checked className="text-my-neutral-50 absolute left-0 top-1/2 -translate-y-1/2 hidden peer-checked:block" />
+                    </label>
+                )}
+                <GridMsg isOpen={isError} msg={formatServerError(error)} isError />
+            </Modal.Body>
+            <Modal.Controls theme="danger">
                 <Button
                     className="font-medium"
                     theme="danger"
@@ -96,7 +93,7 @@ export const FavoriteRemoveModal = (props: Props) => {
                 <Button onClick={onClose} theme="regular" className="font-medium">
                     <Text>{t("btn.cancel")}</Text>
                 </Button>
-            </div>
+            </Modal.Controls>
         </Modal>
     );
 };

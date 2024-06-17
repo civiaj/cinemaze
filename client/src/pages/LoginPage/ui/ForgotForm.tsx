@@ -49,7 +49,7 @@ export const ForgotForm = ({ onSectionChange }: Props) => {
         );
 
     return (
-        <form onSubmit={onRequestPasswordReset}>
+        <form onSubmit={onRequestPasswordReset} id="forget-form">
             <Box className="w-80 px-6">
                 <Heading headinglevel={1}>{t("login.forget-t")}</Heading>
                 <div className="w-full flex flex-col gap-2">
@@ -61,11 +61,7 @@ export const ForgotForm = ({ onSectionChange }: Props) => {
                         onChange={(e) => setEmail(e.target.value)}
                         onCleanInput={() => setEmail("")}
                     />
-                    <GridMsg
-                        msg={formatServerError(error)}
-                        isOpen={isError}
-                        className="bg-my-red-300"
-                    />
+                    <GridMsg msg={formatServerError(error)} isOpen={isError} isError />
                 </div>
                 <div className="flex justify-center flex-col gap-2">
                     <Button isLoading={isLoading} theme="blue" type="submit">

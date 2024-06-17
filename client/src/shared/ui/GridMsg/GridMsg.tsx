@@ -7,10 +7,11 @@ type Props = {
     className?: string;
     isOpen: boolean;
     children?: ReactNode;
+    isError?: boolean;
 };
 
 export const GridMsg = (props: Props) => {
-    const { msg, className, isOpen, children } = props;
+    const { msg, className, isOpen, children, isError } = props;
     const transition = useTransition(isOpen, {
         from: { opacity: 0, gridTemplateRows: "0fr" },
         enter: { opacity: 1, gridTemplateRows: "1fr" },
@@ -22,7 +23,15 @@ export const GridMsg = (props: Props) => {
             condition &&
             (msg || children) && (
                 <animated.div style={style} className="grid">
-                    <div className={classNames("rounded-xl overflow-hidden", {}, [className])}>
+                    <div
+                        className={classNames(
+                            "rounded-xl overflow-hidden",
+                            {
+                                ['className="bg-my-red-300"']: isError,
+                            },
+                            [className]
+                        )}
+                    >
                         {children ? (
                             children
                         ) : (
