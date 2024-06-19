@@ -33,6 +33,8 @@ export const MainPageBody = () => {
     const films = useMemo(() => infiniteFilms ?? [], [infiniteFilms]);
     const showEnd = !isLoading && !isFetching && isEnd && !!films.length;
 
+    console.log({ isLoading });
+
     if (!infiniteFilms.length && isError)
         return (
             <PageLikeBox>

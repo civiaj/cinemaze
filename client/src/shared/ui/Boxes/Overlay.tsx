@@ -1,6 +1,7 @@
-import { HTMLAttributes, ReactNode, useEffect, useRef } from "react";
+import { HTMLAttributes, ReactNode, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useHideScroll } from "@/shared/hooks/useHideScroll";
+import { useInert } from "@/shared/hooks/useInert";
 import { classNames } from "@/shared/lib/classNames";
 
 type Props = {
@@ -33,7 +34,6 @@ export const Overlay = (props: Props) => {
     );
 
     if (theme === "modal") return createPortal(Component, document.getElementById("modal")!);
-
     return Component;
 };
 
@@ -43,17 +43,6 @@ const HideScroll = () => {
 };
 
 const WithInert = () => {
-    useEffect(() => {
-        const root = document.getElementById("root");
-        if (root) {
-            root.inert = true;
-        }
-
-        return () => {
-            if (root) {
-                root.inert = false;
-            }
-        };
-    }, []);
+    useInert();
     return null;
 };

@@ -8,7 +8,6 @@ import { getBreadcrumbs } from "../../model/selectors";
 import { Branches } from "../../ui/Breadcrumbs/Branches";
 import { ExtraBreadcrumbs } from "../../ui/Breadcrumbs/ExtraBreadcrumbs";
 
-
 export const BreadcrumbsBody = () => {
     const { details: branches, main } = useAppSelector(getBreadcrumbs);
     const [displayedIndex, setDisplayedIndex] = useState(0);
@@ -81,7 +80,7 @@ export const BreadcrumbsBody = () => {
                 <>
                     <AppLink
                         to={main.pathname}
-                        className="hover:underline hover:text-blue-500 whitespace-nowrap font-medium shrink-0 text-lg"
+                        className="hover:underline hover:text-blue-500 whitespace-nowrap font-medium shrink-0 text-lg sm:text-xl"
                     >
                         {t(main.label)}
                     </AppLink>

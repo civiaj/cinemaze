@@ -10,7 +10,7 @@ export const useUpdateHeight = (extraHeigth: number = 0) => {
         window.addEventListener("resize", updateHeight);
 
         return () => {
-            window.removeEventListener("scroll", updateHeight);
+            window.removeEventListener("resize", updateHeight);
         };
     }, [extraHeigth]);
 

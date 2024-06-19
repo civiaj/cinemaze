@@ -7,7 +7,7 @@ import { Box } from "@/shared/ui/Boxes/Box";
 import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
 import { Button } from "@/shared/ui/Button/Button";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
-import { FancyInput } from "@/shared/ui/Input/FancyInput";
+import { Input } from "@/shared/ui/Input/Input";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
 import { LoginSections } from "../model/types";
@@ -43,7 +43,8 @@ export const RegistrateForm = (props: Props) => {
                 <Heading headinglevel={1}>{t("login.register")}</Heading>
                 <UserBoxSeparator />
                 <div className="w-full flex flex-col gap-2">
-                    <FancyInput
+                    <Input
+                        fancy
                         autoComplete="username"
                         name="email"
                         placeholder={t("login.email")}
@@ -51,14 +52,16 @@ export const RegistrateForm = (props: Props) => {
                         onChange={(e) => setEmail(e.target.value)}
                         onCleanInput={() => setEmail("")}
                     />
-                    <FancyInput
+                    <Input
+                        fancy
                         autoComplete="name"
                         placeholder={t("login.name")}
                         value={displayName}
                         onChange={(e) => setDisplayName(e.target.value)}
                         onCleanInput={() => setDisplayName("")}
                     />
-                    <FancyInput
+                    <Input
+                        fancy
                         type="password"
                         autoComplete="new-password"
                         placeholder={t("login.password")}
@@ -66,7 +69,8 @@ export const RegistrateForm = (props: Props) => {
                         onChange={(e) => setPassword(e.target.value)}
                         onCleanInput={() => setPassword("")}
                     />
-                    <FancyInput
+                    <Input
+                        fancy
                         type="password"
                         autoComplete="new-password"
                         placeholder={t("login.confirm")}

@@ -8,7 +8,7 @@ import { trimInput } from "@/shared/lib/trimInput";
 import { Modal } from "@/shared/ui/Boxes/Modal";
 import { Button } from "@/shared/ui/Button/Button";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
-import { FancyInput } from "@/shared/ui/Input/FancyInput";
+import { Input } from "@/shared/ui/Input/Input";
 import { Elipsis } from "@/shared/ui/Text/Elipsis";
 
 type Props = {
@@ -46,7 +46,8 @@ export const UserSectionName = (props: Props) => {
             <Modal.Header header={t("user.name")} onClose={onClose} />
             <Modal.Body>
                 {isChanging ? (
-                    <FancyInput
+                    <Input
+                        fancy
                         onCleanInput={() => setNewName("")}
                         value={newName}
                         onChange={(e) => setNewName(e.target.value)}

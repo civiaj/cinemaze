@@ -6,6 +6,7 @@ import { classNames } from "@/shared/lib/classNames";
 import { numberWithSpaces } from "@/shared/lib/numberWithSpaces";
 import { ColoredNumber } from "@/shared/ui/ColoredNumber/ColoredNumber";
 import { Heading } from "@/shared/ui/Text/Heading";
+import { Text } from "@/shared/ui/Text/Text";
 
 interface AboutProps {
     filmId: number;
@@ -70,7 +71,7 @@ export const AboutDetails = memo((props: AboutProps) => {
     ];
 
     return (
-        <div className="flex flex-col gap-2 mt-4 vsm:mt-0">
+        <div className="flex flex-col gap-4 mt-4 vsm:mt-0">
             <Heading headinglevel={3}>{t("details.about-movie")}</Heading>
             <ul className="flex flex-col gap-2">
                 {details.map((detail) => (
@@ -80,8 +81,8 @@ export const AboutDetails = memo((props: AboutProps) => {
                             ["grid mdb:hidden"]: !!detail.special,
                         })}
                     >
-                        <span className="text-my-neutral-500 break-words">{t(detail.title)}</span>
-                        <span
+                        <Text className="text-my-neutral-500 break-words">{t(detail.title)}</Text>
+                        <Text
                             className={classNames("break-words place-self-start", {
                                 ["uppercase border px-1 border-my-neutral-800 font-bold"]:
                                     (detail.title == "details.mpaa" ||
@@ -90,7 +91,7 @@ export const AboutDetails = memo((props: AboutProps) => {
                             })}
                         >
                             {detail.data ?? EMPTY_LINE}
-                        </span>
+                        </Text>
                     </li>
                 ))}
             </ul>

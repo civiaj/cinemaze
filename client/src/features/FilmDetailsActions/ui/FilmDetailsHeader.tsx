@@ -57,8 +57,8 @@ export const FilmDetailsHeader = ({ details, updateFavorite, disabled }: Props) 
     ];
 
     return (
-        <header className="flex flex-col absolute top-2 left-2 gap-2 vsm:gap-4 vsm:static z-[1]">
-            <div className="flex flex-col gap-0 vsm:gap-1">
+        <header className="flex flex-col absolute top-2 left-2 gap-2 vsm:gap-4 vsm:static z-[1] p-2 vsm:p-0">
+            <div className="flex flex-col gap-1 vsm:gap-2">
                 <Heading headinglevel={1} className="text-neutral-50 vsm:text-inherit">
                     {label} ({year})
                 </Heading>
@@ -68,7 +68,7 @@ export const FilmDetailsHeader = ({ details, updateFavorite, disabled }: Props) 
                     </span>
                 )}
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-2">
                 <Button
                     disabled={disabled}
                     onClick={() => onTogglProperty("bookmarked")}
@@ -91,7 +91,7 @@ export const FilmDetailsHeader = ({ details, updateFavorite, disabled }: Props) 
                     <div className="relative">
                         <PopupList
                             transitionValue={isOpen}
-                            className="absolute top-0 right-0 w-48 sm:left-0"
+                            className="absolute top-0 right-0 w-56 sm:left-0"
                             itemCount={options.length}
                             render={({ index, style }) => (
                                 <Button onClick={options[index].action} theme="popup" style={style}>

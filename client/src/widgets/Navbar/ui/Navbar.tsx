@@ -7,7 +7,7 @@ import { allowNavbarScroll, uiActions } from "@/entities/Ui";
 import { Menu } from "@/shared/assets/icons";
 import { classNames } from "@/shared/lib/classNames";
 import { Button } from "@/shared/ui/Button/Button";
-import { NavigationAuth } from "./NavigationAuth/NavigationAuth";
+import { NavbarAuthPopup } from "./NavbarAuthPopup/NavbarAuthPopup";
 
 const min = 0;
 
@@ -78,7 +78,7 @@ export const Navbar = () => {
 
             <SearchInput isActive={isActive} setActive={onOpenSearch} />
             <div className="flex gap-4 items-center">
-                <NavigationAuth />
+                <NavbarAuthPopup />
             </div>
         </nav>
     );

@@ -82,6 +82,7 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
         active = false,
         theme,
         disabled = false,
+        type = "button",
         isLoading,
         ...otherProps
     } = props;
@@ -91,6 +92,7 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
     return (
         <button
             ref={ref}
+            type={type}
             className={classNames(
                 "outline-none focus-visible:ring-2 focus-visible:ring-blue-500 flex items-center justify-between h-10 text-start shrink-0 ring-offset-0 relative text-sm sm:text-base",
                 {

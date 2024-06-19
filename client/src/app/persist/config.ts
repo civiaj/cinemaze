@@ -44,11 +44,11 @@ export const managePagePersistConfig = {
 
 // add all keys here to remove from local storage after logout
 export const persistConfigKeys = [
-    "appstorage",
-    "ui",
-    "mainPage",
-    "favoritePage",
-    "searchPage",
-    "statisticsPage",
-    "manage",
-];
+    persistConfig,
+    uiConfig,
+    mainPagePersistConfig,
+    favoritePagePersistConfig,
+    searchPagePersistConfig,
+    statisticsPagePersistConfig,
+    managePagePersistConfig,
+].map((config) => config.key);

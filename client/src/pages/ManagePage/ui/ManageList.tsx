@@ -58,10 +58,11 @@ export const ManageList = () => {
 
     return (
         <Box>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center gap-4">
                 <Heading headinglevel={1}>{t("manage-t")}</Heading>
                 <Input
                     value={query}
+                    onCleanInput={() => setQuery("")}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder={t("manage.search-name")}
                 />

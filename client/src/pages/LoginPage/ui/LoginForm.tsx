@@ -6,7 +6,7 @@ import { Box } from "@/shared/ui/Boxes/Box";
 import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
 import { Button } from "@/shared/ui/Button/Button";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
-import { FancyInput } from "@/shared/ui/Input/FancyInput";
+import { Input } from "@/shared/ui/Input/Input";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
 import { LoginSections } from "../model/types";
@@ -36,7 +36,7 @@ export const LoginForm = (props: Props) => {
                 <Heading headinglevel={1}>{t("login-t")}</Heading>
                 <UserBoxSeparator />
                 <div className="w-full flex flex-col gap-2">
-                    <FancyInput
+                    <Input
                         type="text"
                         autoComplete="username"
                         name="email"
@@ -44,14 +44,16 @@ export const LoginForm = (props: Props) => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         onCleanInput={() => setEmail("")}
+                        fancy
                     />
-                    <FancyInput
+                    <Input
                         type="password"
                         autoComplete="current-password"
                         placeholder={t("login.password")}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         onCleanInput={() => setPassword("")}
+                        fancy
                     />
                 </div>
                 <GridMsg msg={formatServerError(error)} isOpen={isError} isError />
@@ -63,7 +65,6 @@ export const LoginForm = (props: Props) => {
                     <Button
                         theme="clean"
                         className="justify-center"
-                        type="button"
                         onClick={() => onSectionChange("registrate")}
                     >
                         <Text>{t("btn.register")}</Text>

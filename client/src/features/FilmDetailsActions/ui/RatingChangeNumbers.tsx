@@ -1,4 +1,5 @@
 import { FilledStar } from "@/shared/assets/icons";
+import withFocusTrap from "@/shared/hoc/withFocusTrap";
 import { classNames } from "@/shared/lib/classNames";
 import { Button } from "@/shared/ui/Button/Button";
 
@@ -6,9 +7,9 @@ interface RatingChangeNumbersProps {
     onSetScore: (newValue: number) => void;
 }
 
-export const RatingChangeNumbers = ({ onSetScore }: RatingChangeNumbersProps) => {
+export const RatingChangeNumbers = withFocusTrap(({ onSetScore }: RatingChangeNumbersProps) => {
     return (
-        <ul className="absolute right-0 top-0 rounded-full flex text-secondary px-4 bg-my-neutral-100">
+        <ul className="absolute right-0 top-0 rounded-full flex text-secondary px-4 bg-my-neutral-100 z-10">
             <li className="flex items-center px-2">
                 <FilledStar className="text-xl text-blue-500" />
             </li>
@@ -29,4 +30,4 @@ export const RatingChangeNumbers = ({ onSetScore }: RatingChangeNumbersProps) =>
             ))}
         </ul>
     );
-};
+});

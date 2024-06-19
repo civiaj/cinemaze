@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { getNavbarAuthCollapsed, uiActions } from "@/entities/Ui";
+import { getNavbarAuthPopupIsOpen, uiActions } from "@/entities/Ui";
 import { selectUser } from "@/entities/User";
 import { Left, Login } from "@/shared/assets/icons";
 import withPopup from "@/shared/hoc/withPopup";
@@ -24,18 +24,18 @@ const titles: Record<NavbarOptions, string> = {
     appearance: "nav.appearance-t",
 };
 
-export const NavigationAuth = () => {
-    const navbarAuthCollapsed = useAppSelector(getNavbarAuthCollapsed);
+export const NavbarAuthPopup = () => {
+    const isOpen = useAppSelector(getNavbarAuthPopupIsOpen);
     const dispatch = useAppDispatch();
     const user = useAppSelector(selectUser);
 
     const onClose = useCallback(() => {
-        dispatch(uiActions.toggleNavbarAuth(true));
+        dispatch(uiActions.toggleNavbarAuth(false));
     }, [dispatch]);
 
     const onToggle = useCallback(() => {
-        dispatch(uiActions.toggleNavbarAuth(!navbarAuthCollapsed));
-    }, [dispatch, navbarAuthCollapsed]);
+        dispatch(uiActions.toggleNavbarAuth(!isOpen));
+    }, [dispatch, isOpen]);
 
     return (
         <OutsideClickWrapper onClose={onClose}>
@@ -53,12 +53,12 @@ export const NavigationAuth = () => {
                     <Login />
                 </Button>
             )}
-            <NavigationAuthBodyPopup transitionValue={!navbarAuthCollapsed} onClose={onClose} />
+            <NavbarAuthPopupBody transitionValue={isOpen} onClose={onClose} />
         </OutsideClickWrapper>
     );
 };
 
-const NavigationAuthBody = ({ onClose }: { onClose: () => void }) => {
+const NavbarAuthBody = ({ onClose }: { onClose: () => void }) => {
     const [openView, setOpenView] = useState<NavbarViews>("main");
     const onSetOpenView = useCallback((newView: NavbarViews) => setOpenView(newView), []);
     const user = useAppSelector(selectUser);
@@ -121,7 +121,7 @@ type Props = {
     onClose: () => void;
 };
 
-const NavigationAuthBodyPopup = ({ transitionValue, onClose }: Props) => {
-    const Component = withPopup(NavigationAuthBody, { transitionValue });
+const NavbarAuthPopupBody = ({ transitionValue, onClose }: Props) => {
+    const Component = withPopup(NavbarAuthBody, { transitionValue });
     return <Component onClose={onClose} />;
 };

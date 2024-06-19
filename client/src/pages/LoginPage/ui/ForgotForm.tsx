@@ -9,7 +9,7 @@ import { Box } from "@/shared/ui/Boxes/Box";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
 import { Button } from "@/shared/ui/Button/Button";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
-import { FancyInput } from "@/shared/ui/Input/FancyInput";
+import { Input } from "@/shared/ui/Input/Input";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
 import { LoginSections } from "../model/types";
@@ -53,7 +53,8 @@ export const ForgotForm = ({ onSectionChange }: Props) => {
             <Box className="w-80 px-6">
                 <Heading headinglevel={1}>{t("login.forget-t")}</Heading>
                 <div className="w-full flex flex-col gap-2">
-                    <FancyInput
+                    <Input
+                        fancy
                         autoComplete="username"
                         name="email"
                         placeholder={t("login.email")}

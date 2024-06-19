@@ -3,14 +3,15 @@ import { routeConfig } from "@/app/router/router";
 import { BreadcrumbsT, UiSchema, TAppearances } from "./types";
 
 const initialState: UiSchema = {
-    sb: true,
-    na: true,
+    sidebarIsOpen: false,
+    navbarAuthPopupIsOpen: false,
     scroll: {},
     appearance: "tile",
     breadcrumbs: {
         details: [],
         main: null,
     },
+    isMobile: false,
 };
 
 const uiSlice = createSlice({
@@ -18,13 +19,13 @@ const uiSlice = createSlice({
     initialState,
     reducers: {
         toggleSidebar: (state) => {
-            state.sb = !state.sb;
+            state.sidebarIsOpen = !state.sidebarIsOpen;
         },
         closeSidebar: (state) => {
-            state.sb = true;
+            state.sidebarIsOpen = false;
         },
         toggleNavbarAuth: (state, action: PayloadAction<boolean>) => {
-            state.na = action.payload;
+            state.navbarAuthPopupIsOpen = action.payload;
         },
         saveScrollPosition: (
             state,
@@ -54,6 +55,9 @@ const uiSlice = createSlice({
                 (breadcrumb) => breadcrumb.pathname !== newBreadcrumb.pathname
             );
             state.breadcrumbs.details.push(newBreadcrumb);
+        },
+        setIsMobile: (state, aciton: PayloadAction<boolean>) => {
+            state.isMobile = aciton.payload;
         },
         resetUi: () => initialState,
     },

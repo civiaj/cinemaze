@@ -32,10 +32,9 @@ export const SearchQueryResults = (props: Props) => {
         { skip: !debouncedInputValue || !inputValue }
     );
 
-    const handleQueryClick = (queryName?: string) => {
+    const handleQueryClick = () => {
         onClose();
-        if (!queryName) return;
-        dispatch(searchPageActions.addUserQuery(queryName));
+        dispatch(searchPageActions.addUserQuery(debouncedInputValue));
     };
 
     if (isLoading || isFetching || (inputValue !== debouncedInputValue && inputValue !== ""))
@@ -80,16 +79,12 @@ export const SearchQueryResults = (props: Props) => {
                     <p className="px-2 text-sm font-medium">{t("search.input-results")}</p>
                     <ul className="flex flex-col">
                         {data.films.map((item) => (
-                            <li key={item.filmId} className="rounded-xl overflow-hidden">
+                            <li key={item.filmId}>
                                 <AppLink
                                     theme="clean"
                                     to={`${routePath.details}/${item.filmId}`}
-                                    onClick={() =>
-                                        handleQueryClick(
-                                            item.nameRu ?? item.nameEn ?? item.nameOriginal
-                                        )
-                                    }
-                                    className="py-1 block"
+                                    onClick={handleQueryClick}
+                                    className="py-1 block rounded-xl overflow-hidden"
                                 >
                                     <div className="px-2 flex gap-2">
                                         <div className="h-24 w-16 rounded-xl overflow-hidden">

@@ -3,7 +3,7 @@ import { CSSProperties, FC, useCallback, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { getSidebarCollapsed, uiActions } from "@/entities/Ui";
+import { getIsMobile, getSidebarIsOpen, uiActions } from "@/entities/Ui";
 import { Overlay } from "@/shared/ui/Boxes/Overlay";
 import { getSidebarItems } from "../model/selectors";
 import { SidebarItem } from "./SidebarItem";
@@ -16,13 +16,14 @@ type WrappedOverlayProps = {
 
 export const Sidebar = () => {
     const dispatch = useAppDispatch();
-    const collapsed = useAppSelector(getSidebarCollapsed);
+    const isOpen = useAppSelector(getSidebarIsOpen);
     const { pathname } = useLocation();
     const sidebarItems = useAppSelector(getSidebarItems);
+    const isMobile = useAppSelector(getIsMobile);
 
     const handleClose = useCallback(() => dispatch(uiActions.closeSidebar()), [dispatch]);
 
-    const transitions = useTransition(!collapsed, {
+    const transitions = useTransition(isOpen, {
         from: { opacity: 0, transform: "translateX(-100%)" },
         enter: { opacity: 1, transform: "translateX(0%)" },
         leave: { opacity: 0, transform: "translateX(-100%)" },
@@ -37,19 +38,8 @@ export const Sidebar = () => {
     );
 
     useEffect(() => {
-        const updateSidebar = () => {
-            const sm = 640;
-            if (document.body.clientWidth <= sm) {
-                handleClose();
-            }
-        };
-
-        window.addEventListener("resize", updateSidebar);
-
-        return () => {
-            window.removeEventListener("scroll", updateSidebar);
-        };
-    }, [handleClose]);
+        if (isMobile) handleClose();
+    }, [isMobile, handleClose]);
 
     if (pathname.includes(routePath.login)) return null;
 

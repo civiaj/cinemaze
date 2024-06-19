@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
+import withFocusTrap from "@/shared/hoc/withFocusTrap";
 import withPopup from "@/shared/hoc/withPopup";
 
 type ListProps = {
@@ -32,10 +33,12 @@ interface PopupListProps extends ListProps {
 }
 
 export const PopupList = (props: PopupListProps) => {
-    const Component = withPopup<PopupListProps>(List, {
+    const ComponentWithPopup = withPopup<PopupListProps>(List, {
         transitionValue: props.transitionValue,
         className: `flex flex-col mt-2 rounded-xl absolute overflow-hidden border border-my-neutral-200 bg-my-white shadow-md shadow-my-neutral-200 ${props.className}`,
     });
 
-    return <Component {...props} />;
+    const ComponentWithPopupAndFocus = withFocusTrap(ComponentWithPopup);
+
+    return <ComponentWithPopupAndFocus {...props} />;
 };

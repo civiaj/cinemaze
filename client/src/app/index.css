@@ -87,6 +87,7 @@ BODY {
     padding: 0;
     background-color: var(--50);
     height: 100%;
+    font-family: "FavoritBookC";
 }
 
 .onPageNavigation {

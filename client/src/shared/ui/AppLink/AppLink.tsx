@@ -24,7 +24,7 @@ interface AppLinkProps extends LinkProps {
 
 const style: Record<Themes, string> = {
     card: "focus-visible:ring-2 focus-visible:ring-blue-500 outline-none",
-    clean: "hover:bg-my-neutral-200 py-2 font-medium rounded-xl",
+    clean: "hover:bg-my-neutral-200 py-2 font-medium rounded-xl focus-visible:ring-2 focus-visible:ring-blue-500",
     sourceSmall:
         "opacity-0 focus-visible:opacity-100 group-hover:opacity-100 group-focus-visible:opacity-100 text-inherit rounded-md px-2 text-sm font-medium py-1 active:translate-y-[1px] bg-my-neutral-100 hover:bg-my-neutral-200 focus-visible:bg-my-neutral-200 focus-visible:ring-2 focus-visible:ring-blue-500 outline-none",
     sourceBig:

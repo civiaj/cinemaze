@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppSelector } from "@/app/store";
 import { useLogoutMutation } from "@/entities/Authorization";
@@ -29,20 +28,11 @@ export const NavbarMain = ({ onSetOpenView, onClose }: Props) => {
         appearance: appearances[appearance as TAppearances].label as string,
     };
 
-    const navigate = useNavigate();
-    const { pathname } = useLocation();
     const [logout, { isLoading }] = useLogoutMutation();
     const user = useAppSelector(selectUser);
 
     const onLogout = async () => {
         await logout();
-
-        if (pathname === routePath.main) {
-            window.scrollTo(0, 0);
-        } else {
-            navigate(routePath.main, { replace: true });
-        }
-
         onClose();
     };
 

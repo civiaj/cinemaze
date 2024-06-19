@@ -105,6 +105,12 @@ export const ManageViewAndUpdate = ({
                                 displayName: e.target.value,
                             }))
                         }
+                        onCleanInput={() =>
+                            setChangeData((p) => ({
+                                ...p,
+                                displayName: "",
+                            }))
+                        }
                     />
                 )}
 

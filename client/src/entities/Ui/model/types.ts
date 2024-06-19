@@ -12,12 +12,13 @@ export const appearances: TAppearancesRecord = {
 export type BreadcrumbsT = { pathname: string; label: string };
 
 export interface UiSchema {
-    sb: boolean;
-    na: boolean;
+    sidebarIsOpen: boolean;
+    navbarAuthPopupIsOpen: boolean;
     scroll: Record<string, number>;
     appearance: TAppearances;
     breadcrumbs: {
         main: BreadcrumbsT | null;
         details: BreadcrumbsT[];
     };
+    isMobile: boolean;
 }

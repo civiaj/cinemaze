@@ -58,7 +58,7 @@ export const FavoritePageHeader = memo(({ listVariant }: Props) => {
                             theme="popup"
                             style={style}
                         >
-                            <p className="line-clamp-1 break-words text-start flex justify-between w-full">
+                            <p className="line-clamp-1 break-words text-start flex justify-between w-full items-center">
                                 {t(options[index].label)}
                                 {
                                     <span className="text-blue-500 font-medium text-xs">
