@@ -6,7 +6,7 @@ import { Navbar } from "@/widgets/Navbar";
 import { ProgressBar } from "@/widgets/ProgressBar";
 import { Sidebar } from "@/widgets/Sidebar";
 import { SidebarMobile } from "@/widgets/Sidebar/ui/SidebarMobile";
-import { MobileObserver, getIsMobile } from "@/entities/Ui";
+import { MobileObserver } from "@/entities/Ui";
 import { getIsLogged, useGetMeQuery } from "@/entities/User";
 import { ID_MAIN } from "@/shared/const/const";
 import { FullscreenSpinner } from "@/shared/ui/Spinner/FullscreenSpinner";
@@ -17,8 +17,6 @@ function App() {
         skip: !isLogged,
     });
 
-    const isMobile = useAppSelector(getIsMobile);
-    console.log({ isMobile });
     if (isLoading) return <FullscreenSpinner className="bg-neutral-50 dark:bg-neutral-950" />;
 
     return (

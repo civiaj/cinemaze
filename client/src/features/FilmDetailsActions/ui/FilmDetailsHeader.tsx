@@ -58,7 +58,7 @@ export const FilmDetailsHeader = ({ details, updateFavorite, disabled }: Props) 
 
     return (
         <header className="flex flex-col absolute top-2 left-2 gap-2 vsm:gap-4 vsm:static z-[1] p-2 vsm:p-0">
-            <div className="flex flex-col gap-1 vsm:gap-2">
+            <div className="flex flex-col">
                 <Heading headinglevel={1} className="text-neutral-50 vsm:text-inherit">
                     {label} ({year})
                 </Heading>

@@ -94,6 +94,8 @@ export default {
                 "my-sky-200": "var(--sky-200-opacity)",
                 "my-green-200": "var(--green-200)",
                 "my-green-500": "var(--green-500)",
+                "my-green-50": "var(--green-50)",
+                "my-red-50": "var(--red-50)",
                 "my-red-200": "var(--red-200)",
                 "my-red-300": "var(--red-300)",
                 "my-red-500": "var(--red-500)",

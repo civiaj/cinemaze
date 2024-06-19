@@ -71,7 +71,7 @@ export const AboutDetails = memo((props: AboutProps) => {
     ];
 
     return (
-        <div className="flex flex-col gap-4 mt-4 vsm:mt-0">
+        <div className="flex flex-col gap-2 mt-4 vsm:mt-0">
             <Heading headinglevel={3}>{t("details.about-movie")}</Heading>
             <ul className="flex flex-col gap-2">
                 {details.map((detail) => (

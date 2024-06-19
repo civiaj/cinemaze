@@ -176,7 +176,6 @@ class AuthController {
                 .digest("hex");
 
             const redirectUrl = CLIENT_URL + "/emailverificaiton?status=";
-            console.log({ verificationCode });
             const user = await userService.findUser({ verificationCode });
             if (!user) {
                 return res.redirect(redirectUrl + "error");

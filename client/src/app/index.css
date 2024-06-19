@@ -21,7 +21,8 @@
     --red-300: rgb(220 38 38);
     --red-200: rgb(255, 75, 75);
     --blue-500: rgb(59 130 246);
-
+    --red-50: rgb(254 242 242 / 0.4);
+    --green-50: rgb(240 253 244 / 0.4);
     --image-grayscale: 0;
     --image-opacity: 100%;
     --navbar-height: 3.5rem;
@@ -46,6 +47,8 @@
     --red-500: rgb(220 38 38);
     --red-300: rgb(153 27 27);
     --red-200: rgb(127 29 29);
+    --red-50: rgb(69 10 10 / 0.2);
+    --green-50: rgb(5 46 22 / 0.2);
     --image-grayscale: 10%;
     --image-opacity: 90%;
     --border: var(--100);
