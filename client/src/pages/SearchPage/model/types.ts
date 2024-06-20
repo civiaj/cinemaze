@@ -1,4 +1,5 @@
 import { EntityState } from "@reduxjs/toolkit";
+import { ChangeEvent, KeyboardEvent } from "react";
 
 export interface SearchFiltersQueryT {
     genres: { id: number; genre: string }[];
@@ -62,3 +63,14 @@ export interface SearchQueryT {
     totalPages: number;
     films: FilmT[];
 }
+
+export type SearchInputFormProps = {
+    onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
+    inputValue: string;
+    onSetActive: () => void;
+    isActive: boolean;
+    handleStartSearch: (query?: string) => void;
+    onCleanInput: () => void;
+    focused?: boolean;
+};

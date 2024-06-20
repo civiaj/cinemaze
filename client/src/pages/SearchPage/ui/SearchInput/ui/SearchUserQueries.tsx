@@ -2,15 +2,14 @@ import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { Search } from "@/shared/assets/icons";
 import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
-import { getSearchUserQueriesByInput } from "../../model/selectors";
-import { searchPageActions } from "../../model/slice";
+import { getSearchUserQueriesByInput } from "../../../model/selectors";
+import { searchPageActions } from "../../../model/slice";
+import { SearchInputFormProps } from "../../../model/types";
 
-type Props = {
-    inputValue?: string;
-    startSearch: (query: string) => void;
-};
-
-export const SearchUserQueries = ({ inputValue = "", startSearch }: Props) => {
+export const SearchUserQueries = (
+    props: Pick<SearchInputFormProps, "inputValue" | "handleStartSearch">
+) => {
+    const { handleStartSearch, inputValue } = props;
     const userQueries = useAppSelector((state) => getSearchUserQueriesByInput(state, inputValue));
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
@@ -20,7 +19,7 @@ export const SearchUserQueries = ({ inputValue = "", startSearch }: Props) => {
     };
 
     const handleSearchUserQuery = (query: string) => {
-        startSearch(query);
+        handleStartSearch(query);
         dispatch(searchPageActions.addUserQuery(query));
     };
 

@@ -3,12 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch } from "@/app/store";
 import { uiActions } from "@/entities/Ui";
-import withFocusTrap from "@/shared/hoc/withFocusTrap";
-import { classNames } from "@/shared/lib/classNames";
-import { OutsideClickWrapper } from "@/shared/ui/Boxes/OutsideClickWrapper";
-import { Overlay } from "@/shared/ui/Boxes/Overlay";
-import { searchPageActions } from "../../model/slice";
-import { SearchInputBody } from "./SearchInputBody";
+import { searchPageActions } from "../../../model/slice";
+import { SearchInputActive } from "./SearchInputActive";
 import { SearchInputForm } from "./SearchInputForm";
 
 type Props = {
@@ -68,32 +64,8 @@ export const SearchInput = memo((props: Props) => {
         onSetActive,
     };
 
-    const ActiveInput = () => (
-        <Overlay hideScroll className="z-[51]">
-            <div
-                className={classNames("flex justify-center gap-2 flex-1 relative z-10", {
-                    ["absolute top-2 left-2 right-2"]: isActive,
-                })}
-            >
-                <OutsideClickWrapper
-                    onClose={onSetInactive}
-                    className="flex gap-2 justify-center relative flex-1 md:flex-initial"
-                >
-                    <SearchInputForm {...inputProps} focused />
-                    <SearchInputBody
-                        inputValue={inputValue}
-                        onSetInactive={onSetInactive}
-                        handleStartSearch={handleStartSearch}
-                    />
-                </OutsideClickWrapper>
-            </div>
-        </Overlay>
-    );
-
-    const ActiveInputFocus = withFocusTrap(ActiveInput);
-
     return isActive ? (
-        <ActiveInputFocus {...props} />
+        <SearchInputActive {...inputProps} onSetInactive={onSetInactive} />
     ) : (
         <div className="flex gap-2 justify-center relative flex-1 md:flex-initial">
             <SearchInputForm {...inputProps} />

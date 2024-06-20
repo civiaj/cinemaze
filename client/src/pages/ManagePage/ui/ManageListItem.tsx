@@ -14,23 +14,20 @@ type Props = {
     onSetActive: (newId: string | null) => void;
     onPreventClose: (newValue: boolean) => void;
     className?: string;
+    page: number;
 };
 
-export const ManageListItem = ({
-    user,
-    index,
-    activeUser,
-    onSetActive,
-    className,
-    onPreventClose,
-}: Props) => {
+export const ManageListItem = (props: Props) => {
+    const { user, index, activeUser, onSetActive, className, onPreventClose, page } = props;
     const { createdAt, displayName, email, id, photo, role, updatedAt, verified, isBanned } = user;
     const { i18n } = useTranslation();
     const currentIsActive = activeUser === id;
+    const orderNumber = index * page + 1;
 
     return (
         <>
             <tr
+                tabIndex={0}
                 className={classNames(
                     "h-12 hover:bg-my-neutral-100 relative",
                     {
@@ -40,11 +37,12 @@ export const ManageListItem = ({
                 )}
                 role="button"
                 aria-pressed="false"
+                onKeyDown={(e) => e.key === "Enter" && onSetActive(currentIsActive ? null : id)}
                 onClick={() => onSetActive(currentIsActive ? null : id)}
             >
                 <th scope="row" className="px-1 rounded-l-xl">
                     <div className="flex gap-2 items-center max-w-[250px]">
-                        <p className="font-normal w-10 shrink-0">{index + 1}</p>
+                        <p className="font-normal w-10 shrink-0">{orderNumber}</p>
                         <AppImage
                             containerClassName="w-10 h-10 shrink-0 rounded-xl"
                             onErrorSrc="user"

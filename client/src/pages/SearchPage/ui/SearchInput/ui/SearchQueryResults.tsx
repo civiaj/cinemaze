@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch } from "@/app/store";
+import { SearchInputFormProps } from "@/pages/SearchPage/model/types";
 import formatFilmError from "@/shared/api/helpers/formatFilmError";
 import { DEBOUNCE_SEARCH } from "@/shared/const/const";
 import { useDebouncedValue } from "@/shared/hooks/useDebouncedValue";
@@ -13,16 +14,13 @@ import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
 import { ColoredNumber } from "@/shared/ui/ColoredNumber/ColoredNumber";
 import { Spinner } from "@/shared/ui/Spinner/Spinner";
 import { Text } from "@/shared/ui/Text/Text";
-import { useSearchQuery } from "../../model/searchPageApi";
-import { searchPageActions } from "../../model/slice";
+import { useSearchQuery } from "../../../model/searchPageApi";
+import { searchPageActions } from "../../../model/slice";
 
-type Props = {
-    inputValue?: string;
-    onClose: () => void;
-};
-
-export const SearchQueryResults = (props: Props) => {
-    const { inputValue, onClose } = props;
+export const SearchQueryResults = (
+    props: Pick<SearchInputFormProps, "inputValue"> & { onSetInactive: () => void }
+) => {
+    const { inputValue, onSetInactive } = props;
     const dispatch = useAppDispatch();
     const { t, i18n } = useTranslation();
     const debouncedInputValue = useDebouncedValue(inputValue, DEBOUNCE_SEARCH);
@@ -33,7 +31,7 @@ export const SearchQueryResults = (props: Props) => {
     );
 
     const handleQueryClick = () => {
-        onClose();
+        onSetInactive();
         dispatch(searchPageActions.addUserQuery(debouncedInputValue));
     };
 

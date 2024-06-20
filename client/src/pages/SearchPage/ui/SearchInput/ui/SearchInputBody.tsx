@@ -1,23 +1,19 @@
 import { useTranslation } from "react-i18next";
 import { routePath } from "@/app/router/router";
-import { SearchQueryResults } from "@/pages/SearchPage/ui/SearchInput/SearchQueryResults";
-import { SearchUserQueries } from "@/pages/SearchPage/ui/SearchInput/SearchUserQueries";
+import { SearchInputFormProps } from "@/pages/SearchPage/model/types";
 import { GoToSearch } from "@/shared/assets/icons";
 import { useUpdateHeight } from "@/shared/hooks/useUpdateHeight";
 import { AppLink } from "@/shared/ui/AppLink/AppLink";
-import { extraHeight } from "../../config/data";
+import { extraHeight } from "../../../config/data";
+import { SearchQueryResults } from "./SearchQueryResults";
+import { SearchUserQueries } from "./SearchUserQueries";
 
-type SearchBodyProps = {
-    inputValue: string;
-    onSetInactive: () => void;
-    handleStartSearch: () => void;
-};
-
-export const SearchInputBody = ({
-    inputValue,
-    onSetInactive,
-    handleStartSearch,
-}: SearchBodyProps) => {
+export const SearchInputBody = (
+    props: Pick<SearchInputFormProps, "handleStartSearch" | "inputValue"> & {
+        onSetInactive: () => void;
+    }
+) => {
+    const { inputValue, onSetInactive, handleStartSearch } = props;
     const maxHeight = useUpdateHeight(extraHeight);
     const { t } = useTranslation();
 
@@ -27,8 +23,8 @@ export const SearchInputBody = ({
                 style={{ maxHeight }}
                 className="w-full bg-my-white border border-my-neutral-200 overflow-y-auto px-2 py-2 flex flex-col gap-2 overflow-x-hidden"
             >
-                <SearchUserQueries inputValue={inputValue} startSearch={handleStartSearch} />
-                <SearchQueryResults inputValue={inputValue} onClose={onSetInactive} />
+                <SearchUserQueries inputValue={inputValue} handleStartSearch={handleStartSearch} />
+                <SearchQueryResults inputValue={inputValue} onSetInactive={onSetInactive} />
                 <AppLink
                     theme="clean"
                     className="flex items-center gap-2 px-2 text-my-green-500"

@@ -131,6 +131,7 @@ export const ManageList = () => {
                                             key={user.id}
                                             user={user}
                                             index={index}
+                                            page={page}
                                             className={classNames("", {
                                                 ["opacity-20 pointer-events-none"]:
                                                     isFetching && !isLoading,

@@ -1,22 +1,11 @@
-import { ChangeEvent, KeyboardEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { Search } from "@/shared/assets/icons";
 import { classNames } from "@/shared/lib/classNames";
 import { Button } from "@/shared/ui/Button/Button";
 import { Input } from "@/shared/ui/Input/Input";
+import { SearchInputFormProps } from "../../../model/types";
 
-type Props = {
-    onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
-    inputValue: string;
-    onSetActive: () => void;
-    isActive: boolean;
-    handleStartSearch: (query?: string) => void;
-    onCleanInput: () => void;
-    focused?: boolean;
-};
-
-export const SearchInputForm = (props: Props) => {
+export const SearchInputForm = (props: SearchInputFormProps) => {
     const {
         inputValue,
         onInputChange,
