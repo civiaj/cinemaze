@@ -11,10 +11,9 @@ import { ManageViewAndUpdate } from "../ui/ManageViewAndUpdate";
 type Props = {
     user: TUser;
     onSetActive: (newId: string | null) => void;
-    onPreventClose: (newValue: boolean) => void;
 };
 
-export const ManageListItemActions = ({ user, onSetActive, onPreventClose }: Props) => {
+export const ManageListItemActions = ({ user, onSetActive }: Props) => {
     const { displayName } = user;
     const { t } = useTranslation();
     const [manageView, setManageView] = useState<ManageActionViews>("info");
@@ -31,29 +30,25 @@ export const ManageListItemActions = ({ user, onSetActive, onPreventClose }: Pro
 
     return (
         <GridMsg isOpen={true} className="border border-border rounded-xl my-2">
-            <div className="w-full flex flex-col gap-4 px-4 py-4">
-                <ManageListItemActionsHeader headerText={manageActionHeader[manageView]} />
+            <ManageListItemActionsHeader headerText={manageActionHeader[manageView]} />
+            <UserBoxSeparator />
 
-                <UserBoxSeparator />
+            {(manageView === "info" || manageView === "update") && (
+                <ManageViewAndUpdate
+                    manageView={manageView}
+                    user={user}
+                    onSetManageView={onSetManageView}
+                    onSetActive={onSetActive}
+                />
+            )}
 
-                {(manageView === "info" || manageView === "update") && (
-                    <ManageViewAndUpdate
-                        onPreventClose={onPreventClose}
-                        manageView={manageView}
-                        user={user}
-                        onSetManageView={onSetManageView}
-                        onSetActive={onSetActive}
-                    />
-                )}
-
-                {manageView === "ban" && (
-                    <ManageBan
-                        user={user}
-                        onSetManageView={onSetManageView}
-                        onSetActive={onSetActive}
-                    />
-                )}
-            </div>
+            {manageView === "ban" && (
+                <ManageBan
+                    user={user}
+                    onSetManageView={onSetManageView}
+                    onSetActive={onSetActive}
+                />
+            )}
         </GridMsg>
     );
 };

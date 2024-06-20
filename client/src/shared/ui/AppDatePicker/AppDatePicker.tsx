@@ -28,7 +28,7 @@ const DateInput = forwardRef(
     ) => {
         const { t, i18n } = useTranslation();
         return (
-            <Button theme="regular" className="text-sm h-auto" onClick={onClick} ref={ref}>
+            <Button theme="regular" onClick={onClick} ref={ref}>
                 {value ? (
                     formatDate(new Date(value), i18n.language)
                 ) : (

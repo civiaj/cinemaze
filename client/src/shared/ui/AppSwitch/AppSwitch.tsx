@@ -22,6 +22,7 @@ export const AppSwitch = (props: Props) => {
                     className="sr-only peer"
                     checked={checked}
                     onChange={onChange}
+                    onKeyDown={(e) => e.key === "Enter" && onChange()}
                 />
                 <div
                     className={classNames(

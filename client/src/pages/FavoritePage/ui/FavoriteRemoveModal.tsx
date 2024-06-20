@@ -74,6 +74,7 @@ export const FavoriteRemoveModal = (props: Props) => {
                             type="checkbox"
                             checked={all}
                             onChange={toggleAll}
+                            onKeyDown={(e) => e.key === "Enter" && toggleAll()}
                         />
                         <Text>{t("favorite.remove-all")}</Text>
                         <Checked className="text-my-neutral-50 absolute left-0 top-1/2 -translate-y-1/2 hidden peer-checked:block" />

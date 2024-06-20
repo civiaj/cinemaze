@@ -1,3 +1,4 @@
+import { KeyboardEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { TUser } from "@/entities/User";
 import { Block, Checked, Close, Minus } from "@/shared/assets/icons";
@@ -12,17 +13,21 @@ type Props = {
     index: number;
     activeUser: string | null;
     onSetActive: (newId: string | null) => void;
-    onPreventClose: (newValue: boolean) => void;
     className?: string;
     page: number;
 };
 
 export const ManageListItem = (props: Props) => {
-    const { user, index, activeUser, onSetActive, className, onPreventClose, page } = props;
+    const { user, index, activeUser, onSetActive, className, page } = props;
     const { createdAt, displayName, email, id, photo, role, updatedAt, verified, isBanned } = user;
     const { i18n } = useTranslation();
     const currentIsActive = activeUser === id;
     const orderNumber = index * page + 1;
+
+    const handleKeyDown = (e: KeyboardEvent<HTMLTableRowElement>) => {
+        e.key === "Enter" && onSetActive(currentIsActive ? null : id);
+        e.key === "Esc" && onSetActive(null);
+    };
 
     return (
         <>
@@ -37,7 +42,7 @@ export const ManageListItem = (props: Props) => {
                 )}
                 role="button"
                 aria-pressed="false"
-                onKeyDown={(e) => e.key === "Enter" && onSetActive(currentIsActive ? null : id)}
+                onKeyDown={handleKeyDown}
                 onClick={() => onSetActive(currentIsActive ? null : id)}
             >
                 <th scope="row" className="px-1 rounded-l-xl">
@@ -95,11 +100,7 @@ export const ManageListItem = (props: Props) => {
             {currentIsActive && (
                 <tr className={className}>
                     <td colSpan={7}>
-                        <ManageListItemActions
-                            onPreventClose={onPreventClose}
-                            user={user}
-                            onSetActive={onSetActive}
-                        />
+                        <ManageListItemActions user={user} onSetActive={onSetActive} />
                     </td>
                 </tr>
             )}

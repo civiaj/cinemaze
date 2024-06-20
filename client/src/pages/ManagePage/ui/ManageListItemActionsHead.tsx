@@ -1,3 +1,4 @@
+import { UserBox } from "@/shared/ui/Boxes/UserBox";
 import { Heading } from "@/shared/ui/Text/Heading";
 
 type Props = {
@@ -6,8 +7,8 @@ type Props = {
 
 export const ManageListItemActionsHeader = ({ headerText }: Props) => {
     return (
-        <Heading className="font-medium" headinglevel={4}>
-            {headerText}
-        </Heading>
+        <UserBox>
+            <Heading headinglevel={3}>{headerText}</Heading>
+        </UserBox>
     );
 };

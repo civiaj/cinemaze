@@ -7,7 +7,6 @@ import { useDebouncedValue } from "@/shared/hooks/useDebouncedValue";
 import { TLngs } from "@/shared/i18n/types";
 import { classNames } from "@/shared/lib/classNames";
 import { Box } from "@/shared/ui/Boxes/Box";
-import { OutsideClickWrapper } from "@/shared/ui/Boxes/OutsideClickWrapper";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
 import { Button } from "@/shared/ui/Button/Button";
 import { Input } from "@/shared/ui/Input/Input";
@@ -30,10 +29,6 @@ export const ManageList = () => {
     const [activeUser, setActiveUser] = useState<string | null>(null);
     const [query, setQuery] = useState("");
     const debouncedQuery = useDebouncedValue(query);
-    const [preventClose, setPreventClose] = useState(false);
-
-    const onPreventClose = (newValue: boolean) => setPreventClose(newValue);
-    const onCloseActive = () => onSetActive(null);
 
     const { data, isLoading, isFetching, isError, error } = useGetUsersQuery({
         filter,
@@ -67,11 +62,7 @@ export const ManageList = () => {
                     placeholder={t("manage.search-name")}
                 />
             </div>
-            <OutsideClickWrapper
-                onClose={onCloseActive}
-                className="overflow-x-auto w-full relative"
-                preventClose={preventClose}
-            >
+            <div className="overflow-x-auto w-full relative">
                 <table className={"w-full text-sm sm:text-sm"}>
                     <thead>
                         <tr className="h-11">
@@ -125,7 +116,6 @@ export const ManageList = () => {
                                 ) : (
                                     data?.users.map((user, index) => (
                                         <ManageListItem
-                                            onPreventClose={onPreventClose}
                                             onSetActive={onSetActive}
                                             activeUser={activeUser}
                                             key={user.id}
@@ -150,7 +140,8 @@ export const ManageList = () => {
                         )}
                     </tbody>
                 </table>
-            </OutsideClickWrapper>
+            </div>
+
             {!isLoading && (
                 <Pagination
                     disabled={isFetching}
