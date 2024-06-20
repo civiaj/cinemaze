@@ -11,16 +11,13 @@ export const ModalInProgress = ({ onClose }: Props) => {
     const { t } = useTranslation();
     return (
         <Modal onClose={onClose}>
-            <Modal.Header header="Feature Coming Soon!" onClose={onClose} />
+            <Modal.Header header={t("modal.soon-t")} onClose={onClose} />
             <Modal.Body>
-                <Text>
-                    Thank you for your interest in this feature. We are working hard to bring it to
-                    you, but it is not yet available. Please check back later for updates.
-                </Text>
+                <Text as="p">{t("modal.soon-m")}</Text>
             </Modal.Body>
             <Modal.Controls theme="none">
                 <Button theme="regular" onClick={onClose}>
-                    {t("btn.cancel")}
+                    {t("btn.back")}
                 </Button>
             </Modal.Controls>
         </Modal>

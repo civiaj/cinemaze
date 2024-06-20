@@ -44,7 +44,7 @@
     "to": "à",
     "initial-msg": "Ajustez les paramètres pour une meilleure expérience de recherche",
     "empty-msg": "Rien n'a été trouvé",
-    "empty-msg-add": ", essayez de modifier vos paramètres de recherche",
+    "empty-msg-add": "essayez de changer vos paramètres de recherche",
     "found": "Trouvé",
     "input-p": "Recherche par titre",
     "input-recent": "Requêtes récentes",
@@ -88,7 +88,9 @@
     "last-y": "Année",
     "last-all": "Tout le temps",
     "empty-msg": "Pour consulter les statistiques, noter plusieurs films ou modifier les paramètres",
-    "pie-empty-msg": "Il n'y a pas de statistiques sur les paramètres sélectionnés"
+    "pie-empty-msg": "Il n'y a pas de statistiques sur les paramètres sélectionnés",
+    "notification-one": "Vous n'avez pas encore ajouté suffisamment de films à vos favoris. ",
+    "notification-two": ""
   },
   "manage": {
     "search-name": "Rechercher par nom",
@@ -267,7 +269,7 @@
     "devices-current": "Appareil actuel",
     "devices-active": "Sessions actives",
     "devices-active-empty": "Aucune session active trouvée",
-    "devices-end-all-msg": "Êtes-vous sûr de vouloir mettre fin à toutes les sessions sauf celle en cours ?",
+    "devices-end-all-msg": "Etes-vous sûr de vouloir mettre fin à toutes les sessions sauf celle en cours ?",
     "devices-end-msg": "Voulez-vous vraiment terminer la session",
     "password-check": "Confirmez le mot de passe",
     "password-check-msg": "Pour des raisons de sécurité, veuillez saisir votre mot de passe pour continuer.",
@@ -355,7 +357,7 @@
     "tos-changes-title": "Modifications des conditions",
     "tos-changes-text": "Nous nous réservons le droit de modifier les présentes Conditions à tout moment. Les conditions mises à jour seront publiées sur cette page et entreront en vigueur dès leur publication. L'utilisation continue de l'application après les modifications signifie votre acceptation des nouvelles conditions.",
     "tos-contact-info-title": "Coordonnées",
-    "tos-contact-info-text": "Si vous avez des questions concernant nos Conditions, veuillez nous contacter à :",
+    "tos-contact-info-text": "Si vous avez des questions concernant nos conditions, veuillez nous contacter à :",
     "policy-t": "politique de confidentialité",
     "policy-introduction-title": "Introduction",
     "policy-introduction-text": "Votre vie privée est importante pour nous. Cette politique de confidentialité explique quelles données nous collectons, comment nous les utilisons et comment nous protégeons vos informations.",
@@ -381,5 +383,10 @@
     "placeholder": "Choisir une option",
     "country": "Choisissez le pays",
     "genre": "Choisissez le genre"
+  },
+  "modal": {
+    "notification-t": "Notification",
+    "soon-t": "Fonctionnalité à venir",
+    "soon-m": "Merci de votre intérêt pour cette fonctionnalité. Nous travaillons dur pour vous le proposer, mais il n'est pas encore disponible. Merci de vérifier ultérieurement les mises à jour."
   }
 }

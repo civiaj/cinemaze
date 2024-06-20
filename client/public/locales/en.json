@@ -44,7 +44,7 @@
     "to": "to",
     "initial-msg": "Adjust the settings for a better search experience",
     "empty-msg": "Nothing found",
-    "empty-msg-add": ", try changing your search parameters",
+    "empty-msg-add": "try changing your search parameters",
     "found": "Found",
     "input-p": "Search by title",
     "input-recent": "Recent queries",
@@ -88,7 +88,9 @@
     "last-y": "Year",
     "last-all": "All Time",
     "empty-msg": "To view statistics rate several films or change parametrs",
-    "pie-empty-msg": "There is no statistics on the selected parameters"
+    "pie-empty-msg": "There is no statistics on the selected parameters",
+    "notification-one": "You haven't added enough movies to your favorites yet. ",
+    "notification-two": "To increase the number of statistics graphs, please add more movies to your favorites list."
   },
   "manage": {
     "search-name": "Search by name",
@@ -381,5 +383,10 @@
     "placeholder": "Select an option",
     "country": "Choose the country",
     "genre": "Choose the genre"
+  },
+  "modal": {
+    "notification-t": "Notificiation",
+    "soon-t": "Feature coming soon",
+    "soon-m": "Thank you for your interest in this feature. We are working hard to bring it to you, but it is not yet available. Please check back later for updates."
   }
 }

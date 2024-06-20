@@ -18,6 +18,7 @@ import { addZerosToNumber } from "@/shared/lib/addZerosToNumber";
 import { useTheme } from "@/shared/theme";
 import { AppSelect } from "@/shared/ui/AppSelect/AppSelect";
 import { Box } from "@/shared/ui/Boxes/Box";
+import { Modal } from "@/shared/ui/Boxes/Modal";
 import { OutsideClickWrapper } from "@/shared/ui/Boxes/OutsideClickWrapper";
 import { SettingsBox } from "@/shared/ui/Boxes/SettingsBox";
 import { Button } from "@/shared/ui/Button/Button";
@@ -111,6 +112,8 @@ export const FavoriteVerticalBarChart = () => {
     const dispatch = useAppDispatch();
     const { t } = useTranslation();
     const { filter, order, showAll, sort } = useAppSelector(getVB);
+    const [isModal, setModal] = useState(false);
+    const onClose = () => setModal(false);
 
     const selectByFilter = useMemo(() => getSelectByFilter, []);
     const { data } = useGetStatisticsQuery(undefined, {
@@ -165,6 +168,7 @@ export const FavoriteVerticalBarChart = () => {
             <OutsideClickWrapper
                 onClose={() => setIsOpen(false)}
                 className="flex flex-col gap-2 sm:gap-4"
+                preventClose={isModal}
             >
                 <div className="flex items-center gap-2 justify-between">
                     <Heading headinglevel={1}>{t("stat.cag")}</Heading>
@@ -187,9 +191,12 @@ export const FavoriteVerticalBarChart = () => {
                         <Button
                             theme="regularIcon"
                             className="bg-my-white"
-                            onClick={onShowAllChange}
+                            onClick={() =>
+                                displayed.length < MAX_DISPLAYED
+                                    ? setModal(true)
+                                    : onShowAllChange()
+                            }
                             title={t("stat.cat-show-all")}
-                            disabled={displayed.length < MAX_DISPLAYED}
                         >
                             {showAll ? <EyeOpen /> : <EyeClose />}
                         </Button>
@@ -212,6 +219,25 @@ export const FavoriteVerticalBarChart = () => {
                         >
                             {order === "asc" ? <Ascending /> : <Descending />}
                         </Button>
+                        {isModal && (
+                            <Modal onClose={onClose}>
+                                <Modal.Header
+                                    header={t("modal.notification-t")}
+                                    onClose={onClose}
+                                />
+                                <Modal.Body>
+                                    <div>
+                                        <Text as="p">{t("stat.notification-one")}</Text>
+                                        <Text as="p">{t("stat.notification-two")}</Text>
+                                    </div>
+                                </Modal.Body>
+                                <Modal.Controls theme="none">
+                                    <Button onClick={onClose} theme="regular">
+                                        {t("btn.back")}
+                                    </Button>
+                                </Modal.Controls>
+                            </Modal>
+                        )}
                     </div>
                 </SettingsBox>
             </OutsideClickWrapper>
