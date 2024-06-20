@@ -33,7 +33,7 @@ export const NavbarMain = ({ onSetOpenView, onClose }: Props) => {
 
     const onLogout = async () => {
         await logout();
-        onClose();
+        window.location.reload();
     };
 
     return (

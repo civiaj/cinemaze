@@ -31,6 +31,11 @@ export const UserSectionDelete = ({ email }: Props) => {
 
     const [deleteUser, { isLoading, isError, reset, error }] = useDeleteUserMutation();
 
+    const handleDelete = async () => {
+        await deleteUser();
+        window.location.reload();
+    };
+
     return (
         <>
             <Box className="sm:p-0 p-0 gap-0 sm:gap-0">
@@ -55,17 +60,15 @@ export const UserSectionDelete = ({ email }: Props) => {
                 </UserBox>
             </Box>
             {isModal && (
-                <Modal theme="danger" onClose={onClose}>
+                <>
                     {!isChecked ? (
-                        <>
-                            <CheckPassword
-                                email={email}
-                                onClose={onClose}
-                                onSetChecked={() => setIsChecked(true)}
-                            />
-                        </>
+                        <CheckPassword
+                            email={email}
+                            onClose={onClose}
+                            onSetChecked={() => setIsChecked(true)}
+                        />
                     ) : (
-                        <>
+                        <Modal theme="danger" onClose={onClose}>
                             <Modal.Body>
                                 <Text as="p" className="text-center font-medium">
                                     {t("user.delete-final")}
@@ -73,20 +76,16 @@ export const UserSectionDelete = ({ email }: Props) => {
                                 <GridMsg isError isOpen={isError} msg={formatServerError(error)} />
                             </Modal.Body>
                             <Modal.Controls theme="danger" className="justify-center">
-                                <Button
-                                    onClick={() => deleteUser()}
-                                    isLoading={isLoading}
-                                    theme="danger"
-                                >
+                                <Button onClick={handleDelete} isLoading={isLoading} theme="danger">
                                     {t("btn.delete")}
                                 </Button>
                                 <Button disabled={isLoading} onClick={onClose} theme="regular">
                                     {t("btn.cancel")}
                                 </Button>
                             </Modal.Controls>
-                        </>
+                        </Modal>
                     )}
-                </Modal>
+                </>
             )}
         </>
     );
