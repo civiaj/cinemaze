@@ -44,10 +44,9 @@ export const Page = forwardRef<HTMLDivElement, PageProps>((props, ref) => {
         window.scrollTo(0, 0);
     }, [scrollRestoration]);
 
-    useIntersectionObserver({ targetRef, onScrollEnd });
-
     useInitialEffect(() => {
-        rootRef.current.scrollTop = scrollRestoration;
+        window.scrollTo({ top: scrollRestoration });
+        // rootRef.current.scrollTop = scrollRestoration;
         dispatch(uiActions.initializeBreadcrumbs(pathname));
     });
 
@@ -55,6 +54,8 @@ export const Page = forwardRef<HTMLDivElement, PageProps>((props, ref) => {
         document.addEventListener("scroll", handleScrollRestoration);
         return () => document.removeEventListener("scroll", handleScrollRestoration);
     }, [handleScrollRestoration]);
+
+    useIntersectionObserver({ targetRef, onScrollEnd });
 
     return (
         <>

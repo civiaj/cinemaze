@@ -232,7 +232,9 @@ user.email-y	Email address is verified	Адрес электронной поч�
 user.email-n	Email addres is not verified	Адрес электронной почты не подтвержден	L'adresse e-mail n'est pas vérifiée	이메일 주소가 확인되지 않았습니다.	لم يتم التحقق من عناوين البريد الإلكتروني
 user.photo-drag	Drag  the file	Перенесите файл	Faites glisser le fichier	파일을 드래그하세요.	اسحب الملف
 user.photo-preview	Preview	Предпросмотр	Aperçu	시사	معاينة
-user.photo-delete	Removal	Удаление	Suppression	제거	إزالة
+user.photo-change	Change photo	Изменение фото	Changer la photo	사진 변경	غير الصوره
+user.photo-crop	Select size	Выберите размер	Sélectionnez la taille	사이즈를 선택하다	أختر الحجم
+user.photo-delete	Remove photo	Удаление фото	Retirer photo	사진 삭제	إزالة الصورة
 user.photo-delete-msg	Are you sure you want to delete your profile photo?	Вы действительно хотите удалить фото профиля?	Êtes-vous sûr de vouloir supprimer votre photo de profil ?	프로필 사진을 삭제하시겠습니까?	هل أنت متأكد أنك تريد حذف صورة ملفك الشخصي؟
 user.photo-format-msg	Supported formats: JPG, PNG, JPEG, WEBP	Поддерживаемые форматы: JPG, PNG, JPEG, WEBP	Formats pris en charge : JPG, PNG, JPEG, WEBP	지원되는 형식: JPG, PNG, JPEG, WEBP	التنسيقات المدعومة: JPG، PNG، JPEG، ويب
 user.photo-size-msg	Minimum image size 250 x 250 pixels	Минимальный размер изображения 250 x 250 пикселей	Taille minimale de l'image 250 x 250 pixels	최소 이미지 크기 250 x 250픽셀	الحد الأدنى لحجم الصورة 250 × 250 بكسل

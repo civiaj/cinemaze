@@ -1,6 +1,6 @@
 import { ComponentType, useRef, useEffect, MutableRefObject } from "react";
 
-const focusable = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])';
+const focusable = "a, button, input, textarea, select, details";
 
 const withFocusTrap = <P extends object>(
     WrappedComponent: ComponentType<P>,
@@ -14,7 +14,9 @@ const withFocusTrap = <P extends object>(
 
         useEffect(() => {
             const node = customNode ?? nodeRef.current;
-            const focusables = node?.querySelectorAll(focusable);
+            const focusables = Array.from(node?.querySelectorAll(focusable) ?? []).filter(
+                (el) => el.getAttribute("tabindex") !== "-1"
+            );
 
             if (focusables && focusables.length > 0) {
                 firstNode.current = focusables[0] as HTMLElement;
@@ -27,11 +29,13 @@ const withFocusTrap = <P extends object>(
                     if (e.shiftKey) {
                         if (document.activeElement === firstNode.current) {
                             e.preventDefault();
+                            console.log("ACTIVE = FIRST", document.activeElement);
                             lastNode.current?.focus();
                         }
                     } else {
                         if (document.activeElement === lastNode.current) {
                             e.preventDefault();
+                            console.log("ACTIVE = LAST", document.activeElement);
                             firstNode.current?.focus();
                         }
                     }

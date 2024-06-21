@@ -1,25 +1,36 @@
-import { DragEvent, SyntheticEvent, useRef, useState } from "react";
+import { DragEvent, RefObject, useRef, useState } from "react";
+import Cropper, { Area } from "react-easy-crop";
 import { useTranslation } from "react-i18next";
-import ReactCrop, { Crop, centerCrop, makeAspectCrop } from "react-image-crop";
 import { File } from "@/shared/assets/icons";
 import { classNames } from "@/shared/lib/classNames";
-import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
+import { Modal } from "@/shared/ui/Boxes/Modal";
 import { Button } from "@/shared/ui/Button/Button";
 import { Text } from "@/shared/ui/Text/Text";
-import { CROP_ASPECT, CROP_MIN_WIDTH, acceptInput, formatError, formats } from "../../model/config";
+import { CROP_MIN_WIDTH, acceptInput, formatError, formats } from "../../model/config";
 import { UserPhotoModal } from "./UserPhotoModal";
 
-export const UserChangePhoto = () => {
+type Props = {
+    onClose: () => void;
+    isDefault: boolean;
+    onSetSection: (value: "current" | "change" | "remove") => void;
+};
+
+export const UserChangePhoto = ({ onClose, isDefault, onSetSection }: Props) => {
     const [isDrag, setIsDrag] = useState(false);
     const [isModal, setIsModal] = useState(false);
     const onCloseModal = () => setIsModal(false);
     const onOpenModal = () => setIsModal(true);
     const filePicker = useRef<HTMLInputElement>(null);
     const [wrongFormat, setWrongFormat] = useState<string | null>(null);
+    const [imageRef, setImageRef] = useState<RefObject<HTMLImageElement>>();
 
-    const imgRef = useRef<HTMLImageElement>(null);
+    const [crop, setCrop] = useState({ x: 0, y: 0 });
+    const [finalCrop, setFinalCrop] = useState<Area>();
+    const [zoom, setZoom] = useState(1);
 
-    const [crop, setCrop] = useState<Crop>();
+    const onCropComplete = (_: Area, croppedAreaPixels: Area) => {
+        setFinalCrop(croppedAreaPixels);
+    };
 
     const [file, setFile] = useState<string | null>(null);
     const onDragEnter = (e: DragEvent<HTMLDivElement>) => {
@@ -45,14 +56,6 @@ export const UserChangePhoto = () => {
         onShowFile(target.files[0]);
     };
 
-    const onSetCrop = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-        const { width, height } = e.currentTarget;
-        const cropWidth = (CROP_MIN_WIDTH / width) * 100;
-        const crop = makeAspectCrop({ unit: "%", width: cropWidth }, CROP_ASPECT, width, height);
-        const centeredCrop = centerCrop(crop, width, height);
-        setCrop(centeredCrop);
-    };
-
     const onCancel = () => {
         setFile(null);
     };
@@ -63,7 +66,6 @@ export const UserChangePhoto = () => {
             const image = new Image();
             const src = e.target?.result?.toString() || "";
             image.src = src;
-
             image.addEventListener("load", (e) => {
                 if (wrongFormat) setWrongFormat(null);
                 const { naturalHeight, naturalWidth } = e.currentTarget as HTMLImageElement;
@@ -73,7 +75,6 @@ export const UserChangePhoto = () => {
                     return;
                 }
             });
-
             setFile(src);
         };
         fileReader.readAsDataURL(file);
@@ -82,88 +83,90 @@ export const UserChangePhoto = () => {
     const { t } = useTranslation();
 
     return !file ? (
-        <>
-            <div
-                className={classNames(
-                    "flex items-center justify-center relative h-80 -mx-6 -my-4",
-                    {
-                        ["bg-my-neutral-100"]: isDrag,
-                    }
-                )}
-                onDragEnter={onDragEnter}
-                onDragLeave={onDragLeave}
-                onDragOver={onDragEnter}
-                onDrop={onFileDrop}
-            >
-                <div className="z-[1] pointer-events-none flex flex-col text-center">
-                    <Text>{isDrag ? t("user.photo-drop") : t("user.photo-drag")}</Text>
-                    {wrongFormat && <Text className="font-medium">{wrongFormat}</Text>}
-                </div>
-                <File
+        <Modal onClose={onClose} preventClose>
+            <Modal.Header onClose={onClose} header={t("user.photo-change")} />
+            <Modal.Body>
+                <div
                     className={classNames(
-                        "text-9xl absolute opacity-5 pointer-events-none transition-transform",
+                        "flex items-center justify-center relative h-80 -mx-6 -my-4",
                         {
-                            ["scale-125"]: isDrag,
+                            ["bg-my-neutral-100"]: isDrag,
                         }
                     )}
-                />
-            </div>
-            <UserBoxSeparator />
-            <Button
-                theme="blue"
-                className="self-center"
-                onClick={() => filePicker.current?.click()}
-            >
-                <Text>{t("btn.choose")}</Text>
-            </Button>
-
-            <input
-                onChange={onFileAdd}
-                ref={filePicker}
-                style={{ display: "none" }}
-                type="file"
-                accept={acceptInput}
-                multiple={false}
-            />
-        </>
-    ) : (
-        <>
-            <div className="flex items-center justify-center -mx-6 -my-4">
-                <ReactCrop
-                    minWidth={CROP_MIN_WIDTH}
-                    aspect={CROP_ASPECT}
-                    crop={crop}
-                    onChange={(_, percent) => setCrop(percent)}
-                    circularCrop
-                    keepSelection
-                    className="w-full h-full"
+                    onDragEnter={onDragEnter}
+                    onDragLeave={onDragLeave}
+                    onDragOver={onDragEnter}
+                    onDrop={onFileDrop}
                 >
-                    <img
-                        ref={imgRef}
-                        src={file}
-                        onLoad={onSetCrop}
-                        className="w-full h-full select-none"
+                    <div className="z-[1] pointer-events-none flex flex-col text-center">
+                        <Text>{isDrag ? t("user.photo-drop") : t("user.photo-drag")}</Text>
+                        {wrongFormat && <Text className="font-medium">{wrongFormat}</Text>}
+                    </div>
+                    <File
+                        className={classNames(
+                            "text-9xl absolute opacity-5 pointer-events-none transition-transform",
+                            {
+                                ["scale-125"]: isDrag,
+                            }
+                        )}
                     />
-                </ReactCrop>
-            </div>
+                </div>
+            </Modal.Body>
+            <Modal.Controls>
+                <Button theme="blue" onClick={() => filePicker.current?.click()}>
+                    <Text>{t("btn.choose")}</Text>
+                </Button>
+                {!isDefault && (
+                    <Button onClick={() => onSetSection("current")} theme="regular">
+                        {t("btn.back")}
+                    </Button>
+                )}
+                <input
+                    onChange={onFileAdd}
+                    ref={filePicker}
+                    style={{ display: "none" }}
+                    type="file"
+                    accept={acceptInput}
+                    multiple={false}
+                    tabIndex={-1}
+                />
+            </Modal.Controls>
+        </Modal>
+    ) : (
+        <Modal onClose={onClose} className="h-[100vh]" preventClose>
+            <Modal.Header onClose={onClose} header={t("user.photo-crop")} />
+            <Modal.Body className="p-0 sm:p-0">
+                <div className="flex items-center justify-center overflow-hidden relative h-full">
+                    <Cropper
+                        image={file}
+                        crop={crop}
+                        zoom={zoom}
+                        aspect={1 / 1}
+                        onCropChange={setCrop}
+                        onCropComplete={onCropComplete}
+                        onZoomChange={setZoom}
+                        cropShape="rect"
+                        zoomWithScroll={true}
+                        setImageRef={(ref) => setImageRef(ref)}
+                    />
+                </div>
+            </Modal.Body>
 
-            <UserBoxSeparator />
-
-            <div className="flex gap-2 self-center">
+            <Modal.Controls>
                 <Button onClick={onOpenModal} theme="blue">
                     <Text>{t("btn.confirm")}</Text>
                 </Button>
                 <Button theme="regular" onClick={onCancel}>
                     <Text>{t("btn.back")}</Text>
                 </Button>
-            </div>
+            </Modal.Controls>
 
             <UserPhotoModal
-                image={imgRef.current}
-                crop={crop}
+                image={imageRef?.current}
+                crop={finalCrop}
                 onCloseModal={onCloseModal}
                 isModal={isModal}
             />
-        </>
+        </Modal>
     );
 };

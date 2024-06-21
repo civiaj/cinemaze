@@ -1,51 +1,31 @@
-import { PixelCrop } from "react-image-crop";
+import { Area } from "react-easy-crop";
 
 export function getPreviewCanvas(
-    image: HTMLImageElement,
-    canvas: HTMLCanvasElement,
-    crop: PixelCrop
+    image: HTMLImageElement | undefined | null = undefined,
+    canvas: HTMLCanvasElement | null,
+    crop?: Area
 ) {
+    if (!canvas) {
+        throw new Error("No canvas");
+    }
     const ctx = canvas.getContext("2d");
 
-    if (!ctx) {
-        throw new Error("No 2d context");
+    if (!ctx || !image || !crop) {
+        throw new Error("No ctx, image or crop");
     }
 
-    const scaleX = image.naturalWidth / image.width;
-    const scaleY = image.naturalHeight / image.height;
-    // devicePixelRatio slightly increases sharpness on retina devices
-    // at the expense of slightly slower render times and needing to
-    // size the image back down if you want to download/upload and be
-    // true to the images natural size.
-    const pixelRatio = window.devicePixelRatio;
-    // const pixelRatio = 1
-
-    canvas.width = Math.floor(crop.width * scaleX * pixelRatio);
-    canvas.height = Math.floor(crop.height * scaleY * pixelRatio);
-
-    ctx.scale(pixelRatio, pixelRatio);
-    ctx.imageSmoothingQuality = "high";
-
-    const cropX = crop.x * scaleX;
-    const cropY = crop.y * scaleY;
-
-    ctx.save();
-
-    // 5) Move the crop origin to the canvas origin (0,0)
-    ctx.translate(-cropX, -cropY);
-    // 4) Move the origin to the center of the original position
+    canvas.width = crop.width;
+    canvas.height = crop.height;
 
     ctx.drawImage(
         image,
+        crop.x,
+        crop.y,
+        crop.width,
+        crop.height,
         0,
         0,
-        image.naturalWidth,
-        image.naturalHeight,
-        0,
-        0,
-        image.naturalWidth,
-        image.naturalHeight
+        canvas.width,
+        canvas.height
     );
-
-    ctx.restore();
 }

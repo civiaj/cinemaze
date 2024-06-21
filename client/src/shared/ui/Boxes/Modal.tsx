@@ -36,7 +36,7 @@ export const Modal = withFocusTrap(
             <Overlay withInert hideScroll theme="modal" className="z-50">
                 <Box
                     className={classNames(
-                        "gap-0 p-0 sm:p-0 shadow-0 min-w-[300px] w-[clamp(500px,90%,800px)] max-h-[90%] overflow-hidden mx-2 relative min-h-[300px]",
+                        "gap-0 p-0 sm:p-0 shadow-0 min-w-[300px] w-[clamp(500px,90%,800px)] max-h-[80vh] overflow-hidden mx-2 relative min-h-[300px]",
                         {},
                         [className]
                     )}
@@ -44,7 +44,7 @@ export const Modal = withFocusTrap(
                     <OutsideClickWrapper
                         preventClose={preventClose}
                         onClose={onClose}
-                        className="overflow-hidden h-full overflow-y-auto flex flex-1 flex-col"
+                        className="overflow-hidden overflow-y-auto flex flex-1 flex-col"
                     >
                         {children}
                     </OutsideClickWrapper>
@@ -100,6 +100,10 @@ Modal.Controls = ({ theme, children, className }: ControlsProps) => {
     );
 };
 
-Modal.Body = ({ children }: BodyProps) => {
-    return <UserBox className="flex-1 h-full w-full justify-center">{children}</UserBox>;
+Modal.Body = ({ children, className }: BodyProps) => {
+    return (
+        <UserBox className={classNames("flex-1 w-full justify-center", {}, [className])}>
+            {children}
+        </UserBox>
+    );
 };
