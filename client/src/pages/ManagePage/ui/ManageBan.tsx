@@ -59,9 +59,9 @@ export const ManageBan = ({ user, onSetManageView, onSetActive }: Props) => {
                             selected={blockData.banExpiration}
                             minDate={new Date()}
                             showDisabledMonthNavigation
-                            onChange={(date) =>
-                                setBlockData((p) => ({ ...p, banExpiration: date as Date }))
-                            }
+                            onChange={(date) => {
+                                setBlockData((p) => ({ ...p, banExpiration: date }));
+                            }}
                         />
                     </div>
                     <Text>{t("manage.banMessage")}</Text>

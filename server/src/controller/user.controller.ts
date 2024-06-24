@@ -3,7 +3,6 @@ import fs from "fs";
 import path from "path";
 import { STATIC_PROFILE_DEFAULT, STATIC_PROFILE_NEW, STATIC_PROFILE_PATH } from "../config";
 import ApiError from "../exceptions/api.error";
-import userModel, { User } from "../model/user.model";
 import {
     DisplayNameInput,
     RemoveSessionInput,
@@ -13,9 +12,6 @@ import {
 import tokenService from "../service/token.service";
 import userService from "../service/user.service";
 import logger from "../utils/logger";
-import mongoose from "mongoose";
-import favoriteService from "../service/favorite.service";
-import mailService from "../service/mail.service";
 
 class UserController {
     async getMe(_req: Request, res: Response, next: NextFunction) {
@@ -60,7 +56,6 @@ class UserController {
 
             if (!user) throw ApiError.BadRequest("Нет пользователя с таким id");
 
-            // throw error if same password was provided
             if (user.comparePassword(password))
                 throw ApiError.BadRequest("Новый пароль должен отличаться от старого.");
 
@@ -165,38 +160,6 @@ class UserController {
             next(e);
         }
     }
-
-    // async deleteTestUsers(req: Request, res: Response, next: NextFunction) {
-    //     const data = await userModel.deleteMany({ provider: "test" });
-    //     return res.status(200).json({ data });
-    // }
-
-    // async addTestUsers(req: Request, res: Response, next: NextFunction) {
-    //     try {
-    //         const number = req.body.number ?? 20;
-    //         const users = [];
-
-    //         for (let i = 0; i < number; i++) {
-    //             const newUser: Partial<User> = {
-    //                 email: `testemail${i}@mail.com`,
-    //                 displayName: `Test User №${i}`,
-    //                 password: `123${i}`,
-    //                 id: String(Math.random() + i),
-    //                 provider: "test",
-    //                 isBanned: i % 2 ? true : false,
-    //                 verified: i % 2 ? false : true,
-    //                 banMessage: "Toxic Behaviour",
-    //                 banExpiration: new Date(),
-    //             };
-    //             users[i] = newUser;
-    //         }
-
-    //         const data = await userModel.insertMany(users);
-    //         return res.status(200).json({ data });
-    //     } catch (e) {
-    //         next(e);
-    //     }
-    // }
 }
 
 export default new UserController();
