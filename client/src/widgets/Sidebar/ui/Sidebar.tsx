@@ -1,4 +1,4 @@
-import { AnimatedComponent, animated, useTransition } from "@react-spring/web";
+import { AnimatedComponent, animated, easings, useTransition } from "@react-spring/web";
 import { CSSProperties, FC, useCallback, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { routePath } from "@/app/router/router";
@@ -8,7 +8,7 @@ import { Overlay } from "@/shared/ui/Boxes/Overlay";
 import { getSidebarItems } from "../model/selectors";
 import { SidebarItem } from "./SidebarItem";
 
-type WrappedOverlayProps = {
+type AnimatedOverlayProps = {
     style: CSSProperties;
     onClick: () => void;
     className: string;
@@ -24,15 +24,22 @@ export const Sidebar = () => {
     const handleClose = useCallback(() => dispatch(uiActions.closeSidebar()), [dispatch]);
 
     const transitions = useTransition(isOpen, {
-        from: { opacity: 0, transform: "translateX(-100%)" },
-        enter: { opacity: 1, transform: "translateX(0%)" },
+        from: {
+            opacity: 0,
+            transform: "translateX(-100%)",
+        },
+        enter: {
+            opacity: 1,
+            transform: "translateX(0%)",
+        },
         leave: { opacity: 0, transform: "translateX(-100%)" },
         config: {
-            duration: 100,
+            duration: 200,
+            easing: easings.easeInOutCubic,
         },
     });
 
-    const WrappedOverlay: AnimatedComponent<FC<WrappedOverlayProps>> = useMemo(
+    const AnimatedOverlay: AnimatedComponent<FC<AnimatedOverlayProps>> = useMemo(
         () => animated((props) => <Overlay {...props} />),
         []
     );
@@ -68,7 +75,7 @@ export const Sidebar = () => {
                         </ul>
                     </animated.aside>
 
-                    <WrappedOverlay
+                    <AnimatedOverlay
                         onClick={handleClose}
                         style={{ ...style, transform: "translateX(0)" }}
                         className="hidden sm:block 3xl:hidden"

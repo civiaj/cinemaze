@@ -1,13 +1,14 @@
 import { ComponentType, useRef, useEffect, MutableRefObject } from "react";
+import { classNames } from "@/shared/lib/classNames";
 
 const focusable = "a, button, input, textarea, select, details";
 
 const withFocusTrap = <P extends object>(
     WrappedComponent: ComponentType<P>,
-    withFocusProps: { customNode?: HTMLElement } = {}
+    withFocusProps: { customNode?: HTMLElement; className?: string } = {}
 ) => {
     const ComponentWithFocusTrap = (props: P & JSX.IntrinsicAttributes) => {
-        const { customNode } = withFocusProps;
+        const { customNode, className } = withFocusProps;
         const nodeRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
         const firstNode: MutableRefObject<HTMLElement | null> = useRef(null);
         const lastNode: MutableRefObject<HTMLElement | null> = useRef(null);
@@ -18,6 +19,8 @@ const withFocusTrap = <P extends object>(
                 (el) => el.getAttribute("tabindex") !== "-1"
             );
 
+            console.log("INIT", { focusables });
+
             if (focusables && focusables.length > 0) {
                 firstNode.current = focusables[0] as HTMLElement;
                 lastNode.current = focusables[focusables.length - 1] as HTMLElement;
@@ -25,17 +28,16 @@ const withFocusTrap = <P extends object>(
             }
 
             const handleKeyDown = (e: KeyboardEvent) => {
+                console.log({ focusables });
                 if (e.key === "Tab") {
                     if (e.shiftKey) {
                         if (document.activeElement === firstNode.current) {
                             e.preventDefault();
-                            console.log("ACTIVE = FIRST", document.activeElement);
                             lastNode.current?.focus();
                         }
                     } else {
                         if (document.activeElement === lastNode.current) {
                             e.preventDefault();
-                            console.log("ACTIVE = LAST", document.activeElement);
                             firstNode.current?.focus();
                         }
                     }
@@ -50,7 +52,7 @@ const withFocusTrap = <P extends object>(
         }, [customNode]);
 
         return (
-            <div ref={nodeRef} className="w-full">
+            <div id="focus-trap" ref={nodeRef} className={classNames("w-full", {}, [className])}>
                 <WrappedComponent {...(props as P)} />
             </div>
         );

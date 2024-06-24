@@ -3,19 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useDeletePhotoMutation } from "@/entities/User";
 import formatServerError from "@/shared/api/helpers/formatServerError";
-import { Box } from "@/shared/ui/Boxes/Box";
+
 import { Modal } from "@/shared/ui/Boxes/Modal";
 import { Button } from "@/shared/ui/Button/Button";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
 import { Text } from "@/shared/ui/Text/Text";
-import { UserModalAnimationHoc } from "../UserSectionPhoto/UserModalAnimationHoc";
 
 type Props = {
     onClose: () => void;
     isModal: boolean;
 };
 
-const DeleteModal = ({ onClose }: Props) => {
+export const UserPhotoDeleteModal = ({ onClose, isModal }: Props) => {
     const { t } = useTranslation();
     const [deletePhoto, { isLoading, isError, error }] = useDeletePhotoMutation();
     const navigate = useNavigate();
@@ -27,7 +26,7 @@ const DeleteModal = ({ onClose }: Props) => {
     };
 
     return (
-        <Box className="p-0 sm:p-0">
+        <Modal.Dialog onCloseDialog={onClose} transitionValue={isModal}>
             <Modal.Header header={t("user.photo-delete")} onClose={onClose} />
             <Modal.Body>
                 <Text>{t("user.photo-delete-msg")}</Text>
@@ -42,15 +41,6 @@ const DeleteModal = ({ onClose }: Props) => {
                     <Text>{t("btn.cancel")}</Text>
                 </Button>
             </Modal.Controls>
-        </Box>
+        </Modal.Dialog>
     );
-};
-
-export const UserPhotoDeleteModal = (props: Props) => {
-    const Component = UserModalAnimationHoc(DeleteModal, {
-        transitionValue: props.isModal,
-        onCloseModal: props.onClose,
-    });
-
-    return <Component {...props} />;
 };

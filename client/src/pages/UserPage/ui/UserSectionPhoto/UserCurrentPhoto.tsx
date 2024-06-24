@@ -18,7 +18,7 @@ export const UserCurrentPhoto = (props: Props) => {
     const { t } = useTranslation();
 
     return (
-        <Modal onClose={onClose}>
+        <Modal onClose={onClose} preventClose={isRemove}>
             <Modal.Header onClose={onClose} header={t("user.photo")} />
             <Modal.Body>
                 <AppImage

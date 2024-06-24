@@ -112,7 +112,7 @@ export const UserChangePhoto = ({ onClose, isDefault, onSetSection }: Props) => 
                     />
                 </div>
             </Modal.Body>
-            <Modal.Controls>
+            <Modal.Controls theme="none">
                 <Button theme="blue" onClick={() => filePicker.current?.click()}>
                     <Text>{t("btn.choose")}</Text>
                 </Button>
@@ -152,7 +152,7 @@ export const UserChangePhoto = ({ onClose, isDefault, onSetSection }: Props) => 
                 </div>
             </Modal.Body>
 
-            <Modal.Controls>
+            <Modal.Controls theme="none">
                 <Button onClick={onOpenModal} theme="blue">
                     <Text>{t("btn.confirm")}</Text>
                 </Button>

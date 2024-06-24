@@ -5,14 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useUpdatePhotoMutation } from "@/entities/User";
 import formatServerError from "@/shared/api/helpers/formatServerError";
-import { classNames } from "@/shared/lib/classNames";
-import { Box } from "@/shared/ui/Boxes/Box";
 import { Modal } from "@/shared/ui/Boxes/Modal";
 import { Button } from "@/shared/ui/Button/Button";
 import { GridMsg } from "@/shared/ui/GridMsg/GridMsg";
 import { Text } from "@/shared/ui/Text/Text";
 import { getPreviewCanvas } from "../../helpers/getPreviewCanvas";
-import { UserModalAnimationHoc } from "./UserModalAnimationHoc";
 
 type Props = {
     image?: HTMLImageElement | null;
@@ -21,7 +18,7 @@ type Props = {
     isModal: boolean;
 };
 
-const PhotoModal = ({ image, crop, onCloseModal, isModal }: Props) => {
+export const UserPhotoModal = ({ image, crop, onCloseModal, isModal }: Props) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const { t } = useTranslation();
     const [updatePhoto, { isLoading, error, isError }] = useUpdatePhotoMutation();
@@ -75,7 +72,7 @@ const PhotoModal = ({ image, crop, onCloseModal, isModal }: Props) => {
     }, [image, crop, isModal]);
 
     return (
-        <Box className={classNames("gap-0 sm:gap-0 p-0 sm:p-0 shadow-0")}>
+        <Modal.Dialog onCloseDialog={onCloseModal} transitionValue={isModal}>
             <Modal.Header onClose={onCloseModal} header={t("user.photo-preview")} />
             <Modal.Body>
                 <canvas className="w-[250px] h-[250px] rounded-xl self-center" ref={canvasRef} />
@@ -93,15 +90,6 @@ const PhotoModal = ({ image, crop, onCloseModal, isModal }: Props) => {
                     <Text>{t("btn.cancel")}</Text>
                 </Button>
             </Modal.Controls>
-        </Box>
+        </Modal.Dialog>
     );
-};
-
-export const UserPhotoModal = (props: Props) => {
-    const Component = UserModalAnimationHoc<Props>(PhotoModal, {
-        transitionValue: props.isModal,
-        onCloseModal: props.onCloseModal,
-    });
-
-    return <Component {...props} />;
 };

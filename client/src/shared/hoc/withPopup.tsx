@@ -1,4 +1,4 @@
-import { useTransition, animated } from "@react-spring/web";
+import { useTransition, animated, easings } from "@react-spring/web";
 
 type WithPopupProps = {
     transitionValue: string | number | boolean | null;
@@ -11,9 +11,9 @@ const withPopup = <T,>(Component: React.ComponentType<T>, withPopupProps: WithPo
 
     const ComponentWithPopup = (props: T & JSX.IntrinsicAttributes) => {
         const transition = useTransition(transitionValue, {
-            from: { opacity: 0, transform: "scale(0.9)" },
+            from: { opacity: 0, transform: "scale(0.95)" },
             enter: { opacity: 1, transform: "scale(1)" },
-            config: { duration: 100 },
+            config: { duration: 200, easing: easings.easeOutCubic },
         });
 
         return transition(

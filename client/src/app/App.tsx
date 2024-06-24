@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { AppRouter } from "@/app/router/AppRouter";
 import { useAppSelector } from "@/app/store";
 import { CleanInfinite } from "@/processes/CleanInfinite/CleanInfinite";
@@ -16,6 +17,12 @@ function App() {
     const { isLoading } = useGetMeQuery(undefined, {
         skip: !isLogged,
     });
+
+    useEffect(() => {
+        document.addEventListener("click", () => {
+            console.log(document.activeElement);
+        });
+    }, []);
 
     if (isLoading) return <FullscreenSpinner className="bg-neutral-50 dark:bg-neutral-950" />;
 
