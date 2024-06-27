@@ -1,11 +1,9 @@
 import { RootState } from "@/app/store";
-import { mainPageAdapter } from "./slice";
+import { adapter } from "./slice";
 
-export const getMainQuery = (state: RootState) => state.mainPage.mainQuery;
+export const getMainQuery = (state: RootState) => state.mainPage.query;
 export const getMainPage = (state: RootState) => state.mainPage.page;
 
-const adapterSelectors = mainPageAdapter.getSelectors<RootState>(
-    (state) => state.mainPage.mainPageFilms
-);
+const adapterSelectors = adapter.getSelectors<RootState>((state) => state.mainPage.films);
 
-export const getMainPageInfiniteFilms = (state: RootState) => adapterSelectors.selectAll(state);
+export const getMainFilms = (state: RootState) => adapterSelectors.selectAll(state);

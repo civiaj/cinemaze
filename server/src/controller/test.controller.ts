@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import userModel, { User } from "../model/user.model";
 
 class TestController {
-    async remove(req: Request, res: Response, next: NextFunction) {
+    async remove(_req: Request, res: Response, next: NextFunction) {
         try {
             const data = await userModel.deleteMany({ provider: "test" });
             return res.status(200).json({ data });
@@ -11,7 +11,7 @@ class TestController {
         }
     }
 
-    async add(req: Request, res: Response, next: NextFunction) {
+    async add(_req: Request, res: Response, next: NextFunction) {
         try {
             const popularFigures = [
                 "Harry Potter",

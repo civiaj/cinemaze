@@ -1,7 +1,7 @@
 import { TFavorite } from "@/entities/Favorite";
 import i18n from "@/shared/i18n/config";
 
-const getAddFavoriteToastMsg = (favorite: Partial<TFavorite>) => {
+const getAddFavoriteToastMsg = (favorite: TFavorite) => {
     let message = "";
     switch (true) {
         case "bookmarked" in favorite: {

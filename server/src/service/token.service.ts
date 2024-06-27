@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import mongoose, { FilterQuery, QueryOptions, Types } from "mongoose";
+import mongoose, { FilterQuery, QueryOptions } from "mongoose";
 import {
     JWT_ACCESS_PRIVATE_KEY,
     JWT_ACCESS_PUBLIC_KEY,
@@ -26,7 +26,7 @@ const publicKeys: Record<Keys, string> = {
 };
 
 class TokenService {
-    private signJwt(payload: Object, privateKey: Keys, options?: jwt.SignOptions) {
+    private signJwt(payload: Record<string, unknown>, privateKey: Keys, options?: jwt.SignOptions) {
         return jwt.sign(payload, privateKeys[privateKey], { algorithm: "RS256", ...options });
     }
 

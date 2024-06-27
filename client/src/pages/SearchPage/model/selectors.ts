@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "@/app/store";
-import { searchPageAdapter } from "./slice";
+import { adapter } from "./slice";
 
 export const getSearchPageState = (state: RootState) => state.searchPage;
 export const getSearchPage = (state: RootState) => state.searchPage.page;
@@ -15,8 +15,6 @@ export const getSearchUserQueriesByInput = createSelector(
     }
 );
 
-const adapterSelectors = searchPageAdapter.getSelectors<RootState>(
-    (state) => state.searchPage.searchPageFilms
-);
+const adapterSelectors = adapter.getSelectors<RootState>((state) => state.searchPage.films);
 
 export const getSearchPageInfiniteFilms = (state: RootState) => adapterSelectors.selectAll(state);

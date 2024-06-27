@@ -1,8 +1,9 @@
 import { EntityState } from "@reduxjs/toolkit";
 import { FavoriteListVariantT, TFavorite } from "@/entities/Favorite";
+import { TFilm } from "@/entities/Film";
 
 export interface FavoritePageSchema {
     listVariant: FavoriteListVariantT;
-    favoritePageFilms: EntityState<FilmT & TFavorite>;
+    films: EntityState<TFilm & TFavorite>;
     page: number;
 }

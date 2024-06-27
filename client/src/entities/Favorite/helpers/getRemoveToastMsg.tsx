@@ -5,12 +5,12 @@ import i18n from "@/shared/i18n/config";
 import { AppLink } from "@/shared/ui/AppLink/AppLink";
 
 const getRemoveToastMsg = (payload: {
-    filmId: number;
+    id: number;
     filmTitle?: string;
     listVariant: FavoriteListVariantT;
 }) => {
-    const { filmId, filmTitle = i18n.t("plural.film", { count: 1 }), listVariant } = payload;
-    const link = `${routePath.details}/${filmId}`;
+    const { id, filmTitle = i18n.t("plural.film", { count: 1 }), listVariant } = payload;
+    const link = `${routePath.details}/${id}`;
 
     const toasterMessage: Record<FavoriteListVariantT | "all", string> = {
         bookmarked: "toast.remove-book",

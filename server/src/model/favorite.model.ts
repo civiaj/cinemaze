@@ -1,17 +1,17 @@
 import mongoose from "mongoose";
 
+export type FavoriteItem = {
+    film: mongoose.Schema.Types.ObjectId;
+    userScore: number | null;
+    bookmarked: boolean;
+    hidden: boolean;
+    createdAt: Date;
+    updateAt: Date;
+};
+
 export type Favorite = {
     user: mongoose.Schema.Types.ObjectId;
-    favorites: [
-        {
-            film: mongoose.Schema.Types.ObjectId;
-            userScore: number | null;
-            bookmarked: boolean;
-            hidden: boolean;
-            createdAt: Date;
-            updateAt: Date;
-        }
-    ];
+    favorites: FavoriteItem[];
 };
 
 const favoriteSchema = new mongoose.Schema<Favorite>(

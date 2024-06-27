@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { routePath } from "@/app/router/router";
 import { FavoriteListVariantT, TFavorite, useRemoveOneFavoriteMutation } from "@/entities/Favorite";
+import { TFilm } from "@/entities/Film";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { Checked } from "@/shared/assets/icons";
 import { TLngs } from "@/shared/i18n/types";
@@ -16,13 +17,13 @@ import { listVariants } from "../model/data";
 type Props = {
     onClose: () => void;
     listVariant: FavoriteListVariantT;
-    film?: (FilmT & TFavorite) | null;
+    film?: (TFilm & TFavorite) | null;
 };
 
 export const FavoriteRemoveModal = (props: Props) => {
     const { t, i18n } = useTranslation();
     const { onClose, listVariant, film } = props;
-    const { filmId } = film ?? {};
+    const { id } = film ?? {};
     const title = getFilmTitle(film, i18n.language as TLngs);
     const category = listVariants.find((e) => e.value === listVariant)!.label;
 
@@ -32,16 +33,16 @@ export const FavoriteRemoveModal = (props: Props) => {
     const [removeOneFavorite, { isLoading, isError, error }] = useRemoveOneFavoriteMutation();
 
     const onDelete = async () => {
-        if (!filmId) return;
+        if (!id) return;
         removeOneFavorite({
-            body: { filmId, field: all ? "all" : listVariant },
+            body: { id, field: all ? "all" : listVariant },
             listVariant: all ? "all" : listVariant,
             filmTitle: title,
         })
             .unwrap()
             .then(() => onClose());
     };
-    const link = `${routePath.details}/${film?.filmId}`;
+    const link = `${routePath.details}/${film?.id}`;
 
     return (
         <Modal onClose={onClose} theme="danger">

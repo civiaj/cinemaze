@@ -8,15 +8,15 @@ import { Button } from "@/shared/ui/Button/Button";
 import { ColoredNumber } from "@/shared/ui/ColoredNumber/ColoredNumber";
 
 interface RatingUserScoreProps {
-    filmId: number;
-    updateFavorite: (favorite: Partial<TFavorite>) => Promise<void>;
+    id: number;
+    updateFavorite: (favorite: TFavorite) => Promise<void>;
     disabled: boolean;
 }
 
-export const RatingUserScore = ({ filmId, updateFavorite, disabled }: RatingUserScoreProps) => {
+export const RatingUserScore = ({ id, updateFavorite, disabled }: RatingUserScoreProps) => {
     const user = useAppSelector(selectUser);
     const { t } = useTranslation();
-    const { currentData: favorite } = useGetOneFavoriteQuery(filmId, { skip: !user });
+    const { currentData: favorite } = useGetOneFavoriteQuery(id, { skip: !user });
 
     const handleDeleteScore = () => {
         updateFavorite({ userScore: null });

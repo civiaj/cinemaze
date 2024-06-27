@@ -6,7 +6,7 @@ import { useInitialEffect } from "@/shared/hooks/useInitialEffect";
 import { useIntersectionObserver } from "@/shared/hooks/useIntersectionObserver";
 import { useThrottle } from "@/shared/hooks/useThrottle";
 import { classNames } from "@/shared/lib/classNames";
-import { getScrollByPath } from "../model/selectors";
+import { getIsMobile, getScrollByPath } from "../model/selectors";
 import { uiActions } from "../model/slice";
 import { ScrollButton } from "./ScrollButton";
 
@@ -18,6 +18,7 @@ interface PageProps {
 
 export const Page = forwardRef<HTMLDivElement, PageProps>((props, ref) => {
     const { children, className, onScrollEnd } = props;
+    const isMobile = useAppSelector(getIsMobile);
     const rootRef = useRef() as MutableRefObject<HTMLDivElement>;
     const targetRef = useRef() as MutableRefObject<HTMLDivElement>;
     const scrollRestorationRef = useRef(0);
@@ -65,7 +66,7 @@ export const Page = forwardRef<HTMLDivElement, PageProps>((props, ref) => {
                         ref={rootRef}
                         className={classNames(
                             "py-4 px-2 flex flex-col gap-4 h-full min-w-[300px]",
-                            {},
+                            { ["pb-16"]: isMobile },
                             [className]
                         )}
                     >

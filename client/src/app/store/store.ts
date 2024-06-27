@@ -22,11 +22,11 @@ import { statisticsReducer } from "@/pages/StatisticsPage";
 import { authAndUserSliceReducer } from "@/features/LoadingAuthorizationAndUser";
 import { uiReducer } from "@/entities/Ui";
 import { userReducer } from "@/entities/User";
-import { filmApi } from "@/shared/api/filmApi";
-import { serverApi } from "@/shared/api/serverApi";
+import { api } from "@/shared/api/api";
 import { DispatchFunc, RootState } from "./types";
 
 const appReducer = combineReducers({
+    [api.reducerPath]: api.reducer,
     user: userReducer,
     authAndUserIsLoading: authAndUserSliceReducer,
     ui: persistReducer(uiConfig, uiReducer),
@@ -35,8 +35,6 @@ const appReducer = combineReducers({
     searchPage: persistReducer(searchPagePersistConfig, searchPageReducer),
     statisticsPage: persistReducer(statisticsPagePersistConfig, statisticsReducer),
     manage: persistReducer(managePagePersistConfig, manageReducer),
-    [filmApi.reducerPath]: filmApi.reducer,
-    [serverApi.reducerPath]: serverApi.reducer,
 });
 
 const rootReducer = (state: ReturnType<typeof appReducer> | undefined, action: AnyAction) => {
@@ -56,7 +54,7 @@ const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }).concat(filmApi.middleware, serverApi.middleware, storeErrors),
+        }).concat(api.middleware, storeErrors),
 });
 
 export const persistor = persistStore(store);

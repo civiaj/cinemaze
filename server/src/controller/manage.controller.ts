@@ -23,7 +23,11 @@ class ManageController {
             next(e);
         }
     }
-    async getAll(req: Request<{}, {}, {}, GetAllUsersInput>, res: Response, next: NextFunction) {
+    async getAll(
+        req: Request<object, object, object, GetAllUsersInput>,
+        res: Response,
+        next: NextFunction
+    ) {
         try {
             const { page, filter, order, query, locale } = req.query;
             const data = await userService.getAll({
@@ -41,7 +45,7 @@ class ManageController {
     }
 
     async updateOne(
-        req: Request<{}, {}, ManageUserChangeInput>,
+        req: Request<object, object, ManageUserChangeInput>,
         res: Response,
         next: NextFunction
     ) {
@@ -64,7 +68,11 @@ class ManageController {
         }
     }
 
-    async banOne(req: Request<{}, {}, ManageUserBanInput>, res: Response, next: NextFunction) {
+    async banOne(
+        req: Request<object, object, ManageUserBanInput>,
+        res: Response,
+        next: NextFunction
+    ) {
         try {
             const { banExpiration, banMessage, manageUserId } = req.body;
 

@@ -1,6 +1,6 @@
-import { useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { FilmsList } from "@/features/FilmsList";
+import { useTopQuery } from "@/entities/Film";
 import { Page } from "@/entities/Ui";
 import formatFilmError from "@/shared/api/helpers/formatFilmError";
 import { useInfiniteScroll } from "@/shared/hooks/useInfiniteScroll";
@@ -8,8 +8,7 @@ import { Box } from "@/shared/ui/Boxes/Box";
 import { EndBox } from "@/shared/ui/Boxes/EndBox";
 import { PageLikeBox } from "@/shared/ui/Boxes/PageLikeBox";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
-import { useFilmsQuery } from "../model/mainPageApi";
-import { getMainPage, getMainPageInfiniteFilms, getMainQuery } from "../model/selectors";
+import { getMainPage, getMainFilms, getMainQuery } from "../model/selectors";
 import { mainPageActions } from "../model/slice";
 import { MainPageHeader } from "./MainPageHeader";
 
@@ -20,17 +19,17 @@ const cardStyles: TCardStyles = {
 export const MainPageBody = () => {
     const mainQuery = useAppSelector(getMainQuery);
     const dispatch = useAppDispatch();
-    const infiniteFilms = useAppSelector(getMainPageInfiniteFilms);
+    const infiniteFilms = useAppSelector(getMainFilms);
     const page = useAppSelector(getMainPage);
 
     const { isEnd, isError, isFetching, isLoading, onScrollEnd, error } = useInfiniteScroll({
-        queryHook: useFilmsQuery,
+        queryHook: useTopQuery,
         queryParams: { page, mainQuery },
         setPage: (newPage: number) => dispatch(mainPageActions.setPage(newPage)),
         setFilms: (films) => dispatch(mainPageActions.setMainPageFilms(films)),
     });
 
-    const films = useMemo(() => infiniteFilms ?? [], [infiniteFilms]);
+    const films = infiniteFilms ?? [];
     const showEnd = !isLoading && !isFetching && isEnd && !!films.length;
 
     if (!infiniteFilms.length && isError)

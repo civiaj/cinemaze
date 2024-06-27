@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import { serverApi } from "@/shared/api/serverApi";
+import { api } from "@/shared/api/api";
 import { ServerMessageResponse } from "@/shared/api/types";
 import i18n from "@/shared/i18n/config";
 import {
@@ -11,7 +11,7 @@ import {
     UnbanUserRequest,
 } from "./types";
 
-const manageApi = serverApi.injectEndpoints({
+const manageApi = api.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
         getUsers: builder.query<GetAllUsersData, GetAllUsersQuery>({

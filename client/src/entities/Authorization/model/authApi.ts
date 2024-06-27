@@ -1,12 +1,11 @@
 import { FetchErrorWithToast } from "@/app/store/types";
 import { authAndUserSliceActions } from "@/features/LoadingAuthorizationAndUser";
 import { userActions, userApi } from "@/entities/User";
-import { filmApi } from "@/shared/api/filmApi";
-import { serverApi } from "@/shared/api/serverApi";
+import { api } from "@/shared/api/api";
 import { ServerMessageResponse } from "@/shared/api/types";
 import { GenericResponse, LoginRequest, RegisterRequest } from "../model/types";
 
-const authApi = serverApi.injectEndpoints({
+const authApi = api.injectEndpoints({
     endpoints: (builder) => ({
         register: builder.mutation<GenericResponse, RegisterRequest>({
             query: (data) => ({
@@ -65,10 +64,8 @@ const authApi = serverApi.injectEndpoints({
                     //Reset store and persist in root reducer
                     dispatch(userActions.logout());
 
-                    //Reset serverApi and filmApi
-                    [serverApi, filmApi].forEach((api) => {
-                        dispatch(api.util.resetApiState());
-                    });
+                    //Reset api
+                    dispatch(api.util.resetApiState());
                 } catch (e) {
                     // errorMiddleware
                 }

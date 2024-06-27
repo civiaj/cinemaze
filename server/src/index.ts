@@ -10,6 +10,7 @@ import useragent from "express-useragent";
 import userAgent from "./middleware/userAgent";
 import path from "path";
 import "./schedules/unbanSchedule";
+import ApiError from "./exceptions/api.error";
 
 const app = express();
 
@@ -33,8 +34,7 @@ app.use(userAgent);
 app.use("/api", router);
 
 app.all("*", (req: Request, _res: Response, next: NextFunction) => {
-    const err = new Error(`Route ${req.originalUrl} not found`) as any;
-    err.statusCode = 404;
+    const err = ApiError.BadRequest(`Route ${req.originalUrl} not found`);
     next(err);
 });
 

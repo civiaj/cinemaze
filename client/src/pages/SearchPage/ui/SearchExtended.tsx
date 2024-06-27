@@ -2,41 +2,30 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch } from "@/app/store";
+import { TFiltersRes, TSearchState } from "@/entities/Film";
+import { initialSearch } from "@/entities/Film/model/data";
 import { Close, Refresh } from "@/shared/assets/icons";
 import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "@/shared/const/const";
 import { AppSelect } from "@/shared/ui/AppSelect/AppSelect";
 import { Button } from "@/shared/ui/Button/Button";
 import { Input } from "@/shared/ui/Input/Input";
-import { generateNumberOptions } from "../lib/helpers";
+import { generateNumberOptions } from "../model/helpers";
 import { searchPageActions } from "../model/slice";
-import { SearchFiltersT, SearchQuery, SearchQueryKeys } from "../model/types";
 
 interface SearchExtendedProps {
     disabled: boolean;
     onClose?: () => void;
-    data?: SearchFiltersT;
-    prevQuery: SearchQuery;
+    data?: TFiltersRes;
+    prevQuery: TSearchState;
     skip: boolean;
 }
-
-const resetFiltersValue: SearchQuery = {
-    country: null,
-    genre: null,
-    keyword: "",
-    ratingFrom: RATING_FROM_MIN,
-    ratingTo: RATING_TO_MAX,
-    yearFrom: YEAR_FROM_MIN,
-    yearTo: YEAR_TO_MAX,
-};
 
 export const SearchExtended = (props: SearchExtendedProps) => {
     const { disabled, onClose, data, prevQuery, skip } = props;
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
-
     const [searchParams, setSearchParams] = useSearchParams();
-
-    const [query, setQuery] = useState<SearchQuery>(prevQuery);
+    const [query, setQuery] = useState<TSearchState>(prevQuery);
     const { country, genre, keyword, ratingFrom, ratingTo, yearFrom, yearTo } = query;
 
     const ratingFromOptions = generateNumberOptions(RATING_FROM_MIN, ratingTo);
@@ -44,7 +33,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
     const yearFromOptions = generateNumberOptions(YEAR_FROM_MIN, yearTo);
     const yearToOptions = generateNumberOptions(yearFrom + 1, YEAR_TO_MAX);
 
-    const onUpdateFilters = (queryName: SearchQueryKeys, newValue: number | string | null) => {
+    const onUpdateFilters = (queryName: keyof TSearchState, newValue: number | string | null) => {
         if (newValue === null) {
             setQuery((prev) => ({ ...prev, [queryName]: newValue }));
         }
@@ -61,15 +50,13 @@ export const SearchExtended = (props: SearchExtendedProps) => {
             if (value !== null) searchParams.set(key, String(value));
         });
         setSearchParams(searchParams);
-
         dispatch(searchPageActions.addUserQuery(keyword));
-
         window.scrollTo(0, 0);
         onClose?.();
     };
 
     const handleReset = () => {
-        setQuery(resetFiltersValue);
+        setQuery(initialSearch);
         dispatch(searchPageActions.cleanInfiniteFilms());
         if (searchParams.size) setSearchParams({});
     };

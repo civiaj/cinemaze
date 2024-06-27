@@ -63,7 +63,7 @@ export const routeConfig: Record<AppRoutes, IRoute> = {
 
     [AppRoutes.DETAILS]: {
         element: <DetailsPage />,
-        path: routePath.details + "/:id",
+        path: routePath.details + "/:filmId",
         label: "",
         auth: false,
         allowedRoles: ["user", "admin", "admin-test"],

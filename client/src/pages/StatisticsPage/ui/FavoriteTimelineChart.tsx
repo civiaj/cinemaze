@@ -38,7 +38,7 @@ const CustomTooltip = ({ payload, active }: TooltipProps<TLStat["userScore"], TL
                 <div className="bg-my-neutral-50 bg-opacity-10 px-4 py-2 sm:px-6 sm:py-4 flex flex-col">
                     <Elipsis>
                         <AppLink
-                            to={`${routePath.details}/${item.filmId}`}
+                            to={`${routePath.details}/${item.id}`}
                             className="font-medium text-base sm:text-2xl pointer-events-auto text-my-neutral-800 hover:text-blue-500"
                             title={item.name}
                         >

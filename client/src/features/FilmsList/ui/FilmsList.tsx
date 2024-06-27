@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppSelector } from "@/app/store";
 import { useGetSyncDataQuery } from "@/entities/Favorite";
+import { TFilm } from "@/entities/Film";
 import { TAppearances, getUiAppearance } from "@/entities/Ui";
 import { selectUser } from "@/entities/User";
 import { classNames } from "@/shared/lib/classNames";
@@ -14,7 +15,7 @@ import { Text } from "@/shared/ui/Text/Text";
 import { FilmListSkeleton } from "./FilmListSkeleton";
 
 type FilmsListPropsT = {
-    films: FilmT[];
+    films: TFilm[];
     page: number;
     cardProps?: Partial<FilmCardPropsT>;
     isLoading?: boolean;
@@ -63,17 +64,17 @@ export const FilmsList = (props: FilmsListPropsT) => {
     });
 
     const findIsHidden = useCallback(
-        (filmId: number) => {
+        (id: number) => {
             return user && pathname !== routePath.favorite
-                ? syncData?.films.find((item) => item.filmId === filmId)?.hidden
+                ? syncData?.films.find((item) => item.id === id)?.hidden
                 : false;
         },
         [pathname, syncData, user]
     );
 
     const findUserScore = useCallback(
-        (filmId: number) => {
-            return user ? syncData?.films.find((item) => item.filmId === filmId)?.userScore : null;
+        (id: number) => {
+            return user ? syncData?.films.find((item) => item.id === id)?.userScore : null;
         },
         [syncData, user]
     );
@@ -108,10 +109,10 @@ export const FilmsList = (props: FilmsListPropsT) => {
             >
                 {films.map((film) => (
                     <FilmCard
-                        key={film.filmId}
+                        key={film.id}
                         film={film}
-                        userScore={findUserScore(film.filmId)}
-                        isHidden={findIsHidden(film.filmId)}
+                        userScore={findUserScore(film.id)}
+                        isHidden={findIsHidden(film.id)}
                         appearance={appearance}
                         onClick={onFilmCardClick}
                         onDelete={onFilmCardDelete}

@@ -24,7 +24,7 @@ class UserController {
     }
 
     async updateUserDisplayName(
-        req: Request<{}, {}, DisplayNameInput>,
+        req: Request<object, object, DisplayNameInput>,
         res: Response,
         next: NextFunction
     ) {
@@ -42,7 +42,7 @@ class UserController {
     }
 
     async updatePassword(
-        req: Request<{}, {}, UpdatePasswordInput>,
+        req: Request<object, object, UpdatePasswordInput>,
         res: Response,
         next: NextFunction
     ) {
@@ -78,7 +78,9 @@ class UserController {
             if (user.photo && user.photo !== STATIC_PROFILE_DEFAULT) {
                 try {
                     fs.unlinkSync(path.join(__dirname, `../..${STATIC_PROFILE_PATH}`, user.photo));
-                } catch (e) {}
+                } catch (e) {
+                    // do something
+                }
             }
             user.photo = STATIC_PROFILE_NEW + req.body.newPhoto;
             await user.save({ validateBeforeSave: false });
@@ -128,7 +130,7 @@ class UserController {
     }
 
     async removeSession(
-        req: Request<{}, {}, RemoveSessionInput>,
+        req: Request<object, object, RemoveSessionInput>,
         res: Response,
         next: NextFunction
     ) {
@@ -144,7 +146,11 @@ class UserController {
         }
     }
 
-    async updateRole(req: Request<{}, {}, UpdateRolesInput>, res: Response, next: NextFunction) {
+    async updateRole(
+        req: Request<object, object, UpdateRolesInput>,
+        res: Response,
+        next: NextFunction
+    ) {
         try {
             const user = await userService.findUser({ id: res.locals.user.id });
             if (!user) throw ApiError.BadRequest("Нет пользователя с таким id");

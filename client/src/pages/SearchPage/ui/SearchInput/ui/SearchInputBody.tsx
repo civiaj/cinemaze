@@ -4,7 +4,7 @@ import { SearchInputFormProps } from "@/pages/SearchPage/model/types";
 import { GoToSearch } from "@/shared/assets/icons";
 import { useUpdateHeight } from "@/shared/hooks/useUpdateHeight";
 import { AppLink } from "@/shared/ui/AppLink/AppLink";
-import { extraHeight } from "../../../config/data";
+import { extraHeight } from "../../../model/data";
 import { SearchQueryResults } from "./SearchQueryResults";
 import { SearchUserQueries } from "./SearchUserQueries";
 

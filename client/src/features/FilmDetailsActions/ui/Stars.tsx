@@ -1,27 +1,27 @@
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/app/store";
 import { TFavorite, useGetOneFavoriteQuery } from "@/entities/Favorite";
-import { DetailsT } from "@/entities/FilmDetails";
+import { TDetails } from "@/entities/Film";
 import { selectUser } from "@/entities/User";
 import { FilledStar, Star } from "@/shared/assets/icons";
 import { classNames } from "@/shared/lib/classNames";
 
-interface RatingStarsProps {
-    filmId: number;
-    updateFavorite: (favorite: Partial<TFavorite>) => Promise<void>;
+type Props = {
+    id: number;
+    updateFavorite: (favorite: TFavorite) => Promise<void>;
     disabled: boolean;
-    rating?: DetailsT["rating"];
-}
+    rating?: TDetails["rating"];
+};
 
 const starsArray = Array(10)
     .fill(0)
     .map((_, i) => i + 1);
 
-export const Stars = (props: RatingStarsProps) => {
-    const { filmId, updateFavorite, disabled, rating } = props;
+export const Stars = (props: Props) => {
+    const { id, updateFavorite, disabled, rating } = props;
 
     const user = useAppSelector(selectUser);
-    const { currentData: favorite } = useGetOneFavoriteQuery(filmId, { skip: !user });
+    const { currentData: favorite } = useGetOneFavoriteQuery(id, { skip: !user });
 
     const userScore = favorite?.userScore ?? null;
     const ratingPlaceholder = rating ? Number(rating) : 0;

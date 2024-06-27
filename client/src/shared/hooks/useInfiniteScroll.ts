@@ -1,5 +1,6 @@
 import { UseQuery } from "@reduxjs/toolkit/dist/query/react/buildHooks";
 import { useCallback, useEffect } from "react";
+import { TFilm } from "@/entities/Film";
 
 /* eslint-disable @typescript-eslint/no-explicit-any*/
 
@@ -10,7 +11,7 @@ interface useInfiniteScrollProps {
         [x: string]: any;
     };
     setPage: (newPage: number) => void;
-    setFilms: (films: FilmT[]) => void;
+    setFilms: (films: TFilm[]) => void;
     queryHookSettings?: {
         skip?: boolean;
         refetchOnMountOrArgChange?: boolean | number;

@@ -1,14 +1,6 @@
 import crypto from "crypto";
 import { CookieOptions, NextFunction, Request, Response } from "express";
-import {
-    ADMINS,
-    API_URL,
-    CLIENT_URL,
-    JWT_ACCESS_TTL,
-    JWT_REFRESH_TTL,
-    MONGO_URL,
-    NODE_ENV,
-} from "../config";
+import { ADMINS, API_URL, CLIENT_URL, JWT_ACCESS_TTL, JWT_REFRESH_TTL, NODE_ENV } from "../config";
 import ApiError from "../exceptions/api.error";
 import { GoogleOAuthInput } from "../schema/oauth.schema";
 import {
@@ -25,8 +17,6 @@ import mailService from "../service/mail.service";
 import tokenService from "../service/token.service";
 import userService from "../service/user.service";
 import mongoose from "mongoose";
-import connect from "../utils/connect";
-import userModel from "../model/user.model";
 
 const accessTokenCookieOptions: CookieOptions = {
     maxAge: JWT_ACCESS_TTL,
@@ -48,7 +38,11 @@ if (NODE_ENV === "production") {
 }
 
 class AuthController {
-    async register(req: Request<{}, {}, CreateUserInput>, res: Response, next: NextFunction) {
+    async register(
+        req: Request<object, object, CreateUserInput>,
+        res: Response,
+        next: NextFunction
+    ) {
         const session = await mongoose.startSession();
         session.startTransaction();
         const options = { session };
@@ -83,7 +77,7 @@ class AuthController {
         }
     }
 
-    async login(req: Request<{}, {}, LoginUserInput>, res: Response, next: NextFunction) {
+    async login(req: Request<object, object, LoginUserInput>, res: Response, next: NextFunction) {
         try {
             const { email, password } = req.body;
             const user = await userService.findUser(
@@ -108,7 +102,7 @@ class AuthController {
     }
 
     async checkPassword(
-        req: Request<{}, {}, CheckPasswordInput>,
+        req: Request<object, object, CheckPasswordInput>,
         res: Response,
         next: NextFunction
     ) {
@@ -191,7 +185,11 @@ class AuthController {
         }
     }
 
-    async forgotPassword(req: Request<{}, {}, EmailInput>, res: Response, next: NextFunction) {
+    async forgotPassword(
+        req: Request<object, object, EmailInput>,
+        res: Response,
+        next: NextFunction
+    ) {
         try {
             const user = await userService.findUser({ email: req.body.email, provider: "local" });
             if (!user) throw ApiError.BadRequest("Неверный адрес электронной почты.");
@@ -221,7 +219,7 @@ class AuthController {
     }
 
     async resetPassword(
-        req: Request<ResetPasswordInput["params"], {}, ResetPasswordInput["body"]>,
+        req: Request<ResetPasswordInput["params"], object, ResetPasswordInput["body"]>,
         res: Response,
         next: NextFunction
     ) {
@@ -254,13 +252,11 @@ class AuthController {
     }
 
     async googleOAuthHandler(
-        req: Request<{}, {}, {}, GoogleOAuthInput>,
-        res: Response,
-        next: NextFunction
+        req: Request<object, object, object, GoogleOAuthInput>,
+        res: Response
     ) {
         try {
             const { code } = req.query;
-
             const { access_token, id_token } = await googleService.getTokens(code);
             const googleUser = await googleService.getUser({ access_token, id_token });
             const { email, verified_email, name, picture } = googleUser;

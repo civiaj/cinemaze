@@ -1,8 +1,7 @@
 import { ReactNode, useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
-import { FilmAwards, FilmImages } from "@/entities/FilmDetails";
-import { Description } from "@/entities/FilmDetails";
+import { Description, FilmAwards, FilmImages } from "@/entities/Film";
 import { ID_VIEW_SWITCHER } from "@/shared/const/const";
 import { classNames } from "@/shared/lib/classNames";
 import { Box } from "@/shared/ui/Boxes/Box";
@@ -12,7 +11,7 @@ import { Heading } from "@/shared/ui/Text/Heading";
 import { ViewSwitcherTypes } from "../model/types";
 
 interface ViewSwitcherProps {
-    filmId: number;
+    id: number;
 }
 
 const categories: { title: string; value: ViewSwitcherTypes }[] = [
@@ -22,7 +21,7 @@ const categories: { title: string; value: ViewSwitcherTypes }[] = [
 ];
 
 export const ViewSwitcher = (props: ViewSwitcherProps) => {
-    const { filmId } = props;
+    const { id } = props;
     const listRef = useRef<HTMLUListElement>(null);
     const markerRef = useRef<HTMLDivElement>(null);
     const itemRef = useRef<Map<string, HTMLLIElement> | null>(null);
@@ -53,9 +52,9 @@ export const ViewSwitcher = (props: ViewSwitcherProps) => {
     ) as ViewSwitcherTypes;
 
     const renderedView: { [key in ViewSwitcherTypes]: ReactNode } = {
-        description: <Description filmId={filmId} />,
-        images: <FilmImages filmId={filmId} />,
-        awards: <FilmAwards filmId={filmId} />,
+        description: <Description id={id} />,
+        images: <FilmImages id={id} />,
+        awards: <FilmAwards id={id} />,
     };
 
     const handleChangeCategory = (category: ViewSwitcherTypes) => {

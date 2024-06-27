@@ -1,6 +1,6 @@
 import mongoose, { QueryOptions, Types } from "mongoose";
 import ApiError from "../exceptions/api.error";
-import favoriteModel, { Favorite } from "../model/favorite.model";
+import favoriteModel, { Favorite, FavoriteItem } from "../model/favorite.model";
 import {
     CreateFavoriteInput,
     GetFavoriteAllInput,
@@ -100,6 +100,8 @@ class FavoriteService {
                                 "favorites.bookmarked": 0,
                                 "favorites.userScore": 0,
                                 "favorites.hidden": 0,
+                                "favorites.createdAt": 0,
+                                "favorites.updatedAt": 0,
                             },
                         },
                         { $sort: { [sortBy]: order } },
@@ -126,7 +128,7 @@ class FavoriteService {
         ]);
 
         const totalPages = Math.ceil(result[0]?.total[0]?.count / pageSize) || 0;
-        const films = result[0]?.data?.map((item: any) => {
+        const films = result[0]?.data?.map((item: { favorites: { film: Favorite[] } }) => {
             const { favorites } = item;
             const { film, ...otherFields } = favorites;
             return { ...film[0], ...otherFields };
@@ -149,7 +151,7 @@ class FavoriteService {
                         {
                             $project: {
                                 _id: 0,
-                                filmId: "$filmId",
+                                id: "$id",
                             },
                         },
                     ],
@@ -169,7 +171,7 @@ class FavoriteService {
         return result.reduce(
             (
                 acc: {
-                    films: any[];
+                    films: FavoriteItem[];
                     bookmarked: number;
                     userScore: number;
                     hidden: number;
@@ -197,7 +199,7 @@ class FavoriteService {
     async removeFavoriteField(
         userId: number,
         filmDocumentId: Types.ObjectId,
-        payload: Omit<RemoveFavoriteOneInput, "filmId">
+        payload: Omit<RemoveFavoriteOneInput, "id">
     ) {
         const { field } = payload;
         return field === "all"
@@ -222,7 +224,7 @@ class FavoriteService {
                         {
                             $project: {
                                 _id: 0,
-                                filmId: 1,
+                                id: 1,
                                 genres: "$genres.genre",
                                 countries: "$countries.country",
                                 nameRu: 1,

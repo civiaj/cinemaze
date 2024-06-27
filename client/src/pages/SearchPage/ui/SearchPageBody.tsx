@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { FilmsList } from "@/features/FilmsList";
+import { useFiltersQuery, useSearchQuery, TSearchRes } from "@/entities/Film";
 import { Page } from "@/entities/Ui";
 import formatFilmError from "@/shared/api/helpers/formatFilmError";
 import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "@/shared/const/const";
@@ -13,11 +14,9 @@ import { PageLikeBox } from "@/shared/ui/Boxes/PageLikeBox";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
-import { checkSearchParams } from "../lib/helpers";
-import { useFiltersQuery, useSearchQuery } from "../model/searchPageApi";
+import { checkSearchParams } from "../model/helpers";
 import { getSearchOrder, getSearchPage, getSearchPageInfiniteFilms } from "../model/selectors";
 import { searchPageActions } from "../model/slice";
-import { SearchQuery, SearchQueryT } from "../model/types";
 import { SearchExtendedSmall } from "../ui/SearchExtendedSmall";
 import { SearchPageHeader } from "../ui/SearchPageHeader";
 import { SearchExtended } from "./SearchExtended";
@@ -41,21 +40,17 @@ export const SearchPageBody = () => {
     const country = useMemo(
         () =>
             checkSearchParams("country", searchParams.get("country"), {
-                data: filters.data,
-                min: 0,
-                max: 0,
+                arr: filters.data?.countries,
             }),
-        [filters.data, searchParams]
+        [filters.data?.countries, searchParams]
     );
 
     const genre = useMemo(
         () =>
             checkSearchParams("genre", searchParams.get("genre"), {
-                data: filters.data,
-                min: 0,
-                max: 0,
+                arr: filters.data?.genres,
             }),
-        [filters.data, searchParams]
+        [filters.data?.genres, searchParams]
     );
     const ratingFrom = useMemo(
         () =>
@@ -64,7 +59,7 @@ export const SearchPageBody = () => {
                 max: RATING_TO_MAX,
             }),
         [searchParams]
-    );
+    )!;
     const ratingTo = useMemo(
         () =>
             checkSearchParams("ratingTo", searchParams.get("ratingTo"), {
@@ -72,7 +67,7 @@ export const SearchPageBody = () => {
                 max: RATING_TO_MAX,
             }),
         [searchParams, ratingFrom]
-    );
+    )!;
     const yearFrom = useMemo(
         () =>
             checkSearchParams("yearFrom", searchParams.get("yearFrom"), {
@@ -80,7 +75,7 @@ export const SearchPageBody = () => {
                 max: YEAR_TO_MAX,
             }),
         [searchParams]
-    );
+    )!;
     const yearTo = useMemo(
         () =>
             checkSearchParams("yearTo", searchParams.get("yearTo"), {
@@ -88,10 +83,9 @@ export const SearchPageBody = () => {
                 max: YEAR_TO_MAX,
             }),
         [searchParams, yearFrom]
-    );
+    )!;
     const keyword = searchParams.get("keyword") ?? "";
-
-    const query: SearchQuery = { keyword, yearTo, yearFrom, ratingTo, genre, country, ratingFrom };
+    const query = { keyword, yearTo, yearFrom, ratingTo, country, ratingFrom, genre };
     const skip = searchParams.size === 0;
 
     const { isEnd, isError, isFetching, isLoading, onScrollEnd, data, error } = useInfiniteScroll({
@@ -106,7 +100,7 @@ export const SearchPageBody = () => {
     const showEnd = !skip && !isLoading && !isFetching && isEnd && !!films.length;
     const showHeader = !!infiniteFilms.length || isLoading || isFetching;
     const disabled = isLoading || isFetching;
-    const { total } = (data as SearchQueryT) ?? {};
+    const { total } = (data as TSearchRes) ?? {};
     const { t } = useTranslation();
 
     useEffect(() => {

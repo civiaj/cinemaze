@@ -1,15 +1,16 @@
 import mongoose from "mongoose";
 
 export type Film = {
-    filmId: number;
-    nameRu?: string;
-    nameEn?: string;
-    nameOriginal?: string;
-    year: string;
-    filmLength?: string;
-    countries: { country: string }[];
-    genres: { genre: string }[];
-    rating?: string;
+    id: number;
+    nameRu: string | null;
+    nameEn: string | null;
+    nameOriginal: string | null;
+    year: number | null;
+    filmLengthMins: number;
+    filmLengthHours: string | null;
+    countries: { country: string }[] | null;
+    genres: { genre: string }[] | null;
+    rating: number | null;
     posterUrlPreview: string;
 };
 
@@ -17,14 +18,15 @@ const filmSchema = new mongoose.Schema<Film>(
     {
         countries: { type: [{ country: String }] },
         genres: { type: [{ genre: String }] },
-        filmId: { type: Number, required: true, unique: true },
+        id: { type: Number, required: true, unique: true },
         nameEn: String,
         nameRu: String,
         nameOriginal: String,
-        filmLength: String,
+        filmLengthMins: Number,
+        filmLengthHours: String,
         posterUrlPreview: String,
-        rating: String,
-        year: String,
+        rating: Number,
+        year: Number,
     },
     { versionKey: false }
 );

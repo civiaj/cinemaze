@@ -1,23 +1,25 @@
+import { TFilm } from "@/entities/Film";
+
 export type TFavorite = {
-    bookmarked: boolean;
-    userScore: number | null;
-    hidden: boolean;
+    bookmarked?: boolean | null;
+    userScore?: number | null;
+    hidden?: boolean | null;
 };
 
-export type AddFavoriteRequest = {
-    film: FilmT;
-    favorite: Partial<TFavorite>;
+export type AddFavoriteReq = {
+    film: TFilm;
+    favorite: TFavorite;
 };
 
 export type RemoveFavoriteRequest = {
-    body: { filmId: number; field: FavoriteListVariantT };
+    body: { id: number; field: FavoriteListVariantT };
     listVariant: FavoriteListVariantT;
     filmTitle?: string;
 };
 
 export type SyncDataResponse = {
     films: ({
-        filmId: number;
+        id: number;
     } & TFavorite)[];
     hidden: number;
     userScore: number;
@@ -26,7 +28,7 @@ export type SyncDataResponse = {
 };
 
 export type TStatistics = {
-    filmId: number;
+    id: number;
     genres: string[];
     countries: string[];
     userScore: number | null;
@@ -38,7 +40,7 @@ export type TStatistics = {
     year?: string;
 };
 
-export type FavoriteItemT = { films: FilmT[]; totalPages: number };
+export type FavoriteItemT = { films: TFilm[]; totalPages: number };
 
 export const favoriteListVariant = {
     all: "all",

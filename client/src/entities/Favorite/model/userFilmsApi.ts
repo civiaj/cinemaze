@@ -1,12 +1,12 @@
 import toast from "react-hot-toast";
 import { favoritePageActions } from "@/pages/FavoritePage";
+import { api } from "@/shared/api/api";
 import formatServerError from "@/shared/api/helpers/formatServerError";
-import { serverApi } from "@/shared/api/serverApi";
 import { ServerMessageResponse } from "@/shared/api/types";
 import getAddFavoriteToastMsg from "../helpers/getAddFavoriteToastMsg";
 import getRemoveToastMsg from "../helpers/getRemoveToastMsg";
 import {
-    AddFavoriteRequest,
+    AddFavoriteReq,
     FavoriteItemT,
     FavoriteListVariantT,
     RemoveFavoriteRequest,
@@ -15,25 +15,25 @@ import {
     TStatistics,
 } from "../model/types";
 
-const userFilmsApi = serverApi.injectEndpoints({
+const userFilmsApi = api.injectEndpoints({
     endpoints: (builder) => ({
-        addFavorite: builder.mutation<ServerMessageResponse, AddFavoriteRequest>({
+        addFavorite: builder.mutation<ServerMessageResponse, AddFavoriteReq>({
             query: (body) => ({
                 url: "/favorite/add",
                 method: "POST",
                 body,
                 credentials: "include",
             }),
-            invalidatesTags: (_result, _error, arg) => [{ type: "Favorite", id: arg.film.filmId }],
+            invalidatesTags: (_result, _error, arg) => [{ type: "Favorite", id: arg.film.id }],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 const {
-                    film: { filmId },
+                    film: { id },
                     favorite,
                 } = arg;
 
                 const patchResult = dispatch(
-                    userFilmsApi.util.updateQueryData("getOneFavorite", filmId, (draft) => {
-                        if (draft) Object.assign(draft, { filmId, ...favorite });
+                    userFilmsApi.util.updateQueryData("getOneFavorite", id, (draft) => {
+                        if (draft) Object.assign(draft, { id, ...favorite });
                     })
                 );
 
@@ -65,8 +65,8 @@ const userFilmsApi = serverApi.injectEndpoints({
             providesTags: () => ["Favorites"],
         }),
         getOneFavorite: builder.query<TFavorite | null, number>({
-            query: (filmId) => ({
-                url: `/favorite/info/${filmId}`,
+            query: (id) => ({
+                url: `/favorite/info/${id}`,
                 credentials: "include",
             }),
             transformResponse: (reponse: { data: TFavorite }) => reponse.data,
@@ -86,15 +86,15 @@ const userFilmsApi = serverApi.injectEndpoints({
                     await queryFulfilled;
                     const {
                         filmTitle,
-                        body: { filmId },
+                        body: { id },
                         listVariant,
                     } = arg;
 
-                    toast.success(getRemoveToastMsg({ filmId, filmTitle, listVariant }), {
-                        id: String(filmId),
+                    toast.success(getRemoveToastMsg({ id, filmTitle, listVariant }), {
+                        id: String(id),
                     });
                     dispatch(userFilmsApi.util.invalidateTags(["Favorites"]));
-                    dispatch(favoritePageActions.removeFilm(filmId));
+                    dispatch(favoritePageActions.removeFilm(id));
                 } catch (e) {
                     // error middleware
                 }

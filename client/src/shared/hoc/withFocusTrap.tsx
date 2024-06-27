@@ -18,9 +18,6 @@ const withFocusTrap = <P extends object>(
             const focusables = Array.from(node?.querySelectorAll(focusable) ?? []).filter(
                 (el) => el.getAttribute("tabindex") !== "-1"
             );
-
-            console.log("INIT", { focusables });
-
             if (focusables && focusables.length > 0) {
                 firstNode.current = focusables[0] as HTMLElement;
                 lastNode.current = focusables[focusables.length - 1] as HTMLElement;
@@ -28,7 +25,6 @@ const withFocusTrap = <P extends object>(
             }
 
             const handleKeyDown = (e: KeyboardEvent) => {
-                console.log({ focusables });
                 if (e.key === "Tab") {
                     if (e.shiftKey) {
                         if (document.activeElement === firstNode.current) {

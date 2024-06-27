@@ -114,7 +114,7 @@ export const getSelectByDate = createSelector(
         if (!data) return [];
         // data from server is sorted by updateAt field
         const result = data.reduce((acc: TLStat[], curr) => {
-            const { filmId, year, nameRu, updatedAt, userScore, hidden } = curr;
+            const { id, year, nameRu, updatedAt, userScore, hidden } = curr;
             if (userScore && !hidden) {
                 const updateAtDate = new Date(updatedAt).getTime();
                 let dateFilter = new Date().setDate(new Date().getDate() - Number(interval));
@@ -154,7 +154,7 @@ export const getSelectByDate = createSelector(
 
                 if (updateAtDate > dateFilter) {
                     acc.push({
-                        filmId,
+                        id,
                         name: nameRu || EMPTY_LINE,
                         year,
                         date,

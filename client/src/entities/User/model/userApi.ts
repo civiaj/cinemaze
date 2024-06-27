@@ -1,12 +1,12 @@
 import toast from "react-hot-toast";
 import { authAndUserSliceActions } from "@/features/LoadingAuthorizationAndUser";
 import { userActions } from "@/entities/User";
-import { serverApi } from "@/shared/api/serverApi";
+import { api } from "@/shared/api/api";
 import { ServerMessageResponse } from "@/shared/api/types";
 import i18n from "@/shared/i18n/config";
 import { SessionsResponse, TRoles, TUser } from "../model/types";
 
-export const userApi = serverApi.injectEndpoints({
+export const userApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getMe: builder.query<TUser, void>({
             query: () => ({
@@ -164,7 +164,7 @@ export const userApi = serverApi.injectEndpoints({
                     await queryFulfilled;
                     toast.success(i18n.t("toast.account-deleted"));
                     dispatch(userActions.logout());
-                    dispatch(serverApi.util.resetApiState());
+                    dispatch(api.util.resetApiState());
                 } catch (e) {
                     //error middleware
                 }

@@ -17,7 +17,7 @@ export type TLIntervals = "1" | "7" | "30" | "year" | "all";
 export type TLStat = {
     name: string;
     date: string;
-    filmId: number;
+    id: number;
     year?: string;
     userScore: number;
     fullDate: string;

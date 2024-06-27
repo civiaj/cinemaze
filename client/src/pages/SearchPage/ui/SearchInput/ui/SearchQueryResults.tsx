@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch } from "@/app/store";
 import { SearchInputFormProps } from "@/pages/SearchPage/model/types";
+import { useSearchQuery } from "@/entities/Film";
 import formatFilmError from "@/shared/api/helpers/formatFilmError";
 import { DEBOUNCE_SEARCH } from "@/shared/const/const";
 import { useDebouncedValue } from "@/shared/hooks/useDebouncedValue";
@@ -14,7 +15,6 @@ import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
 import { ColoredNumber } from "@/shared/ui/ColoredNumber/ColoredNumber";
 import { Spinner } from "@/shared/ui/Spinner/Spinner";
 import { Text } from "@/shared/ui/Text/Text";
-import { useSearchQuery } from "../../../model/searchPageApi";
 import { searchPageActions } from "../../../model/slice";
 
 export const SearchQueryResults = (
@@ -23,19 +23,19 @@ export const SearchQueryResults = (
     const { inputValue, onSetInactive } = props;
     const dispatch = useAppDispatch();
     const { t, i18n } = useTranslation();
-    const debouncedInputValue = useDebouncedValue(inputValue, DEBOUNCE_SEARCH);
+    const inputValueDeb = useDebouncedValue(inputValue, DEBOUNCE_SEARCH);
 
     const { data, isLoading, isError, error, isFetching } = useSearchQuery(
-        { keyword: debouncedInputValue, page: 1 },
-        { skip: !debouncedInputValue || !inputValue }
+        { keyword: inputValueDeb },
+        { skip: !inputValueDeb || !inputValue }
     );
 
     const handleQueryClick = () => {
         onSetInactive();
-        dispatch(searchPageActions.addUserQuery(debouncedInputValue));
+        dispatch(searchPageActions.addUserQuery(inputValueDeb));
     };
 
-    if (isLoading || isFetching || (inputValue !== debouncedInputValue && inputValue !== ""))
+    if (isLoading || isFetching || (inputValue !== inputValueDeb && inputValue !== ""))
         return (
             <>
                 <div className="flex items-center justify-center py-2">
@@ -76,35 +76,40 @@ export const SearchQueryResults = (
                 <div className="flex flex-col gap-1">
                     <p className="px-2 text-sm font-medium">{t("search.input-results")}</p>
                     <ul className="flex flex-col">
-                        {data.films.map((item) => (
-                            <li key={item.filmId}>
-                                <AppLink
-                                    theme="clean"
-                                    to={`${routePath.details}/${item.filmId}`}
-                                    onClick={handleQueryClick}
-                                    className="py-1 block rounded-xl overflow-hidden"
-                                >
-                                    <div className="px-2 flex gap-2">
-                                        <div className="h-24 w-16 rounded-xl overflow-hidden">
-                                            <AppImage src={item.posterUrlPreview} />
-                                        </div>
-                                        <div className="flex-1 flex flex-col justify-between">
-                                            <p className="font-medium line-clamp-1 text-ellipsis flex-1">
-                                                {getFilmTitle(item, i18n.language as TLngs)}
-                                            </p>
-
-                                            {item.nameOriginal && (
-                                                <p className="line-clamp-1 text-ellipsis flex-1 text-sm font-normal">
-                                                    {item.nameOriginal}
-                                                </p>
+                        {data.films.map((item) => {
+                            const { id, posterUrlPreview, nameOriginal, rating, year } = item;
+                            return (
+                                <li key={id}>
+                                    <AppLink
+                                        theme="clean"
+                                        to={`${routePath.details}/${id}`}
+                                        onClick={handleQueryClick}
+                                        className="py-1 block rounded-xl overflow-hidden"
+                                    >
+                                        <div className="px-2 flex gap-2">
+                                            {Boolean(posterUrlPreview) && (
+                                                <div className="h-24 w-16 rounded-xl overflow-hidden">
+                                                    <AppImage src={posterUrlPreview!} />
+                                                </div>
                                             )}
-                                            <ColoredNumber number={Number(item.rating)} />
-                                            <p className="font-base">{item.year}</p>
+                                            <div className="flex-1 flex flex-col justify-between">
+                                                <p className="font-medium line-clamp-1 text-ellipsis flex-1">
+                                                    {getFilmTitle(item, i18n.language as TLngs)}
+                                                </p>
+
+                                                {nameOriginal && (
+                                                    <p className="line-clamp-1 text-ellipsis flex-1 text-sm font-normal">
+                                                        {nameOriginal}
+                                                    </p>
+                                                )}
+                                                <ColoredNumber number={Number(rating)} />
+                                                <p className="font-base">{year}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </AppLink>
-                            </li>
-                        ))}
+                                    </AppLink>
+                                </li>
+                            );
+                        })}
                     </ul>
                 </div>
                 <UserBoxSeparator />

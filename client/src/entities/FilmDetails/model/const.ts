@@ -1,1 +1,0 @@
-export const SKELETON_SIMILARS_LENGTH = 5;

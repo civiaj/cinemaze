@@ -1,13 +1,14 @@
 import { PayloadAction, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { TFilm, TSearchCategories } from "@/entities/Film";
 import { USER_QUERY_MAX } from "@/shared/const/const";
-import { SearchOrderT, SearchPageSchema } from "../model/types";
+import { SearchPageSchema } from "../model/types";
 
-export const searchPageAdapter = createEntityAdapter<FilmT>({
-    selectId: (film) => film.filmId,
+export const adapter = createEntityAdapter<TFilm>({
+    selectId: (film) => film.id,
 });
 
 const initialState: SearchPageSchema = {
-    searchPageFilms: searchPageAdapter.getInitialState(),
+    films: adapter.getInitialState(),
     page: 1,
     userQueries: [],
     order: "NUM_VOTE",
@@ -17,14 +18,14 @@ const searchPageSlice = createSlice({
     name: "searchPageSlice",
     initialState,
     reducers: {
-        setOrder: (state, action: PayloadAction<SearchOrderT>) => {
+        setOrder: (state, action: PayloadAction<TSearchCategories>) => {
             state.order = action.payload;
         },
         setPage: (state, action: PayloadAction<number>) => {
             state.page = action.payload;
         },
-        setSearchFilms: (state, action: PayloadAction<FilmT[]>) => {
-            searchPageAdapter.addMany(state.searchPageFilms, action.payload);
+        setSearchFilms: (state, action: PayloadAction<TFilm[]>) => {
+            adapter.addMany(state.films, action.payload);
         },
         addUserQuery: (state, action) => {
             const newQuery = action.payload;
@@ -43,7 +44,7 @@ const searchPageSlice = createSlice({
         },
 
         cleanInfiniteFilms: (state) => {
-            searchPageAdapter.removeAll(state.searchPageFilms);
+            adapter.removeAll(state.films);
             state.page = 1;
         },
     },

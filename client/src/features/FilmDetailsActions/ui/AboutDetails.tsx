@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
-import { useDetailsQuery } from "@/entities/FilmDetails";
+import { useDetailsQuery } from "@/entities/Film";
 import { EMPTY_LINE } from "@/shared/const/const";
 import { classNames } from "@/shared/lib/classNames";
 import { numberWithSpaces } from "@/shared/lib/numberWithSpaces";
@@ -9,17 +9,16 @@ import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
 
 interface AboutProps {
-    filmId: number;
+    id: number;
 }
 
 export const AboutDetails = memo((props: AboutProps) => {
-    const { filmId } = props;
-    const { currentData } = useDetailsQuery(filmId);
+    const { id } = props;
+    const { currentData } = useDetailsQuery(id);
     const { t } = useTranslation();
 
     const {
         countries,
-        filmLength,
         filmLengthMins,
         filmLengthHours,
         genres,
@@ -41,7 +40,7 @@ export const AboutDetails = memo((props: AboutProps) => {
         { title: "details.mpaa", data: ratingMpaa },
         {
             title: "details.length",
-            data: filmLength
+            data: filmLengthMins
                 ? `${filmLengthMins} ${t("details.min")} / ${filmLengthHours}`
                 : EMPTY_LINE,
         },

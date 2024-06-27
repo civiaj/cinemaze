@@ -1,5 +1,5 @@
 import { TFavorite } from "@/entities/Favorite";
-import { useDetailsQuery } from "@/entities/FilmDetails";
+import { useDetailsQuery } from "@/entities/Film";
 import { Box } from "@/shared/ui/Boxes/Box";
 import { AboutDetails } from "./AboutDetails";
 import { AboutPoster } from "./AboutPoster";
@@ -7,25 +7,25 @@ import { AboutRating } from "./AboutRating";
 import { FilmDetailsHeader } from "./FilmDetailsHeader";
 
 type Props = {
-    filmId: number;
+    id: number;
     label: string;
-    updateFavorite: (favorite: Partial<TFavorite>) => Promise<void>;
+    updateFavorite: (favorite: TFavorite) => Promise<void>;
     disabled: boolean;
 };
 
 export const FilmDetailsActions = (props: Props) => {
-    const { filmId, label, updateFavorite, disabled } = props;
-    const { currentData } = useDetailsQuery(filmId);
+    const { id, label, updateFavorite, disabled } = props;
+    const { currentData } = useDetailsQuery(id);
     const {
         posterUrl,
-        link,
+        webUrl,
         ratingAgeLimits,
         year,
         nameOriginal,
         rating,
         ratingKinopoiskVoteCount,
         reviewsCount,
-    } = currentData ?? {};
+    } = currentData! ?? {};
 
     return (
         <Box>
@@ -33,21 +33,21 @@ export const FilmDetailsActions = (props: Props) => {
                 <AboutPoster
                     className="col-span-3 mdb:col-span-2"
                     posterUrl={posterUrl}
-                    link={link}
-                    key={filmId}
+                    webUrl={webUrl}
+                    key={id}
                 />
                 <div className="flex-1 grid grid-cols-7 col-span-5 mdb:col-span-6 gap-x-6">
                     <div className="flex flex-col col-span-7 mdb:col-span-5 gap-4">
                         <FilmDetailsHeader
-                            details={{ label, ratingAgeLimits, year, nameOriginal, filmId }}
+                            details={{ label, ratingAgeLimits, year, nameOriginal, id }}
                             updateFavorite={updateFavorite}
                             disabled={disabled}
                         />
-                        <AboutDetails filmId={filmId} />
+                        <AboutDetails id={id} />
                     </div>
                     <AboutRating
                         className="col-span-2 hidden mdb:flex"
-                        filmId={filmId}
+                        id={id}
                         ratingKinopoiskVoteCount={ratingKinopoiskVoteCount}
                         reviewsCount={reviewsCount}
                         rating={rating}

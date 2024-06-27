@@ -12,12 +12,12 @@ import ApiError from "../exceptions/api.error";
 
 class FavoriteController {
     async addFavorite(
-        req: Request<{}, {}, CreateFilmInput & CreateFavoriteInput>,
+        req: Request<object, object, CreateFilmInput & CreateFavoriteInput>,
         res: Response,
         next: NextFunction
     ) {
         try {
-            const film = await filmService.updateFilm(req.body.film.filmId, req.body.film);
+            const film = await filmService.updateFilm(req.body.film.id, req.body.film);
 
             if (!film) throw ApiError.BadRequest("Ошибка при обновлении фильма");
 
@@ -31,7 +31,7 @@ class FavoriteController {
 
     async getOneFavorite(req: Request<GetFavoriteOneInput>, res: Response, next: NextFunction) {
         try {
-            const film = await filmService.findOne(req.params.filmId);
+            const film = await filmService.findOne(req.params.id);
 
             if (!film)
                 return res.send({ data: { bookmarked: false, hidden: false, userScore: null } });
@@ -45,7 +45,7 @@ class FavoriteController {
     }
 
     async getAllFavorite(
-        req: Request<{}, {}, {}, GetFavoriteAllInput>,
+        req: Request<object, object, object, GetFavoriteAllInput>,
         res: Response,
         next: NextFunction
     ) {
@@ -62,14 +62,14 @@ class FavoriteController {
     }
 
     async removeFavorite(
-        req: Request<{}, {}, RemoveFavoriteOneInput>,
+        req: Request<object, object, RemoveFavoriteOneInput>,
         res: Response,
         next: NextFunction
     ) {
         try {
-            const { filmId, ...favorite } = req.body;
+            const { id, ...favorite } = req.body;
 
-            const film = await filmService.findOne(String(filmId));
+            const film = await filmService.findOne(String(id));
             if (!film) throw ApiError.BadRequest("Ошибка при обновлении фильма");
 
             const updated = await favoriteService.removeFavoriteField(

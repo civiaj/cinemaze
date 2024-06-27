@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ImagePreviewBody } from "@/widgets/ImagePreview/ui/ImagePreviewBody";
 import { ImagePreviewSlider } from "@/widgets/ImagePreview/ui/ImagePreviewSlider";
-import { FilmImagesT } from "@/entities/FilmDetails";
+
+import { TImages } from "@/entities/Film";
 import { Close, Left, Right } from "@/shared/assets/icons";
 import { classNames } from "@/shared/lib/classNames";
 import { AppLink } from "@/shared/ui/AppLink/AppLink";
@@ -12,7 +13,7 @@ import { Button } from "@/shared/ui/Button/Button";
 interface ImagePreviewProps {
     onClose: () => void;
     activeIndex: number;
-    images: FilmImagesT[];
+    images: TImages[];
 }
 
 export const ImagePreview = (props: ImagePreviewProps) => {

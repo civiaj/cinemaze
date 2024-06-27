@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { TFiltersRes, TSearchState } from "@/entities/Film";
 import { Settings } from "@/shared/assets/icons";
 import { Button } from "@/shared/ui/Button/Button";
 import { Heading } from "@/shared/ui/Text/Heading";
-import { SearchFiltersT, SearchQuery } from "../model/types";
 import { SearchExtended } from "../ui/SearchExtended";
 
 type Props = {
     disabled: boolean;
-    data?: SearchFiltersT;
+    data?: TFiltersRes;
     skip: boolean;
-    prevQuery: SearchQuery;
+    prevQuery: TSearchState;
 };
 
 export const SearchExtendedSmall = (props: Props) => {

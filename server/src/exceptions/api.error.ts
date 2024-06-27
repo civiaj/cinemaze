@@ -1,5 +1,5 @@
 export default class ApiError extends Error {
-    constructor(message: string, public status: number, public errors: any[] = []) {
+    constructor(message: string, public status: number, public errors: unknown[] = []) {
         super(message);
         this.status = status;
         this.errors = errors;
@@ -9,19 +9,19 @@ export default class ApiError extends Error {
         return new ApiError(message, 401, errors);
     }
 
-    static BadRequest(message: string = "Неверный запрос", errors?: any[]) {
+    static BadRequest(message: string = "Неверный запрос", errors?: unknown[]) {
         return new ApiError(message, 400, errors);
     }
 
-    static NotAllowed(message: string = "Нет доступа", errors?: any[]) {
+    static NotAllowed(message: string = "Нет доступа", errors?: unknown[]) {
         return new ApiError(message, 403, errors);
     }
 
-    static MailError(errors?: any[]) {
+    static MailError(errors?: unknown[]) {
         return new ApiError("Возникла ошибка при отправке письма.", 500, errors);
     }
 
-    static MongooseError(errors?: any[]) {
+    static MongooseError(errors?: unknown[]) {
         return new ApiError("Возникла ошибка при обращению к базе данных.", 500, errors);
     }
 }

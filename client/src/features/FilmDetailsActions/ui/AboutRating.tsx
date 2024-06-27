@@ -1,24 +1,21 @@
 import { useTranslation } from "react-i18next";
 import { TFavorite } from "@/entities/Favorite";
+import { TDetails } from "@/entities/Film";
 import { classNames } from "@/shared/lib/classNames";
 import { numberWithSpaces } from "@/shared/lib/numberWithSpaces";
 import { ColoredNumber } from "@/shared/ui/ColoredNumber/ColoredNumber";
 import { RatingChange } from "./RatingChange";
 import { RatingSet } from "./RatingSet";
 
-interface AboutRatingProps {
-    className?: string;
-    rating?: string;
-    ratingKinopoiskVoteCount?: number;
-    reviewsCount?: number;
-    filmId: number;
-    updateFavorite: (favorite: Partial<TFavorite>) => Promise<void>;
+type Props = Pick<TDetails, "id" | "ratingKinopoiskVoteCount" | "rating" | "reviewsCount"> & {
     disabled: boolean;
-}
+    className?: string;
+    updateFavorite: (favorite: TFavorite) => Promise<void>;
+};
 
-export const AboutRating = (props: AboutRatingProps) => {
+export const AboutRating = (props: Props) => {
     const {
-        filmId,
+        id,
         rating,
         ratingKinopoiskVoteCount,
         reviewsCount,
@@ -38,18 +35,18 @@ export const AboutRating = (props: AboutRatingProps) => {
                         <span className="font-medium">
                             {numberWithSpaces(ratingKinopoiskVoteCount)}{" "}
                         </span>
-                        {t("plural.vote", { count: ratingKinopoiskVoteCount })}
+                        {t("plural.vote", { count: ratingKinopoiskVoteCount! })}
                     </p>
                 )}
                 {Boolean(reviewsCount) && (
                     <p>
                         <span className="font-medium">{numberWithSpaces(reviewsCount)} </span>
-                        {t("plural.review", { count: reviewsCount })}
+                        {t("plural.review", { count: reviewsCount! })}
                     </p>
                 )}
             </div>
-            <RatingChange filmId={filmId} disabled={disabled} updateFavorite={updateFavorite} />
-            <RatingSet filmId={filmId} disabled={disabled} updateFavorite={updateFavorite} />
+            <RatingChange id={id} disabled={disabled} updateFavorite={updateFavorite} />
+            <RatingSet id={id} disabled={disabled} updateFavorite={updateFavorite} />
         </div>
     );
 };

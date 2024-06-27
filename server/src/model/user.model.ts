@@ -30,7 +30,7 @@ type TUserMethods = {
     createResetToken: () => string;
 };
 
-type TUserModel = mongoose.Model<User, {}, TUserMethods>;
+type TUserModel = mongoose.Model<User, object, TUserMethods>;
 
 const userSchema = new mongoose.Schema<User, TUserModel, TUserMethods>(
     {

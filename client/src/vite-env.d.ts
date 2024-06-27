@@ -7,18 +7,12 @@ type OptionType<T = string | number, K = string | number> = {
     label: K;
 };
 
-interface FilmT {
-    filmId: number;
-    nameRu?: string;
-    nameEn?: string;
-    nameOriginal?: string;
-    year: string;
-    filmLength?: string;
-    countries: { country: string }[];
-    genres: { genre: string }[];
-    rating?: string;
-    posterUrlPreview: string;
-}
+type CountriesEntity = {
+    country: string;
+};
+type GenresEntity = {
+    genre: string;
+};
 
 type TCardStyles = {
     title?: string;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/app/store";
 import { TFavorite, useGetOneFavoriteQuery } from "@/entities/Favorite";
-import { DetailsT } from "@/entities/FilmDetails";
+import { TDetails } from "@/entities/Film";
 import { selectUser } from "@/entities/User";
 import { AddBookmark, Bookmarked, Copy, Dots, Hide, Show } from "@/shared/assets/icons";
 import { copyClipboard } from "@/shared/lib/copyClipboard";
@@ -13,23 +13,22 @@ import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
 
 type Props = {
-    details: Partial<Pick<DetailsT, "year" | "nameOriginal" | "ratingAgeLimits">> & {
+    details: Pick<TDetails, "year" | "nameOriginal" | "ratingAgeLimits" | "id"> & {
         label: string;
-    } & { filmId: DetailsT["filmId"] };
-
-    updateFavorite: (favorite: Partial<TFavorite>) => Promise<void>;
+    };
+    updateFavorite: (favorite: TFavorite) => Promise<void>;
     disabled: boolean;
 };
 
 export const FilmDetailsHeader = ({ details, updateFavorite, disabled }: Props) => {
-    const { filmId, ratingAgeLimits, year, nameOriginal, label } = details;
+    const { id, ratingAgeLimits, year, nameOriginal, label } = details;
     const [isOpen, setIsOpen] = useState(false);
     const onClose = () => setIsOpen(false);
     const onToggle = () => setIsOpen((p) => !p);
     const { t } = useTranslation();
 
     const user = useAppSelector(selectUser);
-    const { currentData: favorite } = useGetOneFavoriteQuery(filmId, { skip: !user });
+    const { currentData: favorite } = useGetOneFavoriteQuery(id, { skip: !user });
 
     const onTogglProperty = (property: "hidden" | "bookmarked") => {
         updateFavorite({ [property]: !favorite?.[property] ?? true });

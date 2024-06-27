@@ -1,12 +1,10 @@
 import { RootState } from "@/app/store";
-import { favoritePageAdapter } from "./slice";
+import { adapter } from "./slice";
 
 export const getListVariant = (state: RootState) => state.favoritePage.listVariant;
 export const getFavoritePage = (state: RootState) => state.favoritePage.page;
 
-const adapterSelectors = favoritePageAdapter.getSelectors<RootState>(
-    (state) => state.favoritePage.favoritePageFilms
-);
+const adapterSelectors = adapter.getSelectors<RootState>((state) => state.favoritePage.films);
 
 export const getUserPageInfiniteFilms = (state: RootState) => adapterSelectors.selectAll(state);
 

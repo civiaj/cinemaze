@@ -12,18 +12,18 @@ import { PopupList } from "@/shared/ui/PopupList/PopupList";
 import { RatingChangeNumbers } from "./RatingChangeNumbers";
 
 interface RatingChangeProps {
-    filmId: number;
-    updateFavorite: (favorite: Partial<TFavorite>) => Promise<void>;
+    id: number;
+    updateFavorite: (favorite: TFavorite) => Promise<void>;
     disabled: boolean;
 }
 
-export const RatingChange = ({ filmId, updateFavorite, disabled }: RatingChangeProps) => {
+export const RatingChange = ({ id, updateFavorite, disabled }: RatingChangeProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isChange, setIsChange] = useState(false);
     const { t } = useTranslation();
 
     const user = useAppSelector(selectUser);
-    const { currentData: favorite } = useGetOneFavoriteQuery(filmId, { skip: !user });
+    const { currentData: favorite } = useGetOneFavoriteQuery(id, { skip: !user });
     const userScore = favorite?.userScore ?? null;
 
     const onClose = () => {

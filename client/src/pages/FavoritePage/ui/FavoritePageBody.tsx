@@ -1,10 +1,11 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { FilmsList } from "@/features/FilmsList";
 import { TFavorite, useGetAllFavoriteQuery, useGetSyncDataQuery } from "@/entities/Favorite";
+import { TFilm } from "@/entities/Film";
 import { Page } from "@/entities/Ui";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { useInfiniteScroll } from "@/shared/hooks/useInfiniteScroll";
@@ -44,10 +45,10 @@ export const FavoritePageBody = () => {
         queryHookSettings: {},
         setPage: (newPage: number) => dispatch(favoritePageActions.setPage(newPage)),
         setFilms: (films) =>
-            dispatch(favoritePageActions.setFavoriteFilms(films as (FilmT & TFavorite)[])),
+            dispatch(favoritePageActions.setFavoriteFilms(films as (TFilm & TFavorite)[])),
     });
 
-    const films = useMemo(() => infiniteFilms ?? [], [infiniteFilms]);
+    const films = infiniteFilms ?? [];
 
     const [isOpen, setIsOpen] = useState(false);
     const onOpenDeleteDialog = useCallback((id: number) => {

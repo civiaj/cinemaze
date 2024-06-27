@@ -1,5 +1,5 @@
 import { SwiperOptions } from "swiper/types";
-import { FilmImagesT } from "@/entities/FilmDetails";
+import { TImages } from "@/entities/Film";
 import { classNames } from "@/shared/lib/classNames";
 import { AppImage } from "@/shared/ui/AppImage/AppImage";
 import { Slider } from "@/shared/ui/Slider";
@@ -32,7 +32,7 @@ const sliderSettings: SwiperOptions = {
 interface ImagePreviewSliderProps {
     initialSlide: number;
     activeSlide: number;
-    images: FilmImagesT[];
+    images: TImages[];
     onSetSlide: (newSlide: number) => void;
     className?: string;
 }

@@ -11,7 +11,7 @@ type Props = {
 export const FilmListSkeleton = ({ containerStyle, appearance, cardStyles }: Props) => {
     return (
         <ul className={containerStyle}>
-            {Array.from({ length: SKELETON_FILMS_LENGTH }, (_, i) => i).map((v) => (
+            {Array.from({ length: SKELETON_FILMS_LENGTH[appearance] }, (_, i) => i).map((v) => (
                 <FilmCardSkeleton appearance={appearance} key={v} cardStyles={cardStyles} />
             ))}
         </ul>

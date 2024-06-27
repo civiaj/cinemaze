@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { TFavorite } from "@/entities/Favorite";
-import { DetailsT } from "@/entities/FilmDetails";
+import { TDetails } from "@/entities/Film";
 import { addZerosToNumber } from "@/shared/lib/addZerosToNumber";
 import { Box } from "@/shared/ui/Boxes/Box";
 import { Heading } from "@/shared/ui/Text/Heading";
@@ -8,14 +8,14 @@ import { RatingUserScore } from "./RatingUserScore";
 import { Stars } from "./Stars";
 
 type Props = {
-    updateFavorite: (favorite: Partial<TFavorite>) => Promise<void>;
+    updateFavorite: (favorite: TFavorite) => Promise<void>;
     disabled: boolean;
-    details: Pick<DetailsT, "ratingImdb" | "rating" | "filmId">;
+    details: Pick<TDetails, "ratingImdb" | "rating" | "id">;
 };
 
 export const RatingStars = (props: Props) => {
     const {
-        details: { filmId, rating, ratingImdb },
+        details: { id, rating, ratingImdb },
         updateFavorite,
         disabled,
     } = props;
@@ -49,15 +49,11 @@ export const RatingStars = (props: Props) => {
             <div className="flex gap-2 flex-col md:flex-row lg:gap-10">
                 <Stars
                     disabled={disabled}
-                    filmId={filmId}
+                    id={id}
                     updateFavorite={updateFavorite}
                     rating={rating}
                 />
-                <RatingUserScore
-                    disabled={disabled}
-                    filmId={filmId}
-                    updateFavorite={updateFavorite}
-                />
+                <RatingUserScore disabled={disabled} id={id} updateFavorite={updateFavorite} />
             </div>
         </Box>
     );

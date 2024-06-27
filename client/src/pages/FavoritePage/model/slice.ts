@@ -1,14 +1,15 @@
 import { PayloadAction, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { FavoriteListVariantT, TFavorite } from "@/entities/Favorite";
+import { TFilm } from "@/entities/Film";
 import { FavoritePageSchema } from "./types";
 
-export const favoritePageAdapter = createEntityAdapter<FilmT & TFavorite>({
-    selectId: (film) => film.filmId,
+export const adapter = createEntityAdapter<TFilm & TFavorite>({
+    selectId: (film) => film.id,
 });
 
 const initialState: FavoritePageSchema = {
     listVariant: "all",
-    favoritePageFilms: favoritePageAdapter.getInitialState(),
+    films: adapter.getInitialState(),
     page: 1,
 };
 
@@ -19,20 +20,20 @@ const userPageSlice = createSlice({
         setFavoriteList: (state, action: PayloadAction<FavoriteListVariantT>) => {
             state.listVariant = action.payload;
             state.page = initialState.page;
-            favoritePageAdapter.removeAll(state.favoritePageFilms);
+            adapter.removeAll(state.films);
         },
-        setFavoriteFilms: (state, action: PayloadAction<(FilmT & TFavorite)[]>) => {
-            favoritePageAdapter.addMany(state.favoritePageFilms, action.payload);
+        setFavoriteFilms: (state, action: PayloadAction<(TFilm & TFavorite)[]>) => {
+            adapter.addMany(state.films, action.payload);
         },
         setPage: (state, action: PayloadAction<number>) => {
             state.page = action.payload;
         },
         cleanInfiniteFilms: (state) => {
-            favoritePageAdapter.removeAll(state.favoritePageFilms);
+            adapter.removeAll(state.films);
             state.page = 1;
         },
         removeFilm: (state, action: PayloadAction<number>) => {
-            favoritePageAdapter.removeOne(state.favoritePageFilms, action);
+            adapter.removeOne(state.films, action);
         },
         resetSlice: () => initialState,
     },

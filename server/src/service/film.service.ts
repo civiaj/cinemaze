@@ -1,9 +1,9 @@
-import { FilterQuery, QueryOptions, Types, UpdateQuery } from "mongoose";
+import { QueryOptions, UpdateQuery } from "mongoose";
 import filmModel, { Film } from "../model/film.model";
 
 class FilmService {
-    async updateFilm(filmId: number, update: UpdateQuery<Film>, options: QueryOptions<Film> = {}) {
-        return filmModel.findOneAndUpdate({ filmId }, update, {
+    async updateFilm(id: number, update: UpdateQuery<Film>, options: QueryOptions<Film> = {}) {
+        return filmModel.findOneAndUpdate({ id }, update, {
             upsert: true,
             lean: true,
             new: true,
@@ -11,8 +11,8 @@ class FilmService {
         });
     }
 
-    async findOne(filmId: string) {
-        return filmModel.findOne({ filmId }).lean();
+    async findOne(id: string) {
+        return filmModel.findOne({ id }).lean();
     }
 }
 

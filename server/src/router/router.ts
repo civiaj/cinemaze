@@ -12,10 +12,20 @@ import { createFilmSchema } from "../schema/film.schema";
 import {getAllUsersSchema,getOneUserSchema,manageUserChangeSchema,mangeUserBanSchema,mangeUserUnbanSchema} from "../schema/manage.schema";
 import {checkPasswordSchema,createUserSchema,emailSchema,loginUserSchema,removeSessionSchema,resetPasswordSchema,setDisplayNameSchema,setPasswordSchema,updateRoleSchema,verifyEmailSchema} from "../schema/user.schema";
 import { resizeSingleImage, uploadSingleImage } from "../upload/single.image";
-import testController from "../controller/test.controller";
+import { getExternalDataByIdSchema, getImagesSchema, getReviewsSchema,  getSearchResultsSchema,  getTopSchema } from "../schema/external-films.schema";
+import externalFilmsController from "../controller/external-films.controller";
 
 const router = Router();
 
+// External films
+router.get('/films/top', validate(getTopSchema), externalFilmsController.getTop);
+router.get('/films/details/:id', validate(getExternalDataByIdSchema), externalFilmsController.getDetails);
+router.get('/films/images',validate(getImagesSchema),externalFilmsController.getImages);
+router.get('/films/reviews', validate(getReviewsSchema), externalFilmsController.getReviews);
+router.get('/films/similars/:id', validate(getExternalDataByIdSchema), externalFilmsController.getSimilars);
+router.get('/films/awards/:id', validate(getExternalDataByIdSchema), externalFilmsController.getAwards);
+router.get('/films/filters', externalFilmsController.getFilters),
+router.get('/films/search', validate(getSearchResultsSchema), externalFilmsController.getSearchResults);
 // Авторизация
 router.post("/register", validate(createUserSchema), authController.register.bind(authController));
 router.post("/login", validate(loginUserSchema), authController.login.bind(authController));
@@ -36,9 +46,9 @@ router.patch( "/user/update/role", deserializeUser, validate(updateRoleSchema), 
 router.patch("/user/remove/photo", deserializeUser, userController.deleteUserPhoto);
 router.delete( "/user/sessions", deserializeUser, validate(removeSessionSchema), userController.removeSession
 );
-// Получить фильмы
+// Фэворит
 router.get( "/favorite", deserializeUser, validate(getFavoriteAllSchema), favoriteController.getAllFavorite);
-router.get( "/favorite/info/:filmId", deserializeUser, validate(getFavoriteOneSchema), favoriteController.getOneFavorite);
+router.get( "/favorite/info/:id", deserializeUser, validate(getFavoriteOneSchema), favoriteController.getOneFavorite);
 router.post( "/favorite/add", deserializeUser, detectBan, validate(createFilmSchema), favoriteController.addFavorite);
 router.get("/favorite/sync", deserializeUser, favoriteController.syncApis);
 router.post( "/favorite/remove", deserializeUser, detectBan, validate(removeFavoriteOneSchema), favoriteController.removeFavorite);

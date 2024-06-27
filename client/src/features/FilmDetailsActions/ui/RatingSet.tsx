@@ -8,16 +8,16 @@ import { Button } from "@/shared/ui/Button/Button";
 import { RatingChangeNumbers } from "./RatingChangeNumbers";
 
 interface RatingSetgSet {
-    filmId: number;
-    updateFavorite: (favorite: Partial<TFavorite>) => Promise<void>;
+    id: number;
+    updateFavorite: (favorite: TFavorite) => Promise<void>;
     disabled: boolean;
 }
 
 export const RatingSet = (props: RatingSetgSet) => {
-    const { filmId, updateFavorite, disabled } = props;
+    const { id, updateFavorite, disabled } = props;
     const { t } = useTranslation();
     const user = useAppSelector(selectUser);
-    const { currentData: favorite } = useGetOneFavoriteQuery(filmId, { skip: !user });
+    const { currentData: favorite } = useGetOneFavoriteQuery(id, { skip: !user });
 
     const [isOpen, setIsOpen] = useState(false);
     const userScore = favorite?.userScore;

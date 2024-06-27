@@ -21,13 +21,13 @@ export const getFavoriteAllSchema = object({
 
 export const getFavoriteOneSchema = object({
     params: object({
-        filmId: string({ required_error: "Параметр filmId обязателен" }),
+        id: string({ required_error: "Параметр id обязателен" }),
     }),
 });
 
 export const removeFavoriteOneSchema = object({
     body: object({
-        filmId: number({ required_error: "Параметр filmId обязателен" }),
+        id: number({ required_error: "Параметр id обязателен" }),
         field: z.enum(filters),
     }),
 });

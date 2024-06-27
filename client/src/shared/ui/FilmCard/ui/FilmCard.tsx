@@ -26,7 +26,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
         hideStats,
     } = props;
 
-    const { filmId, posterUrlPreview, rating, genres, year, countries, filmLength } = film;
+    const { id, posterUrlPreview, rating, genres, year, countries, filmLengthHours } = film;
 
     const { t, i18n } = useTranslation();
     const filmTitle = getFilmTitle(film, i18n.language as TLngs);
@@ -36,7 +36,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
         : [
               { value: userScore, styles: "bg-green-500", key: "userScore" },
               {
-                  value: !rating || rating === "null" ? EMPTY_LINE : rating,
+                  value: rating ?? EMPTY_LINE,
                   styles: "bg-blue-500",
                   key: "rating",
               },
@@ -51,9 +51,9 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                     cardStyles?.card,
                 ])}
             >
-                <AppImage src={posterUrlPreview} alt={`${filmTitle} poster`} />
+                <AppImage src={posterUrlPreview!} alt={`${filmTitle} poster`} />
                 <AppLink
-                    to={`${routePath.details}/${String(filmId)}`}
+                    to={`${routePath.details}/${id}`}
                     theme="card"
                     className="inset-0 z-[5] w-full h-full absolute group"
                     onClick={handleClick}
@@ -101,7 +101,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                 </AppLink>
                 {onDelete && (
                     <button
-                        onClick={() => onDelete(filmId)}
+                        onClick={() => onDelete(id)}
                         className="bg-my-red-200 absolute right-2 top-2 h-6 w-6 rounded-full flex items-center justify-center z-[6] text-neutral-50 hover:bg-my-red-300 opacity-0 group-hover:opacity-100 focus-within:opacity-100"
                     >
                         <Close className="text-lg stroke-2" />
@@ -117,7 +117,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                 <Box className="gap-4 relative">
                     <div className="flex gap-4">
                         <div className="relative w-36 h-52 rounded-xl overflow-hidden shrink-0">
-                            <AppImage src={posterUrlPreview} alt={`${filmTitle} poster`} />
+                            <AppImage src={posterUrlPreview!} alt={`${filmTitle} poster`} />
                             <div className="absolute top-2 left-2 flex items-center gap-2">
                                 {stats.map(
                                     (item) =>
@@ -146,7 +146,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                                 </div>
                                 {onDelete && (
                                     <button
-                                        onClick={() => onDelete(filmId)}
+                                        onClick={() => onDelete(id)}
                                         className="bg-my-red-200 h-6 w-6 rounded-full flex items-center justify-center text-neutral-50 hover:bg-my-red-300 shrink-0"
                                     >
                                         <Close className="text-lg" />
@@ -155,9 +155,9 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                             </div>
                             <UserBoxSeparator />
                             <div className="flex-1 flex flex-col gap-1 font-normal text-sm">
-                                {filmLength && (
+                                {filmLengthHours && (
                                     <p>
-                                        {t("details.length")}: {filmLength}
+                                        {t("details.length")}: {filmLengthHours}
                                     </p>
                                 )}
                                 {!!countries?.length && (
@@ -177,7 +177,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                                         {genres.map(({ genre }) => (
                                             <li
                                                 className="px-2 py-1 rounded-full flex items-center justify-center bg-my-neutral-900 text-my-neutral-50 font-medium text-xs md:text-sm md:px-4"
-                                                key={`${filmId}-${genre}`}
+                                                key={`${id}-${genre}`}
                                             >
                                                 <span>{genre}</span>
                                             </li>
@@ -188,7 +188,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                                 <AppLink
                                     theme="button"
                                     className="hidden sm:flex self-end"
-                                    to={`${routePath.details}/${String(filmId)}`}
+                                    to={`${routePath.details}/${String(id)}`}
                                     onClick={handleClick}
                                 >
                                     {t("card.l-watch")}
@@ -199,7 +199,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                     <AppLink
                         theme="button"
                         className="flex sm:hidden text-center"
-                        to={`${routePath.details}/${String(filmId)}`}
+                        to={`${routePath.details}/${String(id)}`}
                         onClick={handleClick}
                     >
                         {t("card.l-watch")}
