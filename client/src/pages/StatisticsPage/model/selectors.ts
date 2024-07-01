@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "@/app/store";
-import { TStatistics } from "@/entities/Favorite";
+import { TStatistics } from "@/entities/Film";
 import { EMPTY_LINE } from "@/shared/const/const";
 import { formatDate } from "@/shared/lib/formatDate";
 import {
@@ -15,7 +15,7 @@ import {
 } from "./types";
 
 export const getSelectByScore = createSelector(
-    [(res: { data?: TStatistics[] }) => res.data, (_, filter: ScoreFilters) => filter],
+    [(data: TStatistics[]) => data, (_, filter: ScoreFilters) => filter],
     (data, filter) => {
         if (!data) return [];
         return data
@@ -41,7 +41,7 @@ export const getSelectByScore = createSelector(
 
 export const getSelectByFilter = createSelector(
     [
-        (res: { data?: TStatistics[] }) => res.data,
+        (data: TStatistics[]) => data,
         (_, filter: VBFilters, sortBy: VBSortBy, order: VBOrder) => ({
             filter,
             order,
@@ -104,7 +104,7 @@ export const getSelectByFilter = createSelector(
 
 export const getSelectByDate = createSelector(
     [
-        (res: { data?: TStatistics[] }) => res.data,
+        (data: TStatistics[]) => data,
         (_, interval: TLIntervals, locales: string) => ({
             interval,
             locales,
@@ -112,7 +112,6 @@ export const getSelectByDate = createSelector(
     ],
     (data, { interval, locales }) => {
         if (!data) return [];
-        // data from server is sorted by updateAt field
         const result = data.reduce((acc: TLStat[], curr) => {
             const { id, year, nameRu, updatedAt, userScore, hidden } = curr;
             if (userScore && !hidden) {

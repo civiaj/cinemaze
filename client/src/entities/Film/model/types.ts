@@ -4,7 +4,6 @@ type CountriesEntity = {
 type GenresEntity = {
     genre: string;
 };
-
 export type TFilm = {
     id: number;
     nameRu: string | null;
@@ -17,6 +16,7 @@ export type TFilm = {
     genres: GenresEntity[] | null;
     rating: number | null;
     posterUrlPreview: string | null;
+    favorite?: TFavorites;
 };
 export type TDetails = {
     posterUrl: string | null;
@@ -28,6 +28,7 @@ export type TDetails = {
     ratingAgeLimits: string | null;
     ratingKinopoiskVoteCount: number | null;
     description: string | null;
+    favorite?: TFavorites;
 } & TFilm;
 export type TSimilars = Pick<
     TFilm,
@@ -165,3 +166,39 @@ export type TSearchRes = {
     totalPages: number;
     films: TFilm[];
 };
+export type TFavorites = {
+    bookmarked?: boolean | null;
+    userScore?: number | null;
+    hidden?: boolean | null;
+};
+
+export type TFavoritesAllRes = {
+    films: TFilm[];
+    totalPages: number;
+};
+export type TFavoritesAllReq = {
+    page: number;
+    filter: TFavoritesListVariants;
+};
+export const FavoritesListVariants = {
+    all: "all",
+    bookmarked: "bookmarked",
+    hidden: "hidden",
+    userScore: "userScore",
+} as const;
+
+export type TFavoritesListVariants = ObjectValues<typeof FavoritesListVariants>;
+
+export type TFavoritesRemoveReq = {
+    body: { id: number; field: TFavoritesListVariants };
+    filmTitle?: string;
+};
+export type TFavoritesTotal = {
+    hidden: number;
+    userScore: number;
+    bookmarked: number;
+    all: number;
+};
+export type TStatistics = Pick<TFilm, "id" | "nameRu" | "rating" | "year"> &
+    TFavorites & { updatedAt: string; countries: string[]; genres: [] };
+export type UpdateFavorite = (payload: TFavorites, key: keyof TFavorites) => Promise<void>;

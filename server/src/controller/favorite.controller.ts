@@ -2,7 +2,6 @@ import { NextFunction, Response, Request } from "express";
 import {
     CreateFavoriteInput,
     GetFavoriteAllInput,
-    GetFavoriteOneInput,
     RemoveFavoriteOneInput,
 } from "../schema/favorite.schema";
 import favoriteService from "../service/favorite.service";
@@ -17,85 +16,64 @@ class FavoriteController {
         next: NextFunction
     ) {
         try {
-            const film = await filmService.updateFilm(req.body.film.id, req.body.film);
+            const { favorite, ...payload } = req.body;
+            const film = await filmService.updateFilm(payload.id, payload);
 
             if (!film) throw ApiError.BadRequest("Ошибка при обновлении фильма");
+            const userId = res.locals.user.id;
 
-            await favoriteService.modifyFavorite(res.locals.user.id, film._id, req.body.favorite);
-
+            await favoriteService.updateOne({
+                filmDocumentId: film._id,
+                filmId: film.id,
+                payload: favorite,
+                userId,
+            });
             return res.status(200).json({ message: "Добавлено в избранное" });
         } catch (e) {
             next(e);
         }
     }
-
-    async getOneFavorite(req: Request<GetFavoriteOneInput>, res: Response, next: NextFunction) {
-        try {
-            const film = await filmService.findOne(req.params.id);
-
-            if (!film)
-                return res.send({ data: { bookmarked: false, hidden: false, userScore: null } });
-
-            const data = await favoriteService.getFavoriteData(res.locals.user.id, film._id);
-
-            return res.status(200).json({ data });
-        } catch (e) {
-            next(e);
-        }
-    }
-
     async getAllFavorite(
         req: Request<object, object, object, GetFavoriteAllInput>,
         res: Response,
         next: NextFunction
     ) {
         try {
-            const data = await favoriteService.getFavoriteAll(
+            const data = await favoriteService.getAll(
                 res.locals.user.id,
                 Number(req.query.page),
                 req.query.filter
             );
-            return res.status(200).json({ data });
+            return res.status(200).json(data);
         } catch (e) {
             next(e);
         }
     }
-
     async removeFavorite(
         req: Request<object, object, RemoveFavoriteOneInput>,
         res: Response,
         next: NextFunction
     ) {
         try {
-            const { id, ...favorite } = req.body;
-
+            const { id, field } = req.body;
             const film = await filmService.findOne(String(id));
             if (!film) throw ApiError.BadRequest("Ошибка при обновлении фильма");
 
-            const updated = await favoriteService.removeFavoriteField(
-                res.locals.user.id,
-                film._id,
-                favorite
-            );
+            await favoriteService.removeField({
+                field,
+                userId: res.locals.user.id,
+                filmDocumentId: film._id,
+            });
 
-            return res.status(200).json({ data: updated });
-        } catch (e) {
-            next(e);
-        }
-    }
-
-    async syncApis(_req: Request<GetFavoriteOneInput>, res: Response, next: NextFunction) {
-        try {
-            const data = await favoriteService.getFavoriteSyncData(res.locals.user.id);
-            return res.status(200).json({ data });
+            return res.status(200).json({ message: "success" });
         } catch (e) {
             next(e);
         }
     }
     async getStatistics(_req: Request, res: Response, next: NextFunction) {
         try {
-            const data = await favoriteService.getFavoriteStatistics(res.locals.user.id);
-            return res.status(200).json({ data });
+            const data = await favoriteService.getStats(res.locals.user.id);
+            return res.status(200).json(data);
         } catch (e) {
             next(e);
         }

@@ -1,7 +1,9 @@
+import { TFilm } from "@/entities/Film";
+
 export type ScoreFilters = "userScore" | "rating";
 export type TScore = { score: number; count: number };
 
-export type VBFilters = "genres" | "countries";
+export type VBFilters = keyof Pick<TFilm, "countries" | "genres">;
 export type VBSortBy = "count" | "avgUserScore" | "avgRating";
 
 export type VBStat = {
@@ -18,7 +20,7 @@ export type TLStat = {
     name: string;
     date: string;
     id: number;
-    year?: string;
+    year?: number | null;
     userScore: number;
     fullDate: string;
 };

@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
-import { useAppSelector } from "@/app/store";
-import { TFavorite, useGetOneFavoriteQuery } from "@/entities/Favorite";
-import { TDetails } from "@/entities/Film";
-import { selectUser } from "@/entities/User";
+import { TDetails, TFavorites, UpdateFavorite } from "@/entities/Film";
 import { FilledStar, Star } from "@/shared/assets/icons";
 import { classNames } from "@/shared/lib/classNames";
 
 type Props = {
-    id: number;
-    updateFavorite: (favorite: TFavorite) => Promise<void>;
+    updateFavorite: UpdateFavorite;
     disabled: boolean;
     rating?: TDetails["rating"];
+    userScore: TFavorites["userScore"];
 };
 
 const starsArray = Array(10)
@@ -18,19 +15,15 @@ const starsArray = Array(10)
     .map((_, i) => i + 1);
 
 export const Stars = (props: Props) => {
-    const { id, updateFavorite, disabled, rating } = props;
+    const { updateFavorite, disabled, rating, userScore } = props;
 
-    const user = useAppSelector(selectUser);
-    const { currentData: favorite } = useGetOneFavoriteQuery(id, { skip: !user });
-
-    const userScore = favorite?.userScore ?? null;
     const ratingPlaceholder = rating ? Number(rating) : 0;
 
     const [hoverScore, setHoverScore] = useState(() => userScore ?? ratingPlaceholder);
 
     const handleMouseEnter = (newScore: number) => setHoverScore(newScore);
     const handleMouseLeave = () => setHoverScore(userScore ? userScore : ratingPlaceholder);
-    const handleSetScore = (userScore: number) => updateFavorite({ userScore });
+    const handleSetScore = (userScore: number) => updateFavorite({ userScore }, "userScore");
 
     const width = `${hoverScore * 10}%`;
 

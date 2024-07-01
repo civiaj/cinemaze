@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
-import { useGetStatisticsQuery } from "@/entities/Favorite";
+import { useGetStatsQuery } from "@/entities/Film";
 import formatFilmError from "@/shared/api/helpers/formatFilmError";
 import { Box } from "@/shared/ui/Boxes/Box";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
@@ -13,7 +13,7 @@ import { FavoriteVerticalBarChart } from "./FavoriteVerticalBarChart";
 import { StatisticsSkeleton } from "./StatisticsSkeleton";
 
 export const StatisticsPageBody = () => {
-    const { data, isLoading, isError, error } = useGetStatisticsQuery();
+    const { data, isLoading, isError, error } = useGetStatsQuery();
     const navigate = useNavigate();
     const { t } = useTranslation();
 

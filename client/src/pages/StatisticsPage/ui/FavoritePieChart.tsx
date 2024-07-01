@@ -11,7 +11,7 @@ import {
     Tooltip,
     TooltipProps,
 } from "recharts";
-import { useGetStatisticsQuery } from "@/entities/Favorite";
+import { useGetStatsQuery } from "@/entities/Film";
 import { classNames } from "@/shared/lib/classNames";
 import { Box } from "@/shared/ui/Boxes/Box";
 import { Button } from "@/shared/ui/Button/Button";
@@ -115,9 +115,9 @@ export const FavoritePieChart = () => {
     const { t } = useTranslation();
     const [filter, setFilter] = useState<ScoreFilters>("userScore");
     const selectByScore = useMemo(() => getSelectByScore, []);
-    const { scores } = useGetStatisticsQuery(undefined, {
-        selectFromResult: (response) => {
-            return { scores: selectByScore(response, filter) };
+    const { scores } = useGetStatsQuery(undefined, {
+        selectFromResult: ({ data }) => {
+            return { scores: selectByScore(data, filter) };
         },
     });
 

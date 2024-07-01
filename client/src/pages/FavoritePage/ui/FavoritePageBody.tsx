@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { FilmsList } from "@/features/FilmsList";
-import { TFavorite, useGetAllFavoriteQuery, useGetSyncDataQuery } from "@/entities/Favorite";
-import { TFilm } from "@/entities/Film";
+import { useGetAllQuery, useGetStatsTotalQuery } from "@/entities/Film";
 import { Page } from "@/entities/Ui";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { useInfiniteScroll } from "@/shared/hooks/useInfiniteScroll";
@@ -40,12 +39,11 @@ export const FavoritePageBody = () => {
     const { t } = useTranslation();
 
     const { isEnd, isError, isFetching, isLoading, onScrollEnd, error } = useInfiniteScroll({
-        queryHook: useGetAllFavoriteQuery,
+        queryHook: useGetAllQuery,
         queryParams: { page, filter: listVariant },
         queryHookSettings: {},
         setPage: (newPage: number) => dispatch(favoritePageActions.setPage(newPage)),
-        setFilms: (films) =>
-            dispatch(favoritePageActions.setFavoriteFilms(films as (TFilm & TFavorite)[])),
+        setFilms: (films) => dispatch(favoritePageActions.setFavoriteFilms(films)),
     });
 
     const films = infiniteFilms ?? [];
@@ -57,9 +55,11 @@ export const FavoritePageBody = () => {
     }, []);
 
     const onCloseDeleteDialog = useCallback(() => setIsOpen(false), []);
-    const stats = useGetSyncDataQuery();
+    const stats = useGetStatsTotalQuery();
     const showEnd = !isLoading && !isFetching && isEnd && !!films.length;
-    const isEmpty = !stats?.data?.all && !stats.isLoading && !isLoading && !isFetching;
+    const isEmpty = !films.length && !stats.isLoading && !isLoading && !isFetching;
+
+    console.log(films);
 
     if (isEmpty)
         return (

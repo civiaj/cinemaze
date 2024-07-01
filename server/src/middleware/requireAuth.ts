@@ -6,12 +6,22 @@ import userService from "../service/user.service";
 export default async (req: Request, res: Response, next: NextFunction) => {
     try {
         let accessToken: string | undefined;
+        let refreshToken: string | undefined;
 
-        if (req.get("Authorization") && req.get("Authorization")?.startsWith("Bearer")) {
+        const inHeaders =
+            req.get("Authorization") && req.get("Authorization")?.startsWith("Bearer");
+
+        if (inHeaders) {
             accessToken = req.get("Authorization")?.split(" ")[1];
-        } else if (req.cookies["access_token"]) accessToken = req.cookies["access_token"];
+        } else if (req.cookies["access_token"]) {
+            accessToken = req.cookies["access_token"];
+        }
 
-        if (!accessToken || !req.cookies["logged"]) throw ApiError.Unauthorized();
+        if (req.cookies["refresh_token"]) {
+            refreshToken = req.cookies["refresh_token"];
+        }
+
+        if (!accessToken || !req.cookies["logged"] || !refreshToken) throw ApiError.Unauthorized();
 
         const decoded = tokenService.verifyJwt<{ id: string }>(accessToken, "access");
 

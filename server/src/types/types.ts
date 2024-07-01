@@ -43,6 +43,7 @@ export type Film = {
     genres: GenresEntity[] | null;
     rating: number | null;
     posterUrlPreview: string | null;
+    favorite?: FavoriteEntity;
 };
 
 export type UnofficialKinopoiskDetails = {
@@ -103,6 +104,7 @@ export type Details = {
     ratingAgeLimits: string | null;
     ratingKinopoiskVoteCount: number | null;
     description: string | null;
+    favorite?: FavoriteEntity;
 } & Film;
 
 export type UnofficialKinopoiskSearchItem = {
@@ -223,4 +225,10 @@ export type UnofficialKinopoiskSimilars = {
 export type Similars = {
     total: number;
     items: Pick<Film, "id" | "nameRu" | "nameEn" | "nameOriginal" | "posterUrlPreview">[];
+};
+
+export type FavoriteEntity = {
+    userScore: number | null;
+    bookmarked: boolean | null;
+    hidden: boolean | null;
 };

@@ -12,7 +12,7 @@ import {
     YAxis,
 } from "recharts";
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { useGetStatisticsQuery } from "@/entities/Favorite";
+import { useGetStatsQuery } from "@/entities/Film";
 import { Ascending, Descending, EyeClose, EyeOpen, Settings } from "@/shared/assets/icons";
 import { addZerosToNumber } from "@/shared/lib/addZerosToNumber";
 import { useTheme } from "@/shared/theme";
@@ -116,9 +116,9 @@ export const FavoriteVerticalBarChart = () => {
     const onClose = () => setModal(false);
 
     const selectByFilter = useMemo(() => getSelectByFilter, []);
-    const { data } = useGetStatisticsQuery(undefined, {
-        selectFromResult: (result) => {
-            return { data: selectByFilter(result, filter, sort, order) };
+    const { data } = useGetStatsQuery(undefined, {
+        selectFromResult: ({ data }) => {
+            return { data: selectByFilter(data, filter, sort, order) };
         },
     });
 

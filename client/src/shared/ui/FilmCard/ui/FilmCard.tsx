@@ -16,8 +16,6 @@ import { FilmCardPropsT } from "../model/types";
 export const FilmCard = memo((props: FilmCardPropsT) => {
     const {
         film,
-        userScore,
-        isHidden,
         label = "card.t-watch",
         cardStyles,
         onDelete,
@@ -26,7 +24,10 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
         hideStats,
     } = props;
 
-    const { id, posterUrlPreview, rating, genres, year, countries, filmLengthHours } = film;
+    const { id, posterUrlPreview, rating, genres, year, countries, filmLengthHours, favorite } =
+        film;
+
+    const { hidden, userScore } = favorite ?? {};
 
     const { t, i18n } = useTranslation();
     const filmTitle = getFilmTitle(film, i18n.language as TLngs);
@@ -42,7 +43,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
               },
           ];
 
-    if (isHidden || !appearance) return null;
+    if (hidden || !appearance) return null;
 
     if (appearance === "tile")
         return (

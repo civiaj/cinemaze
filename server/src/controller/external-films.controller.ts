@@ -7,6 +7,7 @@ import {
     getExternalDataByIdInput,
 } from "../schema/external-films.schema";
 import externalFilmsService from "../service/external-films.service";
+import favoriteService from "../service/favorite.service";
 
 class ExternalFilmsController {
     async getTop(
@@ -16,6 +17,18 @@ class ExternalFilmsController {
     ) {
         try {
             const data = await externalFilmsService.top(req.query);
+            const { id } = res.locals?.user ?? {};
+            if (id) {
+                const ids = data.films.map((film) => film.id);
+                const favorites = await favoriteService.hydrateByIds(id, ids);
+                data.films = data.films.map((film) => {
+                    const { id } = film;
+                    const candidate = favorites.find(({ filmId }) => filmId === id);
+                    if (!candidate) return film;
+                    const { filmId, ...favorite } = candidate;
+                    return { ...film, favorite };
+                });
+            }
             return res.json(data);
         } catch (e) {
             next(e);
@@ -24,6 +37,11 @@ class ExternalFilmsController {
     async getDetails(req: Request<getExternalDataByIdInput>, res: Response, next: NextFunction) {
         try {
             const data = await externalFilmsService.details(req.params);
+            const { id } = res.locals?.user ?? {};
+            if (id) {
+                const favorite = await favoriteService.hydrateOne(id, req.params.id);
+                if (favorite) data.favorite = favorite;
+            }
             return res.json(data);
         } catch (e) {
             next(e);

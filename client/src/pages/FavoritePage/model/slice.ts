@@ -1,9 +1,8 @@
 import { PayloadAction, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { FavoriteListVariantT, TFavorite } from "@/entities/Favorite";
-import { TFilm } from "@/entities/Film";
+import { TFavorites, TFavoritesListVariants, TFilm } from "@/entities/Film";
 import { FavoritePageSchema } from "./types";
 
-export const adapter = createEntityAdapter<TFilm & TFavorite>({
+export const adapter = createEntityAdapter<TFilm & TFavorites>({
     selectId: (film) => film.id,
 });
 
@@ -17,12 +16,12 @@ const userPageSlice = createSlice({
     name: "userPageSlice",
     initialState,
     reducers: {
-        setFavoriteList: (state, action: PayloadAction<FavoriteListVariantT>) => {
+        setFavoriteList: (state, action: PayloadAction<TFavoritesListVariants>) => {
             state.listVariant = action.payload;
             state.page = initialState.page;
             adapter.removeAll(state.films);
         },
-        setFavoriteFilms: (state, action: PayloadAction<(TFilm & TFavorite)[]>) => {
+        setFavoriteFilms: (state, action: PayloadAction<(TFilm & TFavorites)[]>) => {
             adapter.addMany(state.films, action.payload);
         },
         setPage: (state, action: PayloadAction<number>) => {

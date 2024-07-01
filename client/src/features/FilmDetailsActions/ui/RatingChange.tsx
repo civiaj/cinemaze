@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "@/app/store";
-import { TFavorite, useGetOneFavoriteQuery } from "@/entities/Favorite";
-import { selectUser } from "@/entities/User";
+import { TFavorites, UpdateFavorite } from "@/entities/Film";
 import { Change, Trashcan } from "@/shared/assets/icons";
 import { classNames } from "@/shared/lib/classNames";
 import { OutsideClickWrapper } from "@/shared/ui/Boxes/OutsideClickWrapper";
@@ -12,19 +10,15 @@ import { PopupList } from "@/shared/ui/PopupList/PopupList";
 import { RatingChangeNumbers } from "./RatingChangeNumbers";
 
 interface RatingChangeProps {
-    id: number;
-    updateFavorite: (favorite: TFavorite) => Promise<void>;
+    updateFavorite: UpdateFavorite;
     disabled: boolean;
+    userScore: TFavorites["userScore"];
 }
 
-export const RatingChange = ({ id, updateFavorite, disabled }: RatingChangeProps) => {
+export const RatingChange = ({ userScore, updateFavorite, disabled }: RatingChangeProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isChange, setIsChange] = useState(false);
     const { t } = useTranslation();
-
-    const user = useAppSelector(selectUser);
-    const { currentData: favorite } = useGetOneFavoriteQuery(id, { skip: !user });
-    const userScore = favorite?.userScore ?? null;
 
     const onClose = () => {
         setIsOpen(false);
@@ -39,7 +33,7 @@ export const RatingChange = ({ id, updateFavorite, disabled }: RatingChangeProps
     };
 
     const onUpdateScore = (userScore: number | null) => {
-        updateFavorite({ userScore });
+        updateFavorite({ userScore }, "userScore");
         onClose();
     };
 

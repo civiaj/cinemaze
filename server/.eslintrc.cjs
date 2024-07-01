@@ -6,6 +6,9 @@ module.exports = {
     plugins: ["@typescript-eslint"],
     rules: {
         "@typescript-eslint/no-explicit-any": ["error", { ignoreRestArgs: true }],
-        "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+        "@typescript-eslint/no-unused-vars": [
+            "warn",
+            { argsIgnorePattern: "^_", ignoreRestSiblings: true },
+        ],
     },
 };

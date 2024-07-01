@@ -1,28 +1,22 @@
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "@/app/store";
-import { TFavorite, useGetOneFavoriteQuery } from "@/entities/Favorite";
-import { selectUser } from "@/entities/User";
+import { TFavorites, UpdateFavorite } from "@/entities/Film";
 import { User } from "@/shared/assets/icons";
 import { RatingBox } from "@/shared/ui/Boxes/RatingBox";
 import { Button } from "@/shared/ui/Button/Button";
 import { ColoredNumber } from "@/shared/ui/ColoredNumber/ColoredNumber";
 
 interface RatingUserScoreProps {
-    id: number;
-    updateFavorite: (favorite: TFavorite) => Promise<void>;
+    updateFavorite: UpdateFavorite;
     disabled: boolean;
+    userScore: TFavorites["userScore"];
 }
 
-export const RatingUserScore = ({ id, updateFavorite, disabled }: RatingUserScoreProps) => {
-    const user = useAppSelector(selectUser);
+export const RatingUserScore = ({ userScore, updateFavorite, disabled }: RatingUserScoreProps) => {
     const { t } = useTranslation();
-    const { currentData: favorite } = useGetOneFavoriteQuery(id, { skip: !user });
 
     const handleDeleteScore = () => {
-        updateFavorite({ userScore: null });
+        updateFavorite({ userScore: null }, "userScore");
     };
-
-    const userScore = favorite?.userScore ?? null;
 
     return (
         userScore && (

@@ -9,7 +9,7 @@ interface RatingChangeNumbersProps {
 
 export const RatingChangeNumbers = withFocusTrap(({ onSetScore }: RatingChangeNumbersProps) => {
     return (
-        <ul className="absolute right-10 top-0 rounded-full flex text-secondary px-4 bg-my-neutral-100 z-[10]">
+        <ul className="absolute right-0 top-0 rounded-full flex text-secondary px-4 bg-my-neutral-100 z-[10]">
             <li className="flex items-center px-2">
                 <FilledStar className="text-xl text-blue-500" />
             </li>

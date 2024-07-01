@@ -1,7 +1,7 @@
 import { memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "@/app/store";
-import { FavoriteListVariantT, useGetSyncDataQuery } from "@/entities/Favorite";
+import { TFavoritesListVariants, useGetStatsTotalQuery } from "@/entities/Film";
 import { AppSelect } from "@/shared/ui/AppSelect/AppSelect";
 import { ControllsBox } from "@/shared/ui/Boxes/ControllsBox";
 import { HeaderWithControlls } from "@/shared/ui/Boxes/HeaderWithControlls";
@@ -11,12 +11,12 @@ import { listVariants } from "../model/data";
 import { favoritePageActions } from "../model/slice";
 
 type Props = {
-    listVariant: FavoriteListVariantT;
+    listVariant: TFavoritesListVariants;
 };
 
 export const FavoritePageHeader = memo(({ listVariant }: Props) => {
     const dispatch = useAppDispatch();
-    const { currentData } = useGetSyncDataQuery();
+    const { currentData } = useGetStatsTotalQuery();
     const { t } = useTranslation();
 
     const options = useMemo(
@@ -38,7 +38,7 @@ export const FavoritePageHeader = memo(({ listVariant }: Props) => {
 
     const onListVariantChange = (newVariant: string) => {
         if (listVariant === newVariant) return;
-        dispatch(favoritePageActions.setFavoriteList(newVariant as FavoriteListVariantT));
+        dispatch(favoritePageActions.setFavoriteList(newVariant as TFavoritesListVariants));
     };
 
     return (

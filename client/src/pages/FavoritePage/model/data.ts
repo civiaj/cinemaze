@@ -1,6 +1,6 @@
-import { FavoriteListVariantT } from "@/entities/Favorite";
+import { TFavoritesListVariants } from "@/entities/Film";
 
-export const listVariants: OptionType<FavoriteListVariantT, string>[] = [
+export const listVariants: OptionType<TFavoritesListVariants, string>[] = [
     {
         label: "favorite.all",
         value: "all",

@@ -14,5 +14,9 @@ export type {
     TSearchRes,
     TDetails,
     TImages,
+    TStatistics,
+    TFavorites,
+    TFavoritesListVariants,
+    UpdateFavorite,
 } from "./model/types";
 export { headerTitles, mainQueryOptions, orderOptions } from "./model/data";

@@ -12,7 +12,7 @@ import {
 } from "recharts";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { useGetStatisticsQuery } from "@/entities/Favorite";
+import { useGetStatsQuery } from "@/entities/Film";
 import { classNames } from "@/shared/lib/classNames";
 import { useTheme } from "@/shared/theme";
 import { AppLink } from "@/shared/ui/AppLink/AppLink";
@@ -80,8 +80,8 @@ export const FavoriteTimelineChart = () => {
     const { interval } = useAppSelector(getTL);
     const dispatch = useAppDispatch();
     const selectByDate = useMemo(() => getSelectByDate, []);
-    const { result } = useGetStatisticsQuery(undefined, {
-        selectFromResult: (data) => {
+    const { result } = useGetStatsQuery(undefined, {
+        selectFromResult: ({ data }) => {
             return { result: selectByDate(data, interval, i18n.language) };
         },
     });

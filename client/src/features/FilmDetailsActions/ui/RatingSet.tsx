@@ -1,32 +1,27 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "@/app/store";
-import { TFavorite, useGetOneFavoriteQuery } from "@/entities/Favorite";
-import { selectUser } from "@/entities/User";
+import { TFavorites, UpdateFavorite } from "@/entities/Film";
 import { OutsideClickWrapper } from "@/shared/ui/Boxes/OutsideClickWrapper";
 import { Button } from "@/shared/ui/Button/Button";
 import { RatingChangeNumbers } from "./RatingChangeNumbers";
 
 interface RatingSetgSet {
-    id: number;
-    updateFavorite: (favorite: TFavorite) => Promise<void>;
+    updateFavorite: UpdateFavorite;
     disabled: boolean;
+    userScore: TFavorites["userScore"];
 }
 
 export const RatingSet = (props: RatingSetgSet) => {
-    const { id, updateFavorite, disabled } = props;
+    const { updateFavorite, disabled, userScore } = props;
     const { t } = useTranslation();
-    const user = useAppSelector(selectUser);
-    const { currentData: favorite } = useGetOneFavoriteQuery(id, { skip: !user });
 
     const [isOpen, setIsOpen] = useState(false);
-    const userScore = favorite?.userScore;
 
     const onClose = () => setIsOpen(false);
     const onOpen = () => setIsOpen(true);
 
     const onSetScore = (userScore: number) => {
-        updateFavorite({ userScore });
+        updateFavorite({ userScore }, "userScore");
         onClose();
     };
 

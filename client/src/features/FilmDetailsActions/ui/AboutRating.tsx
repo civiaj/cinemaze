@@ -1,29 +1,28 @@
 import { useTranslation } from "react-i18next";
-import { TFavorite } from "@/entities/Favorite";
-import { TDetails } from "@/entities/Film";
+import { TDetails, UpdateFavorite } from "@/entities/Film";
 import { classNames } from "@/shared/lib/classNames";
 import { numberWithSpaces } from "@/shared/lib/numberWithSpaces";
 import { ColoredNumber } from "@/shared/ui/ColoredNumber/ColoredNumber";
 import { RatingChange } from "./RatingChange";
 import { RatingSet } from "./RatingSet";
 
-type Props = Pick<TDetails, "id" | "ratingKinopoiskVoteCount" | "rating" | "reviewsCount"> & {
+type Props = Pick<TDetails, "ratingKinopoiskVoteCount" | "rating" | "reviewsCount" | "favorite"> & {
     disabled: boolean;
     className?: string;
-    updateFavorite: (favorite: TFavorite) => Promise<void>;
+    updateFavorite: UpdateFavorite;
 };
 
 export const AboutRating = (props: Props) => {
     const {
-        id,
         rating,
         ratingKinopoiskVoteCount,
         reviewsCount,
         className,
         updateFavorite,
         disabled,
+        favorite,
     } = props;
-
+    const { userScore } = favorite ?? {};
     const { t } = useTranslation();
 
     return (
@@ -45,8 +44,12 @@ export const AboutRating = (props: Props) => {
                     </p>
                 )}
             </div>
-            <RatingChange id={id} disabled={disabled} updateFavorite={updateFavorite} />
-            <RatingSet id={id} disabled={disabled} updateFavorite={updateFavorite} />
+            <RatingChange
+                disabled={disabled}
+                updateFavorite={updateFavorite}
+                userScore={userScore}
+            />
+            <RatingSet userScore={userScore} disabled={disabled} updateFavorite={updateFavorite} />
         </div>
     );
 };

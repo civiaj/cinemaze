@@ -52,7 +52,7 @@ class AuthController {
             const verificationCode = user.createVerificationCode();
             await user.save(options);
 
-            await favoriteService.createFavoriteUser(user._id, options);
+            await favoriteService.createOne(user._id, options);
 
             const tokens = await tokenService.signTokens(
                 {
@@ -304,7 +304,7 @@ class AuthController {
             const user = await userService.findUser({ id: res.locals.user.id });
             if (!user) throw ApiError.BadRequest("Нет пользователя с таким id");
 
-            await favoriteService.deleteFavorite(user.id, session);
+            await favoriteService.removeOne(user.id, session);
             await tokenService.removeAllSessions(user.id, session);
 
             if (user.verified) await mailService.sendAccountDelete(user);

@@ -4,8 +4,13 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "@/app/store";
 import { FilmDetailsActions, RatingStars } from "@/features/FilmDetailsActions";
-import { TFavorite, useAddFavoriteMutation, useGetOneFavoriteQuery } from "@/entities/Favorite";
-import { Reviews, Similars, useDetailsQuery } from "@/entities/Film";
+import {
+    Reviews,
+    Similars,
+    UpdateFavorite,
+    useAddOneMutation,
+    useDetailsQuery,
+} from "@/entities/Film";
 import { Breadcrumbs } from "@/entities/Ui";
 import { selectUser } from "@/entities/User";
 import formatFilmError from "@/shared/api/helpers/formatFilmError";
@@ -20,40 +25,36 @@ export const DetailsPageBody = () => {
     const id = Number(filmId);
     const user = useAppSelector(selectUser);
     const { t, i18n } = useTranslation();
-    const details = useDetailsQuery(id);
-    const favorite = useGetOneFavoriteQuery(id, {
-        skip: !user,
-    });
+    const { data, isLoading, isFetching } = useDetailsQuery(id);
 
-    const [addFavorite, { isLoading }] = useAddFavoriteMutation();
+    const [addFavorite, favoriteMutation] = useAddOneMutation();
 
-    const updateFavorite = useCallback(
-        async (favorite: TFavorite) => {
-            if (!user || !details.data) {
+    const updateFavorite = useCallback<UpdateFavorite>(
+        async (payload, key) => {
+            if (!user || !data) {
                 toast.error(t("favorite.unauth-msg"));
                 return;
             }
-            addFavorite({ film: details.data, favorite });
+
+            addFavorite({ ...data, favorite: { ...data.favorite, ...payload }, key });
         },
-        [addFavorite, details, user, t]
+        [addFavorite, data, user, t]
     );
 
-    const loading = details.isLoading || details.isFetching || favorite.isLoading;
+    if (isLoading) return <DetailsPageSkeleton />;
 
-    if (loading) return <DetailsPageSkeleton />;
-
-    if (details.isError || !details.data)
+    if (favoriteMutation.isError || !data)
         return (
             <StatusBox
-                isError={details.isError}
-                msgOrChildren={formatFilmError(details.error)}
+                isError={true}
+                msgOrChildren={formatFilmError(favoriteMutation.error)}
                 reload
             />
         );
 
-    const { ratingImdb, rating } = details.data;
-    const label = getFilmTitle(details.data, i18n.language as TLngs);
-    const disabled = isLoading || favorite.isFetching || favorite.isLoading;
+    const { ratingImdb, rating, favorite } = data;
+    const label = getFilmTitle(data, i18n.language as TLngs);
+    const disabled = favoriteMutation.isLoading || isLoading || isFetching;
 
     return (
         <>
@@ -66,7 +67,7 @@ export const DetailsPageBody = () => {
             />
             <ViewSwitcher id={id} />
             <RatingStars
-                details={{ id, ratingImdb, rating }}
+                details={{ id, ratingImdb, rating, favorite }}
                 updateFavorite={updateFavorite}
                 disabled={disabled}
             />

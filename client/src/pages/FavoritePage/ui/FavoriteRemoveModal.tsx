@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { routePath } from "@/app/router/router";
-import { FavoriteListVariantT, TFavorite, useRemoveOneFavoriteMutation } from "@/entities/Favorite";
-import { TFilm } from "@/entities/Film";
+import { TFilm, useRemoveOneFavoriteMutation } from "@/entities/Film";
+import { TFavoritesListVariants } from "@/entities/Film";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { Checked } from "@/shared/assets/icons";
 import { TLngs } from "@/shared/i18n/types";
@@ -16,8 +16,8 @@ import { listVariants } from "../model/data";
 
 type Props = {
     onClose: () => void;
-    listVariant: FavoriteListVariantT;
-    film?: (TFilm & TFavorite) | null;
+    listVariant: TFavoritesListVariants;
+    film?: TFilm | null;
 };
 
 export const FavoriteRemoveModal = (props: Props) => {
@@ -36,7 +36,6 @@ export const FavoriteRemoveModal = (props: Props) => {
         if (!id) return;
         removeOneFavorite({
             body: { id, field: all ? "all" : listVariant },
-            listVariant: all ? "all" : listVariant,
             filmTitle: title,
         })
             .unwrap()

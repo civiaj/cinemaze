@@ -1,13 +1,12 @@
 import mongoose from "mongoose";
+import { FavoriteEntity } from "../types/types";
 
 export type FavoriteItem = {
     film: mongoose.Schema.Types.ObjectId;
-    userScore: number | null;
-    bookmarked: boolean;
-    hidden: boolean;
+    filmId: number;
     createdAt: Date;
     updateAt: Date;
-};
+} & FavoriteEntity;
 
 export type Favorite = {
     user: mongoose.Schema.Types.ObjectId;
@@ -26,9 +25,10 @@ const favoriteSchema = new mongoose.Schema<Favorite>(
                             ref: "Film",
                             required: true,
                         },
+                        filmId: { type: Number, required: true },
                         userScore: { type: Number, default: null },
-                        bookmarked: { type: Boolean, default: false },
-                        hidden: { type: Boolean, default: false },
+                        bookmarked: { type: Boolean, default: null },
+                        hidden: { type: Boolean, default: null },
                     },
                     { timestamps: true }
                 ),

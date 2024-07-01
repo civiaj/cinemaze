@@ -1,12 +1,7 @@
-import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
-import { routePath } from "@/app/router/router";
 import { useAppSelector } from "@/app/store";
-import { useGetSyncDataQuery } from "@/entities/Favorite";
 import { TFilm } from "@/entities/Film";
 import { TAppearances, getUiAppearance } from "@/entities/Ui";
-import { selectUser } from "@/entities/User";
 import { classNames } from "@/shared/lib/classNames";
 import { Box } from "@/shared/ui/Boxes/Box";
 import { FilmCard, FilmCardPropsT } from "@/shared/ui/FilmCard";
@@ -53,33 +48,8 @@ export const FilmsList = (props: FilmsListPropsT) => {
             "grid gap-x-2 gap-y-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 mdb:grid-cols-5 lg:grid-cols-5",
     };
     const { t } = useTranslation();
-    const { pathname } = useLocation();
-    const user = useAppSelector(selectUser);
-    const {
-        isLoading: isSyncLoading,
-        isFetching: isSyncFetching,
-        data: syncData,
-    } = useGetSyncDataQuery(undefined, {
-        skip: !user,
-    });
 
-    const findIsHidden = useCallback(
-        (id: number) => {
-            return user && pathname !== routePath.favorite
-                ? syncData?.films.find((item) => item.id === id)?.hidden
-                : false;
-        },
-        [pathname, syncData, user]
-    );
-
-    const findUserScore = useCallback(
-        (id: number) => {
-            return user ? syncData?.films.find((item) => item.id === id)?.userScore : null;
-        },
-        [syncData, user]
-    );
-
-    if ((isLoading || isFetching || isSyncLoading || isSyncFetching) && page === 1)
+    if ((isLoading || isFetching) && page === 1)
         return (
             <FilmListSkeleton
                 containerStyle={containerStyle[appearance]}
@@ -97,22 +67,11 @@ export const FilmsList = (props: FilmsListPropsT) => {
 
     return (
         <>
-            {isSyncFetching && page > 1 && (
-                <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
-                    <Spinner />
-                </div>
-            )}
-            <ul
-                className={classNames(`${containerStyle[appearance]}`, {
-                    ["opacity-20 pointer-events-none"]: isSyncFetching && page > 1,
-                })}
-            >
+            <ul className={classNames(`${containerStyle[appearance]}`, {})}>
                 {films.map((film) => (
                     <FilmCard
                         key={film.id}
                         film={film}
-                        userScore={findUserScore(film.id)}
-                        isHidden={findIsHidden(film.id)}
                         appearance={appearance}
                         onClick={onFilmCardClick}
                         onDelete={onFilmCardDelete}

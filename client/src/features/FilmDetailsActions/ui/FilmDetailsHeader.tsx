@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "@/app/store";
-import { TFavorite, useGetOneFavoriteQuery } from "@/entities/Favorite";
-import { TDetails } from "@/entities/Film";
-import { selectUser } from "@/entities/User";
+import { TDetails, UpdateFavorite } from "@/entities/Film";
 import { AddBookmark, Bookmarked, Copy, Dots, Hide, Show } from "@/shared/assets/icons";
 import { copyClipboard } from "@/shared/lib/copyClipboard";
 import { OutsideClickWrapper } from "@/shared/ui/Boxes/OutsideClickWrapper";
@@ -13,25 +10,23 @@ import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
 
 type Props = {
-    details: Pick<TDetails, "year" | "nameOriginal" | "ratingAgeLimits" | "id"> & {
+    details: Pick<TDetails, "year" | "nameOriginal" | "ratingAgeLimits" | "favorite"> & {
         label: string;
     };
-    updateFavorite: (favorite: TFavorite) => Promise<void>;
+    updateFavorite: UpdateFavorite;
     disabled: boolean;
 };
 
 export const FilmDetailsHeader = ({ details, updateFavorite, disabled }: Props) => {
-    const { id, ratingAgeLimits, year, nameOriginal, label } = details;
+    const { ratingAgeLimits, year, nameOriginal, label, favorite } = details;
+    const { bookmarked, hidden } = favorite ?? {};
     const [isOpen, setIsOpen] = useState(false);
     const onClose = () => setIsOpen(false);
     const onToggle = () => setIsOpen((p) => !p);
     const { t } = useTranslation();
 
-    const user = useAppSelector(selectUser);
-    const { currentData: favorite } = useGetOneFavoriteQuery(id, { skip: !user });
-
     const onTogglProperty = (property: "hidden" | "bookmarked") => {
-        updateFavorite({ [property]: !favorite?.[property] ?? true });
+        updateFavorite({ [property]: !favorite?.[property] ?? true }, property);
         onClose();
     };
 
@@ -40,8 +35,6 @@ export const FilmDetailsHeader = ({ details, updateFavorite, disabled }: Props) 
         onClose();
     };
 
-    const bookmarked = favorite?.bookmarked ?? false;
-    const hidden = favorite?.hidden ?? false;
     const options = [
         {
             action: handleCopy,

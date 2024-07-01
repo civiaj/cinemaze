@@ -1,5 +1,4 @@
-import { TFavorite } from "@/entities/Favorite";
-import { useDetailsQuery } from "@/entities/Film";
+import { UpdateFavorite, useDetailsQuery } from "@/entities/Film";
 import { Box } from "@/shared/ui/Boxes/Box";
 import { AboutDetails } from "./AboutDetails";
 import { AboutPoster } from "./AboutPoster";
@@ -9,7 +8,7 @@ import { FilmDetailsHeader } from "./FilmDetailsHeader";
 type Props = {
     id: number;
     label: string;
-    updateFavorite: (favorite: TFavorite) => Promise<void>;
+    updateFavorite: UpdateFavorite;
     disabled: boolean;
 };
 
@@ -25,6 +24,7 @@ export const FilmDetailsActions = (props: Props) => {
         rating,
         ratingKinopoiskVoteCount,
         reviewsCount,
+        favorite,
     } = currentData! ?? {};
 
     return (
@@ -39,7 +39,7 @@ export const FilmDetailsActions = (props: Props) => {
                 <div className="flex-1 grid grid-cols-7 col-span-5 mdb:col-span-6 gap-x-6">
                     <div className="flex flex-col col-span-7 mdb:col-span-5 gap-4">
                         <FilmDetailsHeader
-                            details={{ label, ratingAgeLimits, year, nameOriginal, id }}
+                            details={{ label, ratingAgeLimits, year, nameOriginal, favorite }}
                             updateFavorite={updateFavorite}
                             disabled={disabled}
                         />
@@ -47,12 +47,12 @@ export const FilmDetailsActions = (props: Props) => {
                     </div>
                     <AboutRating
                         className="col-span-2 hidden mdb:flex"
-                        id={id}
                         ratingKinopoiskVoteCount={ratingKinopoiskVoteCount}
                         reviewsCount={reviewsCount}
                         rating={rating}
                         updateFavorite={updateFavorite}
                         disabled={disabled}
+                        favorite={favorite}
                     />
                 </div>
             </div>
