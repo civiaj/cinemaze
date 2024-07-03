@@ -7,8 +7,8 @@ import { SideBarItem } from "./types";
 export const getSidebarItems = createSelector([getIsLogged, getIsAdmin], (isLogged, isAdmin) => {
     const sidebarItems: SideBarItem[] = [
         {
-            label: routeConfig.main.label,
-            to: routePath.main,
+            label: routeConfig.top.label,
+            to: routePath.top,
             Icon: Home,
         },
         {

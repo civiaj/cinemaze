@@ -7,7 +7,7 @@ import requireAuth from "../middleware/requireAuth";
 import detectBan from "../middleware/detectBan";
 import roles from "../middleware/roles";
 import validate from "../middleware/validate";
-import {getFavoriteAllSchema,getFavoriteOneSchema,removeFavoriteOneSchema} from "../schema/favorite.schema";
+import {getFavoriteAllSchema,removeFavoriteOneSchema} from "../schema/favorite.schema";
 import { createFilmSchema } from "../schema/film.schema";
 import {getAllUsersSchema,getOneUserSchema,manageUserChangeSchema,mangeUserBanSchema,mangeUserUnbanSchema} from "../schema/manage.schema";
 import {checkPasswordSchema,createUserSchema,emailSchema,loginUserSchema,removeSessionSchema,resetPasswordSchema,setDisplayNameSchema,setPasswordSchema,updateRoleSchema,verifyEmailSchema} from "../schema/user.schema";
@@ -51,7 +51,8 @@ router.delete( "/user/sessions", requireAuth, validate(removeSessionSchema), use
 router.get( "/favorite", requireAuth, validate(getFavoriteAllSchema), favoriteController.getAllFavorite);
 router.post( "/favorite/add", requireAuth, detectBan, validate(createFilmSchema), favoriteController.addFavorite);
 router.post( "/favorite/remove", requireAuth, detectBan, validate(removeFavoriteOneSchema), favoriteController.removeFavorite);
-router.get("/favorite/statistics", requireAuth, detectBan, favoriteController.getStatistics);
+router.get("/favorite/stats", requireAuth, detectBan, favoriteController.getStatistics);
+router.get("/favorite/stats/total", requireAuth, favoriteController.getStatisticsTotal);
 //manage
 router.get(  "/manage/users", requireAuth, detectBan, roles(["admin", "admin-test"]), validate(getAllUsersSchema), manageController.getAll);
 router.get( "/manage/users/:userId", requireAuth, detectBan, roles(["admin"]), validate(getOneUserSchema), manageController.getOne);

@@ -13,7 +13,7 @@ export const EmailVerificationPage = () => {
     const isSuccess = searchParams.get("status") === "success";
     const isError = searchParams.get("status") === "error";
 
-    if (!isError && !isSuccess) return <Navigate to={routePath.main} replace />;
+    if (!isError && !isSuccess) return <Navigate to={routePath.top} replace />;
 
     let msg;
     if (isError) msg = t("verify.error-msg");
@@ -26,7 +26,7 @@ export const EmailVerificationPage = () => {
                 isError={isError}
                 isSuccess={isSuccess}
                 msgOrChildren={msg}
-                onReload={() => navigate(routePath.main, { replace: true })}
+                onReload={() => navigate(routePath.top, { replace: true })}
             />
         </Page>
     );

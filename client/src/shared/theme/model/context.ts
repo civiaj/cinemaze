@@ -6,4 +6,4 @@ type Props = {
     setTheme: (newTheme: TThemes) => void;
 };
 
-export const ThemeContext = createContext<Props>({ theme: "light", setTheme: () => {} });
+export const ThemeContext = createContext<Props>({ theme: "system", setTheme: () => {} });

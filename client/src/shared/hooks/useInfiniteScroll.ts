@@ -49,7 +49,9 @@ export const useInfiniteScroll = ({
     }, [areMorePages, waitLoading, setPage, page]);
 
     useEffect(() => {
-        if (!waitLoading && films) setFilms(films);
+        if (!waitLoading && films) {
+            setFilms(films);
+        }
     }, [waitLoading, films, setFilms]);
 
     return { ...queryResult, isEnd, onScrollEnd };

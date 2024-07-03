@@ -1,19 +1,17 @@
 import { useAppDispatch, useAppSelector } from "@/app/store";
-import { TSearchCategories, orderOptions } from "@/entities/Film";
+import { TSearchCategories, filmActions, getSearchQuery, orderOptions } from "@/entities/Film";
 import { AppSelect } from "@/shared/ui/AppSelect/AppSelect";
 import { Box } from "@/shared/ui/Boxes/Box";
-import { getSearchOrder } from "../model/selectors";
-import { searchPageActions } from "../model/slice";
 
 interface SearchPageHeaderProps {
     disabled?: boolean;
 }
 
 export const SearchPageHeader = ({ disabled }: SearchPageHeaderProps) => {
-    const order = useAppSelector(getSearchOrder);
+    const order = useAppSelector(getSearchQuery);
     const dispatch = useAppDispatch();
     const handleOrderChange = (newOrder: string) => {
-        dispatch(searchPageActions.setOrder(newOrder as TSearchCategories));
+        dispatch(filmActions.setSearchQuery(newOrder as TSearchCategories));
     };
 
     return (

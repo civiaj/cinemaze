@@ -11,7 +11,7 @@ type Props = {
 
 export const ThemeProvider = ({ children }: Props) => {
     const { value: theme, setValue: setTheme } = useLocalStorage<TThemes>(
-        getPreferableTheme(),
+        "system",
         LOCAL_STORAGE_THEME
     );
 

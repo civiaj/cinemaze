@@ -26,7 +26,7 @@ const ErrorFallback = ({ msg }: Props) => {
 
                 <a
                     className="text-inherit rounded-xl px-4 active:translate-y-[1px] bg-my-neutral-100 hover:bg-my-neutral-200 focus-visible:bg-my-neutral-200 outline-none focus-visible:ring-2 focus-visible:ring-blue-500 h-10 text-base shrink-0 flex items-center justify-center font-normal self-center"
-                    href={routePath.main}
+                    href={routePath.top}
                 >
                     {t("btn.main")}
                 </a>

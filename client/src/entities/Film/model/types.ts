@@ -1,3 +1,6 @@
+import { EntityState } from "@reduxjs/toolkit";
+import { AppRoutes } from "@/app/router/router";
+
 type CountriesEntity = {
     country: string;
 };
@@ -202,3 +205,18 @@ export type TFavoritesTotal = {
 export type TStatistics = Pick<TFilm, "id" | "nameRu" | "rating" | "year"> &
     TFavorites & { updatedAt: string; countries: string[]; genres: [] };
 export type UpdateFavorite = (payload: TFavorites, key: keyof TFavorites) => Promise<void>;
+
+type Route = `${AppRoutes}`;
+
+type QueryMap = {
+    [AppRoutes.TOP]: TTopCategories;
+    [AppRoutes.SEARCH]: TSearchCategories;
+    [AppRoutes.FAVORITE]: TFavoritesListVariants;
+};
+
+export type FilmSchema = {
+    films: EntityState<TFilm>;
+    page: number;
+    route: Route | null;
+    query: QueryMap;
+};

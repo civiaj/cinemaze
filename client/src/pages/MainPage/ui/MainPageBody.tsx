@@ -1,15 +1,13 @@
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { FilmsList } from "@/features/FilmsList";
-import { useTopQuery } from "@/entities/Film";
+import { filmActions, getFilms, getMainQuery, getPage, useTopQuery } from "@/entities/Film";
 import { Page } from "@/entities/Ui";
-import formatFilmError from "@/shared/api/helpers/formatFilmError";
+import formatServerError from "@/shared/api/helpers/formatServerError";
 import { useInfiniteScroll } from "@/shared/hooks/useInfiniteScroll";
 import { Box } from "@/shared/ui/Boxes/Box";
 import { EndBox } from "@/shared/ui/Boxes/EndBox";
 import { PageLikeBox } from "@/shared/ui/Boxes/PageLikeBox";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
-import { getMainPage, getMainFilms, getMainQuery } from "../model/selectors";
-import { mainPageActions } from "../model/slice";
 import { MainPageHeader } from "./MainPageHeader";
 
 const cardStyles: TCardStyles = {
@@ -19,28 +17,28 @@ const cardStyles: TCardStyles = {
 export const MainPageBody = () => {
     const mainQuery = useAppSelector(getMainQuery);
     const dispatch = useAppDispatch();
-    const infiniteFilms = useAppSelector(getMainFilms);
-    const page = useAppSelector(getMainPage);
+    const infiniteFilms = useAppSelector(getFilms);
+    const page = useAppSelector(getPage);
 
     const { isEnd, isError, isFetching, isLoading, onScrollEnd, error } = useInfiniteScroll({
         queryHook: useTopQuery,
         queryParams: { page, mainQuery },
-        setPage: (newPage: number) => dispatch(mainPageActions.setPage(newPage)),
-        setFilms: (films) => dispatch(mainPageActions.setMainPageFilms(films)),
+        setPage: (newPage: number) => dispatch(filmActions.setPage(newPage)),
+        setFilms: (films) => dispatch(filmActions.setFilm(films)),
     });
 
     const films = infiniteFilms ?? [];
-    const showEnd = !isLoading && !isFetching && isEnd && !!films.length;
+    const showEnd = !isLoading && !isFetching && isEnd && !!films.length && !isError;
 
     if (!infiniteFilms.length && isError)
         return (
             <PageLikeBox>
-                <StatusBox msgOrChildren={formatFilmError(error)} isError={isError} reload />
+                <StatusBox msgOrChildren={formatServerError(error)} isError={isError} reload />
             </PageLikeBox>
         );
 
     return (
-        <Page onScrollEnd={onScrollEnd}>
+        <Page onScrollEnd={onScrollEnd} isError={isError}>
             <Box>
                 <MainPageHeader />
             </Box>

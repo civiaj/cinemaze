@@ -4,8 +4,7 @@ import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer } fro
 import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage";
 import {
-    favoritePagePersistConfig,
-    mainPagePersistConfig,
+    filmConfig,
     managePagePersistConfig,
     persistConfig,
     persistConfigKeys,
@@ -14,12 +13,11 @@ import {
     uiConfig,
 } from "@/app/persist/config";
 import { storeErrors } from "@/app/store/storeErrors";
-import { favoritePageReducer } from "@/pages/FavoritePage";
-import { mainPageReducer } from "@/pages/MainPage";
 import { manageReducer } from "@/pages/ManagePage";
 import { searchPageReducer } from "@/pages/SearchPage";
 import { statisticsReducer } from "@/pages/StatisticsPage";
 import { authAndUserSliceReducer } from "@/features/LoadingAuthorizationAndUser";
+import { filmReducer } from "@/entities/Film";
 import { uiReducer } from "@/entities/Ui";
 import { userReducer } from "@/entities/User";
 import { api } from "@/shared/api/api";
@@ -30,11 +28,10 @@ const appReducer = combineReducers({
     user: userReducer,
     authAndUserIsLoading: authAndUserSliceReducer,
     ui: persistReducer(uiConfig, uiReducer),
-    mainPage: persistReducer(mainPagePersistConfig, mainPageReducer),
-    favoritePage: persistReducer(favoritePagePersistConfig, favoritePageReducer),
     searchPage: persistReducer(searchPagePersistConfig, searchPageReducer),
     statisticsPage: persistReducer(statisticsPagePersistConfig, statisticsReducer),
     manage: persistReducer(managePagePersistConfig, manageReducer),
+    film: persistReducer(filmConfig, filmReducer),
 });
 
 const rootReducer = (state: ReturnType<typeof appReducer> | undefined, action: AnyAction) => {
@@ -54,7 +51,7 @@ const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }).concat(api.middleware, storeErrors),
+        }).prepend(api.middleware, storeErrors),
 });
 
 export const persistor = persistStore(store);

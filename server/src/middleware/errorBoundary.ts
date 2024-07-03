@@ -4,7 +4,7 @@ import { ZodError } from "zod";
 import logger from "../utils/logger";
 import axios from "axios";
 
-export default (err: unknown, req: Request, res: Response, _next: NextFunction) => {
+export default (err: unknown, _req: Request, res: Response, _next: NextFunction) => {
     logger.error(err instanceof Error ? err.message : err);
     if (err instanceof ApiError)
         return res.status(err.status).json({ message: err.message, errors: err.errors });
@@ -15,9 +15,9 @@ export default (err: unknown, req: Request, res: Response, _next: NextFunction) 
             errors: err.errors.map((error) => error.message),
         });
     if (axios.isAxiosError(err)) {
-        if (err.response) {
+        if (err.response && err.response.data.message) {
             return res.status(err.response.status).json({
-                message: JSON.stringify(err.response.data),
+                message: err.response.data.message,
             });
         } else if (err.request) {
             return res.status(err.status ?? 400).json({

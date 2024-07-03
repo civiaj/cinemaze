@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import formatFilmError from "@/shared/api/helpers/formatFilmError";
+import formatServerError from "@/shared/api/helpers/formatServerError";
 import { AppImage } from "@/shared/ui/AppImage/AppImage";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
 import { UserBoxSeparator } from "@/shared/ui/Boxes/UserBox";
@@ -22,7 +22,7 @@ export const FilmAwards = ({ id }: FilmAwardsProps) => {
     if (isError)
         return (
             <div className="flex items-center flex-col gap-2">
-                <StatusBox isError={isError} msgOrChildren={formatFilmError(error)} withoutBox />
+                <StatusBox isError={isError} msgOrChildren={formatServerError(error)} withoutBox />
             </div>
         );
 

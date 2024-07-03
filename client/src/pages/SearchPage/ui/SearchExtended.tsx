@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch } from "@/app/store";
-import { TFiltersRes, TSearchState } from "@/entities/Film";
+import { TFiltersRes, TSearchState, filmActions } from "@/entities/Film";
 import { initialSearch } from "@/entities/Film/model/data";
 import { Close, Refresh } from "@/shared/assets/icons";
 import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "@/shared/const/const";
@@ -27,7 +27,6 @@ export const SearchExtended = (props: SearchExtendedProps) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [query, setQuery] = useState<TSearchState>(prevQuery);
     const { country, genre, keyword, ratingFrom, ratingTo, yearFrom, yearTo } = query;
-
     const ratingFromOptions = generateNumberOptions(RATING_FROM_MIN, ratingTo);
     const ratingToOptions = generateNumberOptions(ratingFrom + 1, RATING_TO_MAX);
     const yearFromOptions = generateNumberOptions(YEAR_FROM_MIN, yearTo);
@@ -49,6 +48,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
         Object.entries(query).forEach(([key, value]) => {
             if (value !== null) searchParams.set(key, String(value));
         });
+        dispatch(filmActions.clean());
         setSearchParams(searchParams);
         dispatch(searchPageActions.addUserQuery(keyword));
         window.scrollTo(0, 0);
@@ -57,7 +57,7 @@ export const SearchExtended = (props: SearchExtendedProps) => {
 
     const handleReset = () => {
         setQuery(initialSearch);
-        dispatch(searchPageActions.cleanInfiniteFilms());
+        dispatch(filmActions.clean());
         if (searchParams.size) setSearchParams({});
     };
 

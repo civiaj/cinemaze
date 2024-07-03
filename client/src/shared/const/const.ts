@@ -4,7 +4,7 @@ export const LOCAL_STORAGE_UI_KEY = "ui_key_cb35187b";
 export const LOCAL_STORAGE_THEME = "theme";
 export const SKELETON_REVIEWS_LENGTH = 2;
 export const SKELETON_FILMS_LENGTH: Record<TAppearances, number> = {
-    list: 3,
+    list: 5,
     tile: 20,
 };
 export const THROTTLE_SCROLL = 200;

@@ -232,3 +232,10 @@ export type FavoriteEntity = {
     bookmarked: boolean | null;
     hidden: boolean | null;
 };
+
+export type FavoritesTotal = {
+    hidden: number;
+    userScore: number;
+    bookmarked: number;
+    all: number;
+};

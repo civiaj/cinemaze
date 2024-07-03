@@ -15,7 +15,7 @@ const BanPage = () => {
     const user = useAppSelector(selectUser);
     const { t, i18n } = useTranslation();
 
-    if (!user || (user && !user.isBanned)) return <Navigate to={routePath.main} replace />;
+    if (!user || (user && !user.isBanned)) return <Navigate to={routePath.top} replace />;
 
     const { banExpiration, banMessage, displayName, role } = user;
 
@@ -58,7 +58,7 @@ const BanPage = () => {
                     </div>
                 </UserBox>
 
-                <AppLink to={routePath.main} className="self-center" theme="button">
+                <AppLink to={routePath.top} className="self-center" theme="button">
                     {t("btn.main")}
                 </AppLink>
             </Box>

@@ -13,18 +13,6 @@ export const uiConfig = {
     blaclist: ["na"],
 };
 
-export const mainPagePersistConfig = {
-    key: "mainPage",
-    storage,
-    whitelist: ["mainQuery"],
-};
-
-export const favoritePagePersistConfig = {
-    key: "favoritePage",
-    storage,
-    whitelist: ["listVariant"],
-};
-
 export const searchPagePersistConfig = {
     key: "searchPage",
     storage,
@@ -42,12 +30,16 @@ export const managePagePersistConfig = {
     whitelist: ["order", "filter"],
 };
 
+export const filmConfig = {
+    key: "film",
+    storage,
+    whitelist: ["query"],
+};
+
 // add all keys here to remove from local storage after logout
 export const persistConfigKeys = [
     persistConfig,
     uiConfig,
-    mainPagePersistConfig,
-    favoritePagePersistConfig,
     searchPagePersistConfig,
     statisticsPagePersistConfig,
     managePagePersistConfig,

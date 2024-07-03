@@ -13,7 +13,7 @@ import { UserPage } from "@/pages/UserPage";
 import { IRoute } from "./types";
 
 export enum AppRoutes {
-    MAIN = "main",
+    TOP = "top",
     DETAILS = "details",
     SEARCH = "search",
     DEFAULT = "default",
@@ -30,8 +30,8 @@ export enum AppRoutes {
 
 export const routePath: Record<AppRoutes, string> = {
     [AppRoutes.DEFAULT]: "*",
-    [AppRoutes.MAIN]: "/films",
-    [AppRoutes.DETAILS]: "/films",
+    [AppRoutes.TOP]: "/top",
+    [AppRoutes.DETAILS]: "/details",
     [AppRoutes.SEARCH]: "/search",
     [AppRoutes.FAVORITE]: "/favorite",
     [AppRoutes.LOGIN]: "/login",
@@ -42,20 +42,20 @@ export const routePath: Record<AppRoutes, string> = {
     [AppRoutes.MANAGE_USERS]: "/manage",
     [AppRoutes.BAN]: "/ban",
     [AppRoutes.PRIVACY]: "/privacy",
-};
+} as const;
 
 export const routeConfig: Record<AppRoutes, IRoute> = {
     [AppRoutes.DEFAULT]: {
-        element: <Navigate to={routePath.main} replace />,
+        element: <Navigate to={routePath.top} replace />,
         path: routePath.default,
         label: "",
         auth: false,
         allowedRoles: ["user", "admin", "admin-test"],
     },
 
-    [AppRoutes.MAIN]: {
+    [AppRoutes.TOP]: {
         element: <MainPage />,
-        path: routePath.main,
+        path: routePath.top,
         label: "main-t",
         auth: false,
         allowedRoles: ["user", "admin", "admin-test"],

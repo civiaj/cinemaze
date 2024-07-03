@@ -1,8 +1,8 @@
 import toast from "react-hot-toast";
-import { favoritePageActions } from "@/pages/FavoritePage";
 import { api } from "@/shared/api/api";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { ServerMessageResponse } from "@/shared/api/types";
+import { filmActions } from "./slice";
 import {
     TAwardsRes,
     TDetails,
@@ -26,7 +26,7 @@ import {
 } from "./types";
 import { getAddFavoriteToastMsg, getRemoveToastMsg, transformPayload } from "./utils";
 
-const filmApi = api.injectEndpoints({
+export const filmApi = api.injectEndpoints({
     endpoints: (builder) => ({
         top: builder.query<TTopRes, TTopReq>({
             query: ({ mainQuery, page }) => ({
@@ -35,6 +35,7 @@ const filmApi = api.injectEndpoints({
             }),
             providesTags: ["Favorites"],
         }),
+
         reviews: builder.query<TReviewsRes, TReviewsReq>({
             query: (params) => ({
                 url: "/films/reviews",
@@ -58,7 +59,6 @@ const filmApi = api.injectEndpoints({
                 url: `/films/details/${id}`,
                 credentials: "include",
             }),
-            providesTags: ["Favorites"],
         }),
         filters: builder.query<TFiltersRes, void>({
             query: () => `/films/filters`,
@@ -76,7 +76,6 @@ const filmApi = api.injectEndpoints({
                 body,
                 credentials: "include",
             }),
-            invalidatesTags: ["Favorites"],
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 const { favorite, id, key } = arg;
 
@@ -94,19 +93,21 @@ const filmApi = api.injectEndpoints({
                             return formatServerError(err.error);
                         },
                     });
-                    dispatch(filmApi.util.invalidateTags(["Favorites"]));
+                    const { bookmarked, hidden, userScore } = favorite ?? {};
+                    if ([bookmarked, hidden, userScore].every((v) => !v)) {
+                        dispatch(filmActions.removeFilm(id));
+                    } else {
+                        dispatch(filmActions.updateFilm({ id, changes: { favorite } }));
+                    }
                 } catch (e) {
                     patchResult.undo();
                 }
             },
+            invalidatesTags: ["Favorites"],
         }),
-        getAll: builder.query<TFavoritesAllRes, TFavoritesAllReq>({
-            query: (params) => ({
-                url: `/favorite`,
-                params,
-                credentials: "include",
-            }),
-            providesTags: () => ["Favorites"],
+        getFavorites: builder.query<TFavoritesAllRes, TFavoritesAllReq>({
+            query: (params) => ({ url: `/favorite`, credentials: "include", params }),
+            providesTags: ["Favorites"],
         }),
 
         removeOneFavorite: builder.mutation<ServerMessageResponse, TFavoritesRemoveReq>({
@@ -128,16 +129,16 @@ const filmApi = api.injectEndpoints({
                     toast.success(getRemoveToastMsg({ id, filmTitle, listVariant: field }), {
                         id: String(id),
                     });
-                    dispatch(filmApi.util.invalidateTags(["Favorites"]));
-                    dispatch(favoritePageActions.removeFilm(id));
+                    dispatch(filmActions.removeFilm(id));
                 } catch (e) {
                     // error middleware
                 }
             },
+            invalidatesTags: ["Favorites"],
         }),
         getStatsTotal: builder.query<TFavoritesTotal, void>({
             query: () => ({
-                url: "/favorite/sync",
+                url: "/favorite/stats/total",
                 credentials: "include",
             }),
             providesTags: () => ["Favorites"],
@@ -145,7 +146,7 @@ const filmApi = api.injectEndpoints({
 
         getStats: builder.query<TStatistics[], void>({
             query: () => ({
-                url: "/favorite/statistics",
+                url: "/favorite/stats",
                 credentials: "include",
             }),
             providesTags: () => ["Favorites"],
@@ -164,7 +165,7 @@ export const {
     useTopQuery,
     useSearchQuery,
     useFiltersQuery,
-    useGetAllQuery,
+    useGetFavoritesQuery,
     useGetStatsQuery,
     useGetStatsTotalQuery,
     useRemoveOneFavoriteMutation,

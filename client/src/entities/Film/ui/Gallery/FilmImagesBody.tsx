@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { ImagePreview } from "@/widgets/ImagePreview";
-import formatFilmError from "@/shared/api/helpers/formatFilmError";
+import formatServerError from "@/shared/api/helpers/formatServerError";
 import { ID_VIEW_SWITCHER } from "@/shared/const/const";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
 import { Pagination } from "@/shared/ui/Pagination/Pagination";
@@ -32,7 +32,7 @@ export const FilmImagesBody = (props: FilmImagesBodyProps) => {
     if (isError)
         return (
             <div className="flex items-center flex-col gap-2">
-                <StatusBox isError={isError} msgOrChildren={formatFilmError(error)} withoutBox />
+                <StatusBox isError={isError} msgOrChildren={formatServerError(error)} withoutBox />
             </div>
         );
 

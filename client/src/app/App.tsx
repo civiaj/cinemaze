@@ -1,6 +1,5 @@
 import { AppRouter } from "@/app/router/AppRouter";
 import { useAppSelector } from "@/app/store";
-import { CleanInfinite } from "@/processes/CleanInfinite/CleanInfinite";
 import { LoginPopup } from "@/widgets/LoginPopup";
 import { Navbar } from "@/widgets/Navbar";
 import { ProgressBar } from "@/widgets/ProgressBar";
@@ -26,16 +25,14 @@ function App() {
                 id={ID_MAIN}
             >
                 <Navbar />
-
                 <div className="relative">
                     <ProgressBar />
                     <Sidebar />
                     <SidebarMobile />
                 </div>
-
                 <AppRouter />
-                <CleanInfinite />
                 <MobileObserver />
+
                 {!isLogged && <LoginPopup />}
             </div>
         </>

@@ -1,11 +1,19 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { FilmsList } from "@/features/FilmsList";
-import { useFiltersQuery, useSearchQuery, TSearchRes } from "@/entities/Film";
+import {
+    useFiltersQuery,
+    useSearchQuery,
+    TSearchRes,
+    getPage,
+    getSearchQuery,
+    getFilms,
+    filmActions,
+} from "@/entities/Film";
 import { Page } from "@/entities/Ui";
-import formatFilmError from "@/shared/api/helpers/formatFilmError";
+import formatServerError from "@/shared/api/helpers/formatServerError";
 import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "@/shared/const/const";
 import { useInfiniteScroll } from "@/shared/hooks/useInfiniteScroll";
 import { Box } from "@/shared/ui/Boxes/Box";
@@ -15,8 +23,6 @@ import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
 import { checkSearchParams } from "../model/helpers";
-import { getSearchOrder, getSearchPage, getSearchPageInfiniteFilms } from "../model/selectors";
-import { searchPageActions } from "../model/slice";
 import { SearchExtendedSmall } from "../ui/SearchExtendedSmall";
 import { SearchPageHeader } from "../ui/SearchPageHeader";
 import { SearchExtended } from "./SearchExtended";
@@ -31,11 +37,10 @@ const tileStyles =
 export const SearchPageBody = () => {
     const [searchParams] = useSearchParams();
     const dispatch = useAppDispatch();
-    const page = useAppSelector(getSearchPage);
-    const order = useAppSelector(getSearchOrder);
-    const infiniteFilms = useAppSelector(getSearchPageInfiniteFilms);
+    const page = useAppSelector(getPage);
+    const order = useAppSelector(getSearchQuery);
+    const infiniteFilms = useAppSelector(getFilms);
     const filters = useFiltersQuery();
-    const { search } = useLocation();
 
     const country = useMemo(
         () =>
@@ -84,6 +89,7 @@ export const SearchPageBody = () => {
             }),
         [searchParams, yearFrom]
     )!;
+
     const keyword = searchParams.get("keyword") ?? "";
     const query = { keyword, yearTo, yearFrom, ratingTo, country, ratingFrom, genre };
     const skip = searchParams.size === 0;
@@ -91,35 +97,31 @@ export const SearchPageBody = () => {
     const { isEnd, isError, isFetching, isLoading, onScrollEnd, data, error } = useInfiniteScroll({
         queryHook: useSearchQuery,
         queryParams: { page, order, ...query },
-        setPage: (newPage: number) => dispatch(searchPageActions.setPage(newPage)),
+        setPage: (newPage: number) => dispatch(filmActions.setPage(newPage)),
         queryHookSettings: { skip },
-        setFilms: (films) => dispatch(searchPageActions.setSearchFilms(films)),
+        setFilms: (films) => dispatch(filmActions.setFilm(films)),
     });
 
     const films = infiniteFilms ?? [];
-    const showEnd = !skip && !isLoading && !isFetching && isEnd && !!films.length;
+    const showEnd = !skip && !isLoading && !isFetching && isEnd && !!films.length && !isError;
     const showHeader = !!infiniteFilms.length || isLoading || isFetching;
     const disabled = isLoading || isFetching;
     const { total } = (data as TSearchRes) ?? {};
     const { t } = useTranslation();
-
-    useEffect(() => {
-        dispatch(searchPageActions.cleanInfiniteFilms());
-    }, [search, dispatch]);
 
     if (!infiniteFilms.length && (isError || filters.isError))
         return (
             <PageLikeBox>
                 <StatusBox
                     isError={isError || filters.isError}
-                    msgOrChildren={formatFilmError(error ?? filters.error)}
+                    msgOrChildren={formatServerError(error ?? filters.error)}
                     reload
                 />
             </PageLikeBox>
         );
 
     return (
-        <Page onScrollEnd={onScrollEnd}>
+        <Page onScrollEnd={onScrollEnd} isError={isError}>
             <Box>
                 <div className="gap-4 flex items-center justify-between flex-wrap">
                     <Heading className="max-w-[100%]" headinglevel={1}>
@@ -135,7 +137,6 @@ export const SearchPageBody = () => {
                 </div>
                 {filters.data && (
                     <SearchExtendedSmall
-                        key={search}
                         disabled={disabled}
                         data={filters.data}
                         prevQuery={query}
@@ -172,7 +173,6 @@ export const SearchPageBody = () => {
                     <Box className="lg:sticky hidden !gap-4 top-[72px] lg:flex">
                         <Heading headinglevel={3}>{t("search.extended")}</Heading>
                         <SearchExtended
-                            key={search}
                             disabled={disabled}
                             data={filters.data}
                             prevQuery={query}

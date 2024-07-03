@@ -1,11 +1,6 @@
-import { EntityState } from "@reduxjs/toolkit";
 import { ChangeEvent, KeyboardEvent } from "react";
-import { TFilm, TSearchCategories } from "@/entities/Film";
 
 export interface SearchPageSchema {
-    films: EntityState<TFilm>;
-    page: number;
-    order: TSearchCategories;
     userQueries: string[];
 }
 

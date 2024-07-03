@@ -88,7 +88,6 @@ export const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<HTMLButt
     } = props;
     const activeCls = "text-blue-500";
 
-    // bg-[radial-gradient(circle, rgba(230,80,255,1) 0%, rgba(59,130,246,1) 100%)]
     return (
         <button
             ref={ref}

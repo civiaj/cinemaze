@@ -79,12 +79,16 @@ export const FilmsList = (props: FilmsListPropsT) => {
                     />
                 ))}
             </ul>
-            {!showEnd && (
+            {!showEnd && !isError && (
                 <div className="h-10 flex items-center justify-center">
                     {page > 1 && isFetching && <Spinner />}
                 </div>
             )}
-            {films.length && isError && <Text>{t("error-film-msg")}</Text>}
+            {films.length && isError && (
+                <Box className="text-center">
+                    <Text>{t("error-film-msg")}</Text>
+                </Box>
+            )}
         </>
     );
 };

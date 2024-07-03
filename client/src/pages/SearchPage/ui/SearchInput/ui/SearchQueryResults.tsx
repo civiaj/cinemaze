@@ -3,7 +3,7 @@ import { routePath } from "@/app/router/router";
 import { useAppDispatch } from "@/app/store";
 import { SearchInputFormProps } from "@/pages/SearchPage/model/types";
 import { useSearchQuery } from "@/entities/Film";
-import formatFilmError from "@/shared/api/helpers/formatFilmError";
+import formatServerError from "@/shared/api/helpers/formatServerError";
 import { DEBOUNCE_SEARCH } from "@/shared/const/const";
 import { useDebouncedValue } from "@/shared/hooks/useDebouncedValue";
 import { TLngs } from "@/shared/i18n/types";
@@ -51,7 +51,7 @@ export const SearchQueryResults = (
                 <div className="flex items-center flex-col gap-2">
                     <StatusBox
                         isError={isError}
-                        msgOrChildren={formatFilmError(error)}
+                        msgOrChildren={formatServerError(error)}
                         withoutBox
                     />
                 </div>

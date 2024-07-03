@@ -28,7 +28,7 @@ class FavoriteController {
                 payload: favorite,
                 userId,
             });
-            return res.status(200).json({ message: "Добавлено в избранное" });
+            return res.status(200).json({ message: "Фильм изменен" });
         } catch (e) {
             next(e);
         }
@@ -73,6 +73,14 @@ class FavoriteController {
     async getStatistics(_req: Request, res: Response, next: NextFunction) {
         try {
             const data = await favoriteService.getStats(res.locals.user.id);
+            return res.status(200).json(data);
+        } catch (e) {
+            next(e);
+        }
+    }
+    async getStatisticsTotal(_req: Request, res: Response, next: NextFunction) {
+        try {
+            const data = await favoriteService.getStatsTotal(res.locals.user.id);
             return res.status(200).json(data);
         } catch (e) {
             next(e);

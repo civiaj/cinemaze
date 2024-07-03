@@ -30,7 +30,6 @@ export const UserPhotoModal = ({ image, crop, onCloseModal, isModal }: Props) =>
         const scaleX = image.naturalWidth / image.width;
         const scaleY = image.naturalHeight / image.height;
         const offscreen = new OffscreenCanvas(crop.width * scaleX, crop.height * scaleY);
-        console.log({ offscreen });
         const ctx = offscreen.getContext("2d");
         if (!ctx) {
             throw new Error("No 2d context");

@@ -12,7 +12,7 @@ export const UnauthorizedMessage = () => {
             <StatusBox
                 isError={true}
                 msgOrChildren={t("unauth.default-msg")}
-                onReload={() => navigate(routePath.main, { replace: true })}
+                onReload={() => navigate(routePath.top, { replace: true })}
                 label="btn.main"
             />
         </Page>

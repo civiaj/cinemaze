@@ -39,7 +39,7 @@ export const checkSearchParams = (
             return isCorrect ? number : max;
         }
         default: {
-            return 0;
+            return null;
         }
     }
 };

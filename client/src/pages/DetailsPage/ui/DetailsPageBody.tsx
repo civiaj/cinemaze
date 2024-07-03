@@ -13,7 +13,7 @@ import {
 } from "@/entities/Film";
 import { Breadcrumbs } from "@/entities/Ui";
 import { selectUser } from "@/entities/User";
-import formatFilmError from "@/shared/api/helpers/formatFilmError";
+import formatServerError from "@/shared/api/helpers/formatServerError";
 import { TLngs } from "@/shared/i18n/types";
 import { getFilmTitle } from "@/shared/lib/getFilmTitle";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
@@ -41,13 +41,13 @@ export const DetailsPageBody = () => {
         [addFavorite, data, user, t]
     );
 
-    if (isLoading) return <DetailsPageSkeleton />;
+    if (isLoading || isFetching) return <DetailsPageSkeleton />;
 
     if (favoriteMutation.isError || !data)
         return (
             <StatusBox
                 isError={true}
-                msgOrChildren={formatFilmError(favoriteMutation.error)}
+                msgOrChildren={formatServerError(favoriteMutation.error)}
                 reload
             />
         );

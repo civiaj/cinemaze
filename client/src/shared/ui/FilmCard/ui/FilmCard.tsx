@@ -27,8 +27,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
     const { id, posterUrlPreview, rating, genres, year, countries, filmLengthHours, favorite } =
         film;
 
-    const { hidden, userScore } = favorite ?? {};
-
+    const { userScore } = favorite ?? {};
     const { t, i18n } = useTranslation();
     const filmTitle = getFilmTitle(film, i18n.language as TLngs);
     const handleClick = useCallback(() => onClick?.(), [onClick]);
@@ -43,7 +42,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
               },
           ];
 
-    if (hidden || !appearance) return null;
+    if (!appearance) return null;
 
     if (appearance === "tile")
         return (

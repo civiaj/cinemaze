@@ -4,7 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { FilmsList } from "@/features/FilmsList";
-import { useGetAllQuery, useGetStatsTotalQuery } from "@/entities/Film";
+import {
+    filmActions,
+    getFaviruteQuery,
+    getFilmById,
+    getFilms,
+    getPage,
+    useGetFavoritesQuery,
+    useGetStatsTotalQuery,
+} from "@/entities/Film";
 import { Page } from "@/entities/Ui";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { useInfiniteScroll } from "@/shared/hooks/useInfiniteScroll";
@@ -14,13 +22,6 @@ import { PageLikeBox } from "@/shared/ui/Boxes/PageLikeBox";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
 import { Button } from "@/shared/ui/Button/Button";
 import { Text } from "@/shared/ui/Text/Text";
-import {
-    getFavoritePage,
-    getListVariant,
-    getUserPageInfiniteFilms,
-    getUserPageInfiniteFilmsById,
-} from "../model/selectors";
-import { favoritePageActions } from "../model/slice";
 import { FavoriteRemoveModal } from "../ui/FavoriteRemoveModal";
 import { FavoritePageHeader } from "./FavoritePageHeader";
 
@@ -31,19 +32,18 @@ const cardStyles: TCardStyles = {
 export const FavoritePageBody = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const page = useAppSelector(getFavoritePage);
-    const infiniteFilms = useAppSelector(getUserPageInfiniteFilms);
-    const listVariant = useAppSelector(getListVariant);
+    const page = useAppSelector(getPage);
+    const infiniteFilms = useAppSelector(getFilms);
+    const listVariant = useAppSelector(getFaviruteQuery);
     const [stateFilmId, setStateFilmId] = useState<number | null>(null);
-    const removeFilm = useAppSelector(getUserPageInfiniteFilmsById(stateFilmId));
+    const removeFilm = useAppSelector(getFilmById(stateFilmId));
     const { t } = useTranslation();
 
     const { isEnd, isError, isFetching, isLoading, onScrollEnd, error } = useInfiniteScroll({
-        queryHook: useGetAllQuery,
+        queryHook: useGetFavoritesQuery,
         queryParams: { page, filter: listVariant },
-        queryHookSettings: {},
-        setPage: (newPage: number) => dispatch(favoritePageActions.setPage(newPage)),
-        setFilms: (films) => dispatch(favoritePageActions.setFavoriteFilms(films)),
+        setPage: (newPage: number) => dispatch(filmActions.setPage(newPage)),
+        setFilms: (films) => dispatch(filmActions.setFilm(films)),
     });
 
     const films = infiniteFilms ?? [];
@@ -56,10 +56,9 @@ export const FavoritePageBody = () => {
 
     const onCloseDeleteDialog = useCallback(() => setIsOpen(false), []);
     const stats = useGetStatsTotalQuery();
-    const showEnd = !isLoading && !isFetching && isEnd && !!films.length;
-    const isEmpty = !films.length && !stats.isLoading && !isLoading && !isFetching;
-
-    console.log(films);
+    const showEnd = !isLoading && !isFetching && isEnd && !!films.length && !isError;
+    const isEmpty =
+        !films.length && !stats.isLoading && !isLoading && !isFetching && !stats.data?.all;
 
     if (isEmpty)
         return (
@@ -67,7 +66,7 @@ export const FavoritePageBody = () => {
                 <Box className="items-center text-center">
                     <Text>{t("favorite.empty-msg")}</Text>
 
-                    <Button onClick={() => navigate(routePath.main)} theme="regular">
+                    <Button onClick={() => navigate(routePath.top)} theme="regular">
                         {t("btn.main")}
                     </Button>
                 </Box>
@@ -82,7 +81,7 @@ export const FavoritePageBody = () => {
         );
 
     return (
-        <Page onScrollEnd={onScrollEnd}>
+        <Page onScrollEnd={onScrollEnd} isError={isError}>
             <Box>
                 <FavoritePageHeader listVariant={listVariant} />
             </Box>
@@ -92,6 +91,7 @@ export const FavoritePageBody = () => {
                 cardProps={{ cardStyles }}
                 isLoading={isLoading}
                 isFetching={isFetching}
+                isError={isError}
                 showEnd={showEnd}
                 onFilmCardDelete={onOpenDeleteDialog}
             />

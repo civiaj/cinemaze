@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useGetStatsQuery } from "@/entities/Film";
-import formatFilmError from "@/shared/api/helpers/formatFilmError";
+import formatServerError from "@/shared/api/helpers/formatServerError";
 import { Box } from "@/shared/ui/Boxes/Box";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
 import { Button } from "@/shared/ui/Button/Button";
@@ -20,14 +20,14 @@ export const StatisticsPageBody = () => {
     if (isLoading) return <StatisticsSkeleton />;
 
     if (isError)
-        return <StatusBox msgOrChildren={formatFilmError(error)} isError={isError} reload />;
+        return <StatusBox msgOrChildren={formatServerError(error)} isError={isError} reload />;
 
     if (!data?.some((film) => film.userScore))
         return (
             <Box className="items-center text-center">
                 <Text>{t("stat.empty-msg")}</Text>
 
-                <Button onClick={() => navigate(routePath.main)} theme="regular">
+                <Button onClick={() => navigate(routePath.top)} theme="regular">
                     {t("btn.main")}
                 </Button>
             </Box>

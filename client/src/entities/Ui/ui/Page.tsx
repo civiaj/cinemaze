@@ -14,12 +14,12 @@ interface PageProps {
     className?: string;
     onScrollEnd?: () => void;
     children: ReactNode;
+    isError?: boolean;
 }
 
 export const Page = forwardRef<HTMLDivElement, PageProps>((props, ref) => {
-    const { children, className, onScrollEnd } = props;
+    const { children, className, onScrollEnd, isError } = props;
     const isMobile = useAppSelector(getIsMobile);
-    const rootRef = useRef() as MutableRefObject<HTMLDivElement>;
     const targetRef = useRef() as MutableRefObject<HTMLDivElement>;
     const scrollRestorationRef = useRef(0);
     const { pathname } = useLocation();
@@ -47,7 +47,6 @@ export const Page = forwardRef<HTMLDivElement, PageProps>((props, ref) => {
 
     useInitialEffect(() => {
         window.scrollTo({ top: scrollRestoration });
-        // rootRef.current.scrollTop = scrollRestoration;
         dispatch(uiActions.initializeBreadcrumbs(pathname));
     });
 
@@ -56,14 +55,13 @@ export const Page = forwardRef<HTMLDivElement, PageProps>((props, ref) => {
         return () => document.removeEventListener("scroll", handleScrollRestoration);
     }, [handleScrollRestoration]);
 
-    useIntersectionObserver({ targetRef, onScrollEnd });
+    useIntersectionObserver({ targetRef, onScrollEnd: isError ? undefined : onScrollEnd });
 
     return (
         <>
             <div className="pl-0 appcontainer:pl-[calc(100vw-100%)] w-full h-full">
                 <div className="max-w-6xl w-full flex-1 mx-auto relative h-full" ref={ref}>
                     <main
-                        ref={rootRef}
                         className={classNames(
                             "py-4 px-2 flex flex-col gap-4 h-full min-w-[300px]",
                             { ["pb-16"]: isMobile },

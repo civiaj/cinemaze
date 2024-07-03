@@ -1,14 +1,13 @@
 import { memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "@/app/store";
-import { TFavoritesListVariants, useGetStatsTotalQuery } from "@/entities/Film";
+import { TFavoritesListVariants, filmActions, useGetStatsTotalQuery } from "@/entities/Film";
 import { AppSelect } from "@/shared/ui/AppSelect/AppSelect";
 import { ControllsBox } from "@/shared/ui/Boxes/ControllsBox";
 import { HeaderWithControlls } from "@/shared/ui/Boxes/HeaderWithControlls";
 import { Button } from "@/shared/ui/Button/Button";
 import { Heading } from "@/shared/ui/Text/Heading";
 import { listVariants } from "../model/data";
-import { favoritePageActions } from "../model/slice";
 
 type Props = {
     listVariant: TFavoritesListVariants;
@@ -38,7 +37,7 @@ export const FavoritePageHeader = memo(({ listVariant }: Props) => {
 
     const onListVariantChange = (newVariant: string) => {
         if (listVariant === newVariant) return;
-        dispatch(favoritePageActions.setFavoriteList(newVariant as TFavoritesListVariants));
+        dispatch(filmActions.setFavoriteQuery(newVariant as TFavoritesListVariants));
     };
 
     return (

@@ -8,6 +8,7 @@ import {
 } from "../schema/external-films.schema";
 import externalFilmsService from "../service/external-films.service";
 import favoriteService from "../service/favorite.service";
+import { Film } from "../types/types";
 
 class ExternalFilmsController {
     async getTop(
@@ -21,13 +22,18 @@ class ExternalFilmsController {
             if (id) {
                 const ids = data.films.map((film) => film.id);
                 const favorites = await favoriteService.hydrateByIds(id, ids);
-                data.films = data.films.map((film) => {
-                    const { id } = film;
-                    const candidate = favorites.find(({ filmId }) => filmId === id);
-                    if (!candidate) return film;
-                    const { filmId, ...favorite } = candidate;
-                    return { ...film, favorite };
-                });
+                const favoritesMap = new Map(favorites.map((film) => [film.filmId, film]));
+
+                data.films = data.films
+                    .map((film) => {
+                        const favorite = favoritesMap.get(film.id);
+                        if (favorite) {
+                            if (favorite.hidden) return null;
+                            return { ...film, favorite };
+                        }
+                        return film;
+                    })
+                    .filter((film): film is Film => film !== null);
             }
             return res.json(data);
         } catch (e) {
@@ -88,7 +94,7 @@ class ExternalFilmsController {
             next(e);
         }
     }
-    async getFilters(req: Request<getExternalDataByIdInput>, res: Response, next: NextFunction) {
+    async getFilters(_req: Request<getExternalDataByIdInput>, res: Response, next: NextFunction) {
         try {
             const data = await externalFilmsService.filters();
             return res.json(data);

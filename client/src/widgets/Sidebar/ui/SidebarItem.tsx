@@ -13,6 +13,7 @@ export const SidebarItem = memo((props: Props) => {
     return (
         <li className={classNames("", { ["w-full"]: isMobile })}>
             <NavLink
+                onClick={() => window.scrollTo(0, 0)}
                 className={({ isActive }) =>
                     classNames(
                         "flex items-center justify-start gap-3 px-4 h-10 text-lg rounded-xl hover:bg-my-neutral-200",

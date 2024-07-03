@@ -44,14 +44,18 @@ export const StatusBox = (props: Props) => {
         <>
             {isSuccess ? (
                 <div className="rounded-full bg-my-green-500 p-2 text-neutral-50">
-                    <Checked className="text-3xl" />
+                    <Checked className="text-xl" />
                 </div>
             ) : (
                 <div className="rounded-full bg-my-red-500 p-2 text-neutral-50">
-                    <Close className="text-3xl" />
+                    <Close className="text-xl" />
                 </div>
             )}
-            {typeof msgOrChildren === "string" ? <Text>{msgOrChildren}</Text> : msgOrChildren}
+            {typeof msgOrChildren === "string" ? (
+                <Text className="text-center">{msgOrChildren}</Text>
+            ) : (
+                msgOrChildren
+            )}
 
             {to && (
                 <AppLink theme="button" to={to}>

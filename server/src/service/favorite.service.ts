@@ -7,7 +7,7 @@ import {
     RemoveFavoriteOneInput,
 } from "../schema/favorite.schema";
 import makeSet from "../utils/makeSet";
-import { FavoriteEntity } from "../types/types";
+import { FavoriteEntity, FavoritesTotal, Film } from "../types/types";
 
 const pageSize = 20;
 const sortBy = "favorites.updatedAt";
@@ -71,142 +71,107 @@ class FavoriteService {
                 break;
             }
         }
-        const result = await favoriteModel.aggregate([
+        const result: { films: Film[]; total: { count: number }[] }[] =
+            await favoriteModel.aggregate([
+                {
+                    $match: {
+                        user: mongoose.Types.ObjectId.createFromHexString(String(userId)),
+                    },
+                },
+                { $unwind: "$favorites" },
+                match,
+                { $sort: { [sortBy]: order } },
+                {
+                    $facet: {
+                        films: [
+                            {
+                                $lookup: {
+                                    from: "films",
+                                    localField: "favorites.film",
+                                    foreignField: "_id",
+                                    as: "film",
+                                },
+                            },
+                            { $unwind: "$film" },
+                            {
+                                $project: {
+                                    _id: 0,
+                                    id: "$film.id",
+                                    countries: "$film.countries",
+                                    filmLengthHours: "$film.filmLengthHours",
+                                    filmLengthMins: "$film.filmLengthMins",
+                                    genres: "$film.genres",
+                                    nameEn: "$film.nameEn",
+                                    nameOriginal: "$film.nameOriginal",
+                                    nameRu: "$film.nameRu",
+                                    posterUrlPreview: "$film.posterUrlPreview",
+                                    rating: "$film.rating",
+                                    year: "$film.year",
+                                    favorite: {
+                                        userScore: "$favorites.userScore",
+                                        bookmarked: "$favorites.bookmarked",
+                                        hidden: "$favorites.hidden",
+                                    },
+                                },
+                            },
+                            { $skip: skip },
+                            { $limit: pageSize },
+                        ],
+                        total: [
+                            {
+                                $group: {
+                                    _id: null,
+                                    count: { $sum: 1 },
+                                },
+                            },
+                        ],
+                    },
+                },
+            ]);
+        const { films, total } = result[0];
+        return { films, totalPages: Math.ceil(total[0].count / pageSize) };
+    }
+
+    async getStatsTotal(userId: number): Promise<FavoritesTotal> {
+        const result: { favorites: FavoriteEntity }[] = await favoriteModel.aggregate([
+            { $match: { user: mongoose.Types.ObjectId.createFromHexString(String(userId)) } },
+            { $unwind: "$favorites" },
             {
-                $facet: {
-                    data: [
-                        {
-                            $match: {
-                                user: mongoose.Types.ObjectId.createFromHexString(String(userId)),
-                            },
-                        },
-                        { $unwind: "$favorites" },
-                        match,
-                        {
-                            $lookup: {
-                                from: "films",
-                                localField: "favorites.film",
-                                foreignField: "_id",
-                                as: "favorites.film",
-                            },
-                        },
-                        {
-                            $project: {
-                                _id: 0,
-                                user: 0,
-                                "favorites._id": 0,
-                                "favorites.film._id": 0,
-                                "favorites.film.countries._id": 0,
-                                "favorites.film.genres._id": 0,
-                                "favorites.bookmarked": 0,
-                                "favorites.hidden": 0,
-                                "favorites.createdAt": 0,
-                                "favorites.updatedAt": 0,
-                            },
-                        },
-                        { $sort: { [sortBy]: order } },
-                        { $skip: skip },
-                        { $limit: pageSize },
-                    ],
-                    total: [
-                        {
-                            $match: {
-                                user: mongoose.Types.ObjectId.createFromHexString(String(userId)),
-                            },
-                        },
-                        {
-                            $unwind: "$favorites",
-                        },
-                        match,
-                        {
-                            $group: {
-                                _id: null,
-                                count: { $sum: 1 },
-                            },
-                        },
-                    ],
+                $project: {
+                    _id: 0,
+                    "favorites.bookmarked": 1,
+                    "favorites.userScore": 1,
+                    "favorites.hidden": 1,
                 },
             },
         ]);
 
-        const totalPages = Math.ceil(result[0]?.total[0]?.count / pageSize) || 0;
-        const films = result[0]?.data?.map(
-            (item: {
-                favorites: {
-                    film: Favorite[];
-                    userScore: FavoriteItem["userScore"];
-                    filmId: FavoriteItem["filmId"];
-                };
-            }) => {
-                const { favorites } = item;
-                const { film, userScore } = favorites;
-                return { ...film[0], favorite: { userScore } };
-            }
-        );
-        return { films, totalPages };
+        const initial: FavoritesTotal = {
+            all: 0,
+            userScore: 0,
+            bookmarked: 0,
+            hidden: 0,
+        };
+
+        const data = result.reduce((acc, curr, _index, arr): FavoritesTotal => {
+            if (!acc.all) acc.all = arr.length;
+            const { favorites } = curr;
+            const { userScore, bookmarked, hidden } = favorites;
+            const entities: [key: keyof FavoritesTotal, value: number | null | boolean][] = [
+                ["userScore", userScore],
+                ["bookmarked", bookmarked],
+                ["hidden", hidden],
+            ];
+            entities.forEach(([key, value]) => {
+                if (value) {
+                    acc[key] += 1;
+                }
+            });
+            return acc;
+        }, initial);
+
+        return data;
     }
-
-    async getStatsTotal() {}
-
-    // async getFavoriteSyncData(userId: number) {
-    //     const result = await favoriteModel.aggregate([
-    //         { $match: { user: mongoose.Types.ObjectId.createFromHexString(String(userId)) } },
-    //         { $unwind: "$favorites" },
-    //         {
-    //             $lookup: {
-    //                 from: "films",
-    //                 localField: "favorites.film",
-    //                 foreignField: "_id",
-    //                 as: "favorites.film",
-
-    //                 pipeline: [
-    //                     {
-    //                         $project: {
-    //                             _id: 0,
-    //                             id: "$id",
-    //                         },
-    //                     },
-    //                 ],
-    //             },
-    //         },
-    //         {
-    //             $project: {
-    //                 _id: 0,
-    //                 user: 0,
-    //                 "favorites._id": 0,
-    //                 "favorites.createdAt": 0,
-    //                 "favorites.updatedAt": 0,
-    //             },
-    //         },
-    //     ]);
-
-    //     return result.reduce(
-    //         (
-    //             acc: {
-    //                 films: FavoriteItem[];
-    //                 bookmarked: number;
-    //                 userScore: number;
-    //                 hidden: number;
-    //                 all: number;
-    //             },
-    //             item,
-    //             index,
-    //             arr
-    //         ) => {
-    //             if (!acc.all) acc.all = arr.length;
-    //             const { favorites } = item;
-    //             const { film, ...otherFields } = favorites;
-    //             const newItem = { ...film[0], ...otherFields };
-    //             acc.films[index] = newItem;
-    //             const { userScore, bookmarked, hidden } = otherFields;
-    //             acc.userScore = userScore ? acc.userScore + 1 : acc.userScore;
-    //             acc.bookmarked = bookmarked ? acc.bookmarked + 1 : acc.bookmarked;
-    //             acc.hidden = hidden ? acc.hidden + 1 : acc.hidden;
-    //             return acc;
-    //         },
-    //         { hidden: 0, userScore: 0, bookmarked: 0, films: [] }
-    //     );
-    // }
 
     async removeField({
         field,
@@ -274,33 +239,20 @@ class FavoriteService {
         userId: number,
         ids: number[]
     ): Promise<Pick<FavoriteItem, "bookmarked" | "userScore" | "filmId" | "hidden">[]> {
-        const result = await favoriteModel.aggregate([
+        const data = await favoriteModel.aggregate([
             { $match: { user: mongoose.Types.ObjectId.createFromHexString(String(userId)) } },
             { $unwind: "$favorites" },
             { $match: { "favorites.filmId": { $in: ids } } },
+            { $replaceRoot: { newRoot: "$favorites" } },
             {
                 $project: {
                     _id: 0,
-                    user: 0,
-                    "favorites._id": 0,
-                    "favorites.createdAt": 0,
-                    "favorites.updatedAt": 0,
+                    createdAt: 0,
+                    updatedAt: 0,
+                    film: 0,
                 },
             },
         ]);
-
-        const data = result?.map(
-            (item: {
-                favorites: Pick<
-                    FavoriteItem,
-                    "bookmarked" | "userScore" | "filmId" | "hidden" | "film"
-                >;
-            }) => {
-                const { favorites } = item;
-                const { film, ...other } = favorites;
-                return other;
-            }
-        );
 
         return data;
     }
@@ -340,8 +292,6 @@ class FavoriteService {
             { user: userId, "favorites.film": filmDocumentId },
             { $set: makeSet(payload) }
         );
-
-        console.log({ payload, updateResult });
         const favorite = await this.getFavorite(userId, filmDocumentId);
         if (!favorite) return ApiError.MongooseError();
 
