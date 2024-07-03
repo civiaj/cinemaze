@@ -51,7 +51,7 @@ export const FilmCard = memo((props: FilmCardPropsT) => {
                     cardStyles?.card,
                 ])}
             >
-                <AppImage src={posterUrlPreview!} alt={`${filmTitle} poster`} />
+                <AppImage loading="eager" src={posterUrlPreview!} alt={`${filmTitle} poster`} />
                 <AppLink
                     to={`${routePath.details}/${id}`}
                     theme="card"

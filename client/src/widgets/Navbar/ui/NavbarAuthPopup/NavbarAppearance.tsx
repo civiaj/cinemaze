@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "@/app/store";
+import { filmActions } from "@/entities/Film";
 import { TAppearances, TAppearancesRecord, getUiAppearance, uiActions } from "@/entities/Ui";
 import { Checked } from "@/shared/assets/icons";
 import { Button } from "@/shared/ui/Button/Button";
@@ -13,6 +14,12 @@ export const NavbarAppearance = () => {
     const dispatch = useAppDispatch();
     const { t } = useTranslation();
 
+    const onAppearanceChange = (newValue: TAppearances) => {
+        window.scrollTo({ top: 0 });
+        dispatch(filmActions.clean());
+        dispatch(uiActions.setAppearance(newValue));
+    };
+
     return (
         <ul className="flex flex-col py-2">
             {Object.keys(appearances).map((appearanceKey) => {
@@ -20,7 +27,7 @@ export const NavbarAppearance = () => {
                 return (
                     <li key={appearanceKey}>
                         <Button
-                            onClick={() => dispatch(uiActions.setAppearance(item.value))}
+                            onClick={() => onAppearanceChange(item.value)}
                             theme="popup"
                             className="gap-4 py-2 text-base w-full justify-start"
                         >

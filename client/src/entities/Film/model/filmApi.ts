@@ -94,7 +94,7 @@ export const filmApi = api.injectEndpoints({
                         },
                     });
                     const { bookmarked, hidden, userScore } = favorite ?? {};
-                    if ([bookmarked, hidden, userScore].every((v) => !v)) {
+                    if ([bookmarked, userScore].every((v) => !v) || hidden) {
                         dispatch(filmActions.removeFilm(id));
                     } else {
                         dispatch(filmActions.updateFilm({ id, changes: { favorite } }));
