@@ -15,16 +15,21 @@ export default (err: unknown, _req: Request, res: Response, _next: NextFunction)
             errors: err.errors.map((error) => error.message),
         });
     if (axios.isAxiosError(err)) {
+        // Do not propagate 401 to clients from external apis.
+        let status = err?.response?.status;
+        if (!status) status = err.status;
+        if (!status || status === 401) status = 502;
+
         if (err.response && err.response.data.message) {
-            return res.status(err.response.status).json({
+            return res.status(status).json({
                 message: err.response.data.message,
             });
         } else if (err.request) {
-            return res.status(err.status ?? 400).json({
+            return res.status(status).json({
                 message: err.request,
             });
         } else {
-            return res.status(err.status ?? 400).json({
+            return res.status(status).json({
                 message: err.message,
             });
         }
