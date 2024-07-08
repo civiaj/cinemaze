@@ -35,10 +35,10 @@ services:
 
     nginx-react:
         # build: "./client"
-        image: ghcr.io/civiaj/nginx-client:latest
-        container_name: nginx-react
         # env_file:
         #     - client/.env.production.local
+        image: ghcr.io/civiaj/nginx-client:latest
+        container_name: nginx-react
         ports:
             - "80:80"
             - "443:443"
