@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { routePath } from "@/app/router/router";
-import { Page } from "@/entities/Ui";
+import { Page } from "@/features/Page";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
 
 export const EmailVerificationPage = () => {

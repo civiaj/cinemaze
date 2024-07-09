@@ -27,37 +27,72 @@ export const UserPhotoModal = ({ image, crop, onCloseModal, isModal }: Props) =>
 
     const onSave = async () => {
         if (!image || !canvasRef.current || !crop) return;
-        const scaleX = image.naturalWidth / image.width;
-        const scaleY = image.naturalHeight / image.height;
-        const offscreen = new OffscreenCanvas(crop.width * scaleX, crop.height * scaleY);
-        const ctx = offscreen.getContext("2d");
+        const canvas = document.createElement("canvas");
+        canvas.width = crop.width;
+        canvas.height = crop.height;
+        const ctx = canvas.getContext("2d");
         if (!ctx) {
             throw new Error("No 2d context");
         }
 
         ctx.drawImage(
-            canvasRef.current,
+            image,
+            crop.x,
+            crop.y,
+            crop.width,
+            crop.height,
             0,
             0,
-            canvasRef.current.width,
-            canvasRef.current.height,
-            0,
-            0,
-            offscreen.width,
-            offscreen.height
+            canvas.width,
+            canvas.height
         );
 
-        const blob = await offscreen.convertToBlob({
-            type: "image/jpeg",
-            quality: 0.9,
-        });
+        canvas.toBlob(
+            async (blob) => {
+                if (!blob) {
+                    throw new Error("Failed to convert canvas to blob");
+                }
+                const formData = new FormData();
+                formData.append("image", blob);
+                updatePhoto(formData)
+                    .unwrap()
+                    .then(() => navigate(routePath.user));
+            },
+            "image/jpeg",
+            0.9
+        );
+        // if (!image || !canvasRef.current || !crop) return;
+        // const scaleX = image.naturalWidth / image.width;
+        // const scaleY = image.naturalHeight / image.height;
+        // const offscreen = new OffscreenCanvas(crop.width * scaleX, crop.height * scaleY);
+        // const ctx = offscreen.getContext("2d");
+        // if (!ctx) {
+        //     throw new Error("No 2d context");
+        // }
 
-        const formData = new FormData();
-        formData.append("image", blob);
+        // ctx.drawImage(
+        //     canvasRef.current,
+        //     0,
+        //     0,
+        //     canvasRef.current.width,
+        //     canvasRef.current.height,
+        //     0,
+        //     0,
+        //     offscreen.width,
+        //     offscreen.height
+        // );
 
-        updatePhoto(formData)
-            .unwrap()
-            .then(() => navigate(routePath.user));
+        // const blob = await offscreen.convertToBlob({
+        //     type: "image/jpeg",
+        //     quality: 0.9,
+        // });
+
+        // const formData = new FormData();
+        // formData.append("image", blob);
+
+        // updatePhoto(formData)
+        //     .unwrap()
+        //     .then(() => navigate(routePath.user));
     };
 
     useEffect(() => {
@@ -73,8 +108,14 @@ export const UserPhotoModal = ({ image, crop, onCloseModal, isModal }: Props) =>
     return (
         <Modal.Dialog onCloseDialog={onCloseModal} transitionValue={isModal}>
             <Modal.Header onClose={onCloseModal} header={t("user.photo-preview")} />
+
             <Modal.Body>
-                <canvas className="w-[250px] h-[250px] rounded-xl self-center" ref={canvasRef} />
+                <div className="flex items-center justify-center">
+                    <canvas
+                        className="w-[250px] h-[250px] rounded-xl self-center"
+                        ref={canvasRef}
+                    />
+                </div>
                 <GridMsg
                     isError
                     isOpen={isError || Boolean(canvasError)}

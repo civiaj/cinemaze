@@ -1,4 +1,4 @@
-import { Page } from "@/entities/Ui";
+import { Page } from "@/features/Page";
 import { ManageList } from "../ui/ManageList";
 
 const ManagePage = () => {

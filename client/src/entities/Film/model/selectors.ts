@@ -1,3 +1,4 @@
+import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "@/app/store";
 import { adapter } from "./slice";
 
@@ -12,3 +13,6 @@ export const getFilmById = (id: number | null) => (state: RootState) => {
     if (id == null) return null;
     return adapterSelectors.selectById(state, id);
 };
+export const getHasFilms = createSelector([getFilms], (films) => {
+    return films.length > 0;
+});

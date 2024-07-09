@@ -4,7 +4,7 @@ import { routePath } from "@/app/router/router";
 import { PrivacyItem } from "@/pages/PrivacyAndTosPage/model/types";
 import { PrivacyPolicy } from "@/pages/PrivacyAndTosPage/ui/PrivacyPolicy";
 import { TOS } from "@/pages/PrivacyAndTosPage/ui/TOS";
-import { Page } from "@/entities/Ui";
+import { Page } from "@/features/Page";
 import { classNames } from "@/shared/lib/classNames";
 import { AppLink } from "@/shared/ui/AppLink/AppLink";
 import { Box } from "@/shared/ui/Boxes/Box";

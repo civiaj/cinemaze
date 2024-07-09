@@ -1,4 +1,3 @@
-import { FetchErrorWithToast } from "@/app/store/types";
 import { authAndUserSliceActions } from "@/features/LoadingAuthorizationAndUser";
 import { userActions, userApi } from "@/entities/User";
 import { api } from "@/shared/api/api";
@@ -45,10 +44,6 @@ const authApi = api.injectEndpoints({
                     // errorMiddleware
                     dispatch(authAndUserSliceActions.endLoading());
                 }
-            },
-            transformErrorResponse: (error: FetchErrorWithToast) => {
-                error.toast = true;
-                return error;
             },
         }),
         logout: builder.mutation<void, void>({

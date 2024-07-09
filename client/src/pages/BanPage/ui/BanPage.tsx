@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppSelector } from "@/app/store";
-import { Page } from "@/entities/Ui";
+import { Page } from "@/features/Page";
 import { selectUser } from "@/entities/User";
 import { formatDate } from "@/shared/lib/formatDate";
 import { AppLink } from "@/shared/ui/AppLink/AppLink";

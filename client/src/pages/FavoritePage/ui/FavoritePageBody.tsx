@@ -13,7 +13,7 @@ import {
     useGetFavoritesQuery,
     useGetStatsTotalQuery,
 } from "@/entities/Film";
-import { Page } from "@/entities/Ui";
+import { Page } from "@/features/Page";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { useInfiniteScroll } from "@/shared/hooks/useInfiniteScroll";
 import { Box } from "@/shared/ui/Boxes/Box";

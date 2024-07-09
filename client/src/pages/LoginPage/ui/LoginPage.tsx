@@ -3,7 +3,7 @@ import { Navigate, useSearchParams } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppSelector } from "@/app/store";
 import { getAuthAndUserIsLoading } from "@/features/LoadingAuthorizationAndUser";
-import { Page } from "@/entities/Ui";
+import { Page } from "@/features/Page";
 import { selectUser } from "@/entities/User";
 import { LoginSections } from "../model/types";
 import { ForgotForm } from "../ui/ForgotForm";
@@ -33,7 +33,7 @@ const LoginPage = () => {
     if (user) return <Navigate to={routePath.favorite} replace />;
 
     return (
-        <Page className="h-[100dvh] items-center justify-center">
+        <Page className="min-h-[100dvh] items-center justify-center">
             {isLogin && <LoginForm onSectionChange={onSectionChange} isLoading={isLoading} />}
             {isRegistrate && (
                 <RegistrateForm onSectionChange={onSectionChange} isLoading={isLoading} />

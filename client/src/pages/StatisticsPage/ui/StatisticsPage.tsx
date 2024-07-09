@@ -1,4 +1,4 @@
-import { Page } from "@/entities/Ui";
+import { Page } from "@/features/Page";
 import { StatisticsPageBody } from "./StatisticsPageBody";
 
 const StatisticsPage = () => {

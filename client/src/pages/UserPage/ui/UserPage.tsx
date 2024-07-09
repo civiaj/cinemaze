@@ -2,7 +2,7 @@ import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppSelector } from "@/app/store";
 import { UserSectionDelete } from "@/pages/UserPage/ui/UserSectionDelete";
-import { Page } from "@/entities/Ui";
+import { Page } from "@/features/Page";
 import { selectUser } from "@/entities/User";
 import { TUserSection } from "../model/types";
 import { UserSectionDevices } from "../ui/UserSectionDevices";

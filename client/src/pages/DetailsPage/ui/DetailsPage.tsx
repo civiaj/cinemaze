@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Page } from "@/entities/Ui";
+import { Page } from "@/features/Page";
 import { DetailsPageBody } from "./DetailsPageBody";
 
 const DetailsPage = () => {

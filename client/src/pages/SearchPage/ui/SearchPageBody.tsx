@@ -12,7 +12,7 @@ import {
     getFilms,
     filmActions,
 } from "@/entities/Film";
-import { Page } from "@/entities/Ui";
+import { Page } from "@/features/Page";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "@/shared/const/const";
 import { useInfiniteScroll } from "@/shared/hooks/useInfiniteScroll";

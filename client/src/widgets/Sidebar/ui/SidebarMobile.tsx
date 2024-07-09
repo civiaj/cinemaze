@@ -11,7 +11,7 @@ export const SidebarMobile = () => {
     if (pathname.includes(routePath.login)) return null;
 
     return (
-        <div className="fixed sm:hidden bottom-0 left-0 w-full bg-my-neutral-50 backdrop-blur-sm h-12 border-t border-border z-[100]">
+        <div className="fixed sm:hidden bottom-0 left-0 w-full bg-my-neutral-50 backdrop-blur-sm h-12 border-t border-border z-[40]">
             <ul className="flex w-full h-full">
                 {sidebarItems.map((sidebarItem) => (
                     <SidebarItem {...sidebarItem} key={sidebarItem.label} isMobile />

@@ -26,13 +26,14 @@ export const Navbar = () => {
     }, []);
 
     useEffect(() => {
-        if (!navRef.current || !allowScroll || isActive) return;
-        const max = navRef.current.scrollHeight;
-
         let translate = 0;
         let prev = window.scrollY;
 
         const handleScroll = () => {
+            console.log(navRef.current, !allowScroll, isActive);
+            if (!navRef.current || !allowScroll || isActive) return;
+            const max = navRef.current.scrollHeight;
+
             if (wasClicked) return setWasClicked(false);
 
             const scrollY = window.scrollY;
