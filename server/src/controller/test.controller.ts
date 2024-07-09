@@ -68,6 +68,7 @@ class TestController {
                     verified: Math.random() > 0.5 ? false : true,
                     banMessage: "TEST USER BAN MESSAGE",
                     banExpiration: new Date(new Date().setDate(new Date().getDate() + 65)),
+                    photo: "test",
                 };
             }
             const data = await userModel.insertMany(users);
@@ -94,6 +95,7 @@ class TestController {
                     verified: Math.random() > 0.5 ? false : true,
                     banMessage: "TEST USER BAN MESSAGE",
                     banExpiration: new Date(new Date().setDate(new Date().getDate() + 65)),
+                    photo: "test",
                 };
                 users[i] = newUser;
             }

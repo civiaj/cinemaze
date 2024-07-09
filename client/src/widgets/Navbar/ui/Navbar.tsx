@@ -30,7 +30,6 @@ export const Navbar = () => {
         let prev = window.scrollY;
 
         const handleScroll = () => {
-            console.log(navRef.current, !allowScroll, isActive);
             if (!navRef.current || !allowScroll || isActive) return;
             const max = navRef.current.scrollHeight;
 
