@@ -27,7 +27,10 @@ export const UserPhotoModal = ({ image, crop, onCloseModal, isModal }: Props) =>
 
     const onSave = async () => {
         if (!image || !canvasRef.current || !crop) return;
-        if (typeof OffscreenCanvas !== "undefined") {
+        if (
+            typeof OffscreenCanvas !== "undefined" &&
+            typeof OffscreenCanvas.prototype.convertToBlob === "function"
+        ) {
             const offscreen = new OffscreenCanvas(crop.width, crop.height);
             const ctx = offscreen.getContext("2d");
             if (!ctx) {
