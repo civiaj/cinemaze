@@ -27,72 +27,69 @@ export const UserPhotoModal = ({ image, crop, onCloseModal, isModal }: Props) =>
 
     const onSave = async () => {
         if (!image || !canvasRef.current || !crop) return;
-        const canvas = document.createElement("canvas");
-        canvas.width = crop.width;
-        canvas.height = crop.height;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) {
-            throw new Error("No 2d context");
+        if (typeof OffscreenCanvas !== "undefined") {
+            const offscreen = new OffscreenCanvas(crop.width, crop.height);
+            const ctx = offscreen.getContext("2d");
+            if (!ctx) {
+                throw new Error("No 2d context");
+            }
+            ctx.drawImage(
+                canvasRef.current,
+                0,
+                0,
+                canvasRef.current.width,
+                canvasRef.current.height,
+                0,
+                0,
+                offscreen.width,
+                offscreen.height
+            );
+
+            const blob = await offscreen.convertToBlob({
+                type: "image/jpeg",
+                quality: 0.9,
+            });
+
+            const formData = new FormData();
+            formData.append("image", blob);
+
+            updatePhoto(formData)
+                .unwrap()
+                .then(() => navigate(routePath.user));
+        } else {
+            const canvas = document.createElement("canvas");
+            canvas.width = crop.width;
+            canvas.height = crop.height;
+            const ctx = canvas.getContext("2d");
+            if (!ctx) {
+                throw new Error("No 2d context");
+            }
+            ctx.drawImage(
+                image,
+                crop.x,
+                crop.y,
+                crop.width,
+                crop.height,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+            canvas.toBlob(
+                async (blob) => {
+                    if (!blob) {
+                        throw new Error("Failed to convert canvas to blob");
+                    }
+                    const formData = new FormData();
+                    formData.append("image", blob);
+                    updatePhoto(formData)
+                        .unwrap()
+                        .then(() => navigate(routePath.user));
+                },
+                "image/jpeg",
+                0.9
+            );
         }
-
-        ctx.drawImage(
-            image,
-            crop.x,
-            crop.y,
-            crop.width,
-            crop.height,
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
-
-        canvas.toBlob(
-            async (blob) => {
-                if (!blob) {
-                    throw new Error("Failed to convert canvas to blob");
-                }
-                const formData = new FormData();
-                formData.append("image", blob);
-                updatePhoto(formData)
-                    .unwrap()
-                    .then(() => navigate(routePath.user));
-            },
-            "image/jpeg",
-            0.9
-        );
-        // if (!image || !canvasRef.current || !crop) return;
-        // const scaleX = image.naturalWidth / image.width;
-        // const scaleY = image.naturalHeight / image.height;
-        // const offscreen = new OffscreenCanvas(crop.width * scaleX, crop.height * scaleY);
-        // const ctx = offscreen.getContext("2d");
-        // if (!ctx) {
-        //     throw new Error("No 2d context");
-        // }
-
-        // ctx.drawImage(
-        //     canvasRef.current,
-        //     0,
-        //     0,
-        //     canvasRef.current.width,
-        //     canvasRef.current.height,
-        //     0,
-        //     0,
-        //     offscreen.width,
-        //     offscreen.height
-        // );
-
-        // const blob = await offscreen.convertToBlob({
-        //     type: "image/jpeg",
-        //     quality: 0.9,
-        // });
-
-        // const formData = new FormData();
-        // formData.append("image", blob);
-
-        // updatePhoto(formData)
-        //     .unwrap()
-        //     .then(() => navigate(routePath.user));
     };
 
     useEffect(() => {
