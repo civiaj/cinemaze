@@ -16,8 +16,6 @@ export const ScrollButton = (props: ScrollButtonProps) => {
     const [isOnTop, setIsOnTop] = useState(false);
     const isMobile = useAppSelector(getIsMobile);
 
-    console.log({ isMobile });
-
     const handleClick = () => {
         if (!isOnTop) {
             scrollTop();
