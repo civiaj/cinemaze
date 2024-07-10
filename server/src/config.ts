@@ -43,3 +43,4 @@ export const STATIC_PROFILE_DEFAULT = API_URL + STATIC_PROFILE_ROUTE + "default-
 export const ADMINS = ["shlenskiyevgeniy@gmail.com", "evgeniyrabotyaga@gmail.com"];
 export const BASE_DOMAIN = process.env.BASE_DOMAIN as string;
 export const KP_UNOFF_KEY = process.env.KP_UNOFF_KEY as string;
+export const REDIS_HOST = NODE_ENV === "development" ? "localhost" : "redis";

@@ -9,6 +9,7 @@ import {
 import externalFilmsService from "../service/external-films.service";
 import favoriteService from "../service/favorite.service";
 import { Film } from "../types/types";
+import { getCacheOrFetch } from "../utils/getCacheOrFetch";
 
 class ExternalFilmsController {
     async getTop(
@@ -17,7 +18,11 @@ class ExternalFilmsController {
         next: NextFunction
     ) {
         try {
-            const data = await externalFilmsService.top(req.query);
+            const data = await getCacheOrFetch(
+                req.url,
+                async () => await externalFilmsService.top(req.query)
+            );
+
             const { id } = res.locals?.user ?? {};
             if (id) {
                 const ids = data.films.map((film) => film.id);
@@ -42,7 +47,11 @@ class ExternalFilmsController {
     }
     async getDetails(req: Request<getExternalDataByIdInput>, res: Response, next: NextFunction) {
         try {
-            const data = await externalFilmsService.details(req.params);
+            const data = await getCacheOrFetch(
+                req.url,
+                async () => await externalFilmsService.details(req.params)
+            );
+
             const { id } = res.locals?.user ?? {};
             if (id) {
                 const favorite = await favoriteService.hydrateOne(id, req.params.id);
@@ -59,7 +68,10 @@ class ExternalFilmsController {
         next: NextFunction
     ) {
         try {
-            const data = await externalFilmsService.images(req.query);
+            const data = await getCacheOrFetch(
+                req.url,
+                async () => await externalFilmsService.images(req.query)
+            );
             return res.json(data);
         } catch (e) {
             next(e);
@@ -71,7 +83,10 @@ class ExternalFilmsController {
         next: NextFunction
     ) {
         try {
-            const data = await externalFilmsService.reviews(req.query);
+            const data = await getCacheOrFetch(
+                req.url,
+                async () => await externalFilmsService.reviews(req.query)
+            );
             return res.json(data);
         } catch (e) {
             next(e);
@@ -79,7 +94,10 @@ class ExternalFilmsController {
     }
     async getSimilars(req: Request<getExternalDataByIdInput>, res: Response, next: NextFunction) {
         try {
-            const data = await externalFilmsService.similars(req.params);
+            const data = await getCacheOrFetch(
+                req.url,
+                async () => await externalFilmsService.similars(req.params)
+            );
             return res.json(data);
         } catch (e) {
             next(e);
@@ -88,15 +106,21 @@ class ExternalFilmsController {
 
     async getAwards(req: Request<getExternalDataByIdInput>, res: Response, next: NextFunction) {
         try {
-            const data = await externalFilmsService.awards(req.params);
+            const data = await getCacheOrFetch(
+                req.url,
+                async () => await externalFilmsService.awards(req.params)
+            );
             return res.json(data);
         } catch (e) {
             next(e);
         }
     }
-    async getFilters(_req: Request<getExternalDataByIdInput>, res: Response, next: NextFunction) {
+    async getFilters(req: Request<getExternalDataByIdInput>, res: Response, next: NextFunction) {
         try {
-            const data = await externalFilmsService.filters();
+            const data = await getCacheOrFetch(
+                req.url,
+                async () => await externalFilmsService.filters()
+            );
             return res.json(data);
         } catch (e) {
             next(e);
@@ -108,7 +132,10 @@ class ExternalFilmsController {
         next: NextFunction
     ) {
         try {
-            const data = await externalFilmsService.search(req.query);
+            const data = await getCacheOrFetch(
+                req.url,
+                async () => await externalFilmsService.search(req.query)
+            );
             return res.json(data);
         } catch (e) {
             next(e);

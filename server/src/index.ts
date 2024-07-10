@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { CLIENT_URL, PORT, STATIC_PROFILE_PATH, STATIC_PROFILE_ROUTE } from "./config";
 import logger from "./utils/logger";
-import connect from "./utils/connect";
+import connectMongoDB from "./utils/connectMongoDB";
 import router from "./router/router";
 import errorBoundary from "./middleware/errorBoundary";
 import useragent from "express-useragent";
@@ -11,6 +11,7 @@ import userAgent from "./middleware/userAgent";
 import path from "path";
 import "./schedules/unbanSchedule";
 import ApiError from "./exceptions/api.error";
+import connectRedis from "./utils/connectRedis";
 
 const app = express();
 
@@ -42,5 +43,6 @@ app.use(errorBoundary);
 
 app.listen(PORT, async () => {
     logger.info(`App is running on Port: ${PORT}`);
-    await connect();
+    await connectRedis();
+    await connectMongoDB();
 });

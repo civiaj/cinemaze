@@ -17,6 +17,15 @@ services:
         volumes:
             - cert_volume:/etc/letsencrypt:Z
 
+    redis:
+        image: redis:7.2.5
+        container_name: redis
+        restart: unless-stopped
+        volumes:
+            - redis_data:/data
+        ports:
+            - "6379:6379"
+
     api:
         build: "./server"
         container_name: api
@@ -31,6 +40,9 @@ services:
                 required: true
             certbot-oneshot:
                 condition: service_completed_successfully
+                required: true
+            redis:
+                condition: service_started
                 required: true
 
     nginx-react:
@@ -66,3 +78,4 @@ services:
 volumes:
     cert_volume:
     acme_challenge:
+    redis_data:

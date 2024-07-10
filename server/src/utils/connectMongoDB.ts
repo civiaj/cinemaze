@@ -2,11 +2,10 @@ import { MONGO_URL } from "../config";
 import logger from "./logger";
 import mongoose from "mongoose";
 
-const connect = async () => {
+const connectMongoDB = async () => {
     try {
-        logger.info("Connecting to database...");
         await mongoose.connect(MONGO_URL);
-        logger.info("Connected to MongoDB");
+        logger.info("MongoDB connection successful");
     } catch (error) {
         logger.error(
             `Could not connect to database. Reason: ${
@@ -16,4 +15,4 @@ const connect = async () => {
     }
 };
 
-export default connect;
+export default connectMongoDB;
