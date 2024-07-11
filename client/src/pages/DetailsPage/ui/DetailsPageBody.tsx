@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
+import { routePath } from "@/app/router/router";
 import { useAppSelector } from "@/app/store";
 import { FilmDetailsActions, RatingStars } from "@/features/FilmDetailsActions";
 import {
@@ -16,7 +17,12 @@ import { selectUser } from "@/entities/User";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { TLngs } from "@/shared/i18n/types";
 import { getFilmTitle } from "@/shared/lib/getFilmTitle";
+import { AppLink } from "@/shared/ui/AppLink/AppLink";
+import { Box } from "@/shared/ui/Boxes/Box";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
+import { Button } from "@/shared/ui/Button/Button";
+import { Heading } from "@/shared/ui/Text/Heading";
+import { Text } from "@/shared/ui/Text/Text";
 import { ViewSwitcher } from "../ui/ViewSwitcher";
 import { DetailsPageSkeleton } from "./DetailsPageSkeleton";
 
@@ -25,7 +31,7 @@ export const DetailsPageBody = () => {
     const id = Number(filmId);
     const user = useAppSelector(selectUser);
     const { t, i18n } = useTranslation();
-    const { data, isLoading, isFetching } = useDetailsQuery(id);
+    const { data, isLoading, isFetching, error } = useDetailsQuery(id);
 
     const [addFavorite, favoriteMutation] = useAddOneMutation();
 
@@ -42,15 +48,19 @@ export const DetailsPageBody = () => {
     );
 
     if (isLoading || isFetching) return <DetailsPageSkeleton />;
-
-    if (favoriteMutation.isError || !data)
+    if (error) {
+        return <StatusBox isError={true} msgOrChildren={formatServerError(error)} reload />;
+    }
+    if (!data) {
         return (
-            <StatusBox
-                isError={true}
-                msgOrChildren={formatServerError(favoriteMutation.error)}
-                reload
-            />
+            <Box className="items-center">
+                <Text>{t("search.empty-msg")}</Text>
+                <AppLink to={routePath.top} theme="button">
+                    {t("btn.main")}
+                </AppLink>
+            </Box>
         );
+    }
 
     const { ratingImdb, rating, favorite } = data;
     const label = getFilmTitle(data, i18n.language as TLngs);

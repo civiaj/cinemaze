@@ -1,7 +1,7 @@
 import { redisClient } from "../utils/connectRedis";
 import logger from "../utils/logger";
 
-const CACHE_TIME = 3600;
+const CACHE_TIME = 86400;
 
 class CacheService {
     async get(key: string) {
