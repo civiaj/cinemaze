@@ -20,8 +20,6 @@ import { getFilmTitle } from "@/shared/lib/getFilmTitle";
 import { AppLink } from "@/shared/ui/AppLink/AppLink";
 import { Box } from "@/shared/ui/Boxes/Box";
 import { StatusBox } from "@/shared/ui/Boxes/StatusBox";
-import { Button } from "@/shared/ui/Button/Button";
-import { Heading } from "@/shared/ui/Text/Heading";
 import { Text } from "@/shared/ui/Text/Text";
 import { ViewSwitcher } from "../ui/ViewSwitcher";
 import { DetailsPageSkeleton } from "./DetailsPageSkeleton";
