@@ -32,6 +32,8 @@ services:
         env_file:
             - server/.env.production
         restart: unless-stopped
+        volumes:
+            - express_static:/app/static:Z
         ports:
             - "3000:3000"
         depends_on:
@@ -79,3 +81,4 @@ volumes:
     cert_volume:
     acme_challenge:
     redis_data:
+    express_static:
