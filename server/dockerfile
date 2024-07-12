@@ -7,8 +7,8 @@ RUN npm ci
 COPY . .
 RUN npm run build
 RUN cp -r src/email-templates dist
-RUN rm -rf src
-RUN rm tsconfig.json
 RUN mkdir -p static/profiles
 RUN cp -n src/assets/default-user.jpeg static/profiles/
+RUN rm -rf src
+RUN rm tsconfig.json
 ENTRYPOINT [ "node", "dist/index.js" ]
