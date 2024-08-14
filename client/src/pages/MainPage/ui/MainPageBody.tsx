@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { FilmsList } from "@/features/FilmsList";
-import { filmActions, getFilms, getMainQuery, getPage, useTopQuery } from "@/entities/Film";
 import { Page } from "@/features/Page";
+import { filmActions, getFilms, getMainQuery, getPage, useTopQuery } from "@/entities/Film";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { useInfiniteScroll } from "@/shared/hooks/useInfiniteScroll";
 import { Box } from "@/shared/ui/Boxes/Box";

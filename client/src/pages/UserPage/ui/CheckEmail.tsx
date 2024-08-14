@@ -1,6 +1,6 @@
 import { useState, FormEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { useCheckPasswordMutation } from "@/entities/Authorization";
+import { useCheckEmailMutation } from "@/entities/Authorization";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { Modal } from "@/shared/ui/Boxes/Modal";
 import { Button } from "@/shared/ui/Button/Button";
@@ -12,39 +12,34 @@ type Props = {
     onClose: () => void;
 };
 
-export const CheckPassword = (props: Props & { onSetChecked: () => void }) => {
+export const CheckEmail = (props: Props & { onSetChecked: () => void }) => {
     const { onSetChecked, onClose } = props;
     const { t } = useTranslation();
-    const [checkPassword, { isLoading, error, isError }] = useCheckPasswordMutation();
-    const [password, setPassword] = useState("");
+    const [checkEmail, { isLoading, error, isError }] = useCheckEmailMutation();
+    const [email, setEmail] = useState("");
 
-    const onPasswordCheck = (e: FormEvent<HTMLFormElement>) => {
+    const onEmailCheck = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!password) return;
-        checkPassword({ password })
+        if (!email) return;
+        checkEmail({ email })
             .unwrap()
             .then(() => onSetChecked());
     };
 
     return (
         <Modal onClose={onClose}>
-            <form
-                onSubmit={onPasswordCheck}
-                id="check-password-form"
-                className="flex flex-col flex-1"
-            >
-                <Modal.Header header={t("user.password-check")} onClose={onClose} />
+            <form onSubmit={onEmailCheck} id="check-email-form" className="flex flex-col flex-1">
+                <Modal.Header header={t("user.email-check")} onClose={onClose} />
                 <Modal.Body>
-                    <Text as="p">{t("user.password-check-msg")}</Text>
+                    <Text as="p">{t("user.email-check-msg")}</Text>
                     <Input
                         fancy
-                        placeholder={t("user.password")}
-                        name="password"
-                        type="password"
-                        autoComplete="password"
-                        value={password}
-                        onCleanInput={() => setPassword("")}
-                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder={t("user.email")}
+                        name="email"
+                        autoComplete="off"
+                        value={email}
+                        onCleanInput={() => setEmail("")}
+                        onChange={(e) => setEmail(e.target.value)}
                         focused
                     />
                     <GridMsg isError isOpen={isError} msg={formatServerError(error)} />

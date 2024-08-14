@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { FilmsList } from "@/features/FilmsList";
+import { Page } from "@/features/Page";
 import {
     useFiltersQuery,
     useSearchQuery,
@@ -12,7 +13,6 @@ import {
     getFilms,
     filmActions,
 } from "@/entities/Film";
-import { Page } from "@/features/Page";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { RATING_FROM_MIN, RATING_TO_MAX, YEAR_FROM_MIN, YEAR_TO_MAX } from "@/shared/const/const";
 import { useInfiniteScroll } from "@/shared/hooks/useInfiniteScroll";

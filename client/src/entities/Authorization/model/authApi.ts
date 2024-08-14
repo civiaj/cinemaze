@@ -74,6 +74,14 @@ const authApi = api.injectEndpoints({
                 credentials: "include",
             }),
         }),
+        checkEmail: builder.mutation<GenericResponse, { email: string }>({
+            query: ({ email }) => ({
+                url: "/confirmEmail",
+                method: "POST",
+                body: { email },
+                credentials: "include",
+            }),
+        }),
         forgotPassword: builder.mutation<ServerMessageResponse, { email: string }>({
             query: (body) => ({ url: "/forgot", method: "POST", body, credentials: "include" }),
         }),
@@ -102,4 +110,5 @@ export const {
     useCheckPasswordMutation,
     useForgotPasswordMutation,
     useResetPasswordMutation,
+    useCheckEmailMutation,
 } = authApi;

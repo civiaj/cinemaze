@@ -115,7 +115,27 @@ class AuthController {
                 throw ApiError.BadRequest("Неверный пароль");
             }
 
-            return res.status(201).json({ message: "success" });
+            return res.status(200).json({ message: "success" });
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async confirmEmail(
+        req: Request<object, object, EmailInput>,
+        res: Response,
+        next: NextFunction
+    ) {
+        try {
+            const { email } = req.body;
+            const { id } = res.locals.user;
+            const user = await userService.findUser({ id, provider: "google", email });
+
+            if (!user) {
+                throw ApiError.BadRequest("Неверный адрес электронной почты");
+            }
+
+            return res.status(200).json({ message: "success" });
         } catch (e) {
             next(e);
         }

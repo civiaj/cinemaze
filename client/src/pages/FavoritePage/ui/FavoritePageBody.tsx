@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { routePath } from "@/app/router/router";
 import { useAppDispatch, useAppSelector } from "@/app/store";
 import { FilmsList } from "@/features/FilmsList";
+import { Page } from "@/features/Page";
 import {
     filmActions,
     getFaviruteQuery,
@@ -13,7 +14,6 @@ import {
     useGetFavoritesQuery,
     useGetStatsTotalQuery,
 } from "@/entities/Film";
-import { Page } from "@/features/Page";
 import formatServerError from "@/shared/api/helpers/formatServerError";
 import { useInfiniteScroll } from "@/shared/hooks/useInfiniteScroll";
 import { Box } from "@/shared/ui/Boxes/Box";

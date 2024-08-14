@@ -31,6 +31,7 @@ router.get('/films/search', validate(getSearchResultsSchema), externalFilmsContr
 router.post("/register", validate(createUserSchema), authController.register.bind(authController));
 router.post("/login", validate(loginUserSchema), authController.login.bind(authController));
 router.post( "/checkPassword", requireAuth, validate(checkPasswordSchema), authController.checkPassword);
+router.post( "/confirmEmail", requireAuth, validate(emailSchema), authController.confirmEmail);
 router.get("/refresh", authController.refresh.bind(authController));
 router.get("/logout", requireAuth, authController.logout.bind(authController));
 router.get("/activate/:verificationCode", validate(verifyEmailSchema), authController.verifyEmail);

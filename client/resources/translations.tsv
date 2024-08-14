@@ -1,11 +1,11 @@
 de	en	ru	fr	ko	ar
 main.popular	Popular	Популярные	Populaire	인기 있는	شائع
-main.popular-t	Watching now	Смотрят сейчас	Regarder maintenant	보고있다	أشاهد الآن
+main.popular-t	Watching now	Смотрят сейчас	Je regarde maintenant	지금 시청 중	أشاهد الآن
 main.best	Best	Лучшее	Meilleur	최상의	أفضل
 main.best-t	Best of all time	Лучшее за все время	Le meilleur de tous les temps	역대 최고	الأفضل على الإطلاق
 main.antisipated	Antisipated	Ожидаемые	Antisipé	예상되는	متوقع
 main.antisipated-t	Coming soon	Скоро в кино	À venir	곧 출시 예정	قريباً
-nav.profile	My Profile	Мой Профиль	Mon profil	내 프로필	ملفي
+nav.profile	My Profile	Мой Профиль	Mon profil	내 프로필	ملفي الشخصي
 nav.moovies	My Movies	Мои Фильмы	Mes films	내 영화	أفلامي
 nav.language-t	Language	Язык	Langue	언어	لغة
 nav.language-en	English	English	English	English	English
@@ -27,18 +27,18 @@ search-t	Search	Поиск	Recherche	찾다	يبحث
 manage-t	Manage	Управление	Gérer	관리하다	يدير
 user-t	User	Профиль	Utilisateur	사용자	مستخدم
 login-t	Login	Авторизация	Se connecter	로그인	تسجيل الدخول
-ban-t	Ban	Блокировка	Interdire	반	المنع
+ban-t	Ban	Блокировка	Interdire	반	حظر
 search.extended	Extended Search	Расширенный Поиск	Recherche étendue	확장검색	بحث موسع
 search.keyword	Keyword	Ключевое слово	Mot-clé	예어	الكلمة الرئيسية
 search.keyword-place	Enter the title	Введите название	Entrez le titre	제목을 입력하세요	أدخل العنوان
 search.country	Country	Страна	Pays	국가	دولة
 search.genre	Genre	Жанр	Genre	장르	النوع
-search.rating	Rating	Рейтинг	Notation	평가	تقييم
+search.rating	Rating	Рейтинг	Notation	평가	تصنيف
 search.year	Year	Год	Année	년도	سنة
 search.from	from	от	depuis	~에서	من
 search.to	to	до	à	에게	ل
 search.initial-msg	Adjust the settings for a better search experience	Настройте параметры для лучшего поиска.	Ajustez les paramètres pour une meilleure expérience de recherche	더 나은 검색 환경을 위해 설정을 조정하세요.	اضبط الإعدادات للحصول على تجربة بحث أفضل
-search.empty-msg	Nothing found	Ничего не найдено	Rien n'a été trouvé	아무것도 찾을 수 없음	لم يتم العثور على شيء
+search.empty-msg	Nothing found	Ничего не найдено	Rien trouvé	아무것도 발견되지 않았습니다	لم يتم العثور على شيء
 search.empty-msg-add	try changing your search parameters	попробуйте изменить параметры поиска	essayez de changer vos paramètres de recherche	검색 매개변수를 변경해 보세요	حاول تغيير معلمات البحث الخاصة بك
 search.found	Found	Найдено	Trouvé	설립하다	وجد
 search.input-p	Search by title	Поиск по названию	Recherche par titre	제목으로 검색	البحث حسب العنوان
@@ -49,31 +49,31 @@ search.by-rating	By Rating	По Рейтингу	Par note	평점별	حسب ال�
 search.by-date	By Date	По Дате Выхода	Par date	날짜별	حسب التاريخ
 favorite.all	All	Все	Tous	모두	الجميع
 favorite.userscore	With My Rating	С Моей Оценкой	Avec ma note	내 평점으로	مع تقييمي
-favorite.will	Will Watch	Буду Смотреть	Regarderai	지켜볼 것이다	سوف أشاهد
+favorite.will	Will Watch	Буду Смотреть	Je regarderai	지켜볼 것이다	سوف تشاهد
 favorite.hidden	Hidden	Скрытые	Caché	숨겨진	مختفي
 favorite.empty-msg	Before continuing, please add a movie to your 'Will Watch' list or give it a rating	Прежде чем продолжить, добавьте какой-нибудь фильм в список 'Буду Cмотреть' или поставьте оценку	Avant de continuer, veuillez ajouter un film à votre liste « À regarder » ou lui attribuer une note.	계속하기 전에 '볼만한 영화' 목록에 영화를 추가하거나 평가해 주세요.	قبل المتابعة، يرجى إضافة فيلم إلى قائمة "سوف تشاهده" أو تقييمه
 favorite.remove-t	Removal	Удаление	Suppression	제거	إزالة
 favorite.unauth-msg	You must log in	Необходимо авторизоваться	Vous devez vous connecter	로그인해야 합니다.	يجب عليك تسجيل الدخول
 favorite.remove-all	Remove from all lists	Удалить из всех списков	Supprimer de toutes les listes	모든 목록에서 제거	إزالة من كافة القوائم
 favorite.remove-from-list	from	из списка	depuis	~에서	من
-favorite.remove-b	Are you sure you want to delete	Вы действительно хотите удалить	Etes-vous sûr que vous voulez supprimer	삭제 하시겠습니까	هل أنت متأكد أنك تريد حذف
+favorite.remove-b	Are you sure you want to delete	Вы действительно хотите удалить	Etes-vous sûr de vouloir supprimer	삭제하시겠습니까?	هل أنت متأكد أنك تريد الحذف
 stat.ratings	Ratings	Оценки	Notes	평가	التقييمات
 stat.ratings-my	My Movie Ratings	Мои Оценки	Mes classements de films	내 영화 평점	تقييمات أفلامي
 stat.ratings-film	Film Ratings	Рейтинг Фильма	Classements des films	영화 등급	تقييمات الأفلام
 stat.cag	Countries and Genres	Страны и Жанры	Pays et genres	국가 및 장르	البلدان والأنواع
 stat.cag-data	Data	Данные	Données	데이터	بيانات
 stat.cag-data-genre	Genres	Жанры	Genre	장르	الأنواع
-stat.cag-data-country	Countries	Страны	Des pays	국가	بلدان
-stat.cag-sort	Sort By	Сортировать по	Trier par	정렬 기준	ترتيب حسب
+stat.cag-data-country	Countries	Страны	Pays	국가	بلدان
+stat.cag-sort	Sort By	Сортировать по	Trier par	정렬 기준	فرز حسب
 stat.cag-sort-count	Count	Количеству	Compter	세다	عدد
-stat.cag-sort-userscore	My Rating	Моей Оценке	Mon classement	내 평가	تقييمي
+stat.cag-sort-userscore	My Rating	Моей Оценке	Ma note	내 평가	تقييمي
 stat.cag-sort-rating	Movie Raing	Рейтингу Фильма	Film Raing	영화 비	فيلم رينج
-stat.cat-show-all	Show All	Показать Все	Afficher tout	모두 보이기	عرض الكل
-stat.cat-change-order	Change Order	Изменить Порядок	Change l'ordre	주문 변경	تغيير الترتيب
-stat.cat-userscore	My Rating	Моя Оценка	Mon classement	내 평가	تقييمي
+stat.cat-show-all	Show All	Показать Все	Afficher tout	모두 표시	إظهار الكل
+stat.cat-change-order	Change Order	Изменить Порядок	Modifier l'ordre	변경 순서	تغيير الترتيب
+stat.cat-userscore	My Rating	Моя Оценка	Ma note	내 평가	تقييمي
 stat.cat-rating	Movie Rating	Рейтинг Фильма	Classement du film	영화 평점	تقييم الفيلم
 stat.last	Last	Последние	Dernier	마지막	آخر
-stat.last-24	24 Hours	24 Часа	24 heures	24 시간	24 ساعة
+stat.last-24	24 Hours	24 Часа	24 heures	24시간	24 ساعة
 stat.last-7	Week	Неделя	Semaine	주	أسبوع
 stat.last-m	Month	Месяц	Mois	월	شهر
 stat.last-y	Year	Год	Année	년도	سنة
@@ -82,14 +82,14 @@ stat.empty-msg	To view statistics rate several films or change parametrs	Для 
 stat.pie-empty-msg	There is no statistics on the selected parameters	Статистика по выбранным параметрам отсутствует	Il n'y a pas de statistiques sur les paramètres sélectionnés	선택한 매개변수에 대한 통계가 없습니다.	لا توجد إحصائيات حول المعلمات المحددة
 stat.notification-one	You haven't added enough movies to your favorites yet. 	Вы еще не добавили достаточно фильмов в избранное. 	Vous n'avez pas encore ajouté suffisamment de films à vos favoris. 	아직 즐겨찾기에 충분한 영화를 추가하지 않았습니다. 	لم تقم بإضافة ما يكفي من الأفلام إلى المفضلة لديك حتى الآن. 
 stat.notification-two	To increase the number of statistics graphs, please add more movies to your favorites list.	Для увеличения количества графиков статистики, пожалуйста, добавьте больше фильмов в ваш список избранного.			
-manage.search-name	Search by name	Поиск по имени	Rechercher par nom	이름으로 검색	البحث عن طريق الإسم
+manage.search-name	Search by name	Поиск по имени	Rechercher par nom	이름으로 검색	البحث بالاسم
 manage.displayName	Name	Имя	Nom	이름	اسم
-manage.verified	Verified	Подтвержден	Vérifié	확인됨	تم التحقق
-manage.isBanned	Banned	Заблокирован	banni	금지됨	محظور
+manage.verified	Verified	Подтвержден	Vérifié	확인됨	تم التحقق منه
+manage.isBanned	Banned	Заблокирован	Interdit	금지됨	محظور
 manage.email	Email	Почта	E-mail	이메일	بريد إلكتروني
 manage.role	Role	Роль	Rôle	역할	دور
-manage.updatedAt	Last Update	Обновлен	Dernière mise à jour	마지막 업데이트	اخر تحديث
-manage.createdAt	Created At	Создан	Créé à	생성 날짜	أنشئت في
+manage.updatedAt	Last Update	Обновлен	Dernière mise à jour	마지막 업데이트	التحديث الأخير
+manage.createdAt	Created At	Создан	Créé à	생성 날짜	تم الإنشاء في
 manage.banMessage	Block message	Сообщение о блокировке	Bloquer le message	메시지 차단	حظر الرسالة
 manage.banExpiration	Blocked until	Заблокирован до	Bloqué jusqu'à	차단 기간:	محظور حتى
 manage.provider	Provider	Провайдер	Fournisseur	공급자	مزود
@@ -99,50 +99,50 @@ manage.ban-t	Block user {{displayName}}	Запрет доступа {{displayNam
 manage.change-t	Update {{displayName}}	Изменение {{displayName}}	Mettre à jour {{displayName}}	{{displayName}} 업데이트	تحديث {{displayName}}
 manage.unban-t	Unban {{displayName}}	Разблокировать {{displayName}}	Annuler le bannissement de {{displayName}}	{{displayName}} 차단 해제	إلغاء الحظر {{displayName}}
 manage.unban-message	Do you really want to unblock	Вы действильно хотите разблокировать	Voulez-vous vraiment débloquer	정말로 차단을 해제하시겠습니까?	هل تريد حقا إلغاء الحظر
-manage.t	Unblock	Разблокировать	Débloquer	차단 해제	رفع الحظر
-manage.ban-date-default	Select date..	Выберите дату..	Sélectionner une date..	날짜를 선택하세요..	حدد تاريخ..
+manage.t	Unblock	Разблокировать	Débloquer	차단 해제	إلغاء الحظر
+manage.ban-date-default	Select date..	Выберите дату..	Sélectionnez la date..	날짜를 선택하세요..	اختر التاريخ..
 login.login	Login	Авторизация	Se connecter	로그인	تسجيل الدخول
-login.email	E-mail address	Адрес электронной почты	Adresse e-mail	이메일 주소	عنوان البريد الإلكتروني
+login.email	E-mail address	Адрес электронной почты	Adresse email	이메일 주소	عنوان البريد الإلكتروني
 login.password	Password	Пароль	Mot de passe	비밀번호	كلمة المرور
 login.name	Name	Имя	Nom	이름	اسم
 login.confirm	Confirm password	Подтверждение пароля	Confirmez le mot de passe	비밀번호 확인	تأكيد كلمة المرور
 login.register	Registration	Регистрация	Inscription	등록	تسجيل
-login.forget-p	Forget password?	Забыли пароль?	Mot de passe oublié?	비밀번호 분실?	هل نسيت كلمة المرور؟
+login.forget-p	Forget password?	Забыли пароль?	Mot de passe oublié ?	비밀번호를 잊으셨나요?	هل نسيت كلمة المرور؟
 login.forget-t	Recovery	Восстановление	Récupération	회복	استعادة
 login.forget-msg	A link to change your password has been sent to your email.	Ссылка для изменения пароля была отправлена на вашу почту.	Un lien pour changer votre mot de passe a été envoyé à votre email.	비밀번호를 변경할 수 있는 링크가 귀하의 이메일로 전송되었습니다.	تم إرسال رابط لتغيير كلمة المرور الخاصة بك إلى بريدك الإلكتروني.
 login.with	Login with	Вход с помощью	Connectez-vous avec	다음으로 로그인	تسجيل الدخول مع
-details.will-watch	Will Watch	Буду Смотреть	Regarderai	지켜볼 것이다	سوف أشاهد
+details.will-watch	Will Watch	Буду Смотреть	Je regarderai	지켜볼 것이다	سوف تشاهد
 details.copy	Copy link	Скопировать ссылку	Copier le lien	링크 복사	نسخ الوصلة
 details.show	Show	Показать	Montrer	보여주다	يعرض
 details.hide	Hide	Скрыть	Cacher	숨다	يخفي
 details.change	Change	Изменить	Changement	변화	يتغير
 details.delete	Delete	Удалить	Supprimer	삭제	يمسح
-details.your-score	Your Score	Ваша Оценка	Ton score	너의 점수	درجاتك
+details.your-score	Your Score	Ваша Оценка	Votre score	당신의 점수	درجاتك
 details.set-rating	Set Rating	Оценить Фильм	Définir la note	등급 설정	تعيين التقييم
-details.year	Production year	Год производства	Année de production	생산연도	سنة الإنتاج
+details.year	Year of production	Год производства	Année de production	생산연도	سنة الإنتاج
 details.country	Country	Страна	Pays	국가	دولة
 details.genre	Genre	Жанр	Genre	장르	النوع
-details.slogan	Tagline	Слоган	Slogan	태그라인	سطر الوصف
+details.slogan	Slogan	Слоган	Slogan	슬로건	شعار
 details.age-limit	Age	Возраст	Âge	나이	عمر
-details.mpaa	MPAA rating	Рейтинг MPAA	Classement MPAA	MPAA 등급	تصنيف الاتحاد الأمريكي للصور المتحركة
+details.mpaa	MPAA rating	Рейтинг MPAA	Classement MPAA	MPAA 등급	تصنيف MPAA
 details.length	Time	Время	Temps	시간	وقت
 details.rate-kp	Kinopoisk rating	Рейтинг Кинопоиск	Note Kinopoisk	키노포스크 등급	تصنيف كينوبويسك
-details.count-kp	Estimates	Оценок	Estimations	견적	التقديرات
-details.reviews-count	Reviews	Рецензий	Commentaires	리뷰	التعليقات
-details.about-movie	About the film	О фильме	À propos du film	영화에 대하여	بخصوص الفيلم
+details.count-kp	Estimates	Оценок	Estimations	견적	تقديرات
+details.reviews-count	Reviews	Рецензий	Avis	리뷰	التعليقات
+details.about-movie	About the film	О фильме	À propos du film	영화에 대하여	عن الفيلم
 details.min	min.	мин.	min.	분.	دقيقة.
 details.descr	Review	Обзор	Revoir	검토	مراجعة
 details.images	Images	Изображения	Images	이미지	الصور
-details.awards	Awards	Награды	Prix	수상 내역	الجوائز
+details.awards	Awards	Награды	Récompenses	수상 내역	الجوائز
 details.descr-empty	Review not available	Обзор недоступен	Avis non disponible	리뷰를 사용할 수 없습니다.	المراجعة غير متوفرة
 details.tag-still	Stills	Кадры	Images fixes	스틸	اللقطات
 details.tag-shooting	Shootings	Съёмки	Fusillades	총격 사건	إطلاق النار
 details.tag-poster	Posters	Постеры	Affiches	포스터	الملصقات
-details.tag-fan-art	Fan art	Фан-арт	Fanarts	팬 아트	معجب بالفن
+details.tag-fan-art	Fan art	Фан-арт	Fanarts	팬아트	فن المعجبين
 details.tag-promo	Promo	Промо	Promotion	프로모션	الترويجي
 details.tag-concept	Concepts	Концепты	Concepts	개념	المفاهيم
 details.tag-wallpaper	Wallpapers	Обои	Fonds d'écran	배경화면	خلفيات
-details.tag-cover	Covers	Обложки	Couvertures	커버	أغلفة
+details.tag-cover	Covers	Обложки	Couvertures	커버	يغطي
 details.tag-screenshot	Screenshots	Скриншоты	Captures d'écran	스크린샷	لقطات الشاشة
 details.images-not-found	No images found in <span>{{tag}}</span> category	В категории <span>{{tag}}</span> изображений не найдено	Aucune image trouvée dans la catégorie <span>{{tag}}</span>	<span>{{tag}}</span> 카테고리에 이미지가 없습니다.	لم يتم العثور على صور في فئة <span>{{tag}}</span>
 details.images-source	Open the source	Открыть источник	Ouvrir la source	소스 열기	افتح المصدر
@@ -158,18 +158,18 @@ details.reviews-new-first	New First	Сначала Новые	Nouveau premier	�
 details.reviews-old-first	Old First	Сначала Старые	Vieux premier	오래된 것부터	القديم أولا
 details.reviews-t	Viewer reviews	Рецензии зрителей	Avis des téléspectateurs	시청자 리뷰	مراجعات المشاهدين
 verify.error-msg	Unable to verify email address.	Невозможно верифицировать адрес электронной почты.	Impossible de vérifier l'adresse e-mail.	이메일 주소를 확인할 수 없습니다.	غير قادر على التحقق من عنوان البريد الإلكتروني.
-verify.success-msg	Email address verified.	Электронный адрес почты подтвержден.	Adresse e-mail vérifiée.	이메일 주소가 확인되었습니다.	عنوان البريد الإلكتروني التحقق منها.
+verify.success-msg	Email address verified.	Электронный адрес почты подтвержден.	Adresse e-mail vérifiée.	이메일 주소가 확인되었습니다.	تم التحقق من عنوان البريد الإلكتروني.
 unauthorized-msg	The user does not have the required rights to view this page.	Пользователь не обладает требуемыми правами для просмотра данной страницы.	L'utilisateur ne dispose pas des droits requis pour visualiser cette page.	사용자에게 이 페이지를 보는 데 필요한 권한이 없습니다.	ليس لدى المستخدم الحقوق المطلوبة لعرض هذه الصفحة.
 ban.msg	restrictions have been placed on your account	на ваш профиль были наложены ограничения	des restrictions ont été placées sur votre compte	귀하의 계정에 제한이 적용되었습니다	تم وضع قيود على حسابك
 ban.one	1. You cannot add, delete or change movies in your collection.	1. Вы не можете добавлять, удалять или изменять фильмы в вашей коллекции.	1. Vous ne pouvez pas ajouter, supprimer ou modifier des films dans votre collection.	1. 컬렉션에 영화를 추가, 삭제, 변경할 수 없습니다.	1. لا يمكنك إضافة أو حذف أو تغيير الأفلام في مجموعتك.
 ban.two	2. Viewing the statistics page is not available.	2. Недоступен просмотр страницы со статистикой.	2. L'affichage de la page des statistiques n'est pas disponible.	2. 통계 페이지를 볼 수 없습니다.	2. عرض صفحة الإحصائيات غير متاح.
-ban.three	3. Viewing the page with a list of users is not available.	3. Недоступен просмотр страницы со списком пользователей.	3. L'affichage de la page avec une liste d'utilisateurs n'est pas disponible.	3. 사용자 목록이 포함된 페이지는 볼 수 없습니다.	3. عرض الصفحة مع قائمة المستخدمين غير متاح.
+ban.three	3. Viewing the page with a list of users is not available.	3. Недоступен просмотр страницы со списком пользователей.	3. L'affichage de la page avec une liste d'utilisateurs n'est pas disponible.	3. 사용자 목록이 포함된 페이지를 볼 수 없습니다.	3. عرض الصفحة مع قائمة المستخدمين غير متاح.
 ban.msg-small	Your Account is Banned	Ваш Профиль Заблокирован	Votre compte est banni	귀하의 계정이 금지되었습니다	حسابك محظور
-boundary.t	An error has occurred	Произошла ошибка	Une erreur est survenue	오류가 발생했습니다	حدث خطأ
+boundary.t	An error has occurred	Произошла ошибка	Une erreur s'est produite	오류가 발생했습니다.	لقد حدث خطأ
 boundary.b	Please refresh the page or return to the home page to try again.	Пожалуйста, обновите страницу или вернитесь на главную, чтобы повторить попытку.	Veuillez actualiser la page ou revenir à la page d'accueil pour réessayer.	페이지를 새로 고치거나 홈페이지로 돌아가서 다시 시도하세요.	يرجى تحديث الصفحة أو العودة إلى الصفحة الرئيسية للمحاولة مرة أخرى.
-toast.error-default	Unknown error	Неизвестная ошибка	Erreur inconnue	알수없는 오류	خطأ غير معروف
-toast.error-server-default	Server error	Ошибка сервера	Erreur du serveur	서버 오류	خطأ في الخادم
-toast.error-fetch	Unable to connect to server	Невозможно подключиться к серверу	Incapable de se connecter au serveur	서버에 연결할 수 없습니다	غير قادر على الإتصال بالسيرفر
+toast.error-default	Unknown error	Неизвестная ошибка	Erreur inconnue	알 수 없는 오류	خطأ غير معروف
+toast.error-server-default	Server error	Ошибка сервера	Erreur de serveur	서버 오류	خطأ في الخادم
+toast.error-fetch	Unable to connect to server	Невозможно подключиться к серверу	Impossible de se connecter au serveur	서버에 연결할 수 없습니다	غير قادر على الاتصال بالخادم
 toast.book-add	Added to "Will Watch"	Добавлено в "Буду Смотреть"	Ajouté à « Will Watch »	"관찰하겠습니다"에 추가되었습니다.	تمت الإضافة إلى "سوف أشاهد"
 toast.book-remove	Removed from bookmarks	Убрано из закладок	Supprimé des favoris	북마크에서 삭제됨	تمت إزالتها من الإشارات المرجعية
 toast.hidden-add	The film will not be displayed in the general feed and will not be taken into account in statistics	Фильм не будет отображаться в общей ленте и учитываться в статистике	Le film ne sera pas affiché dans le flux général et ne sera pas pris en compte dans les statistiques	영화는 일반 피드에 표시되지 않으며 통계에 반영되지 않습니다.	لن يتم عرض الفيلم في البث العام ولن يؤخذ في الاعتبار في الإحصائيات
@@ -182,7 +182,7 @@ toast.remove-rating	<movieLink>{{title}}</movieLink> rating successfully removed
 toast.remove-all	<movieLink>{{title}}</movieLink> removed from all categories	<movieLink>{{title}}</movieLink> удален из всех категорий	<movieLink>{{title}}</movieLink> supprimé de toutes les catégories	<movieLink>{{title}}</movieLink>가 모든 카테고리에서 삭제되었습니다.	تمت إزالة <movieLink>{{title}}</movieLink> من جميع الفئات
 toast.copy	Link copied	Ссылка скопирована	Lien copié	링크가 복사되었습니다	تم نسخ الرابط
 toast.update-name	Name updated	Имя обновлено	Nom mis à jour	이름이 업데이트되었습니다.	تم تحديث الاسم
-toast.update-password	Password updated	Пароль обновлен	Mot de passe mis à jour	비밀번호가 업데이트되었습니다.	تم تحديث كلمة السر
+toast.update-password	Password updated	Пароль обновлен	Mot de passe mis à jour	비밀번호가 업데이트되었습니다.	تم تحديث كلمة المرور
 toast.update-session	Session deleted	Сессия удалена	Séance supprimée	세션이 삭제되었습니다.	تم حذف الجلسة
 toast.update-photo	Profile photo updated	Фото профиля обновлено	Photo de profil mise à jour	프로필 사진이 업데이트되었습니다.	تم تحديث صورة الملف الشخصي
 toast.update-photo-delete	Profile photo removed	Фото профиля удалено	Photo de profil supprimée	프로필 사진이 삭제되었습니다.	تمت إزالة صورة الملف الشخصي
@@ -192,49 +192,49 @@ toast.update-user-success	User {{name}} updated successfully	Пользоват�
 toast.update-user-error	Error during query execution	Ошибка во время выполнения запроса	Erreur lors de l'exécution de la requête	쿼리 실행 중 오류	حدث خطأ أثناء تنفيذ الاستعلام
 toast.ban-user-success	User {{name}} has been successfully blocked	Пользователь {{name}} успешно заблокирован	L'utilisateur {{name}} a été bloqué avec succès	사용자 {{name}}이(가) 성공적으로 차단되었습니다.	تم حظر المستخدم {{name}} بنجاح
 toast.unban-user-success	User {{name}} successfully unblocked	Пользователь {{name}} успешно разблокирован	L'utilisateur {{name}} a été débloqué avec succès	사용자 {{name}}이(가) 성공적으로 차단을 해제했습니다.	تم إلغاء حظر المستخدم {{name}} بنجاح
-no-film-msg	There are no items to display	Нет элементов для отображения	Il n'y a pas d'éléments à afficher	표시할 항목이 없습니다.	لا توجد عناصر لعرضها
+no-film-msg	There are no items to display	Нет элементов для отображения	Il n'y a aucun élément à afficher	표시할 항목이 없습니다.	لا توجد عناصر لعرضها
 error-film-msg	An error occurred while loading	При загрузке возникла ошибка	Une erreur s'est produite lors du chargement	로드하는 동안 오류가 발생했습니다.	حدث خطأ أثناء التحميل
 end-box-msg	You have reached the end of the list	Вы достигли конца списка	Vous êtes arrivé à la fin de la liste	목록의 끝에 도달했습니다.	لقد وصلت إلى نهاية القائمة
 btn.save	Save	Сохранить	Sauvegarder	구하다	يحفظ
 btn.back	Back	Назад	Dos	뒤쪽에	خلف
 btn.choose	Choose	Выбрать	Choisir	선택하다	يختار
 btn.log-in	Log in	Войти	Se connecter	로그인	تسجيل الدخول
-btn.log-out	Log out	Выйти	Se déconnecter	로그 아웃	تسجيل خروج
+btn.log-out	Log out	Выйти	Se déconnecter	로그아웃	تسجيل الخروج
 btn.delete	Delete	Удалить	Supprimer	삭제	يمسح
 btn.cancel	Cancel	Отмена	Annuler	취소	يلغي
 btn.apply	Apply	Применить	Appliquer	적용하다	يتقدم
 btn.search	Search	Поиск	Recherche	찾다	يبحث
 btn.search-ext	Extended search	Расиширенный поиск	Recherche étendue	확장검색	بحث موسع
-btn.block	Ban	Заблокировать	Interdire	반	المنع
-btn.unblock	Unban	Разблокировать	Annuler le bannissement	금지 해제	رفع الحظر
+btn.block	Ban	Заблокировать	Interdire	반	حظر
+btn.unblock	Unban	Разблокировать	Annuler le bannissement	금지 해제	إلغاء الحظر
 btn.change	Change	Изменить	Changement	변화	يتغير
 btn.confirm	Confirm	Подтвердить	Confirmer	확인하다	يتأكد
 btn.end-all-sessions	End all sessions	Завершить все сеансы	Terminer toutes les sessions	모든 세션 종료	إنهاء كافة الجلسات
 btn.end	End	Заверишть	Fin	끝	نهاية
-btn.register	Create new account	Зарегистрироваться	Créer un nouveau compte	새 계정을 만들	انشاء حساب جديد
-btn.recover	Recover password	Восстановить пароль	Récupérer mot de passe	비밀번호 복구	إستعادة كلمة المرور
+btn.register	Create new account	Зарегистрироваться	Créer un nouveau compte	새 계정 만들기	إنشاء حساب جديد
+btn.recover	Recover password	Восстановить пароль	Récupérer le mot de passe	비밀번호 복구	استعادة كلمة المرور
 btn.main	Go to Main	Перейти на главную	Aller à la page principale	메인으로 이동	اذهب إلى الرئيسية
-btn.reload	Reload page	Перезагрузить страницу	Rafraîchir la page	페이지 새로고침	إعادة تحميل الصفحة
+btn.reload	Reload page	Перезагрузить страницу	Recharger la page	페이지 새로고침	إعادة تحميل الصفحة
 btn.to-kp	To Kinopoisk	На Кинопоиск	À Kinopoisk	키노포이스크행	إلى كينوبويسك
 btn.view-whole-review	Show full review	Показать всю рецензию	Afficher l'avis complet	전체 리뷰 보기	عرض المراجعة الكاملة
 btn.delete-account	Yes, delete	Да, Удалить	Oui, supprimer	예, 삭제합니다	نعم احذف
-user.email	E-mail address	Адрес электронной почты	Adresse e-mail	이메일 주소	عنوان البريد الإلكتروني
+user.email	E-mail address	Адрес электронной почты	Adresse email	이메일 주소	عنوان البريد الإلكتروني
 user.photo	User photo	Фото профиля	Photo de l'utilisateur	사용자 사진	صورة المستخدم
 user.name	User name	Имя пользователя	Nom d'utilisateur	사용자 이름	اسم المستخدم
-user.devices	Devices	Устройства	Dispositifs	장치	الأجهزة
+user.devices	Devices	Устройства	Appareils	장치	الأجهزة
 user.role	Role	Роль	Rôle	역할	دور
 user.password	Password	Пароль	Mot de passe	비밀번호	كلمة المرور
-user.devices-all	Show all	Показать все	Afficher tout	모두 보이기	عرض الكل
+user.devices-all	Show all	Показать все	Afficher tout	모두 표시	إظهار الكل
 user.password-change	Change the passwrod	Измените пароль	Changer le mot de passe	비밀번호 변경	تغيير كلمة المرور
-user.created	Created	Создан	Créé	만들어진	مخلوق
-user.updated	Last update	Последнее обновление	Dernière mise à jour	마지막 업데이트	اخر تحديث
+user.created	Created	Создан	Créé	생성됨	مخلوق
+user.updated	Last update	Последнее обновление	Dernière mise à jour	마지막 업데이트	التحديث الأخير
 user.email-y	Email address is verified	Адрес электронной почты подтвержден	L'adresse e-mail est vérifiée	이메일 주소가 확인되었습니다	تم التحقق من عنوان البريد الإلكتروني
 user.email-n	Email addres is not verified	Адрес электронной почты не подтвержден	L'adresse e-mail n'est pas vérifiée	이메일 주소가 확인되지 않았습니다.	لم يتم التحقق من عناوين البريد الإلكتروني
 user.photo-drag	Drag  the file	Перенесите файл	Faites glisser le fichier	파일을 드래그하세요.	اسحب الملف
 user.photo-preview	Preview	Предпросмотр	Aperçu	시사	معاينة
-user.photo-change	Change photo	Изменение фото	Changer la photo	사진 변경	غير الصوره
-user.photo-crop	Select size	Выберите размер	Sélectionnez la taille	사이즈를 선택하다	أختر الحجم
-user.photo-delete	Remove photo	Удаление фото	Retirer photo	사진 삭제	إزالة الصورة
+user.photo-change	Change photo	Изменение фото	Changer de photo	사진 변경	تغيير الصورة
+user.photo-crop	Select size	Выберите размер	Sélectionnez la taille	사이즈 선택	اختر الحجم
+user.photo-delete	Remove photo	Удаление фото	Supprimer la photo	사진 삭제	إزالة الصورة
 user.photo-delete-msg	Are you sure you want to delete your profile photo?	Вы действительно хотите удалить фото профиля?	Êtes-vous sûr de vouloir supprimer votre photo de profil ?	프로필 사진을 삭제하시겠습니까?	هل أنت متأكد أنك تريد حذف صورة ملفك الشخصي؟
 user.photo-format-msg	Supported formats: JPG, PNG, JPEG, WEBP	Поддерживаемые форматы: JPG, PNG, JPEG, WEBP	Formats pris en charge : JPG, PNG, JPEG, WEBP	지원되는 형식: JPG, PNG, JPEG, WEBP	التنسيقات المدعومة: JPG، PNG، JPEG، ويب
 user.photo-size-msg	Minimum image size 250 x 250 pixels	Минимальный размер изображения 250 x 250 пикселей	Taille minimale de l'image 250 x 250 pixels	최소 이미지 크기 250 x 250픽셀	الحد الأدنى لحجم الصورة 250 × 250 بكسل
@@ -242,14 +242,16 @@ user.name-change-t	User Name	Имя Профиля	Nom d'utilisateur	사용자 �
 user.name-change-l	Name	Имя	Nom	이름	اسم
 user.name-change-p	Enter a new name	Введите новое имя пользователя	Entrez un nouveau nom	새 이름을 입력하세요.	أدخل اسمًا جديدًا
 user.devices-current	Current device	Текущее устройство	Appareil actuel	현재 장치	الجهاز الحالي
-user.devices-active	Active sessions	Активные сеансы	Sessions actives	활성 세션	جلسات نشطة
+user.devices-active	Active sessions	Активные сеансы	Séances actives	활성 세션	جلسات نشطة
 user.devices-active-empty	No active sessions found	Активных сеансов не найдено	Aucune session active trouvée	활성 세션을 찾을 수 없습니다.	لم يتم العثور على جلسات نشطة
-user.devices-end-all-msg	Are you sure you want to end all sessions except the current one?	Вы действительно хотите завершить все сеансы, кроме текущего?	Etes-vous sûr de vouloir mettre fin à toutes les sessions sauf celle en cours ?	현재 세션을 제외한 모든 세션을 종료하시겠습니까?	هل أنت متأكد أنك تريد إنهاء كافة الجلسات باستثناء الجلسة الحالية؟
+user.devices-end-all-msg	Are you sure you want to end all sessions except the current one?	Вы действительно хотите завершить все сеансы, кроме текущего?	Etes-vous sûr de vouloir mettre fin à toutes les sessions sauf celle en cours ?	현재 세션을 제외한 모든 세션을 종료하시겠습니까?	هل أنت متأكد أنك تريد إنهاء جميع الجلسات باستثناء الجلسة الحالية؟
 user.devices-end-msg	Do you really want to end the session	Вы действительно хотите завершить сеанс	Voulez-vous vraiment terminer la session	정말로 세션을 종료하시겠습니까?	هل تريد حقاً إنهاء الجلسة؟
 user.password-check	Confirm the password	Подтвердите пароль	Confirmez le mot de passe	비밀번호를 확인하세요	تأكيد كلمة المرور
 user.password-check-msg	For security reasons, please enter your password to continue.	Исходя из соображений безопасности, для продолжения введите свой пароль.	Pour des raisons de sécurité, veuillez saisir votre mot de passe pour continuer.	보안상의 이유로 계속하려면 비밀번호를 입력하세요.	لأسباب أمنية، يرجى إدخال كلمة المرور الخاصة بك للمتابعة.
 user.password-change-next	Change password	Изменить пароль	Changer le mot de passe	비밀번호 변경	تغيير كلمة المرور
 user.password-change-next-new	New password	Новый пароль	Nouveau mot de passe	새 비밀번호	كلمة المرور الجديدة
+user.email-check	Confirm the email	Подтвердите адрес почты			
+user.email-check-msg	For security reasons, please enter your email to continue.	Исходя из соображений безопасности, для продолжения введите свой адрес почты.			
 user.role-change	Role change	Изменение роли	Changement de rôle	역할 변경	تغيير الدور
 user.role-change-current	Current role	Текущая роль	Rôle actuel	현재 역할	الدور الحالي
 user.role-change-new	Select a new role	Выберите новую роль	Sélectionnez un nouveau rôle	새 역할 선택	حدد دورًا جديدًا
@@ -272,7 +274,7 @@ plural.film_few		фильма			أفلام
 plural.film_many		фильмов			أفلام
 plural.film_other	films		films	영화	أفلام
 plural.star_zero					نجوم
-plural.star_one	star	звезда	étoile		نجمة
+plural.star_one	star	звезда	étoile		نجم
 plural.star_two					نجوم
 plural.star_few		звезды			نجوم
 plural.star_many		звёзд			نجوم
@@ -284,7 +286,7 @@ plural.results_few		результата			نتائج
 plural.results_many		результатов			نتائج
 plural.results_other	results		résultats	결과	نتائج
 plural.vote_zero					أصوات
-plural.vote_one	vote	оценка	vote		تصويت
+plural.vote_one	vote	оценка	voter		تصويت
 plural.vote_two					أصوات
 plural.vote_few		оценки			أصوات
 plural.vote_many		оценок			أصوات
@@ -311,22 +313,22 @@ privacy.tos-prohibited-text	Prohibited actions:	Запрещено:	Actions inte
 privacy.tos-prohibited-item-1	Using the App to distribute malicious software.	Использовать Приложение для распространения вредоносного программного обеспечения.	Utiliser l'application pour distribuer des logiciels malveillants.	앱을 사용하여 악성 소프트웨어를 배포합니다.	استخدام التطبيق لتوزيع البرامج الضارة.
 privacy.tos-prohibited-item-2	Using the App to violate copyrights or other intellectual property rights.	Использовать Приложение для нарушений авторских прав или других прав интеллектуальной собственности.	Utiliser l'application pour violer les droits d'auteur ou d'autres droits de propriété intellectuelle.	앱을 사용하여 저작권이나 기타 지적 재산권을 침해하는 행위.	استخدام التطبيق لانتهاك حقوق النشر أو حقوق الملكية الفكرية الأخرى.
 privacy.tos-prohibited-item-3	Posting or distributing offensive, obscene, or illegal material.	Публиковать или распространять оскорбительные, непристойные или незаконные материалы.	Publier ou distribuer du matériel offensant, obscène ou illégal.	모욕적이거나 외설적이거나 불법적인 자료를 게시하거나 배포하는 행위.	نشر أو توزيع مواد مسيئة أو فاحشة أو غير قانونية.
-privacy.tos-limitation-liability-title	Limitation of Liability	Ограничение ответственности	Limitation de responsabilité	책임의 제한	تحديد المسؤولية
+privacy.tos-limitation-liability-title	Limitation of Liability	Ограничение ответственности	Limitation de responsabilité	책임의 제한	حدود المسؤولية
 privacy.tos-limitation-liability-text	We are not liable for any loss or damage resulting from your use of or inability to use the App. The App is provided "as is," without any warranties.	Мы не несем ответственности за любые убытки или ущерб, возникшие в результате использования или невозможности использования Приложения. Приложение предоставляется "как есть", без каких-либо гарантий.	Nous ne sommes pas responsables de toute perte ou dommage résultant de votre utilisation ou de votre incapacité à utiliser l'application. L'application est fournie « telle quelle », sans aucune garantie.	당사는 귀하가 앱을 사용하거나 사용할 수 없음으로 인해 발생하는 손실이나 피해에 대해 책임을 지지 않습니다. 앱은 어떠한 보증도 없이 "있는 그대로" 제공됩니다.	نحن لسنا مسؤولين عن أي خسارة أو ضرر ناتج عن استخدامك للتطبيق أو عدم قدرتك على استخدامه. يتم توفير التطبيق "كما هو"، دون أي ضمانات.
-privacy.tos-intellectual-property-title	Intellectual Property	Интеллектуальная собственность	Propriété intellectuelle	지적 재산권	الملكية الفكرية
+privacy.tos-intellectual-property-title	Intellectual Property	Интеллектуальная собственность	Propriété intellectuelle	지적재산권	الملكية الفكرية
 privacy.tos-intellectual-property-text	All rights to the content and software of the App are owned by Cinemaze or its licensors. Nothing in these Terms grants you any rights to use such materials beyond the use of the App.	Все права на контент и программное обеспечение Приложения принадлежат Cinemaze или его лицензиарам. Ничто в данных Условиях не предоставляет вам каких-либо прав на использование таких материалов, кроме как в рамках использования Приложения.	Tous les droits sur le contenu et les logiciels de l'application appartiennent à Cinemaze ou à ses concédants de licence. Rien dans les présentes Conditions ne vous accorde le droit d'utiliser ces éléments au-delà de l'utilisation de l'Application.	앱의 콘텐츠 및 소프트웨어에 대한 모든 권리는 Cinemaze 또는 해당 라이센스 제공자가 소유합니다. 본 약관의 어떠한 조항도 귀하에게 앱 사용 외에 해당 자료를 사용할 수 있는 권리를 부여하지 않습니다.	جميع حقوق المحتوى والبرامج الخاصة بالتطبيق مملوكة لشركة Cinemaze أو الجهات المرخصة لها. لا يوجد في هذه الشروط ما يمنحك أي حقوق لاستخدام هذه المواد بما يتجاوز استخدام التطبيق.
 privacy.tos-changes-title	Changes to Terms	Изменения в условиях	Modifications des conditions	약관 변경	التغييرات في الشروط
 privacy.tos-changes-text	We reserve the right to modify these Terms at any time. Updated Terms will be posted on this page and will take effect upon posting. Continued use of the App after changes signifies your acceptance of the new Terms.	Мы оставляем за собой право изменять эти Условия в любое время. Обновленные Условия будут опубликованы на этой странице и вступят в силу с момента публикации. Продолжение использования Приложения после изменений означает ваше согласие с новыми Условиями.	Nous nous réservons le droit de modifier les présentes Conditions à tout moment. Les conditions mises à jour seront publiées sur cette page et entreront en vigueur dès leur publication. L'utilisation continue de l'application après les modifications signifie votre acceptation des nouvelles conditions.	당사는 언제든지 본 약관을 수정할 권리를 보유합니다. 업데이트된 약관은 이 페이지에 게시되며 게시 즉시 적용됩니다. 변경 후에도 앱을 계속 사용하면 새 약관에 동의하는 것으로 간주됩니다.	نحن نحتفظ بالحق في تعديل هذه الشروط في أي وقت. سيتم نشر الشروط المحدثة على هذه الصفحة وستدخل حيز التنفيذ عند النشر. إن استمرار استخدام التطبيق بعد التغييرات يعني موافقتك على الشروط الجديدة.
 privacy.tos-contact-info-title	Contact Information	Контактная информация	Coordonnées	연락처 정보	معلومات الاتصال
-privacy.tos-contact-info-text	If you have any questions about our Terms, please contact us at:	Если у вас есть вопросы по поводу наших Условий, пожалуйста, свяжитесь с нами по адресу:	Si vous avez des questions concernant nos conditions, veuillez nous contacter à :	약관에 대해 질문이 있는 경우 다음 주소로 문의해 주세요.	إذا كان لديك أي أسئلة حول شروطنا، يرجى الاتصال بنا على:
-privacy.policy-t	Privacy Policy	Политика конфиденциальности	politique de confidentialité	개인 정보 정책	سياسة الخصوصية
+privacy.tos-contact-info-text	If you have any questions about our Terms, please contact us at:	Если у вас есть вопросы по поводу наших Условий, пожалуйста, свяжитесь с нами по адресу:	Si vous avez des questions concernant nos Conditions, veuillez nous contacter à :	약관에 대해 질문이 있는 경우 다음 주소로 문의해 주세요.	إذا كان لديك أي أسئلة حول شروطنا، يرجى الاتصال بنا على:
+privacy.policy-t	Privacy Policy	Политика конфиденциальности	politique de confidentialité	개인 정보 보호 정책	سياسة الخصوصية
 privacy.policy-introduction-title	Introduction	Введение	Introduction	소개	مقدمة
 privacy.policy-introduction-text	Your privacy is important to us. This privacy policy explains what data we collect, how we use it, and how we protect your information.	Ваше конфиденциальность важна для нас. В данной политике конфиденциальности объясняется, какие данные мы собираем, как мы их используем и как мы защищаем вашу информацию.	Votre vie privée est importante pour nous. Cette politique de confidentialité explique quelles données nous collectons, comment nous les utilisons et comment nous protégeons vos informations.	귀하의 개인정보는 우리에게 중요합니다. 본 개인정보 보호정책은 당사가 수집하는 데이터, 사용 방법 및 귀하의 정보를 보호하는 방법을 설명합니다.	خصوصيتك مهمة بالنسبة لنا. تشرح سياسة الخصوصية هذه البيانات التي نجمعها، وكيف نستخدمها، وكيف نحمي معلوماتك.
 privacy.policy-data-collection-title	Data Collection	Сбор данных	Collecte de données	데이터 수집	جمع البيانات
 privacy.policy-data-collection-text	We may collect the following types of data:	Мы можем собирать следующие типы данных:	Nous pouvons collecter les types de données suivants :	당사는 다음 유형의 데이터를 수집할 수 있습니다.	قد نقوم بجمع الأنواع التالية من البيانات:
 privacy.policy-data-collection-item-1	Personal information (e.g., name, email address)	Личная информация (например, имя, адрес электронной почты)	Informations personnelles (par exemple, nom, adresse e-mail)	개인정보(예: 이름, 이메일 주소)	المعلومات الشخصية (مثل الاسم وعنوان البريد الإلكتروني)
 privacy.policy-data-collection-item-2	App usage data (e.g., actions within the app)	Данные об использовании приложения (например, действия в приложении)	Données d'utilisation de l'application (par exemple, actions au sein de l'application)	앱 사용 데이터(예: 앱 내 작업)	بيانات استخدام التطبيق (على سبيل المثال، الإجراءات داخل التطبيق)
-privacy.policy-data-usage-title	Data Usage	Использование данных	L'utilisation de données	데이터 사용량	استخدام البيانات
+privacy.policy-data-usage-title	Data Usage	Использование данных	Utilisation des données	데이터 사용량	استخدام البيانات
 privacy.policy-data-usage-text	We use the collected data for:	Мы используем собранные данные для:	Nous utilisons les données collectées pour :	당사는 수집된 데이터를 다음 목적으로 사용합니다.	نحن نستخدم البيانات التي تم جمعها من أجل:
 privacy.policy-data-usage-item-1	Providing and improving our services	Предоставления и улучшения наших услуг	Fournir et améliorer nos services	서비스 제공 및 개선	تقديم خدماتنا وتحسينها
 privacy.policy-data-usage-item-2	Ensuring user security	Обеспечения безопасности пользователей	Assurer la sécurité des utilisateurs	사용자 보안 보장	ضمان أمن المستخدم
@@ -335,13 +337,13 @@ privacy.policy-data-transfer-title	Data Transfer	Передача данных	T
 privacy.policy-data-transfer-text	We do not share your data with third parties, except as required by law or necessary to provide our services.	Мы не передаем ваши данные третьим лицам, за исключением случаев, предусмотренных законом или необходимых для предоставления наших услуг.	Nous ne partageons pas vos données avec des tiers, sauf si la loi l'exige ou si cela est nécessaire pour fournir nos services.	당사는 법률에서 요구하거나 서비스 제공에 필요한 경우를 제외하고 귀하의 데이터를 제3자와 공유하지 않습니다.	نحن لا نشارك بياناتك مع أطراف ثالثة، باستثناء ما يقتضيه القانون أو ضروري لتقديم خدماتنا.
 privacy.policy-data-security-title	Data Security	Безопасность данных	Sécurité des données	데이터 보안	أمن البيانات
 privacy.policy-data-security-text	We take reasonable measures to protect your data from unauthorized access, alteration, or destruction.	Мы принимаем разумные меры для защиты ваших данных от несанкционированного доступа, изменения или уничтожения.	Nous prenons des mesures raisonnables pour protéger vos données contre tout accès, modification ou destruction non autorisés.	당사는 귀하의 데이터를 무단 접근, 변경 또는 파기로부터 보호하기 위해 합리적인 조치를 취합니다.	نحن نتخذ تدابير معقولة لحماية بياناتك من الوصول غير المصرح به أو التغيير أو التدمير.
-privacy.policy-user-rights-title	User Rights	Права пользователей	Droits de l'utilisateur	사용자 권리	حقوق المستخدم
+privacy.policy-user-rights-title	User Rights	Права пользователей	Droits des utilisateurs	사용자 권리	حقوق المستخدم
 privacy.policy-user-rights-text	You have the right to access, modify, or delete your data. To exercise these rights, please contact us at the address below.	Вы имеете право на доступ к своим данным, их изменение или удаление. Для реализации этих прав свяжитесь с нами по указанному ниже адресу.	Vous disposez d'un droit d'accès, de modification ou de suppression de vos données. Pour exercer ces droits, veuillez nous contacter à l'adresse ci-dessous.	귀하는 귀하의 데이터에 접근, 수정, 삭제할 권리가 있습니다. 이러한 권리를 행사하려면 아래 주소로 문의하시기 바랍니다.	لديك الحق في الوصول إلى بياناتك أو تعديلها أو حذفها. لممارسة هذه الحقوق، يرجى الاتصال بنا على العنوان أدناه.
 privacy.policy-contact-info-title	Contact Information	Контактная информация	Coordonnées	연락처 정보	معلومات الاتصال
 privacy.policy-contact-info-text	If you have any questions about our privacy policy, please contact us at:	Если у вас есть вопросы по поводу нашей политики конфиденциальности, свяжитесь с нами по адресу:	Si vous avez des questions concernant notre politique de confidentialité, veuillez nous contacter à :	당사의 개인 정보 보호 정책에 대해 질문이 있는 경우 다음 주소로 문의해 주십시오.	إذا كان لديك أي أسئلة حول سياسة الخصوصية لدينا، يرجى الاتصال بنا على:
-select.placeholder	Select an option	Выберите вариант	Choisir une option	옵션을 선택하세요	حدد اختيارا
+select.placeholder	Select an option	Выберите вариант	Sélectionnez une option	옵션을 선택하세요	حدد خيارًا
 select.country	Choose the country	Выберите страну	Choisissez le pays	국가를 선택하세요	اختر البلد
 select.genre	Choose the genre	Выберите жанр	Choisissez le genre	장르를 선택하세요	اختر النوع
 modal.notification-t	Notificiation	Уведомление	Notification	알림	الإخطار
 modal.soon-t	Feature coming soon	Функция скоро появится	Fonctionnalité à venir	기능이 곧 제공될 예정입니다.	الميزة قريبا
-modal.soon-m	Thank you for your interest in this feature. We are working hard to bring it to you, but it is not yet available. Please check back later for updates.	Благодарим вас за интерес к этой функции. Мы прилагаем все усилия, чтобы донести его до вас, но он пока недоступен. Пожалуйста, зайдите позже за обновлениями.	Merci de votre intérêt pour cette fonctionnalité. Nous travaillons dur pour vous le proposer, mais il n'est pas encore disponible. Merci de vérifier ultérieurement les mises à jour.	이 기능에 관심을 가져주셔서 감사합니다. 우리는 그것을 당신에게 제공하기 위해 열심히 노력하고 있지만 아직 사용할 수 없습니다. 나중에 다시 업데이트를 확인해 주세요.	شكرا لاهتمامك بهذه الميزة. نحن نعمل جاهدين على توفيره لكم، ولكنه غير متوفر بعد. من فضلك تحقق مره اخرى لاحقا من اجل التحديثات.
+modal.soon-m	Thank you for your interest in this feature. We are working hard to bring it to you, but it is not yet available. Please check back later for updates.	Благодарим вас за интерес к этой функции. Мы прилагаем все усилия, чтобы донести его до вас, но он пока недоступен. Пожалуйста, зайдите позже для получения обновлений.	Merci de votre intérêt pour cette fonctionnalité. Nous travaillons dur pour vous le proposer, mais il n'est pas encore disponible. Veuillez revenir plus tard pour les mises à jour.	이 기능에 관심을 가져주셔서 감사합니다. 우리는 그것을 당신에게 제공하기 위해 열심히 노력하고 있지만 아직 사용할 수 없습니다. 나중에 다시 업데이트를 확인하세요.	شكرا لاهتمامك بهذه الميزة. نحن نعمل جاهدين على توفيره لكم، ولكنه غير متوفر بعد. يرجى التحقق مرة أخرى لاحقا للحصول على التحديثات.
