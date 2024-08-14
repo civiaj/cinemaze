@@ -250,8 +250,8 @@ user.password-check	Confirm the password	Подтвердите пароль	Con
 user.password-check-msg	For security reasons, please enter your password to continue.	Исходя из соображений безопасности, для продолжения введите свой пароль.	Pour des raisons de sécurité, veuillez saisir votre mot de passe pour continuer.	보안상의 이유로 계속하려면 비밀번호를 입력하세요.	لأسباب أمنية، يرجى إدخال كلمة المرور الخاصة بك للمتابعة.
 user.password-change-next	Change password	Изменить пароль	Changer le mot de passe	비밀번호 변경	تغيير كلمة المرور
 user.password-change-next-new	New password	Новый пароль	Nouveau mot de passe	새 비밀번호	كلمة المرور الجديدة
-user.email-check	Confirm the email	Подтвердите адрес почты			
-user.email-check-msg	For security reasons, please enter your email to continue.	Исходя из соображений безопасности, для продолжения введите свой адрес почты.			
+user.email-check	Confirm the email	Подтвердите адрес почты	Confirmez l'e-mail	이메일을 확인하세요	قم بتأكيد البريد الإلكتروني
+user.email-check-msg	For security reasons, please enter your email to continue.	Исходя из соображений безопасности, для продолжения введите свой адрес почты.	Pour des raisons de sécurité, veuillez saisir votre email pour continuer.	보안상의 이유로 계속하려면 이메일을 입력하세요.	لأسباب أمنية، يرجى إدخال بريدك الإلكتروني للمتابعة.
 user.role-change	Role change	Изменение роли	Changement de rôle	역할 변경	تغيير الدور
 user.role-change-current	Current role	Текущая роль	Rôle actuel	현재 역할	الدور الحالي
 user.role-change-new	Select a new role	Выберите новую роль	Sélectionnez un nouveau rôle	새 역할 선택	حدد دورًا جديدًا
