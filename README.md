@@ -14,7 +14,6 @@
 
 ### Клиентская часть:
 - **React**
-- **TypeScript**
 - **Redux Toolkit**
 - **RTK Query**
 
