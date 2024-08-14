@@ -8,16 +8,14 @@ export default (err: unknown, _req: Request, res: Response, _next: NextFunction)
     logger.error(err instanceof Error ? err.message : err);
     if (err instanceof ApiError)
         return res.status(err.status).json({ message: err.message, errors: err.errors });
-
-    if (err instanceof ZodError)
+    else if (err instanceof ZodError)
         return res.status(400).json({
             message: "Ошибка валидации",
             errors: err.errors.map((error) => error.message),
         });
-    if (axios.isAxiosError(err)) {
+    else if (axios.isAxiosError(err)) {
         // Do not propagate 401 to clients from external apis.
         let status = err?.response?.status;
-        if (!status) status = err.status;
         if (!status || status === 401) status = 502;
 
         if (err.response && err.response.data.message) {

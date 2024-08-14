@@ -128,7 +128,7 @@ class FavoriteService {
                     },
                 },
             ]);
-        const { films, total } = result[0];
+        const { films, total } = result[0] ?? {};
         return { films, totalPages: Math.ceil(total[0].count / pageSize) };
     }
 

@@ -13,7 +13,7 @@ const authApi = api.injectEndpoints({
                 body: data,
                 credentials: "include",
             }),
-            invalidatesTags: ["User"],
+            invalidatesTags: ["User", "Favorites"],
             async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
                 try {
                     dispatch(authAndUserSliceActions.startLoading());
@@ -33,7 +33,7 @@ const authApi = api.injectEndpoints({
                 body: data,
                 credentials: "include",
             }),
-            invalidatesTags: ["User"],
+            invalidatesTags: ["User", "Favorites"],
             async onQueryStarted(_arg, { queryFulfilled, dispatch }) {
                 try {
                     dispatch(authAndUserSliceActions.startLoading());
