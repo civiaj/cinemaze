@@ -40,7 +40,7 @@ const UserPage = () => {
                 <UserSectionPassword email={user.email} onClose={onClose} />
             )}
             {section?.startsWith("role") && <UserSectionRole onClose={onClose} role={user.role} />}
-            {section?.startsWith("delete") && <UserSectionDelete email={user.email} />}
+            {section?.startsWith("delete") && <UserSectionDelete />}
         </Page>
     );
 };

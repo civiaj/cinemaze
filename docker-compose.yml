@@ -51,6 +51,7 @@ services:
         # build: "./client"
         # env_file:
         #     - client/.env.production.local
+        # Why image? Read client/dockerfile
         image: ghcr.io/civiaj/nginx-client:latest
         container_name: nginx-react
         ports:

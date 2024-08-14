@@ -1,18 +1,22 @@
 {
     "type": "module",
     "scripts": {
-        "dev": "concurrently \"npm run dev --prefix ./client/\" \"npm run dev --prefix ./server/\""
+        "dev": "concurrently \"npm run dev --prefix ./client/\" \"npm run dev --prefix ./server/\"",
+        "prepare": "husky"
     },
-    "dependencies": {
-        "concurrently": "^8.2.2"
+    "lint-staged": {
+        "client/src/**/*.{ts,tsx}": [
+            "eslint --config client/.eslintrc.cjs --fix",
+            "tsc --noEmit"
+        ],
+        "server/src/**/*.{ts,tsx}": [
+            "eslint --config server/.eslintrc --fix",
+            "tsc --noEmit"
+        ]
     },
     "devDependencies": {
-        "@feature-sliced/eslint-config": "^0.1.1",
-        "@types/node": "^20.12.4",
-        "@typescript-eslint/eslint-plugin": "^7.6.0",
-        "@typescript-eslint/parser": "^7.6.0",
-        "eslint-import-resolver-typescript": "^3.6.1",
-        "eslint-plugin-boundaries": "^4.2.1",
-        "eslint-plugin-import": "^2.29.1"
+        "concurrently": "^8.2.2",
+        "husky": "^9.1.4",
+        "lint-staged": "^15.2.9"
     }
 }
