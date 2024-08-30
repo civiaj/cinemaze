@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { AppRouter } from "@/app/router/AppRouter";
 import { useAppSelector } from "@/app/store";
 import { LoginPopup } from "@/widgets/LoginPopup";
@@ -12,6 +13,7 @@ import { FullscreenSpinner } from "@/shared/ui/Spinner/FullscreenSpinner";
 
 function App() {
     const isLogged = useAppSelector(getIsLogged);
+    const ref = useRef(null);
     const { isLoading } = useGetMeQuery(undefined, {
         skip: !isLogged,
     });
@@ -21,6 +23,7 @@ function App() {
     return (
         <>
             <div
+                ref={ref}
                 className="text-my-neutral-800 bg-my-neutral-50 font-normal font-custom antialiased h-full w-full min-h-[100dvh]"
                 id={ID_MAIN}
             >
@@ -31,7 +34,7 @@ function App() {
                     <SidebarMobile />
                 </div>
                 <AppRouter />
-                <MobileObserver />
+                <MobileObserver ref={ref} />
 
                 {!isLogged && <LoginPopup />}
             </div>

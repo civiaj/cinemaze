@@ -1,28 +1,24 @@
-import { useEffect } from "react";
+import { forwardRef, useCallback } from "react";
 import { useAppDispatch } from "@/app/store";
-import { uiActions } from "../model/slice";
+import { uiActions } from "@/entities/Ui/model/slice";
+import useResizeObserver, { ResizeObserverValue } from "@/shared/hooks/useResizeObserver";
 
 type Props = {
     size?: number;
 };
 
-export const MobileObserver = (props: Props) => {
+export const MobileObserver = forwardRef<HTMLDivElement, Props>((props, ref) => {
     const { size = 640 } = props;
     const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        const handleResize = () => {
-            const isMobile = window.innerWidth <= size;
-            dispatch(uiActions.setIsMobile(isMobile));
-        };
+    const onResize = useCallback(
+        ({ width }: ResizeObserverValue) => {
+            dispatch(uiActions.setIsMobile(width <= size));
+        },
+        [dispatch, size]
+    );
 
-        handleResize();
-
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, [dispatch, size]);
+    useResizeObserver(ref, onResize);
 
     return null;
-};
+});
