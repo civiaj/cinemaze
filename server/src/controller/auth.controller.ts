@@ -33,7 +33,7 @@ const refreshTokenCookieOptions: CookieOptions = {
 if (NODE_ENV === "production") {
     [accessTokenCookieOptions, refreshTokenCookieOptions].forEach((option) => {
         option.secure = true;
-        option.sameSite = "none";
+        option.sameSite = "strict";
     });
 }
 
