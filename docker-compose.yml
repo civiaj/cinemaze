@@ -66,6 +66,12 @@ services:
             - cert_volume:/etc/letsencrypt:Z
             - acme_challenge:/usr/share/nginx/html/.well-known:Z
 
+    nextjs-pg:
+        image: ghcr.io/civiaj/nextjs-pg:latest
+        ports:
+            - "3001:3001"
+        restart: unless-stopped
+
     certbot:
         image: certbot/certbot
         container_name: certbot
