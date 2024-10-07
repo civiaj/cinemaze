@@ -11,7 +11,7 @@ services:
         image: certbot/certbot
         restart: "no"
         entrypoint: /bin/sh
-        command: -c 'test -d /etc/letsencrypt/live/${BASE_DOMAIN} || certbot certonly --standalone --register-unsafely-without-email -d ${BASE_DOMAIN} --rsa-key-size ${rsa_key_size:-2048} --agree-tos --force-renewal'
+        command: -c 'test -d /etc/letsencrypt/live/${BASE_DOMAIN} || certbot certonly --standalone --register-unsafely-without-email -d ${BASE_DOMAIN} -d next.${BASE_DOMAIN} --rsa-key-size ${rsa_key_size:-2048} --agree-tos --force-renewal'
         ports:
             - "80:80"
         volumes:
