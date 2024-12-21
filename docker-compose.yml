@@ -48,11 +48,11 @@ services:
                 required: true
 
     nginx-react:
-        # build: "./client"
-        # env_file:
-        #     - client/.env.production.local
+        build: "./client"
+        env_file:
+            - client/.env.production.local
         # Why image? Read client/dockerfile
-        image: ghcr.io/civiaj/nginx-client:latest
+        # image: ghcr.io/civiaj/nginx-client:latest
         container_name: nginx-react
         ports:
             - "80:80"
@@ -65,13 +65,24 @@ services:
         volumes:
             - cert_volume:/etc/letsencrypt:Z
             - acme_challenge:/usr/share/nginx/html/.well-known:Z
-
     nextjs-pg:
         image: ghcr.io/civiaj/nextjs-pg:latest
         ports:
             - "3001:3001"
         restart: unless-stopped
-
+        environment:
+            DATABASE_URL: postgres://postgres:postgres@db:5432/mydatabase
+            NODE_ENV: production
+        depends_on:
+            - nextjs-pg-db
+    nextjs-pg-db:
+        image: postgres:13
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: mydatabase
+        volumes:
+            - db_data:/var/lib/postgresql/data
     certbot:
         image: certbot/certbot
         container_name: certbot
@@ -89,3 +100,4 @@ volumes:
     acme_challenge:
     redis_data:
     express_static:
+    db_data:
